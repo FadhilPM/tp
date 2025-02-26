@@ -19,15 +19,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Lee Chun Hao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/0x4f776c.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage]](https://0x4F776C.github.io)
+[[github](http://github.com/0x4F776C)]
+[[portfolio](team/0x4F776C.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Code Reviewer
+* Responsibilities: Code Quality + Testing
 
 ### Johnny Doe
 
