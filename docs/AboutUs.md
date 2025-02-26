@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Cheng Jing
 
 <img src="images/cj-783.png" width="200px">
 
