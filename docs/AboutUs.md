@@ -8,7 +8,6 @@ We are a team based in the [School of Computing, National University of Singapor
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
-
 ### Kenneth Soh
 
 <img src="images/kennethsoh.png" width="200px">
@@ -20,3 +19,53 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Project Manager
 * Responsibilites: Integration, Scheduling and Tracking
 
+### Cheng Jing
+
+<img src="images/cj-783.png" width="200px">
+
+[[homepage](https://cj-783.github.io/)]
+[[github](https://github.com/CJ-783)]
+[[portfolio](team/cj-783.md)]
+
+* Role: Developer
+* Responsibilities: Deadline and Code Quality
+
+### Lee Chun Hao
+
+<img src="images/0x4f776c.png" width="200px">
+
+[[homepage]](https://0x4F776C.github.io)
+[[github](http://github.com/0x4F776C)]
+[[portfolio](team/0x4F776C.md)]
+
+* Role: Code Reviewer
+* Responsibilities: Code Quality + Testing
+
+### Johnny Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Data
+
+### Jean Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Dev Ops + Threading
+
+### James Doe
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: UI
