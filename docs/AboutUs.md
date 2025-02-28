@@ -15,7 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[homepage](https://cj-783.github.io/)]
 [[github](https://github.com/CJ-783)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/cj-783.md)]
 
 * Role: Developer
 * Responsibilities: Deadline and Code Quality
