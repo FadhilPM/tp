@@ -10,6 +10,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ## Project team
 ### Kenneth Soh
 
+### Ingyin San (Piper)
+
+<img src="images/broccoli-hater.png" width="200px">
+
+[[github](https://github.com/broccoli-hater)]
+
+* Role: Member
 <img src="images/kennethsoh.png" width="200px">
 
 [[homepage](http://kennethsoh.me)]
