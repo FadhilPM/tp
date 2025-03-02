@@ -288,30 +288,115 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ArtHive` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add Contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Artist chooses to add a new contact, and enters the client name, phone number, and optional project tag.
+2. ArtHive validates the entered information.
+3. ArtHive adds the contact and displays a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Artist enters invalid phone number.
+  * 1a1. ArtHive shows error message with valid phone number format examples.
+  * 1a2. Artist enters a valid phone number.
+    
+    Use case resumes at step 2.
 
-  Use case ends.
+* 1b. Artist enters a non-alphanumeric client name.
+  * 1b1. ArtHive shows error message requesting only letters and numbers.
+  * 1b2. Artist enters a valid client name.
 
-* 3a. The given index is invalid.
+    Use case resumes at step 2.
 
-    * 3a1. AddressBook shows an error message.
+* 1c. Artist enters a client name exceeding 40 characters.
+  * 1c1. ArtHive shows error message about character limit.
+  * 1c2. Artist enters a valid client name.
+    
+    Use case resumes at step 2.
+
+* 1d. Artist enters an invalid project tag.
+  * 1d1. ArtHive shows appropriate error message (excessive length or invalid characters).
+  * 1d2. Artist enters a valid project tag.
+    
+    Use case resumes at step 2.
+
+* 2a. Phone number already exists in the system.
+  * 2a1. ArtHive informs Artist that the phone number already exists.
+  * 2a2. Artist enters a different valid phone number.
+    
+    Use case resumes at step 2.
+
+**Use case: Delete Contact**
+
+**MSS**
+
+1. Artist chooses to delete a contact, and enters the phone number.
+2. ArtHive validates the phone number.
+3. ArtHive deletes the contact and any associated project tags.
+4. ArtHive displays confirmation of deletion.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Artist enters invalid phone number.
+    * 1a1. ArtHive shows error message with valid phone number format examples.
+    * 1a2. Artist enters a valid phone number.
 
       Use case resumes at step 2.
+
+* 2a. Phone number does not exist in the system.
+    * 2a1. ArtHive informs Artist that the contact does not exist.
+    * 2a2. Artist enters a different phone number or cancels the operation.
+
+      Use case resumes at step 1, or ends if cancelled.
+
+**Use case: Save Contact(s)**
+
+**MSS**
+
+1. Artist chooses to save contacts, and Artist enters filename or accepts default filename.
+2. ArtHive saves contacts to the specified file.
+3. ArtHive displays confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Artist specifies an invalid filename.
+    * 1a1. ArtHive displays error message indicating invalid filename.
+    * 1a2. Artist enters a valid filename or accepts default.
+
+      Use case resumes at step 2.
+
+* 2a. ArtHive encounters an error during saving.
+    * 2a1. ArtHive displays error message with details.
+    * 2a2. Artist acknowledges the error.
+
+      Use case ends.
+
+**Use case: Clear Contact(s)**
+
+**MSS**
+
+1. Artist chooses to clear all contacts.
+2. ArtHive clears all contacts and associated project tags.
+3. ArtHive displays confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. ArtHive does not have any contact(s) left
+    * 1a1. Artist acknowledges.
+
+      Use case ends.
 
 *{More to be added}*
 
