@@ -10,13 +10,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 ## Project team
 ### Kenneth Soh
 
-### Ingyin San (Piper)
-
-<img src="images/broccoli-hater.png" width="200px">
-
-[[github](https://github.com/broccoli-hater)]
-
-* Role: Member
 <img src="images/kennethsoh.png" width="200px">
 
 [[homepage](http://kennethsoh.me)]
@@ -48,6 +41,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Code Reviewer
 * Responsibilities: Code Quality + Testing
 
+### Ingyin San (Piper)
+
+<img src="images/broccoli-hater.png" width="200px">
+
+[[github](https://github.com/broccoli-hater)]
+
+* Role: Developer
+
 ### Fadhil Peer Mohamed
 
 <img src="images/fadhilpm.png" width="200px">
@@ -57,22 +58,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
