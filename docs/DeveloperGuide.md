@@ -332,7 +332,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Phone Number**: A unique 8-digit Singapore phone number starting with '6','8', or '9' that acts as the unique and primary identifier for each contact in ArtHive.
 * **Project Tag**: A label assigned to contacts to group them by project. Project tags are alphanumeric strings with underscores and hyphens, up to 20 characters.
 * **Payment Status**: A boolean attribute (paid/unpaid) associated with a project tag that indicates whether payment has been received.
-* **Address Book**: The data structure in ArtHive that stores all contact information.
 * **Command Format**: The specific syntax required to execute functions in ArtHive (e.g., "add n/<Client Name> p/<Phone Number> t/<ProjectTag Name>").
 * **Parameter**: A piece of information required by a command, such as client name, phone number, or project tag.
 * **Data Persistence**: The ability to save contact information to a file for later retrieval, ensuring data is not lost when the application is closed.
