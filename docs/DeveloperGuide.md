@@ -288,7 +288,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `ArtHive` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ArtHive` and the **Actor** is the `Artist`, unless specified otherwise)
 
 **Use case: Add Contact**
 
@@ -326,12 +326,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 2.
 
-* 2a. Phone number already exists in the system.
-  * 2a1. ArtHive informs Artist that the phone number already exists.
-  * 2a2. Artist enters a different valid phone number.
-    
-    Use case resumes at step 2.
-
 **Use case: Delete Contact**
 
 **MSS**
@@ -350,12 +344,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a2. Artist enters a valid phone number.
 
       Use case resumes at step 2.
-
-* 2a. Phone number does not exist in the system.
-    * 2a1. ArtHive informs Artist that the contact does not exist.
-    * 2a2. Artist enters a different phone number or cancels the operation.
-
-      Use case resumes at step 1, or ends if cancelled.
 
 **Use case: Save Contact(s)**
 
@@ -387,16 +375,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Artist chooses to clear all contacts.
 2. ArtHive clears all contacts and associated project tags.
-3. ArtHive displays confirmation message.
+3. ArtHive displays confirmation message stating that the contacts has been cleared.
 
    Use case ends.
-
-**Extensions**
-
-* 1a. ArtHive does not have any contact(s) left
-    * 1a1. Artist acknowledges.
-
-      Use case ends.
 
 *{More to be added}*
 
