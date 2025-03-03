@@ -327,6 +327,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Client**: An individual or organization that engages the artist's services.
+* **Contact**: An entry in ArtHive that contains client information, such as, name, phone number, and associated project tags.
+* **Phone Number**: A unique 8-digit Singapore phone number starting with '6','8', or '9' that acts as the unique and primary identifier for each contact in ArtHive.
+* **Project Tag**: A label assigned to contacts to group them by project. Project tags are alphanumeric strings with underscores and hyphens, up to 20 characters.
+* **Payment Status**: A boolean attribute (paid/unpaid) associated with a project tag that indicates whether payment has been received.
+* **Command Format**: The specific syntax required to execute functions in ArtHive (e.g., "add n/<Client Name> p/<Phone Number> t/<ProjectTag Name>").
+* **Parameter**: A piece of information required by a command, such as client name, phone number, or project tag.
+* **Data Persistence**: The ability to save contact information to a file for later retrieval, ensuring data is not lost when the application is closed.
+* **Alphanumeric**: Characters that consists of only letters (A-Z, a-z) and numbers (0-9).
+* **Case Sensitive**: The property where uppercase and lowercase letters are treated as separated distinct characters (e.g., "John Smith" vs "jOhn SmITh").
+* **Trim**: The process of removing leading and trailing spaces from input.
+* **JSON File**: The file format used to store contact information (arthive.json).
+* **GUI** Graphical User Interface - the visual elements that display information and receive user input.
+* **CLI**: Command Line Interface - the text-based method of interacting with ArtHive through integrated typed commands.
+* **Regex**: Regular Expression - a sequence of characters that defines a certain search pattern, used in ArtHive to validate phone numbers.
 
 --------------------------------------------------------------------------------------------------------------------
 
