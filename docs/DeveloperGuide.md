@@ -288,16 +288,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ArtHive` and the **Actor** is the `artist`, unless specified otherwise)
+(For all use cases below, the **System** is the `ArtHive` and the **Actor** is the `Artist`, unless specified otherwise)
 
 **Use case: UC02 - Tag Project to Contact**  
-**Actor: Artist**
 **MSS**
 
-1.  Artist wants to tag a Project to a Contact.
-2.  ArtHive requests for details (Phone Number of Contact & Project Name).
-3.  Artist enters the required data.
-4.  ArtHive adds the Project Name to the Contact, and shows a success message.
+1.  Artist wants to tag a Project to a Contact, and enters the `tag` command
+2.  Artist enters the contact's Phone Number and Project Name after a p/ and t/ delimiter respectively.
+3.  ArtHive adds the Project Name to the Contact, and shows a success message.
 
     Use case ends.
 
@@ -317,16 +315,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1.  ArtHive returns an error message
 
     Use case resumes at step 3.
+---
 
 
 **Use case: UC06 - Find Contact**  
-**Actor: Artist**
 **MSS**
 
-1.  Artist chooses to use the Find Contact feature.
-2.  ArtHive requests a search input value from the Artist.
-3.  Artist enters the client name of the contact he/she would like to find as the search input value.
-4.  ArtHive returns a list of contacts whose Client Names match the search input.
+1.  Artist chooses to use the Find Contact feature, and enters the `find` command.
+2.  Artist enters the client name of the contact he/she would like to find as the search input value.
+3.  ArtHive returns a list of contacts whose Client Names match the search input.
 
     Use case ends.
 
