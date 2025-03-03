@@ -288,32 +288,65 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ArtHive` and the **Actor** is the `artist`, unless specified otherwise)
 
-**Use case: Delete a person**
-
+**Use case: UC02 - Tag Project to Contact**  
+**Actor: Artist**
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Artist wants to tag a Project to a Contact.
+2.  ArtHive requests for details (Phone Number of Contact & Project Name).
+3.  Artist enters the required data.
+4.  ArtHive adds the Project Name to the Contact, and shows a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a.   ArtHive detects that the given Phone Number is non-existent.
+    * 3a1.  ArtHive displays an error message stating that the Contact does not exist
 
-  Use case ends.
+    Use case resumes at step 3.
 
-* 3a. The given index is invalid.
+* 3b.   ArtHive detects that the phone number is non-existent.
+    * 3b1.  ArtHive creates the Project with a paid attribute value of "False".
 
-    * 3a1. AddressBook shows an error message.
+    Use case resumes at step 4.
 
-      Use case resumes at step 2.
+* 3c.   ArtHive detects that the user input is invalid.
+    * 3c1.  ArtHive returns an error message
 
-*{More to be added}*
+    Use case resumes at step 3.
+
+
+**Use case: UC06 - Find Contact**  
+**Actor: Artist**
+**MSS**
+
+1.  Artist chooses to use the Find Contact feature.
+2.  ArtHive requests a search input value from the Artist.
+3.  Artist enters the client name of the contact he/she would like to find as the search input value.
+4.  ArtHive returns a list of contacts whose Client Names match the search input.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a.   ArtHive detects an error where the search input contains invalid characters.
+    * 3a1.  ArtHive displays an error message stating that the search input contains invalid characters
+   
+    Use case resumes at step 3.
+
+* 4a.   ArtHive is unable to find Client Names that match the search input.
+    * 4a1.  ArtHive displays an empty list with a message stating that no matching contacts are found.
+   
+    Use case ends.
+
+
+
+
+
+
 
 ### Non-Functional Requirements
 
