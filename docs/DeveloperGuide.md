@@ -262,13 +262,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* Freelance Artists
+* has a need to manage a significant number of contacts with highly specific requests
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: organise client information clearly and efficiently, reminds users of upcoming deadlines and is optimised for users who prefer a command line interface.
 
 
 ### User stories
@@ -277,15 +278,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `* * *`  | user                                       | add a new contact              |                                                                        |
+| `* * *`  | user                                       | delete a contact               | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a contact by name         | locate details of persons without having to go through the entire list |
+| `* * *`  | user with many clients                     | save my client's contacts      | keep track of all my clients's information                             |
+| `* * *`  | user with many clients                     | track payments                 | check whether my clients have paid my commission                       |
+| `* *`    | user                                       | blacklist or tag clients       | identify unreasonable clients easily and not take work from them       |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
 *{More to be added}*
 
+---
 ### Use cases
 
 (For all use cases below, the **System** is `ArtHive` and the **Actor** is the `Artist`, unless specified otherwise)
@@ -297,8 +300,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Artist chooses to add a new contact, and enters the client name, phone number, and optional project tag.
 2. ArtHive validates the entered information.
 3. ArtHive adds the contact and displays a confirmation message.
-
-    Use case ends.
 
 **Extensions**
 
@@ -326,6 +327,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 2.
 
+**Use case: Use case: Tag Project to Contact**
+
+**MSS**
+
+1.  Artist wants to tag a Project to a Contact.
+2.  Artist enters the contact's Phone Number and Project Name.
+3.  ArtHive adds the Project Name to the Contact, and shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a.   ArtHive detects that the given Phone Number is non-existent.
+  * 2a1.  ArtHive displays an error message stating that the Contact does not exist
+
+    Use case resumes at step 2.
+
+* 2b.   ArtHive detects that the Project Name is non-existent.
+  * 2b1.  ArtHive creates the Project with a paid attribute value of "False".
+
+    Use case resumes at step 3.
+
+* 2c.   ArtHive detects that the user input is invalid.
+  * 2c1.  ArtHive returns an error message
+
+    Use case resumes at step 2.
+
+**Use case: Use case: Find Contact**  
+
+**MSS**
+
+1.  Artist chooses to use the Find Contact feature.
+2.  Artist enters the client name of the contact he/she would like to find as the search input value.
+3.  ArtHive returns a list of contacts whose Client Names match the search input.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a.   ArtHive detects an error where the search input contains invalid characters.
+  * 2a1.  ArtHive displays an error message stating that the search input contains invalid characters
+   
+    Use case resumes at step 2.
+
+* 3a.   ArtHive is unable to find Client Names that match the search input.
+  * 3a1.  ArtHive displays an empty list with a message stating that no matching contacts are found.
+   
+    Use case ends.
+
 **Use case: Delete Contact**
 
 **MSS**
@@ -340,10 +390,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. Artist enters invalid phone number.
-    * 1a1. ArtHive shows error message with valid phone number format examples.
-    * 1a2. Artist enters a valid phone number.
+  * 1a1. ArtHive shows error message with valid phone number format examples.
+  * 1a2. Artist enters a valid phone number.
+  
+    Use case resumes at step 3.
 
-      Use case resumes at step 2.
+**Use case: Clear Contact(s)**
+
+**MSS**
+
+1. Artist chooses to clear all contacts.
+2. ArtHive clears all contacts and associated project tags.
+3. ArtHive displays confirmation message stating that the contacts has been cleared.
+
+   Use case ends.
 
 **Use case: Save Contact(s)**
 
@@ -373,41 +433,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 3.
 
 * 1d. Artist specifies an invalid filename consisting of unrecognised characters.
-    * 1d1. ArtHive displays error message indicating invalid filename.
-    * 1d2. Artist acknowledges the error.
+  * 1d1. ArtHive displays error message indicating invalid filename.
+  * 1d2. Artist acknowledges the error.
 
-      Use case returns to step 1.
+    Use case returns to step 1.
 
 * 2a. ArtHive encounters an error during saving.
-    * 2a1. ArtHive displays error message with details.
-    * 2a2. Artist acknowledges the error.
+  * 2a1. ArtHive displays error message with details.
+  * 2a2. Artist acknowledges the error.
 
-      Use case ends.
+    Use case ends.
 
-**Use case: Clear Contact(s)**
 
-**MSS**
-
-1. Artist chooses to clear all contacts.
-2. ArtHive clears all contacts and associated project tags.
-3. ArtHive displays confirmation message stating that the contacts has been cleared.
-
-   Use case ends.
 
 *{More to be added}*
+
+---
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The system Should be able to respond within 3 seconds.
+5. The system should not lose any data up till the latest successful operation due to accidental closure of the application.
+6. The data file should be stored locally on the computer and should be in a human editable text file.
+7. The software should be able to work without using an installer.
+8. The software should not require a remote server to operate.
 
-*{More to be added}*
+---
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Client**: An individual or organization that engages the artist's services.
+* **Contact**: An entry in ArtHive that contains client information, such as, name, phone number, and associated project tags.
+* **Phone Number**: A unique 8-digit Singapore phone number starting with '6','8', or '9' that acts as the unique and primary identifier for each contact in ArtHive.
+* **Project Tag**: A label assigned to contacts to group them by project. Project tags are alphanumeric strings with underscores and hyphens, up to 20 characters.
+* **Payment Status**: A boolean attribute (paid/unpaid) associated with a project tag that indicates whether payment has been received.
+* **Command Format**: The specific syntax required to execute functions in ArtHive (e.g., "add n/<Client Name> p/<Phone Number> t/<ProjectTag Name>").
+* **Parameter**: A piece of information required by a command, such as client name, phone number, or project tag.
+* **Data Persistence**: The ability to save contact information to a file for later retrieval, ensuring data is not lost when the application is closed.
+* **Alphanumeric**: Characters that consists of only letters (A-Z, a-z) and numbers (0-9).
+* **Case Sensitive**: The property where uppercase and lowercase letters are treated as separated distinct characters (e.g., "John Smith" vs "jOhn SmITh").
+* **Trim**: The process of removing leading and trailing spaces from input.
+* **JSON File**: The file format used to store contact information (arthive.json).
+* **GUI** Graphical User Interface - the visual elements that display information and receive user input.
+* **CLI**: Command Line Interface - the text-based method of interacting with ArtHive through integrated typed commands.
+* **Regex**: Regular Expression - a sequence of characters that defines a certain search pattern, used in ArtHive to validate phone numbers.
 
 --------------------------------------------------------------------------------------------------------------------
 
