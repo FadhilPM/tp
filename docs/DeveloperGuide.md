@@ -349,19 +349,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Artist chooses to save contacts, and Artist enters filename or accepts default filename.
-2. ArtHive saves contacts to the specified file.
+1. Artist chooses to save contact(s).
+2. ArtHive save contact(s) to 'arthive.json'.
 3. ArtHive displays confirmation message.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Artist specifies an invalid filename.
-    * 1a1. ArtHive displays error message indicating invalid filename.
-    * 1a2. Artist enters a valid filename or accepts default.
+* 1a. Artist specifies a <filename> consisting of recognised characters with an extension of '.json'.
+  * 1a1. ArtHive save contact(s) to <filename>.json
 
-      Use case resumes at step 2.
+    Use case resumes at step 3.
+
+* 1b. Artist specifies a <filename> consisting of recognised characters without an extension.
+  * 1b1. ArtHive appends '.json' to the <filename>
+
+    Use case resumes at step 3.
+
+* 1c. Artist did not specify a filename.
+  * 1c1. ArtHive save contact(s) to the default filename of 'arthive.json'
+
+    Use case resumes at step 3.
+
+* 1d. Artist specifies an invalid filename consisting of unrecognised characters.
+    * 1d1. ArtHive displays error message indicating invalid filename.
+    * 1d2. Artist acknowledges the error.
+
+      Use case returns to step 1.
 
 * 2a. ArtHive encounters an error during saving.
     * 2a1. ArtHive displays error message with details.
