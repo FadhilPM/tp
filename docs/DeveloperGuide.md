@@ -288,11 +288,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+---
 ### Use cases
 
-(For all use cases below, the **System** is the `ArtHive` and the **Actor** is the `Artist`, unless specified otherwise)
+(For all use cases below, the **System** is `ArtHive` and the **Actor** is the `Artist`, unless specified otherwise)
 
-**Use case: Use case: Tag Project to Contact**  
+**Use case: Add Contact**
+
+**MSS**
+
+1. Artist chooses to add a new contact, and enters the client name, phone number, and optional project tag.
+2. ArtHive validates the entered information.
+3. ArtHive adds the contact and displays a confirmation message.
+
+**Extensions**
+
+* 1a. Artist enters invalid phone number.
+  * 1a1. ArtHive shows error message with valid phone number format examples.
+  * 1a2. Artist enters a valid phone number.
+    
+    Use case resumes at step 2.
+
+* 1b. Artist enters a non-alphanumeric client name.
+  * 1b1. ArtHive shows error message requesting only letters and numbers.
+  * 1b2. Artist enters a valid client name.
+
+    Use case resumes at step 2.
+
+* 1c. Artist enters a client name exceeding 40 characters.
+  * 1c1. ArtHive shows error message about character limit.
+  * 1c2. Artist enters a valid client name.
+    
+    Use case resumes at step 2.
+
+* 1d. Artist enters an invalid project tag.
+  * 1d1. ArtHive shows appropriate error message (excessive length or invalid characters).
+  * 1d2. Artist enters a valid project tag.
+    
+    Use case resumes at step 2.
+
+**Use case: Use case: Tag Project to Contact**
+
 **MSS**
 
 1.  Artist wants to tag a Project to a Contact.
@@ -304,23 +340,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a.   ArtHive detects that the given Phone Number is non-existent.
-    * 2a1.  ArtHive displays an error message stating that the Contact does not exist
+  * 2a1.  ArtHive displays an error message stating that the Contact does not exist
 
     Use case resumes at step 2.
 
 * 2b.   ArtHive detects that the Project Name is non-existent.
-    * 2b1.  ArtHive creates the Project with a paid attribute value of "False".
+  * 2b1.  ArtHive creates the Project with a paid attribute value of "False".
 
     Use case resumes at step 3.
 
 * 2c.   ArtHive detects that the user input is invalid.
-    * 2c1.  ArtHive returns an error message
+  * 2c1.  ArtHive returns an error message
 
     Use case resumes at step 2.
----
-
 
 **Use case: Use case: Find Contact**  
+
 **MSS**
 
 1.  Artist chooses to use the Find Contact feature.
@@ -332,20 +367,88 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a.   ArtHive detects an error where the search input contains invalid characters.
-    * 2a1.  ArtHive displays an error message stating that the search input contains invalid characters
+  * 2a1.  ArtHive displays an error message stating that the search input contains invalid characters
    
     Use case resumes at step 2.
 
 * 3a.   ArtHive is unable to find Client Names that match the search input.
-    * 3a1.  ArtHive displays an empty list with a message stating that no matching contacts are found.
+  * 3a1.  ArtHive displays an empty list with a message stating that no matching contacts are found.
    
+    Use case ends.
+
+**Use case: Delete Contact**
+
+**MSS**
+
+1. Artist chooses to delete a contact, and enters the phone number.
+2. ArtHive validates the phone number.
+3. ArtHive deletes the contact and any associated project tags.
+4. ArtHive displays confirmation of deletion.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Artist enters invalid phone number.
+  * 1a1. ArtHive shows error message with valid phone number format examples.
+  * 1a2. Artist enters a valid phone number.
+  
+    Use case resumes at step 3.
+
+**Use case: Clear Contact(s)**
+
+**MSS**
+
+1. Artist chooses to clear all contacts.
+2. ArtHive clears all contacts and associated project tags.
+3. ArtHive displays confirmation message stating that the contacts has been cleared.
+
+   Use case ends.
+
+**Use case: Save Contact(s)**
+
+**MSS**
+
+1. Artist chooses to save contact(s).
+2. ArtHive save contact(s) to 'arthive.json'.
+3. ArtHive displays confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Artist specifies a <filename> consisting of recognised characters with an extension of '.json'.
+  * 1a1. ArtHive save contact(s) to <filename>.json
+
+    Use case resumes at step 3.
+
+* 1b. Artist specifies a <filename> consisting of recognised characters without an extension.
+  * 1b1. ArtHive appends '.json' to the <filename>
+
+    Use case resumes at step 3.
+
+* 1c. Artist did not specify a filename.
+  * 1c1. ArtHive save contact(s) to the default filename of 'arthive.json'
+
+    Use case resumes at step 3.
+
+* 1d. Artist specifies an invalid filename consisting of unrecognised characters.
+  * 1d1. ArtHive displays error message indicating invalid filename.
+  * 1d2. Artist acknowledges the error.
+
+    Use case returns to step 1.
+
+* 2a. ArtHive encounters an error during saving.
+  * 2a1. ArtHive displays error message with details.
+  * 2a2. Artist acknowledges the error.
+
     Use case ends.
 
 
 
+*{More to be added}*
 
-
-
+---
 
 ### Non-Functional Requirements
 
@@ -357,6 +460,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. The data file should be stored locally on the computer and should be in a human editable text file.
 7. The software should be able to work without using an installer.
 8. The software should not require a remote server to operate.
+
+---
 
 ### Glossary
 
