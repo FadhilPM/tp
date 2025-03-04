@@ -262,13 +262,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* Freelance Artists
+* has a need to manage a significant number of contacts with highly specific requests
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: organise client information clearly and efficiently, reminds users of upcoming deadlines and is optimised for users who prefer a command line interface.
 
 
 ### User stories
@@ -277,11 +278,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `* * *`  | user                                       | add a new contact              |                                                                        |
+| `* * *`  | user                                       | delete a contact               | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a contact by name         | locate details of persons without having to go through the entire list |
+| `* * *`  | user with many clients                     | save my client's contacts      | keep track of all my clients's information                             |
+| `* * *`  | user with many clients                     | track payments                 | check whether my clients have paid my commission                       |
+| `* *`    | user                                       | blacklist or tag clients       | identify unreasonable clients easily and not take work from them       |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
 *{More to be added}*
