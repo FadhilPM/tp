@@ -327,7 +327,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 2.
 
-**Use case: Use case: Tag Project to Contact**
+**Use case: Tag Project to Contact**
 
 **MSS**
 
@@ -354,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case: Use case: Find Contact**  
+**Use case: Find Contact**  
 
 **MSS**
 
@@ -445,7 +445,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
+**Use case: Track Payment**
 
+**MSS**
+
+1.  Artist wants to track the payment status of a project.
+2.  Artist enters the payment status, contact's phone number, and project name.
+3.  ArtHive tags the corresponding contact’s project with the provided payment status, and shows a "paid" or "unpaid" tag on user profile. 
+
+    Use case ends.
+
+**Extensions**
+
+* 2a.   ArtHive detects that the given Phone Number is non-existent.
+  * 2a1.  ArtHive displays an error message stating that the Contact does not exist
+
+    Use case resumes at step 2.
+
+* 2b.   ArtHive detects that the Project Name is non-existent.
+  * 2b1.  ArtHive displays an error message stating that the Project does not exist 
+
+    Use case resumes at step 2.
+
+* 2c.   ArtHive detects that the user input is invalid.
+  * 2c1.  ArtHive returns an error message
+
+    Use case resumes at step 2.
 *{More to be added}*
 
 ---
