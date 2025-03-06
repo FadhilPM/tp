@@ -1,4 +1,4 @@
-<!--[![codecov](https://codecov.io/gh/AY2425S2-CS2103-F10-1/tp/graph/badge.svg?token=FJ99L6LFD9)](https://codecov.io/gh/AY2425S2-CS2103-F10-1/tp) -->
+[![codecov](https://codecov.io/gh/AY2425S2-CS2103-F10-1/tp/graph/badge.svg?token=FJ99L6LFD9)](https://codecov.io/gh/AY2425S2-CS2103-F10-1/tp)
 
 [![CI Status](https://github.com/AY2425S2-CS2103-F10-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S2-CS2103-F10-1/tp/actions)
 
