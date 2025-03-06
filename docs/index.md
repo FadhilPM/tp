@@ -3,7 +3,7 @@ layout: page
 title: ArtHive
 ---
 
-[![CI Status](https://github.com/AY2425S2-CS2103-F10-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/sAY2425S2-CS2103-F10-1/tp/actions)
+[![CI Status](https://github.com/AY2425S2-CS2103-F10-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S2-CS2103-F10-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S2-CS2103-F10-1/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2425S2-CS2103-F10-1/tp)
 
 ![Ui](images/Ui.png)
