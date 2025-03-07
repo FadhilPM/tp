@@ -43,6 +43,13 @@ public class StorageManager implements Storage {
     @Override
     public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
+
+        try {
+            Optional<UserPrefs> savedPrefs = readUserPrefs();
+        } catch (DataLoadingException e) {
+            logger.warning("Can't verify saved preferences: "
+                    + e.getMessage());
+        }
     }
 
 
