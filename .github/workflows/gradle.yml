@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Set up repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@main
 
       - name: Set up repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@main
         with:
           ref: master
 
@@ -41,6 +41,6 @@ jobs:
 
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
