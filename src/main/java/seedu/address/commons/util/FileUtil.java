@@ -83,9 +83,9 @@ public class FileUtil {
     }
 
     /**
-     * Get the new file name from a given Path object.
+     * Check if there are more than 1 save file.
      */
-    public static Path getFile(Path dir) throws IOException {
+    public static Path checkExistingJsonFiles(Path dir) throws IOException {
         try (Stream<Path> files = Files.list(dir)) {
             List<Path> jsonFiles = files
                     .filter(Files::isRegularFile)
@@ -109,6 +109,7 @@ public class FileUtil {
         if (!oldPath.equals(newPath)) {
             try {
                 Files.deleteIfExists(oldPath);
+                System.err.println("Delete old address book file: " + oldPath);
             } catch (IOException e) {
                 System.err.println("Error deleting old address book: " + e.getMessage());
             }

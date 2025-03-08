@@ -50,6 +50,9 @@ public class SaveCommand extends Command {
                 String customFileName = fileName.get() + ".json";
                 Path newPath = Paths.get("data", customFileName);
                 Path oldPath = model.getAddressBookFilePath();
+
+                FileUtil.purgeOldAddressBookFile(oldPath, newPath);
+
                 storage.saveAddressBook(model.getAddressBook(), newPath);
                 model.setAddressBookFilePath(newPath);
 
@@ -58,8 +61,6 @@ public class SaveCommand extends Command {
                 } catch (IOException e) {
                     System.err.println("Error saving user preferences");
                 }
-
-                FileUtil.purgeOldAddressBookFile(oldPath, newPath);
 
                 return new CommandResult(String.format(SUCCESS, newPath));
             } else {
