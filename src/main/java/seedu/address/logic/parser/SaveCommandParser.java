@@ -25,7 +25,7 @@ public class SaveCommandParser implements Parser<SaveCommand> {
             return new SaveCommand(storage);
         }
 
-        if (!trimArgs.matches("[a-zA-Z0-9]+")) {
+        if (!trimArgs.matches("[a-zA-Z0-9-_]+")) {
             throw new ParseException("Input contains invalid characters. Only alphanumeric characters are allowed.");
         }
 
