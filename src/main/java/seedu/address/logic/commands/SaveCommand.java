@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -44,28 +43,14 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        Path path = fileName.map(x -> {
+            String customFileName = x + ".json";
+            Path newPath = Paths.get("data", customFileName);
+            return newPath;
+        }).orElseGet(() -> model.getAddressBookFilePath());
         try {
-            if (fileName.isPresent()) {
-                String customFileName = fileName.get() + ".json";
-                Path newPath = Paths.get("data", customFileName);
-                Path oldPath = model.getAddressBookFilePath();
-                storage.saveAddressBook(model.getAddressBook(), newPath);
-                model.setAddressBookFilePath(newPath);
-
-                try {
-                    storage.saveUserPrefs(model.getUserPrefs());
-                } catch (IOException e) {
-                    System.err.println("Error saving user prefs");
-                }
-
-                FileUtil.purgeOldAddressBookFile(oldPath, newPath);
-
-                return new CommandResult(String.format(SUCCESS, newPath));
-            } else {
-                storage.saveAddressBook(model.getAddressBook());
-                return new CommandResult(String.format(SUCCESS, storage.getAddressBookFilePath()));
-            }
+            storage.saveAddressBook(model.getAddressBook(), path);
+            return new CommandResult(String.format(SUCCESS, path));
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException e) {

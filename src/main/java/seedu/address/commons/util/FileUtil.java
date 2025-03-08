@@ -5,8 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Writes and reads files
@@ -80,38 +78,5 @@ public class FileUtil {
      */
     public static void writeToFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
-    }
-
-    /**
-     * Get the new file name from a given Path object.
-     */
-    public static Path getFile(Path dir) throws IOException {
-        try (Stream<Path> files = Files.list(dir)) {
-            List<Path> jsonFiles = files
-                    .filter(Files::isRegularFile)
-                    .filter(file -> file.toString().endsWith(".json"))
-                    .toList();
-
-            if (jsonFiles.size() != 1) {
-                throw new IllegalStateException("There should only be 1 json file. Please check the directory: " + dir);
-            }
-
-            return jsonFiles.get(0);
-        }
-    }
-
-    /**
-     * Delete the old save file to ensure
-     * that only one .json file exist in
-     * /data folder.
-     */
-    public static void purgeOldAddressBookFile(Path oldPath, Path newPath) {
-        if (!oldPath.equals(newPath)) {
-            try {
-                Files.deleteIfExists(oldPath);
-            } catch (IOException e) {
-                System.err.println("Error deleting old address book: " + e.getMessage());
-            }
-        }
     }
 }

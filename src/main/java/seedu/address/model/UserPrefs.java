@@ -2,13 +2,11 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.util.FileUtil;
 
 /**
  * Represents User's preferences.
@@ -16,20 +14,12 @@ import seedu.address.commons.util.FileUtil;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath;
+    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
      */
-    public UserPrefs() {
-        try {
-            this.addressBookFilePath = FileUtil.getFile(Paths.get("data"));
-
-        } catch (IOException | IllegalStateException e) {
-            this.addressBookFilePath = Paths.get("data", "arthive.json");
-            System.err.println("Error! Using default file: " + this.addressBookFilePath);
-        }
-    }
+    public UserPrefs() {}
 
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
