@@ -110,7 +110,7 @@ public class FileUtil {
             try {
                 Files.deleteIfExists(oldPath);
             } catch (IOException e) {
-                System.err.println("Error deleting old address book");
+                System.err.println("Error deleting old address book: " + e.getMessage());
             }
         }
     }
