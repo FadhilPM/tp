@@ -56,7 +56,7 @@ public class SaveCommand extends Command {
                 try {
                     storage.saveUserPrefs(model.getUserPrefs());
                 } catch (IOException e) {
-                    System.err.println("Error saving user prefs");
+                    System.err.println("Error saving user preferences");
                 }
 
                 FileUtil.purgeOldAddressBookFile(oldPath, newPath);
