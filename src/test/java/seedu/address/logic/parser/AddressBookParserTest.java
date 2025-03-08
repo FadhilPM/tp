@@ -25,13 +25,19 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.storage.Storage;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
+    private final Storage storage;
+    private final AddressBookParser parser;
 
-    private final AddressBookParser parser = new AddressBookParser();
+    public AddressBookParserTest() {
+        this.storage = null;
+        this.parser = new AddressBookParser(storage);
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
