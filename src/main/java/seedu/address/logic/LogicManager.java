@@ -60,11 +60,11 @@ public class LogicManager implements Logic {
             String[] commandType = commandText.split(" ");
 
             switch (commandType[0]) {
-                case "add", "clear", "delete", "edit":
-                    storage.saveAddressBook(model.getAddressBook());
-                    break;
+            case "add", "clear", "delete", "edit":
+                storage.saveAddressBook(model.getAddressBook());
+                break;
             default:
-                    return commandResult;
+                return commandResult;
             }
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
