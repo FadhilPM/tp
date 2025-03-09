@@ -35,6 +35,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
+    }
+
+    @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
@@ -46,11 +51,6 @@ public class ModelManagerTest {
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
         userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
-    }
-
-    @Test
-    public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
     }
 
     @Test
