@@ -9,13 +9,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-//import java.util.Arrays;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-//import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -52,11 +52,11 @@ public class UniquePersonListTest {
         assertThrows(NullPointerException.class, () -> uniquePersonList.add(null));
     }
 
-    //@Test
-    //public void add_duplicatePerson_throwsDuplicatePersonException() {
-    //    uniquePersonList.add(ALICE);
-    //    assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
-    //}
+    @Test
+    public void add_duplicatePerson_throwsDuplicatePersonException() {
+        uniquePersonList.add(ALICE);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+    }
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
@@ -102,12 +102,12 @@ public class UniquePersonListTest {
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
-    //    @Test
-    //    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
-    //        uniquePersonList.add(ALICE);
-    //        uniquePersonList.add(BOB);
-    //        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
-    //    }
+    @Test
+    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+    }
 
     @Test
     public void remove_nullPerson_throwsNullPointerException() {
@@ -156,11 +156,11 @@ public class UniquePersonListTest {
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
-    //    @Test
-    //    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
-    //        List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
-    //        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
-    //    }
+    @Test
+    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
+        List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+    }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {

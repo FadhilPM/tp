@@ -30,6 +30,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "91234567";
     public static final String VALID_PHONE_BOB = "98765432";
+    public static final String VALID_PHONE_ALICE = "94351253";
+    public static final String VALID_PHONE_RANDOM = "97772221";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
