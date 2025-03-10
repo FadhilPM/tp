@@ -11,7 +11,7 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric with underscore and hypehens "
             + "allowed, and be between 1 and 20 characters long.";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9_-]{1,20}$";
+    public static final String VALIDATION_REGEX = "[a-zA-Z0-9_-]{1,20}";
 
     public final String tagName;
 
@@ -35,6 +35,7 @@ public class Tag {
 
     @Override
     public boolean equals(Object other) {
+        //checks if the object is the same
         if (other == this) {
             return true;
         }
@@ -43,9 +44,8 @@ public class Tag {
         if (!(other instanceof Tag)) {
             return false;
         }
-
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.equalsIgnoreCase(otherTag.tagName);
     }
 
     @Override
