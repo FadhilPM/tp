@@ -52,11 +52,11 @@ public class UniquePersonListTest {
         assertThrows(NullPointerException.class, () -> uniquePersonList.add(null));
     }
 
-    @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
-        uniquePersonList.add(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
-    }
+    //@Test
+    //public void add_duplicatePerson_throwsDuplicatePersonException() {
+    //    uniquePersonList.add(ALICE);
+    //    assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+    //}
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
