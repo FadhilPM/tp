@@ -3,6 +3,8 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.person.Phone;
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -14,6 +16,8 @@ public class Tag {
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9_-]{1,20}";
 
     public final String tagName;
+    public final Boolean tagPaid;
+
 
     /**
      * Constructs a {@code Tag}.
@@ -24,7 +28,9 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+        this.tagPaid = false;
     }
+
 
     /**
      * Returns true if a given string is a valid tag name.
@@ -32,6 +38,15 @@ public class Tag {
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    /**
+     * Returns true if tag has tagPaid attribute of true, returns false otherwise
+     */
+    public boolean isPaid() {
+        return this.tagPaid;
+    }
+
+
 
     @Override
     public boolean equals(Object other) {

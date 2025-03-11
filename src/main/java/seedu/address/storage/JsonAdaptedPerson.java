@@ -24,7 +24,6 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
-
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
