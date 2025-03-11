@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,7 +32,7 @@ public class TagCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TAG + "project-x";
 
-    public static final String MESSAGE_SUCCESS = "yay tag added";
+    public static final String MESSAGE_SUCCESS = "Tag added to Contact: %1$s";
     private final Index index;
     private final Phone phone;
     private final Set<Tag> tags;
@@ -62,18 +62,19 @@ public class TagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(taggedPerson)));
     }
 
-    private static Person tagProjectToPerson(Person personToEdit, Set<Tag> current) {
+    private static Person tagProjectToPerson(Person personToEdit, Set<Tag> newlyAddedTags) {
         assert personToEdit != null;
 
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
-        Set<Tag> tags = personToEdit.getTags();
+        Set<Tag> currentTags = personToEdit.getTags();
 
-        // Add the current and new tags to a single Set
-        Set<Tag> newTags = new HashSet<Tag>();
-        newTags.addAll(tags);
-        newTags.addAll(current);
+        // Add the current and newly added tags to a single Linked Hash Set
+        Set<Tag> newTags = new LinkedHashSet<Tag>();
+        newTags.addAll(currentTags);
+        newTags.addAll(newlyAddedTags);
 
+        // Return new Person 
         return new Person(name, phone, newTags);
     }
 }

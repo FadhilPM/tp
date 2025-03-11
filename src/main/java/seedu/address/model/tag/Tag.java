@@ -14,9 +14,8 @@ public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric with underscore and hyphens. "
             + "allowed, and be between 1 and 20 characters long.";
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9_-]{1,20}";
-
     public final String tagName;
-    public final Boolean tagPaid;
+    public Boolean tagPaid;
 
 
     /**
@@ -46,7 +45,12 @@ public class Tag {
         return this.tagPaid;
     }
 
-
+    /**
+     * Set the tagPaid attribute to true, to reflect successful payment
+     */
+    public void pay() {
+        this.tagPaid = true;
+    }
 
     @Override
     public boolean equals(Object other) {

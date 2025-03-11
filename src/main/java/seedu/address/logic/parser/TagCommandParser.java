@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -28,12 +28,12 @@ public class TagCommandParser implements Parser<TagCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_TAG);
 
-        //if (!arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_TAG)
-          //      || !argMultimap.getPreamble().isEmpty()) {
-           // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
-       // }
-
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_TAG)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE);
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
 
