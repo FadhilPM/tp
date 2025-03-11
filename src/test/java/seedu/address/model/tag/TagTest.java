@@ -1,5 +1,7 @@
 package seedu.address.model.tag;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,27 @@ public class TagTest {
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
+
+        //more than 20 characters
+        assertFalse(Tag.isValidTagName("aaaaaaaaaaaaaaaaaaaaa"));
+
+        //less than 1 character
+        assertFalse(Tag.isValidTagName(""));
+
+        //hyphens and underscores allows
+        assertTrue(Tag.isValidTagName("_-"));
+
+        //other special characters not allowed
+        assertFalse(Tag.isValidTagName("*!@#$%^&*"));
     }
+
+    @Test
+    public void equals() {
+        Tag tag = new Tag("Valid-Tag");
+
+        // case insensitive
+        assertTrue(tag.equals(new Tag("valid-tag")));
+    }
+
 
 }

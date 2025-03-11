@@ -59,10 +59,11 @@ public class ParserUtil {
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
+        String sanitizedInput = trimmedPhone.replaceAll("\\s+", "");
+        if (!Phone.isValidPhone(sanitizedInput)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new Phone(sanitizedInput);
     }
 
     /**
@@ -117,7 +118,7 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            tagSet.add(parseTag(tagName.toLowerCase()));
         }
         return tagSet;
     }
