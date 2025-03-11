@@ -72,7 +72,7 @@ public class TagCommand extends Command {
         newTags.addAll(currentTags);
         newTags.addAll(newlyAddedTags);
 
-        // Return new Person 
+        // Return new Person
         return new Person(name, phone, newTags);
     }
 }
