@@ -418,7 +418,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. Artist specifies a <filename> consisting of recognised characters with an extension of '.json'.
-  * 1a1. ArtHive save contact(s) to <filename>.json
+  * 1a1. ArtHive save contact(s) to <filename>.json.
 
     Use case resumes at step 3.
 
@@ -489,8 +489,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Client**: An individual or organization that engages the artist's services.
 * **Contact**: An entry in ArtHive that contains client information, such as, name, phone number, and associated project tags.
 * **Phone Number**: A unique 8-digit Singapore phone number starting with '6','8', or '9' that acts as the unique and primary identifier for each contact in ArtHive.
