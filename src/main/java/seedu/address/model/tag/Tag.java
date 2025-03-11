@@ -11,7 +11,7 @@ import seedu.address.model.person.Phone;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric with underscore and hyphens. "
+    public static final String MESSAGE_CONSTRAINTS = "Tag names should be alphanumeric with underscore and hyphens. "
             + "allowed, and be between 1 and 20 characters long.";
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9_-]{1,20}";
     public final String tagName;
@@ -29,7 +29,6 @@ public class Tag {
         this.tagName = tagName;
         this.tagPaid = false;
     }
-
 
     /**
      * Returns true if a given string is a valid tag name.

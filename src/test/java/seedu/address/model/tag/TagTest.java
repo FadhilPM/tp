@@ -30,7 +30,7 @@ public class TagTest {
         //less than 1 character
         assertFalse(Tag.isValidTagName(""));
 
-        //hyphens and underscores allows
+        //hyphens and underscores allowed
         assertTrue(Tag.isValidTagName("_-"));
 
         //other special characters not allowed

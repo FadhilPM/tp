@@ -14,8 +14,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -25,10 +23,10 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags a project to a contact. "
-            + "Parameters: "
+            + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_NAME + "PHONE "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TAG + "project-x";
 
@@ -70,7 +68,7 @@ public class TagCommand extends Command {
         Set<Tag> currentTags = personToEdit.getTags();
 
         // Add the current and newly added tags to a single Linked Hash Set
-        Set<Tag> newTags = new LinkedHashSet<Tag>();
+        Set<Tag> newTags = new LinkedHashSet<>();
         newTags.addAll(currentTags);
         newTags.addAll(newlyAddedTags);
 

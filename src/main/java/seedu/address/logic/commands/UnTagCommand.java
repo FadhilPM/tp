@@ -23,10 +23,10 @@ public class UnTagCommand extends Command {
     public static final String COMMAND_WORD = "untag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Remove a project from a contact. "
-            + "Parameters: "
+            + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_NAME + "PHONE "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TAG + "project-x";
 
