@@ -30,7 +30,7 @@ public class UnTagCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TAG + "project-x";
 
-    public static final String MESSAGE_SUCCESS = "Tag removed from Contact: %1$s";
+    public static final String MESSAGE_SUCCESS = "Tag removed from Contact";
     private final Index index;
     private final Phone phone;
     private final Set<Tag> tags;
@@ -57,7 +57,7 @@ public class UnTagCommand extends Command {
 
         model.setPerson(personToEdit, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(taggedPerson)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
     private static Person unTagProjectFromPerson(Person personToEdit, Set<Tag> tagsToRemove) {
