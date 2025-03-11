@@ -3,8 +3,6 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.model.person.Phone;
-
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -15,8 +13,7 @@ public class Tag {
             + "allowed, and be between 1 and 20 characters long.";
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9_-]{1,20}";
     public final String tagName;
-    public Boolean tagPaid;
-
+    private Boolean tagPaid;
 
     /**
      * Constructs a {@code Tag}.

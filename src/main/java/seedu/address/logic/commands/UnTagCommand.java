@@ -19,6 +19,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Removes Tag(s) from a person in the address book.
+ */
 public class UnTagCommand extends Command {
     public static final String COMMAND_WORD = "untag";
 
@@ -35,6 +38,11 @@ public class UnTagCommand extends Command {
     private final Phone phone;
     private final Set<Tag> tags;
 
+    /**
+     * @param index of the person in the filtered person list to edit
+     * @param phone number of the person in the filtered person list to edit
+     * @param tags to remove
+     */
     public UnTagCommand(Index index, Phone phone, Set<Tag> tags) {
         requireNonNull(index);
         requireNonNull(phone);
@@ -60,6 +68,11 @@ public class UnTagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
+    /**
+     * Create an edited person with the refreshed tag set
+     * @param personToEdit current person to edit
+     * @param tagsToRemove tags to be removed
+     */
     private static Person unTagProjectFromPerson(Person personToEdit, Set<Tag> tagsToRemove) {
         assert personToEdit != null;
 

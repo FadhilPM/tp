@@ -19,6 +19,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Add Tag(s) to a person in the address book.
+ */
 public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
@@ -35,6 +38,11 @@ public class TagCommand extends Command {
     private final Phone phone;
     private final Set<Tag> tags;
 
+    /**
+     * @param index of the person in the filtered person list to edit
+     * @param phone number of the person in the filtered person list to edit
+     * @param tags to add
+     */
     public TagCommand(Index index, Phone phone, Set<Tag> tags) {
         requireNonNull(index);
         requireNonNull(phone);
@@ -60,6 +68,11 @@ public class TagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
+    /**
+     * Create an edited person with the refreshed tag set
+     * @param personToEdit current person to edit
+     * @param newlyAddedTags tags to be added
+     */
     private static Person tagProjectToPerson(Person personToEdit, Set<Tag> newlyAddedTags) {
         assert personToEdit != null;
 

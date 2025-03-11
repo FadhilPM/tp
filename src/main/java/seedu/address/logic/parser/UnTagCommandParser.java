@@ -14,6 +14,12 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class UnTagCommandParser implements Parser<UnTagCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the UnTagCommand
+     * and returns an UnTagCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public UnTagCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_TAG);
