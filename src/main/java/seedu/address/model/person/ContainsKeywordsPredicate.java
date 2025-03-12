@@ -2,6 +2,9 @@ package seedu.address.model.person;
 
 import java.util.function.Predicate;
 
+/**
+ * An abstract class used to check if a specific field in a {@code Person} object contains a given keyword.
+ */
 public abstract class ContainsKeywordsPredicate implements Predicate<Person> {
 
     /**

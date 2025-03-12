@@ -8,7 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 /**
  * Tests that a {@code Person}'s {@code Phone} matches any of the keywords given.
  */
-public class PhoneContainsKeywordsPredicate extends ContainsKeywordsPredicate{
+public class PhoneContainsKeywordsPredicate extends ContainsKeywordsPredicate {
     private final List<String> keywords;
 
     public PhoneContainsKeywordsPredicate(List<String> keywords) {
