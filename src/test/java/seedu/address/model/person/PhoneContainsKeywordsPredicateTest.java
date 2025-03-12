@@ -43,15 +43,15 @@ public class PhoneContainsKeywordsPredicateTest {
     public void test_phoneContainsKeywords_returnsTrue() {
         // One keyword
         PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(Collections.singletonList("88888888"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("88888888 66666666").build()));
+        assertTrue(predicate.test(new PersonBuilder().withPhone("88888888").build()));
 
         // Multiple keywords
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("88888888", "66666666"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("88888888 66666666").build()));
+        assertTrue(predicate.test(new PersonBuilder().withPhone("88888888").build()));
 
         // Only one matching keyword
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("66666666", "66668888"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("88888888 66668888").build()));
+        assertTrue(predicate.test(new PersonBuilder().withPhone("66668888").build()));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class PhoneContainsKeywordsPredicateTest {
 
         // Non-matching keyword
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("66668888"));
-        assertFalse(predicate.test(new PersonBuilder().withPhone("88888888 66666666").build()));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("88888888").build()));
 
         // Partially-matching keywords
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("6666", "8888"));
