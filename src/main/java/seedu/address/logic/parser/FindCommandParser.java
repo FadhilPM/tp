@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import seedu.address.commons.util.StringUtil;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
@@ -29,40 +30,13 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] keywords = trimmedArgs.split("\\s+");
 
-        if (isNumeric(keywords)) {
+        if (StringUtil.isNumeric(keywords)) {
             return new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList(keywords)));
-        } else if (isAlpha(keywords)) {
+        } else if (StringUtil.isAlpha(keywords)) {
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
-
-    /**
-     * Checks if all keywords are numeric
-     */
-    public static boolean isNumeric(String[] keywords) {
-        try {
-            for (String keyword : keywords) {
-                Integer.parseInt(keyword);
-            }
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Checks if all keywords are alphabetic
-     */
-    public static boolean isAlpha(String[] keywords) {
-        for (String keyword : keywords) {
-            if (!keyword.matches("[a-zA-Z]+")) {
-                return false;
-            }
-        }
-        return true;
-    }
-
 }
