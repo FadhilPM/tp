@@ -34,7 +34,8 @@ public class FindCommandParserTest {
     public void parse_allAlphabeticKeywords_returnsFindCommandWithNamePredicate() throws ParseException {
         String input = "Alice Bob Charlie";
         FindCommand command = parser.parse(input);
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob", "Charlie"))), command);
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(
+                "Alice", "Bob", "Charlie"))), command);
     }
 
     @Test
