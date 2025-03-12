@@ -29,6 +29,8 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")); // more than 40 chars
+
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
@@ -56,5 +58,11 @@ public class NameTest {
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
+
+        // extra space will be different from each other
+        assertFalse(name.equals(new Name("ValidName")));
+
+        // upper/lower case are not the same
+        assertFalse(name.equals(new Name("valid name")));
     }
 }

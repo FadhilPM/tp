@@ -109,6 +109,7 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.iterator();
     }
 
+    //TODO: look through here
     @Override
     public boolean equals(Object other) {
         if (other == this) {
