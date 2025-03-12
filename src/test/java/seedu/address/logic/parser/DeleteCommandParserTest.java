@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -30,8 +31,8 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validPhone_returnsDeleteCommand() {
-        Phone phone = new Phone("81234567");
-        assertParseSuccess(parser, " p/81234567", new DeleteByPhoneCommand(phone));
+        Phone phone = new Phone(VALID_PHONE_AMY);
+        assertParseSuccess(parser, String.format(" p/%s", VALID_PHONE_AMY), new DeleteByPhoneCommand(phone));
     }
 
     @Test
