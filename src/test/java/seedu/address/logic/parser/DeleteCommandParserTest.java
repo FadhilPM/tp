@@ -7,7 +7,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.DeleteByIndexCommand;
+import seedu.address.logic.commands.DeleteByPhoneCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.model.person.Phone;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -21,12 +24,25 @@ public class DeleteCommandParserTest {
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+    public void parse_validIndex_returnsDeleteCommand() {
+        assertParseSuccess(parser, "1", new DeleteByIndexCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
+    public void parse_validPhone_returnsDeleteCommand() {
+        Phone phone = new Phone("81234567");
+        assertParseSuccess(parser, " p/81234567", new DeleteByPhoneCommand(phone));
+    }
+
+    @Test
+    public void parse_invalidIndex_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidPhone_throwsParseException() {
+        assertParseFailure(parser,
+                           " p/8123456",
+                           String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }
