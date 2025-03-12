@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
-public abstract class ContainsKeywordsPredicate{
+import java.util.function.Predicate;
+
+public abstract class ContainsKeywordsPredicate implements Predicate<Person> {
 
     /**
      * Checks if a field in Person matches the keyword.

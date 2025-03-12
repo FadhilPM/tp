@@ -17,6 +17,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
@@ -30,11 +31,17 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (isNumeric(keywords)) {
             return new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList(keywords)));
-        } else {
+        } else if (isAlpha(keywords)) {
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        } else {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
 
+    /**
+     * Checks if all keywords are numeric
+     */
     public static boolean isNumeric(String[] keywords) {
         try {
             for (String keyword : keywords) {
@@ -42,6 +49,18 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
         } catch (NumberFormatException nfe) {
             return false;
+        }
+        return true;
+    }
+
+    /**
+     * Checks if all keywords are alphabetic
+     */
+    public static boolean isAlpha(String[] keywords) {
+        for (String keyword : keywords) {
+            if (!keyword.matches("[a-zA-Z]+")) {
+                return false;
+            }
         }
         return true;
     }
