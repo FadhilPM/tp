@@ -65,4 +65,30 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Checks if all keywords are numeric
+     */
+    public static boolean isNumeric(String[] keywords) {
+        try {
+            for (String keyword : keywords) {
+                Integer.parseInt(keyword);
+            }
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Checks if all keywords are alphabetic
+     */
+    public static boolean isAlpha(String[] keywords) {
+        for (String keyword : keywords) {
+            if (!keyword.matches("[a-zA-Z]+")) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
