@@ -411,13 +411,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Artist specifies a filename consisting of recognised characters with an extension of '.json'.
-  * 1a1. ArtHive save contact(s) to filename.json.
+* 1a. Artist specifies a \<filename\> consisting of recognised characters with an extension of '.json'.
+  * 1a1. ArtHive save contact(s) to \<filename\>.json.
 
     Use case resumes at step 3.
 
-* 1b. Artist specifies a filename consisting of recognised characters without an extension.
-  * 1b1. ArtHive appends '.json' to the filename.
+* 1b. Artist specifies a \<filename\> consisting of recognised characters without an extension.
+  * 1b1. ArtHive appends '.json' to the \<filename\>.
 
     Use case resumes at step 3.
 
