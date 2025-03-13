@@ -351,7 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Artist chooses to use the Find Contact feature.
+1.  Artist wants to Find a Contact from the list.
 2.  Artist enters the client name of the contact he/she would like to find as the search input value.
 3.  ArtHive returns a list of contacts whose Client Names match the search input.
 
@@ -373,7 +373,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Artist chooses to delete a contact, and enters the phone number.
+1. Artist wants to delete a contact.
+2. Artist enters the phone number.
 2. ArtHive deletes the contact and any associated project tags.
 3. ArtHive displays confirmation of deletion.
 
@@ -381,13 +382,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. ArtHive detects that the entered Phone Number is invalid.
-  * 1a1. ArtHive displays an error message with valid phone number format examples.
-  * 1a2. Artist enters new data.
+* 2a. ArtHive detects that the entered Phone Number is invalid.
+  * 2a1. ArtHive displays an error message with valid phone number format examples.
+  * 2a2. Artist enters new data.
 
-    Step 1a1-1a2 are repeated until the data entered are correct.
+    Step 2a1-2a2 are repeated until the data entered are correct.
 
-    Use case resumes at step 2.
+    Use case resumes at step 3.
 
 **Use case: Clear Contact(s)**
 
