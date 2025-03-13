@@ -404,8 +404,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Artist want to save contact(s).
-2. ArtHive save contact(s) to 'arthive.json'.
+1. Artist wants to save contact(s).
+2. ArtHive saves contact(s) to 'arthive.json'.
 3. ArtHive displays confirmation message.
 
    Use case ends.
@@ -414,12 +414,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Artist specifies a filename consisting of recognised characters without an extension.
   * 1a1. ArtHive appends '.json' to the filename.
-  * 1a2. ArtHive save contact(s) based on the filename.
+  * 1a2. ArtHive saves contact(s) based on the filename.
 
     Use case resumes at step 3.
 
-* 1b. Artist did not specify a filename.
-  * 1b1. ArtHive save contact(s) to the default filename of 'arthive.json'.
+* 1b. Artist does not specify a filename.
+  * 1b1. ArtHive saves contact(s) to the default filename of 'arthive.json'.
 
     Use case resumes at step 3.
 
