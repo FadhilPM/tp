@@ -297,33 +297,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Artist chooses to add a new contact, and enters the client name, phone number, and optional project tag.
-2. ArtHive validates the entered information.
-3. ArtHive adds the contact and displays a confirmation message.
+1.  Artist wants to add a new contact.
+2.  Artist enters the client’s Name, Phone Number, and optional Project Tag.
+3.  ArtHive adds the contact and displays a success message.
+    
+    Use case ends.
 
 **Extensions**
 
-* 1a. Artist enters invalid phone number.
-  * 1a1. ArtHive shows error message with valid phone number format examples.
-  * 1a2. Artist enters a valid phone number.
+* 2a. ArtHive detects that the entered Phone Number is invalid.
+  * 2a1. ArtHive displays an error message with the correct phone number format.
 
     Use case resumes at step 2.
 
-* 1b. Artist enters a non-alphanumeric client name.
-  * 1b1. ArtHive shows error message requesting only letters and numbers.
-  * 1b2. Artist enters a valid client name.
+* 2b. ArtHive detects that the client Name contains invalid characters or exceeds 40 characters.
+  * 2b1. ArtHive displays an error message specifying the issue.
 
     Use case resumes at step 2.
 
-* 1c. Artist enters a client name exceeding 40 characters.
-  * 1c1. ArtHive shows error message about character limit.
-  * 1c2. Artist enters a valid client name.
-
-    Use case resumes at step 2.
-
-* 1d. Artist enters an invalid project tag.
-  * 1d1. ArtHive shows appropriate error message (excessive length or invalid characters).
-  * 1d2. Artist enters a valid project tag.
+* 2c. ArtHive detects that the entered Project Tag is invalid.
+  * 2c1. ArtHive displays an error message specifying the issue (excessive length or invalid characters).
 
     Use case resumes at step 2.
 
@@ -381,19 +374,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Artist chooses to delete a contact, and enters the phone number.
-2. ArtHive validates the phone number.
-3. ArtHive deletes the contact and any associated project tags.
-4. ArtHive displays confirmation of deletion.
+2. ArtHive deletes the contact and any associated project tags.
+3. ArtHive displays confirmation of deletion.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Artist enters invalid phone number.
-  * 1a1. ArtHive shows error message with valid phone number format examples.
-  * 1a2. Artist enters a valid phone number.
+* 1a. ArtHive detects that the entered Phone Number is invalid.
+  * 1a1. ArtHive displays an error message with valid phone number format examples.
+  * 1a2. Artist enters new data.
 
-    Use case resumes at step 3.
+    Step 1a1-1a2 are repeated until the data entered are correct.
+
+    Use case resumes at step 2.
 
 **Use case: Clear Contact(s)**
 
@@ -409,7 +403,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Artist chooses to save contact(s).
+1. Artist want to save contact(s).
 2. ArtHive save contact(s) to 'arthive.json'.
 3. ArtHive displays confirmation message.
 
@@ -417,13 +411,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Artist specifies a <filename> consisting of recognised characters with an extension of '.json'.
-  * 1a1. ArtHive save contact(s) to <filename>.json.
+* 1a. Artist specifies a filename consisting of recognised characters with an extension of '.json'.
+  * 1a1. ArtHive save contact(s) to filename.json.
 
     Use case resumes at step 3.
 
-* 1b. Artist specifies a <filename> consisting of recognised characters without an extension.
-  * 1b1. ArtHive appends '.json' to the <filename>.
+* 1b. Artist specifies a filename consisting of recognised characters without an extension.
+  * 1b1. ArtHive appends '.json' to the filename.
 
     Use case resumes at step 3.
 
