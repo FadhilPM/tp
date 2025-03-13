@@ -500,7 +500,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Parameter**: A piece of information required by a command, such as client name, phone number, or project tag.
 * **Data Persistence**: The ability to save contact information to a file for later retrieval, ensuring data is not lost when the application is closed.
 * **Alphanumeric**: Characters that consists of only letters (A-Z, a-z) and numbers (0-9).
-* **Case Sensitive**: The property where uppercase and lowercase letters are treated as separated distinct characters (e.g., "John Smith" vs "jOhn SmITh").
+* **Case Insensitive**: The property where uppercase and lowercase letters are treated as equivalent (e.g., "John Smith" vs "jOhn SmITh").
 * **Trim**: The process of removing leading and trailing spaces from input.
 * **JSON File**: The file format used to store contact information (arthive.json).
 * **GUI** Graphical User Interface - the visual elements that display information and receive user input.
