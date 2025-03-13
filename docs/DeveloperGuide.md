@@ -364,8 +364,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-* 3a.   ArtHive is unable to find Client Names that match the search input.
-  * 3a1.  ArtHive displays an empty list with a message stating that no matching contacts are found.
+* 2a.   ArtHive is unable to find Client Names that match the search input.
+  * 2a1.  ArtHive displays an empty list with a message stating that no matching contacts are found.
 
     Use case ends.
 
@@ -375,8 +375,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Artist wants to delete a contact.
 2. Artist enters the phone number.
-2. ArtHive deletes the contact and any associated project tags.
-3. ArtHive displays confirmation of deletion.
+3. ArtHive deletes the contact and any associated project tags.
+4. ArtHive displays confirmation of deletion.
 
    Use case ends.
 
@@ -412,24 +412,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Artist specifies a \<filename\> consisting of recognised characters with an extension of '.json'.
-  * 1a1. ArtHive save contact(s) to \<filename\>.json.
+* 1a. Artist specifies a filename consisting of recognised characters without an extension.
+  * 1a1. ArtHive appends '.json' to the filename.
+  * 1a2. ArtHive save contact(s) based on the filename.
 
     Use case resumes at step 3.
 
-* 1b. Artist specifies a \<filename\> consisting of recognised characters without an extension.
-  * 1b1. ArtHive appends '.json' to the \<filename\>.
+* 1b. Artist did not specify a filename.
+  * 1b1. ArtHive save contact(s) to the default filename of 'arthive.json'.
 
     Use case resumes at step 3.
 
-* 1c. Artist did not specify a filename.
-  * 1c1. ArtHive save contact(s) to the default filename of 'arthive.json'.
-
-    Use case resumes at step 3.
-
-* 1d. Artist specifies an invalid filename consisting of unrecognised characters.
-  * 1d1. ArtHive displays error message indicating invalid filename.
-  * 1d2. Artist acknowledges the error.
+* 1c. Artist specifies an invalid filename consisting of unrecognised characters.
+  * 1c1. ArtHive displays error message indicating invalid filename.
+  * 1c2. Artist acknowledges the error.
 
     Use case returns to step 1.
 
