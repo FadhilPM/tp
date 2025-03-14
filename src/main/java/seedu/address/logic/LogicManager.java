@@ -60,7 +60,7 @@ public class LogicManager implements Logic {
             String[] commandType = commandText.split(" ");
 
             switch (commandType[0]) {
-            case "add", "clear", "delete", "edit":
+            case "add", "clear", "delete", "edit", "tag", "untag":
                 storage.saveAddressBook(model.getAddressBook());
                 break;
             default:

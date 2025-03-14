@@ -31,7 +31,7 @@ public class FileUtilTest {
 
         Path jsonFile = Files.createFile(temp.resolve("temp.json"));
 
-        Path result = FileUtil.getFile(temp);
+        Path result = FileUtil.checkExistingJsonFiles(temp);
 
         assertEquals(jsonFile, result);
 
@@ -46,7 +46,7 @@ public class FileUtilTest {
         Files.createFile(temp.resolve("temp1.json"));
         Files.createFile(temp.resolve("temp2.json"));
 
-        assertThrows(IllegalStateException.class, () -> FileUtil.getFile(temp));
+        assertThrows(IllegalStateException.class, () -> FileUtil.checkExistingJsonFiles(temp));
 
         Files.walk(temp)
                 .map(Path::toFile)
@@ -57,7 +57,7 @@ public class FileUtilTest {
     void test_getFile_emptyDirectory() throws IOException {
         Path temp = Files.createTempDirectory("temp");
 
-        assertThrows(IllegalStateException.class, () -> FileUtil.getFile(temp));
+        assertThrows(IllegalStateException.class, () -> FileUtil.checkExistingJsonFiles(temp));
 
         Files.delete(temp);
     }
@@ -66,7 +66,7 @@ public class FileUtilTest {
     void test_getFile_invalidDirectory() {
         Path invalid = Paths.get("invalid");
 
-        assertThrows(IOException.class, () -> FileUtil.getFile(invalid));
+        assertThrows(IOException.class, () -> FileUtil.checkExistingJsonFiles(invalid));
     }
 
     @Test
