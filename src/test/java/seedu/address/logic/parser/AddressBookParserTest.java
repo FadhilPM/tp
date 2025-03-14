@@ -84,7 +84,7 @@ public class AddressBookParserTest {
         Phone phone = personTag.getPhone();
         String tags = "T_est-1";
         assertTrue(parser.parseCommand(TagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " p/" + phone + " t/" + tags) instanceof TagCommand);
+                + " p/" + phone + " t/" + tags) instanceof TagCommand);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class AddressBookParserTest {
         Phone phone = personUntag.getPhone();
         String tags = "T_est-1";
         assertTrue(parser.parseCommand(UnTagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " p/" + phone + " t/" + tags) instanceof UnTagCommand);
+                + " p/" + phone + " t/" + tags) instanceof UnTagCommand);
     }
 
     @Test
