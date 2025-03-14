@@ -140,4 +140,39 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    void isNumeric_allKeywordsAreNumeric_returnsTrue() {
+        String[] keywords = {"123", "456", "789"};
+        assertTrue(StringUtil.isNumeric(keywords));
+    }
+
+    @Test
+    void isNumeric_rneKeywordIsNotNumeric_returnsFalse() {
+        String[] keywords = {"123", "abc", "789"};
+        assertFalse(StringUtil.isNumeric(keywords));
+    }
+
+    @Test
+    void isNumeric_nullArray_throwsNullPointerException() {
+        String[] keywords = null;
+        assertThrows(NullPointerException.class, () -> StringUtil.isNumeric(keywords));
+    }
+
+    @Test
+    void isAlpha_allKeywordsAreAlphabetic_returnsTrue() {
+        String[] keywords = {"abc", "DEF", "GhIj"};
+        assertTrue(StringUtil.isAlpha(keywords));
+    }
+
+    @Test
+    void isAlpha_oneKeywordIsNotAlphabetic_returnsFalse() {
+        String[] keywords = {"abc", "123", "DEF"};
+        assertFalse(StringUtil.isAlpha(keywords));
+    }
+
+    @Test
+    void isAlpha_nullArray_throwsNullPointerException() {
+        String[] keywords = null;
+        assertThrows(NullPointerException.class, () -> StringUtil.isAlpha(keywords));
+    }
 }
