@@ -66,7 +66,7 @@ public class TagCommand extends Command {
      * @param personToEdit current person to edit
      * @param newlyAddedTags tags to be added
      */
-    private static Person tagProjectToPerson(Person personToEdit, Set<Tag> newlyAddedTags) {
+    public static Person tagProjectToPerson(Person personToEdit, Set<Tag> newlyAddedTags) {
         assert personToEdit != null;
 
         Name name = personToEdit.getName();
