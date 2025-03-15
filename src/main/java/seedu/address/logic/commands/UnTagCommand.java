@@ -68,7 +68,7 @@ public class UnTagCommand extends Command {
      * @param personToEdit current person to edit
      * @param tagsToRemove tags to be removed
      */
-    static Person unTagProjectFromPerson(Person personToEdit, Set<Tag> tagsToRemove) {
+    public static Person unTagProjectFromPerson(Person personToEdit, Set<Tag> tagsToRemove) {
         assert personToEdit != null;
 
         Name name = personToEdit.getName();
