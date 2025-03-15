@@ -26,7 +26,7 @@ public class TagCommand extends Command {
             + "Parameters: "
             + PREFIX_PHONE + "PHONE "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TAG + "project-x";
 

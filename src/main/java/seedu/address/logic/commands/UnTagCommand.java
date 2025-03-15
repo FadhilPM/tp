@@ -27,7 +27,7 @@ public class UnTagCommand extends Command {
             + "Parameters: "
             + PREFIX_PHONE + "PHONE "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TAG + "project-x";
 
@@ -68,7 +68,7 @@ public class UnTagCommand extends Command {
      * @param personToEdit current person to edit
      * @param tagsToRemove tags to be removed
      */
-    private static Person unTagProjectFromPerson(Person personToEdit, Set<Tag> tagsToRemove) {
+    static Person unTagProjectFromPerson(Person personToEdit, Set<Tag> tagsToRemove) {
         assert personToEdit != null;
 
         Name name = personToEdit.getName();
