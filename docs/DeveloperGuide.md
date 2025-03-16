@@ -347,27 +347,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case: Find Contact**
+**Use case: Find Contact(s) by Name**
 
 **MSS**
 
-1.  Artist wants to Find a Contact from the list.
-2.  Artist enters the client name of the contact he/she would like to find as the search input value.
-3.  ArtHive returns a list of contacts whose Client Names match the search input.
+1.  Artist wants to Find Contact(s) from the list.
+2.  Artist enters the client name(s) of the contact(s) they would like to find as the search input keyword(s).
+3.  ArtHive returns a list of contacts whose Client Names match the search keyword(s).
 
     Use case ends.
 
 **Extensions**
 
-* 2a.   ArtHive detects an error where the search input contains invalid characters.
-  * 2a1.  ArtHive displays an error message stating that the search input contains invalid characters.
+* 2a.   ArtHive detects an error where the search keyword(s) contains invalid characters.
+  * 2a1.  ArtHive displays an error message stating that the search keyword(s) contains invalid characters.
 
     Use case resumes at step 2.
 
-* 2a.   ArtHive is unable to find Client Names that match the search input.
-  * 2a1.  ArtHive displays an empty list with a message stating that no matching contacts are found.
+* 2b.   ArtHive is unable to find Client Names that match the search keyword(s).
+  * 2b1.  ArtHive displays an empty list with a message stating that no matching contacts are found.
 
     Use case ends.
+
+**Use case: Find Contact(s) by Phone Number**
+
+**MSS**
+
+1.  Artist wants to Find Contact(s) from the list.
+2.  Artist enters the phone number(s) of the contact(s) they would like to find as the search input keyword(s).
+3.  ArtHive returns a list of contacts whose Phone Numbers match the search keyword(s).
+
+    Use case ends.
+
+**Extensions**
+
+* 2a.   ArtHive detects an error where the search keyword(s) contains invalid characters.
+    * 2a1.  ArtHive displays an error message stating that the search keyword(s) contains invalid characters.
+
+      Use case resumes at step 2.
+
+* 2b.   ArtHive is unable to find Phone Numbers that match the search keyword(s).
+    * 2b1.  ArtHive displays an empty list with a message stating that no matching contacts are found.
+
+      Use case ends.
 
 **Use case: Delete Contact**
 
