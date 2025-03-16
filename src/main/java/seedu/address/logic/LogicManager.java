@@ -10,6 +10,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.enumeration.SavingCommandTypes;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -59,12 +60,8 @@ public class LogicManager implements Logic {
         try {
             String[] commandType = commandText.split(" ");
 
-            switch (commandType[0]) {
-            case "add", "clear", "delete", "edit", "tag", "untag":
+            if (SavingCommandTypes.isRequireSaving(commandType[0])) {
                 storage.saveAddressBook(model.getAddressBook());
-                break;
-            default:
-                return commandResult;
             }
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);

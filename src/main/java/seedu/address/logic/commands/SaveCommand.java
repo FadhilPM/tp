@@ -53,19 +53,24 @@ public class SaveCommand extends Command {
 
         try {
             Path pathToBeSaved;
+            Path oldPath = model.getAddressBookFilePath();
 
             if (fileName.isPresent()) {
-                String customFileName = fileName.get() + ".json";
-                Path newPath = Paths.get("data", customFileName);
-                Path oldPath = model.getAddressBookFilePath();
+                pathToBeSaved = Paths.get("data", fileName.get() + ".json");
+                storage.saveAddressBook(model.getAddressBook(), pathToBeSaved);
+                model.setAddressBookFilePath(pathToBeSaved);
 
-                FileUtil.purgeOldAddressBookFile_active(oldPath, newPath);
-                model.setAddressBookFilePath(newPath);
-                pathToBeSaved = newPath;
+                try {
+                    storage.saveUserPrefs(model.getUserPrefs());
+                } catch (IOException e) {
+                    System.err.println("Error saving user preferences");
+                }
+
+                FileUtil.purgeOldAddressBookFile_active(oldPath, pathToBeSaved);
+                return new CommandResult(String.format(SUCCESS, pathToBeSaved));
             } else {
-                Path oldPath = model.getAddressBookFilePath();
                 FileUtil.purgeOldAddressBookFile_passive(oldPath);
-                pathToBeSaved = model.getAddressBookFilePath();
+                pathToBeSaved = oldPath;
             }
 
             storage.saveAddressBook(model.getAddressBook(), pathToBeSaved);
