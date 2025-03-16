@@ -142,7 +142,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find 87438807` returns `Alex Yeoh`
-* `find 87438807 99272758` returns `Alex Yeoh` and `Bernice Yu`
+* `find 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu` <br>
   ![result for 'find 87438807 99272758'](images/find87438807_99272758Result.png)
 
 ### Deleting a person : `delete`
