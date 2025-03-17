@@ -42,6 +42,8 @@ public class Email {
         if (email != null) {
             requireNonNull(email);
             checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+        } else {
+            email = "No email provided.";
         }
         value = email;
     }
