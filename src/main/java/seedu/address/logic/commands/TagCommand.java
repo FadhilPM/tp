@@ -14,6 +14,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -36,6 +37,7 @@ public class TagCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Tag added to Contact";
     private final Index index;
     private final Phone phone;
+
     private final Set<Tag> tags;
 
     /**
@@ -79,13 +81,16 @@ public class TagCommand extends Command {
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
         Set<Tag> currentTags = personToEdit.getTags();
+        Email email = personToEdit.getEmail();
 
         // Add the current and newly added tags to a single Linked Hash Set
         Set<Tag> newTags = new LinkedHashSet<>();
         newTags.addAll(currentTags);
         newTags.addAll(newlyAddedTags);
 
+
+
         // Return new Person
-        return new Person(name, phone, newTags);
+        return new Person(name, phone, email, newTags);
     }
 }

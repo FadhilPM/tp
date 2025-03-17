@@ -20,16 +20,19 @@ public class Person {
     private final Name name;
     private final Phone phone;
 
+    private final Email email;
+
     // Data fields
     private final Set<Tag> tags = new LinkedHashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Set<Tag> tags) {
-        requireAllNonNull(name, phone, tags);
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
+        this.email = email;
         this.tags.addAll(tags);
     }
 
@@ -39,6 +42,9 @@ public class Person {
 
     public Phone getPhone() {
         return phone;
+    }
+    public Email getEmail() {
+        return email;
     }
 
     /**
@@ -80,13 +86,14 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
+                && email.equals(otherPerson.email)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, tags);
+        return Objects.hash(name, phone, email, tags);
     }
 
     @Override
@@ -94,6 +101,7 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
+                .add("email", email)
                 .add("tags", tags)
                 .toString();
     }
