@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatusBarFooter statusBarFooter;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -116,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -168,6 +170,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Updates the status bar with the new savefile location.
+     * @param saveLocation
+     */
+    public void updateStatusBarSaveLocation(Path saveLocation) {
+        statusBarFooter.updateSaveLocation(saveLocation);
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -184,6 +194,11 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            /** Update the status bar location to point to the new file path */
+            if (commandResult.isSaveLocationModified()) {
+                updateStatusBarSaveLocation(logic.getAddressBookFilePath());
             }
 
             return commandResult;
