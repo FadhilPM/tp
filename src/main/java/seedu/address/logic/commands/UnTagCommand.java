@@ -12,6 +12,7 @@ import java.util.Set;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -74,6 +75,7 @@ public class UnTagCommand extends Command {
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
         Set<Tag> currentTags = personToEdit.getTags();
+        Email email = personToEdit.getEmail();
 
         // Remove tagsToRemove from current Tags
         Set<Tag> newTags = new LinkedHashSet<>(currentTags);
@@ -81,6 +83,6 @@ public class UnTagCommand extends Command {
         System.out.println(newTags);
 
         // Return new Person
-        return new Person(name, phone, newTags);
+        return new Person(name, phone, email, newTags);
     }
 }
