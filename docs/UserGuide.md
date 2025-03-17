@@ -77,15 +77,26 @@ Format: `help`
 
 Adds a person to ArtHive.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The email address is optional. You can choose to leave it blank if you prefer not to provide it.
+</div>
+
+* Name can only contain alphanumeric characters, spaces, a max of 40 characters and should not be blank.
+* Phone numbers should be exactly 8 digits long, beginning with either 6, 8 or 9
+* Tag names can only contain alphanumeric with underscore and hyphens, between 1 and 20 characters long.
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Sarah Lee p/91233215`
+* `add n/John Doe p/98765432 e/johnd@example.com`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/92345678`
+
+  ![result for 'find alex david'](images/addContactResult.jpg)
 
 ### Listing all persons : `list`
 
