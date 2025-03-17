@@ -44,7 +44,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         String emailString = argMultimap.getValue(PREFIX_EMAIL).orElse(null);
         Email email = ParserUtil.parseEmail(emailString);
 
-        //Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, tagList);

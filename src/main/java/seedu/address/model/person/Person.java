@@ -19,8 +19,8 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-
     private final Email email;
+    private final PreferredContactMethod preferredContactMethod = new PreferredContactMethod();
 
     // Data fields
     private final Set<Tag> tags = new LinkedHashSet<>();
@@ -45,6 +45,10 @@ public class Person {
     }
     public Email getEmail() {
         return email;
+    }
+
+    public PreferredContactMethod getPreferredContactMethod() {
+        return preferredContactMethod;
     }
 
     /**
