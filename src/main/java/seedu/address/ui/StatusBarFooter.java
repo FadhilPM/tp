@@ -25,4 +25,12 @@ public class StatusBarFooter extends UiPart<Region> {
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
 
+    /**
+     * Update the status bar to point to new file path
+     * @param saveLocation Value of the new file path
+     */
+    public void updateSaveLocation(Path saveLocation) {
+        saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+    }
+
 }
