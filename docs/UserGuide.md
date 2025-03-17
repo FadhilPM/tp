@@ -28,7 +28,7 @@ ArtHive is a **desktop application for artists to manage clients and commissions
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ArtHive.
+   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to ArtHive.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
