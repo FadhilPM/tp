@@ -67,6 +67,7 @@ public class SaveCommand extends Command {
                 }
 
                 FileUtil.purgeOldAddressBookFile_active(oldPath, pathToBeSaved);
+
                 return new CommandResult(String.format(SUCCESS, pathToBeSaved), false, false, true);
             } else {
                 FileUtil.purgeOldAddressBookFile_passive(oldPath);
