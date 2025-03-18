@@ -77,7 +77,7 @@ public class SaveCommand extends Command {
             storage.saveAddressBook(model.getAddressBook(), pathToBeSaved);
             storage.saveUserPrefs(model.getUserPrefs());
 
-            return new CommandResult(String.format(SUCCESS, pathToBeSaved), false, false ,false);
+            return new CommandResult(String.format(SUCCESS, pathToBeSaved), false, false, false);
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException e) {

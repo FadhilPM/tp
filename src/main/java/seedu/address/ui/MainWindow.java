@@ -196,7 +196,6 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            /** Update the status bar location to point to the new file path */
             if (commandResult.isSaveLocationModified()) {
                 updateStatusBarSaveLocation(logic.getAddressBookFilePath());
             }
