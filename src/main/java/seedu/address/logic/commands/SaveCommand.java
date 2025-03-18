@@ -41,17 +41,24 @@ public class SaveCommand extends Command {
         this.storage = requireNonNull(storage);
     }
 
+    /**
+     * Execute save command depending on the parameter.
+     * @param model {@code Model} which the command should operate on.
+     * @return Either save to original file or save to a new file.
+     * @throws CommandException
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         try {
+            Path pathToBeSaved;
+            Path oldPath = model.getAddressBookFilePath();
+
             if (fileName.isPresent()) {
-                String customFileName = fileName.get() + ".json";
-                Path newPath = Paths.get("data", customFileName);
-                Path oldPath = model.getAddressBookFilePath();
-                storage.saveAddressBook(model.getAddressBook(), newPath);
-                model.setAddressBookFilePath(newPath);
+                pathToBeSaved = Paths.get("data", fileName.get() + ".json");
+                storage.saveAddressBook(model.getAddressBook(), pathToBeSaved);
+                model.setAddressBookFilePath(pathToBeSaved);
 
                 try {
                     storage.saveUserPrefs(model.getUserPrefs());
@@ -59,13 +66,18 @@ public class SaveCommand extends Command {
                     System.err.println("Error saving user preferences");
                 }
 
-                FileUtil.purgeOldAddressBookFile(oldPath, newPath);
+                FileUtil.purgeOldAddressBookFile_active(oldPath, pathToBeSaved);
 
-                return new CommandResult(String.format(SUCCESS, newPath));
+                return new CommandResult(String.format(SUCCESS, pathToBeSaved), false, false, true);
             } else {
-                storage.saveAddressBook(model.getAddressBook());
-                return new CommandResult(String.format(SUCCESS, storage.getAddressBookFilePath()));
+                FileUtil.purgeOldAddressBookFile_passive(oldPath);
+                pathToBeSaved = oldPath;
             }
+
+            storage.saveAddressBook(model.getAddressBook(), pathToBeSaved);
+            storage.saveUserPrefs(model.getUserPrefs());
+
+            return new CommandResult(String.format(SUCCESS, pathToBeSaved), false, false, false);
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException e) {
