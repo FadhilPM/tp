@@ -159,11 +159,28 @@ Format: `exit`
 
 ### Saving the data
 
-ArtHive data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Saves ArtHive data in the hard disk via passive (automatic) save or active (manual) save. Passive save activates after any command that changes the data. Active save activates when the user type in `save` as the command. This can be coupled with a [filename] parameter to change the name of the saved file. Upon changing the saved file name, all subsequent saves will be written to the new file.
+
+Format: `save [filename]`
+
+* Saves the data to the hard disk.
+
+Examples:
+* `save` proceeds to save the data to the filename pointed in `preferences.json`.
+
+![save without parameter](images/save_no_param.png)
+
+* `save newFile` proceeds to save the data to `newFile.json`, deletes old saved file, and updates `preferences.json`.
+
+![save with parameter](images/save_with_param.png)
 
 ### Editing the data file
 
-ArtHive data are saved automatically as a JSON file `[JAR file location]/data/arthive.json`. Advanced users are welcome to update data directly by editing that data file.
+ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[filename].json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-primary">:exclamation: **Note:**
+[filename] refers to the saved file name that is specified in `preferences.json`
+</div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ArtHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
