@@ -89,6 +89,7 @@ The email address is optional. You can choose to leave it blank if you prefer no
 
 * Name can only contain alphanumeric characters, spaces, a max of 40 characters and should not be blank.
 * Phone numbers should be exactly 8 digits long, beginning with either 6, 8 or 9
+* Email address must be in a valid format (i.e. username@domain.com), without spaces
 * Tag names can only contain alphanumeric with underscore and hyphens, between 1 and 20 characters long.
 
 Examples:
@@ -205,7 +206,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
