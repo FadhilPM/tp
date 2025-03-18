@@ -20,7 +20,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for TagCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for UnTagCommand.
  */
 public class UnTagCommandTest {
 
