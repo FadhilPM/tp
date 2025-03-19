@@ -88,12 +88,21 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        //requireNonNull(email);
+
+        if (email != null) {
+            String trimmedEmail = email.trim();
+            if (!Email.isValidEmail(trimmedEmail)) {
+                throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            }
+
+            return new Email(trimmedEmail);
+        } else {
+            return new Email(null);
         }
-        return new Email(trimmedEmail);
+
+
+
     }
 
     /**

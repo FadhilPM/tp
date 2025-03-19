@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteByIndexCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -59,7 +60,7 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new DeleteByIndexCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
@@ -83,7 +84,7 @@ public class AddressBookParserTest {
         Phone phone = personTag.getPhone();
         String tags = "T_est-1";
         assertTrue(parser.parseCommand(TagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " p/" + phone + " t/" + tags) instanceof TagCommand);
+                + " p/" + phone + " t/" + tags) instanceof TagCommand);
     }
 
     @Test
@@ -92,7 +93,7 @@ public class AddressBookParserTest {
         Phone phone = personUntag.getPhone();
         String tags = "T_est-1";
         assertTrue(parser.parseCommand(UnTagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " p/" + phone + " t/" + tags) instanceof UnTagCommand);
+                + " p/" + phone + " t/" + tags) instanceof UnTagCommand);
     }
 
     @Test
