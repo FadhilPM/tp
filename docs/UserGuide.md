@@ -80,7 +80,7 @@ Adds a person to ArtHive.
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0).
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -88,9 +88,9 @@ The email address is optional. You can choose to leave it blank if you prefer no
 </div>
 
 * Name can only contain alphanumeric characters, spaces, a max of 40 characters and should not be blank.
-* Phone numbers should be exactly 8 digits long, beginning with either 6, 8 or 9
-* Email address must be in a valid format (i.e. username@domain.com), without spaces
-* Tag names can only contain alphanumeric with underscore and hyphens, between 1 and 20 characters long.
+* Phone numbers should be exactly 8 digits long, beginning with either 6, 8 or 9.
+* Email address must be in a valid format (i.e. username@domain.com), without spaces.
+* Tag names can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 
 Examples:
 * `add n/Sarah Lee p/91233215`
@@ -169,7 +169,7 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the data
+### Saving the data : `save` 
 
 Saves ArtHive data in the hard disk via passive (automatic) save or active (manual) save. Passive save activates after any command that changes the data. Active save activates when the user type in `save` as the command. This can be coupled with a [filename] parameter to change the name of the saved file. Upon changing the saved file name, all subsequent saves will be written to the new file.
 
@@ -186,7 +186,7 @@ Examples:
 
 ![save with parameter](images/save_with_param.png)
 
-### Editing the data file
+#### Editing the data file
 
 ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[filename].json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -199,9 +199,34 @@ If your changes to the data file makes its format invalid, ArtHive will discard 
 Furthermore, certain edits can cause ArtHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Adding a tag : `tag`
 
-_Details coming soon ..._
+Adds a tag to an existing person in ArtHive.
+
+Format: `tag p/PHONE t/TAG`
+
+* Adds one or more tags to the person specified by `PHONE`.
+* Unlike editing tags, the existing tags of the person will not be removed i.e adding of tags is cumulative.
+* Tag names can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+
+Examples:
+*  `tag p/81234567 t/project-x` Adds a tag `project-x` to the person who has the phone number `81234567`.
+*  `tag p/91234567 t/project-y t/Project_z` Adds the tags `project-y` and `Project_z` to the person who has the phone number `91234567`.
+
+
+### Removing a tag : `untag`
+
+Removes a tag from an existing person in ArtHive.
+
+Format: `untag p/PHONE t/TAG`
+
+* Removes one or more tags from the person specified by `PHONE`, if it exists.
+* Tag names can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* If a tag name does not exist, the remove operation will still complete successfully without any errors or warnings. No additional checks, other than validity of tag names, are performed before attempting the removal.
+
+Examples:
+*  Person A with phone number `81234567` has no tags. `untag p/81234567 t/project-x` makes no change and returns a successful untag message.
+*  Person B with phone number `91234567` has one tag `project-y`. `untag p/91234567 t/project-y t/Project_z` removes the tag `project-y` only.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -223,13 +248,14 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
+**Help** | `help`
 **Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**List** | `list`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`
-**List** | `list`
-**Help** | `help`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Clear** | `clear`
+**exit** | `exit`
 **Save** | `save [FILENAME]` <br> e.g., `save newfile`
 **tag**  | `tag p/PHONE_NUMBER t/TAG` <br> e.g., `tag p/91234567 t/project-x`
 **untag**| `untag p/PHONE_NUMBER t/TAG`<br> e.g., `untag p/91234567 t/project-x`
