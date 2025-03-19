@@ -161,7 +161,7 @@ Examples:
 
 Adds a tag to an existing person in ArtHive.
 
-Format: `tag p/PHONE t/TAG [t/TAG]`
+Format: `tag p/PHONE t/TAG [t/TAG]..​`
 
 * Adds one or more tags to the person specified by `PHONE`.
 * Unlike editing tags, the existing tags of the person will not be removed i.e adding of tags is cumulative.
@@ -176,7 +176,7 @@ Examples:
 
 Removes a tag from an existing person in ArtHive.
 
-Format: `untag p/PHONE t/TAG [t/TAG]`
+Format: `untag p/PHONE t/TAG [t/TAG]..​`
 
 * Removes one or more tags from the person specified by `PHONE`, if it exists.
 * Tag names can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
