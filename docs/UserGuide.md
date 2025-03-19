@@ -72,6 +72,11 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Listing all persons : `list`
+
+Shows a list of all persons in ArtHive.
+
+Format: `list`
 
 ### Adding a person: `add`
 
@@ -98,12 +103,6 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/92345678`
 
   ![result for 'find alex david'](images/addContactResult.jpg)
-
-### Listing all persons : `list`
-
-Shows a list of all persons in ArtHive.
-
-Format: `list`
 
 ### Editing a person : `edit`
 
@@ -157,47 +156,6 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ArtHive.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
-
-Clears all entries from ArtHive.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data : `save` 
-
-Saves ArtHive data in the hard disk via passive (automatic) save or active (manual) save. Passive save activates after any command that changes the data. Active save activates when the user type in `save` as the command. This can be coupled with a [filename] parameter to change the name of the saved file. Upon changing the saved file name, all subsequent saves will be written to the new file.
-
-Format: `save [filename]`
-
-* Saves the data to the hard disk.
-
-Examples:
-* `save` proceeds to save the data to the filename pointed in `preferences.json`.
-
-![save without parameter](images/save_no_param.png)
-
-* `save newFile` proceeds to save the data to `newFile.json`, deletes old saved file, and updates `preferences.json`.
-
-![save with parameter](images/save_with_param.png)
-
-#### Editing the data file
-
-ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[filename].json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-primary">:exclamation: **Note:**
-[filename] refers to the saved file name that is specified in `preferences.json`
-</div>
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ArtHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause ArtHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
 
 ### Adding a tag : `tag`
 
@@ -228,6 +186,49 @@ Examples:
 *  Person A with phone number `81234567` has no tags. `untag p/81234567 t/project-x` makes no change and returns a successful untag message.
 *  Person B with phone number `91234567` has one tag `project-y`. `untag p/91234567 t/project-y t/Project_z` removes the tag `project-y` only.
 
+
+### Saving the data : `save`
+
+Saves ArtHive data in the hard disk via passive (automatic) save or active (manual) save. Passive save activates after any command that changes the data. Active save activates when the user type in `save` as the command. This can be coupled with a [filename] parameter to change the name of the saved file. Upon changing the saved file name, all subsequent saves will be written to the new file.
+
+Format: `save [filename]`
+
+* Saves the data to the hard disk.
+
+Examples:
+* `save` proceeds to save the data to the filename pointed in `preferences.json`.
+
+![save without parameter](images/save_no_param.png)
+
+* `save newFile` proceeds to save the data to `newFile.json`, deletes old saved file, and updates `preferences.json`.
+
+![save with parameter](images/save_with_param.png)
+
+#### Editing the data file
+
+ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[filename].json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-primary">:exclamation: **Note:**
+[filename] refers to the saved file name that is specified in `preferences.json`
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, ArtHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause ArtHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</div>
+
+### Clearing all entries : `clear`
+
+Clears all entries from ArtHive.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -249,13 +250,13 @@ Examples:
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend t/colleague`
 **List** | `list`
+**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend t/colleague`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Clear** | `clear`
-**exit** | `exit`
-**Save** | `save [FILENAME]` <br> e.g., `save newfile`
 **tag**  | `tag p/PHONE_NUMBER t/TAG` <br> e.g., `tag p/91234567 t/project-x`
 **untag**| `untag p/PHONE_NUMBER t/TAG`<br> e.g., `untag p/91234567 t/project-x`
+**Save** | `save [FILENAME]` <br> e.g., `save newfile`
+**Clear** | `clear`
+**exit** | `exit`
