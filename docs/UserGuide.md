@@ -145,17 +145,21 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from ArtHive.
+Deletes the specified contact in the current displayed contact list from ArtHive.
 
-Format: `delete INDEX`
+**Format:** `delete INDEX` **or** `delete p/PHONE_NUMBER`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the contact at the specified `INDEX` **or** with the specified `PHONE_NUMBER`.
+* The `INDEX` refers to the index number shown in the displayed contact list and **must be a positive integer** (1, 2, 3, …).
+* The `PHONE_NUMBER` must be an exact 8-digit phone number and must belong to a contact in the current displayed contact list.
+* **One and only one** of `INDEX` or `p/PHONE_NUMBER` must be provided. 
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in ArtHive.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+**Examples:**
+* `list` followed by `delete 2` deletes the 2nd contact in ArtHive.
+  ![result for 'delete 2'](images/DeleteByIndexResult.png)
+* `list` followed by `delete p/93210283` deletes the contact with phone number 93210283.
+  ![result for 'delete p/93210283'](images/DeleteByPhoneNumberResult.png)
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -225,7 +229,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX`<br> e.g., `delete 3` <br> **or**  `delete p/PHONE_NUMBER`<br> e.g., `delete p/87438807`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`
 **List** | `list`
