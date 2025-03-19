@@ -84,7 +84,7 @@ public class AddressBookParserTest {
         Phone phone = personTag.getPhone();
         String tags = "T_est-1";
         assertTrue(parser.parseCommand(TagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " p/" + phone + " t/" + tags) instanceof TagCommand);
+                + " p/" + phone + " t/" + tags) instanceof TagCommand);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class AddressBookParserTest {
         Phone phone = personUntag.getPhone();
         String tags = "T_est-1";
         assertTrue(parser.parseCommand(UnTagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " p/" + phone + " t/" + tags) instanceof UnTagCommand);
+                + " p/" + phone + " t/" + tags) instanceof UnTagCommand);
     }
 
     @Test
@@ -114,6 +114,14 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_save() {
+        assertThrows(ParseException.class, String.format("Unknown command"), (
+        ) -> parser.parseCommand(
+                        " newFile"
+                                + INDEX_FIRST_PERSON.getOneBased()));
     }
 
     @Test

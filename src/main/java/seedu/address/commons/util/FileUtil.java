@@ -83,9 +83,9 @@ public class FileUtil {
     }
 
     /**
-     * Get the new file name from a given Path object.
+     * Check if there are more than 1 save file.
      */
-    public static Path getFile(Path dir) throws IOException {
+    public static Path checkExistingJsonFiles(Path dir) throws IOException {
         try (Stream<Path> files = Files.list(dir)) {
             List<Path> jsonFiles = files
                     .filter(Files::isRegularFile)
@@ -101,17 +101,73 @@ public class FileUtil {
     }
 
     /**
-     * Delete the old save file to ensure
-     * that only one .json file exist in
-     * /data folder.
+     * This version should be used for passive saving
+     * features only.
+     * Deletes all .json files except the new savefile
+     * and preferences.json
+     * @param oldPath
      */
-    public static void purgeOldAddressBookFile(Path oldPath, Path newPath) {
-        if (!oldPath.equals(newPath)) {
-            try {
-                Files.deleteIfExists(oldPath);
-            } catch (IOException e) {
-                System.err.println("Error deleting old address book: " + e.getMessage());
+    public static void purgeOldAddressBookFile_passive(Path oldPath) {
+        try {
+            Path dir = oldPath.getParent();
+            if (dir == null || !Files.exists(dir)) {
+                return;
             }
+
+            try (Stream<Path> files = Files.list(dir)) {
+                files.filter(Files::isRegularFile)
+                        .filter(file -> file.toString().endsWith(".json"))
+                        .filter(file -> !file.getFileName().toString().equals("preferences.json"))
+                        .filter(file -> !file.getFileName().equals(oldPath.getFileName()))
+                        .forEach(file -> {
+                            try {
+                                Files.deleteIfExists(file);
+                                System.err.println("Deleted old savefile: " + file);
+                            } catch (IOException e) {
+                                System.err.println("Error deleting old savefile: " + e.getMessage());
+                            }
+                        });
+            }
+        } catch (IOException e) {
+            System.err.println("Can't list files in: " + e.getMessage());
+        }
+    }
+
+    /**
+     * This version should be used for active saving
+     * features only.
+     * Deletes all .json files except the new savefile
+     * and preferences.json
+     * @param oldPath Old savefile name
+     * @param newPath New savefile name
+     */
+    public static void purgeOldAddressBookFile_active(Path oldPath, Path newPath) {
+        if (oldPath.equals(newPath)) {
+            return;
+        }
+
+        try {
+            Path dir = newPath.getParent();
+            if (dir == null || !Files.exists(dir)) {
+                return;
+            }
+
+            try (Stream<Path> files = Files.list(dir)) {
+                files.filter(Files::isRegularFile)
+                        .filter(file -> file.toString().endsWith(".json"))
+                        .filter(file -> !file.getFileName().equals(newPath.getFileName()))
+                        .filter(file -> !file.getFileName().toString().equals("preferences.json"))
+                        .forEach(file -> {
+                            try {
+                                Files.deleteIfExists(file);
+                                System.err.println("Deleted old savefile: " + file);
+                            } catch (IOException e) {
+                                System.err.println("Error deleting old savefile: " + e.getMessage());
+                            }
+                        });
+            }
+        } catch (IOException e) {
+            System.err.println("Can't list files in: " + e.getMessage());
         }
     }
 }

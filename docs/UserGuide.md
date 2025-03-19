@@ -28,7 +28,7 @@ ArtHive is a **desktop application for artists to manage clients and commissions
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ArtHive.
+   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to ArtHive.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -77,15 +77,27 @@ Format: `help`
 
 Adds a person to ArtHive.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The email address is optional. You can choose to leave it blank if you prefer not to provide it.
+</div>
+
+* Name can only contain alphanumeric characters, spaces, a max of 40 characters and should not be blank.
+* Phone numbers should be exactly 8 digits long, beginning with either 6, 8 or 9
+* Email address must be in a valid format (i.e. username@domain.com), without spaces
+* Tag names can only contain alphanumeric with underscore and hyphens, between 1 and 20 characters long.
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Sarah Lee p/91233215`
+* `add n/John Doe p/98765432 e/johnd@example.com`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/92345678`
+
+  ![result for 'find alex david'](images/addContactResult.jpg)
 
 ### Listing all persons : `list`
 
@@ -97,7 +109,7 @@ Format: `list`
 
 Edits an existing person in ArtHive.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -118,13 +130,16 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* The search must only contain either alphabets or numerals, not both
+* Only the name or phone is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full phone numbers will be matched e.g `888` will not match `88888888`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
+* `find 87438807` returns `Alex Yeoh`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -156,11 +171,28 @@ Format: `exit`
 
 ### Saving the data
 
-ArtHive data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Saves ArtHive data in the hard disk via passive (automatic) save or active (manual) save. Passive save activates after any command that changes the data. Active save activates when the user type in `save` as the command. This can be coupled with a [filename] parameter to change the name of the saved file. Upon changing the saved file name, all subsequent saves will be written to the new file.
+
+Format: `save [filename]`
+
+* Saves the data to the hard disk.
+
+Examples:
+* `save` proceeds to save the data to the filename pointed in `preferences.json`.
+
+![save without parameter](images/save_no_param.png)
+
+* `save newFile` proceeds to save the data to `newFile.json`, deletes old saved file, and updates `preferences.json`.
+
+![save with parameter](images/save_with_param.png)
 
 ### Editing the data file
 
-ArtHive data are saved automatically as a JSON file `[JAR file location]/data/arthive.json`. Advanced users are welcome to update data directly by editing that data file.
+ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[filename].json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-primary">:exclamation: **Note:**
+[filename] refers to the saved file name that is specified in `preferences.json`
+</div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ArtHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -191,10 +223,13 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`
 **List** | `list`
 **Help** | `help`
+**Save** | `save [FILENAME]` <br> e.g., `save newfile`
+**tag**  | `tag p/PHONE_NUMBER t/TAG` <br> e.g., `tag p/91234567 t/project-x`
+**untag**| `untag p/PHONE_NUMBER t/TAG`<br> e.g., `untag p/91234567 t/project-x`
