@@ -130,18 +130,32 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* The search must only contain either alphabets or numerals, not both
-* Only the name or phone is searched.
+* The search must only contain alphabetic characters.
+* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Only full phone numbers will be matched e.g `888` will not match `88888888`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find 87438807` returns `Alex Yeoh`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Locating persons by number: `find`
+
+Finds persons whose phone numbers contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The order of the keywords does not matter. e.g. `88888888 66666666` will match `66666666 88888888`
+* The search must only contain numerals.
+* Only the phone number is searched.
+* Only full phone numbers will be matched e.g `888` will not match `88888888`
+
+Examples:
+* `find 87438807` returns `Alex Yeoh`
+* `find 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu` <br>
+  ![result for 'find 87438807 99272758'](images/find87438807_99272758Result.png)
 
 ### Deleting a person : `delete`
 
