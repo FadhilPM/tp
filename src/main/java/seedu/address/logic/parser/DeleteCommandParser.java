@@ -20,18 +20,26 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns a DeleteCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PHONE);
+        String preamble = argMultimap.getPreamble().trim();
         Optional<String> phoneNumber = argMultimap.getValue(PREFIX_PHONE);
+
+        boolean preambleIsPresent = !preamble.isEmpty();
+        boolean phoneNumberIsPresent = !phoneNumber.isEmpty();
+
+        if (preambleIsPresent && phoneNumberIsPresent) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
 
         try {
             if (phoneNumber.isPresent()) {
                 Phone phone = ParserUtil.parsePhone(phoneNumber.get());
                 return new DeleteByPhoneCommand(phone);
             } else {
-                Index index = ParserUtil.parseIndex(args);
+                Index index = ParserUtil.parseIndex(preamble);
                 return new DeleteByIndexCommand(index);
             }
         } catch (ParseException pe) {
