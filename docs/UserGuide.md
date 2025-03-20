@@ -279,4 +279,4 @@ Action | Format, Examples
 **Untag**| `untag p/PHONE_NUMBER t/TAG [t/TAG]…​` <br> e.g., `untag p/91234567 t/project-x`
 **Save** | `save [FILENAME]` <br> e.g., `save newfile`
 **Clear** | `clear`
-**Exit** | `exit`
+**exit** | `exit`
