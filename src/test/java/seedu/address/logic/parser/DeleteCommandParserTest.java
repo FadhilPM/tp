@@ -36,6 +36,22 @@ public class DeleteCommandParserTest {
     }
 
     @Test
+    public void parse_validIndexAndValidPhone_throwsParseException() {
+        int index = 1;
+        assertParseFailure(parser,
+                           String.format("%d p/%s", index, VALID_PHONE_AMY),
+                           String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validPhoneAndValidIndex_throwsParseException() {
+        int index = 1;
+        assertParseFailure(parser,
+                           String.format(" p/%s %d", VALID_PHONE_AMY, index),
+                           String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_invalidIndex_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
