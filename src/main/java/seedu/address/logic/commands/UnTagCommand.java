@@ -80,7 +80,6 @@ public class UnTagCommand extends Command {
         // Remove tagsToRemove from current Tags
         Set<Tag> newTags = new LinkedHashSet<>(currentTags);
         newTags.removeAll(tagsToRemove);
-        System.out.println(newTags);
 
         // Return new Person
         return new Person(name, phone, email, newTags);
