@@ -20,7 +20,7 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Optional<Email> email;
+    private final Optional<Email> optionalEmail;
     private final PreferredContactMethod preferredContactMethod = new PreferredContactMethod();
 
     // Data fields
@@ -29,11 +29,11 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Optional<Email> email, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
+    public Person(Name name, Phone phone, Optional<Email> optionalEmail, Set<Tag> tags) {
+        requireAllNonNull(name, phone, optionalEmail, tags);
         this.name = name;
         this.phone = phone;
-        this.email = email;
+        this.optionalEmail = optionalEmail;
         this.tags.addAll(tags);
     }
 
@@ -45,7 +45,7 @@ public class Person {
         return phone;
     }
     public Optional<Email> getEmail() {
-        return email;
+        return optionalEmail;
     }
 
     public PreferredContactMethod getPreferredContactMethod() {
@@ -91,14 +91,14 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
+                && optionalEmail.equals(otherPerson.optionalEmail)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, tags);
+        return Objects.hash(name, phone, optionalEmail, tags);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
+                .add("email", optionalEmail)
                 .add("tags", tags)
                 .toString();
     }
