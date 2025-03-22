@@ -20,7 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final PreferredContactMethod preferredContactMethod = new PreferredContactMethod();
+    private final PreferredContactMethod preferredContactMethod;
 
     // Data fields
     private final Set<Tag> tags = new LinkedHashSet<>();
@@ -34,6 +34,25 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
+        this.preferredContactMethod = new PreferredContactMethod("Phone");
+    }
+
+    /**
+     * Constructs a {@code Person} with a specified preferred contact method.
+     *
+     * @param name The name of the person.
+     * @param phone The phone number of the person.
+     * @param email The email address of the person.
+     * @param tags The set of tags associated with the person.
+     * @param preferredContactMethod The preferred method of contact (Phone or Email).
+     */
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags, PreferredContactMethod preferredContactMethod) {
+        requireAllNonNull(name, phone, email, tags, preferredContactMethod);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.tags.addAll(tags);
+        this.preferredContactMethod = preferredContactMethod;
     }
 
     public Name getName() {
