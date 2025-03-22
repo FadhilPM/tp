@@ -23,7 +23,7 @@ public class SampleDataUtil {
                     Optional.of(new Email("alexyeoh@example.com")),
                 getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"),
-                    Optional.of(new Email("berniceyu@example.com")),
+                    Optional.empty(),
                 getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                     Optional.of(new Email("charlotte@example.com")),
