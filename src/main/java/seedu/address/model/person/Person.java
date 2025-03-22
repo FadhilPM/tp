@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -19,7 +20,7 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
+    private final Optional<Email> email;
     private final PreferredContactMethod preferredContactMethod = new PreferredContactMethod();
 
     // Data fields
@@ -28,7 +29,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Optional<Email> email, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
@@ -43,7 +44,7 @@ public class Person {
     public Phone getPhone() {
         return phone;
     }
-    public Email getEmail() {
+    public Optional<Email> getEmail() {
         return email;
     }
 
