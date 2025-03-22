@@ -54,6 +54,10 @@ public class Person {
         return preferredContactMethod;
     }
 
+    /**
+     * Separates tags from projects and place them in separate LinkedHashSets
+     * @param tags set of tags
+     */
     public void tagOrProject(Set<Tag> tags) {
         for (Tag t : tags) {
             if (t instanceof Project) {
@@ -73,12 +77,6 @@ public class Person {
     }
 
     public Set<Tag> getProjects() {
-        //Set<Tag> projects = new LinkedHashSet<>();
-        //for (Tag t : this.tags) {
-        //    if (t instanceof Project) {
-        //        projects.add(t);
-        //    }
-        //}
         return Collections.unmodifiableSet(projects);
     }
 

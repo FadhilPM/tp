@@ -2,12 +2,22 @@ package seedu.address.model.tag;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a Project in the address book.
+ * Project is a type of Tag (Extends Tag).
+ * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ */
 public class Project extends Tag {
-
 
     private boolean isComplete;
     private boolean isPaid;
     private LocalDateTime deadline;
+
+    /**
+     * Constructs a {@code Project}.
+     *
+     * @param tagName A valid tag name.
+     */
     public Project(String tagName) {
         super(tagName);
         this.isComplete = false;
@@ -17,7 +27,7 @@ public class Project extends Tag {
 
 
     /**
-     * Get the completion status of the project, complete or incomplete
+     * Get the completion status of the project, complete or incomplete.
      */
     public String checkIfComplete() {
         return this.isComplete ? "Complete" : "Incomplete";
@@ -38,14 +48,14 @@ public class Project extends Tag {
     }
 
     /**
-     * Returns Paid if project has isPaid attribute of true, returns Unpaid otherwise
+     * Returns Paid if project has isPaid attribute of true, returns Unpaid otherwise.
      */
     public String checkIfPaid() {
         return this.isPaid ? "Paid" : "Unpaid";
     }
 
     /**
-     * Set the isPaid attribute to true, to reflect successful payment
+     * Set the isPaid attribute to true, to reflect successful payment.
      */
     public void pay() {
         this.isPaid = true;
@@ -59,7 +69,7 @@ public class Project extends Tag {
     }
 
     /**
-     * Set deadline attribute
+     * Set deadline attribute.
      * @param deadline LocalDateTime
      */
     public void setDeadline(LocalDateTime deadline) {
@@ -68,6 +78,7 @@ public class Project extends Tag {
 
     @Override
     public String toString() {
-        return '[' + tagName + " | " + checkIfPaid() + " | " + checkIfComplete() + " | Deadline: " + getDeadline() + ']';
+        return '[' + tagName + " | " + checkIfPaid() + " | " + checkIfComplete()
+                + " | Deadline: " + getDeadline() + ']';
     }
 }

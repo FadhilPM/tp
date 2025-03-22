@@ -1,9 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -12,10 +9,8 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.TagCommand;
-import seedu.address.logic.commands.UnTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,8 +27,9 @@ public class TagCommandParser implements Parser<TagCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_TAG, PREFIX_PROJECT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_TAG)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnTagCommand.MESSAGE_USAGE));
+        if (!arePrefixesPresent(argMultimap, PREFIX_PHONE)
+                || (argMultimap.getValue(PREFIX_TAG).isEmpty() && argMultimap.getValue(PREFIX_PROJECT).isEmpty())) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE);

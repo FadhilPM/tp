@@ -32,6 +32,10 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Checks if this tag equals the other tag.
+     * @param other tag
+     */
     public boolean equals(Object other) {
         //checks if the object is the same
         if (other == this) {
