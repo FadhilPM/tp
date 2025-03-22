@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     private Label preferredContactMethod;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane projects;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -56,5 +58,8 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getProjects().stream()
+                .sorted(Comparator.comparing(project -> project.tagName))
+                .forEach(project -> projects.getChildren().add(new Label(project.tagName)));
     }
 }

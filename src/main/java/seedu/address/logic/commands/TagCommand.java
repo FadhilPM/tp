@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,19 +32,19 @@ public class TagCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TAG + "project-x";
 
-    public static final String MESSAGE_SUCCESS = "Tag added to Contact";
+    public static final String TAG_MESSAGE_SUCCESS = "Tag added to Contact";
+    public static final String PROJECT_MESSAGE_SUCCESS = "Project added to Contact";
     private final Phone phone;
-
-    private final Set<Tag> tags;
+    private final Tag tag;
 
     /**
      * @param phone number of the person in the filtered person list to edit
-     * @param tags to add
+     * @param tag to add
      */
-    public TagCommand(Phone phone, Set<Tag> tags) {
+    public TagCommand(Phone phone, Tag tag) {
         requireNonNull(phone);
         this.phone = phone;
-        this.tags = tags;
+        this.tag = tag;
     }
 
     @Override
@@ -56,11 +57,16 @@ public class TagCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PHONE_NUMBER));
 
-        Person taggedPerson = tagProjectToPerson(personToTag, this.tags);
+        Person taggedPerson = tagProjectToPerson(personToTag, this.tag);
 
         model.setPerson(personToTag, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+
+        if (this.tag instanceof Project) {
+            return new CommandResult(String.format(PROJECT_MESSAGE_SUCCESS));
+        } else {
+            return new CommandResult(String.format(TAG_MESSAGE_SUCCESS));
+        }
     }
 
     /**
@@ -68,7 +74,7 @@ public class TagCommand extends Command {
      * @param personToEdit current person to edit
      * @param newlyAddedTags tags to be added
      */
-    public static Person tagProjectToPerson(Person personToEdit, Set<Tag> newlyAddedTags) {
+    public static Person tagProjectToPerson(Person personToEdit, Tag newlyAddedTags) {
         assert personToEdit != null;
 
         Name name = personToEdit.getName();
@@ -79,9 +85,7 @@ public class TagCommand extends Command {
         // Add the current and newly added tags to a single Linked Hash Set
         Set<Tag> newTags = new LinkedHashSet<>();
         newTags.addAll(currentTags);
-        newTags.addAll(newlyAddedTags);
-
-
+        newTags.add(newlyAddedTags);
 
         // Return new Person
         return new Person(name, phone, email, newTags);

@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,17 +25,19 @@ public class Person {
 
     // Data fields
     private final Set<Tag> tags = new LinkedHashSet<>();
+    private final Set<Tag> projects = new LinkedHashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
+        requireAllNonNull(name, phone, email);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.tags.addAll(tags);
+        tagOrProject(tags);
     }
+
 
     public Name getName() {
         return name;
@@ -51,12 +54,32 @@ public class Person {
         return preferredContactMethod;
     }
 
+    public void tagOrProject(Set<Tag> tags) {
+        for (Tag t : tags) {
+            if (t instanceof Project) {
+                this.projects.add(t);
+            } else {
+                this.tags.add(t);
+            }
+        }
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Set<Tag> getProjects() {
+        //Set<Tag> projects = new LinkedHashSet<>();
+        //for (Tag t : this.tags) {
+        //    if (t instanceof Project) {
+        //        projects.add(t);
+        //    }
+        //}
+        return Collections.unmodifiableSet(projects);
     }
 
     /**

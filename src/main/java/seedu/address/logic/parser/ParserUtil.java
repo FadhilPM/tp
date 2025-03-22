@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -13,6 +15,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -118,6 +121,26 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+
+    /**
+     * Parses a {@code String tag} into a {@code Project}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Formats the String datetime to LocalDateTime
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Project parseProject(String tag, String dateTime) throws ParseException {
+        requireNonNull(tag, dateTime);
+        String trimmedTag = tag.trim();
+        if (!Tag.isValidTagName(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime deadline = LocalDateTime.parse(dateTime.trim(), formatter);
+
+        return new Project(trimmedTag, deadline);
     }
 
     /**

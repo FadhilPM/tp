@@ -13,7 +13,6 @@ public class Tag {
             + "allowed, and be between 1 and 20 characters long.";
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9_-]{1,20}";
     public final String tagName;
-    private Boolean tagPaid;
 
     /**
      * Constructs a {@code Tag}.
@@ -24,7 +23,6 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
-        this.tagPaid = false;
     }
 
     /**
@@ -34,21 +32,6 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
-    /**
-     * Returns true if tag has tagPaid attribute of true, returns false otherwise
-     */
-    public boolean isPaid() {
-        return this.tagPaid;
-    }
-
-    /**
-     * Set the tagPaid attribute to true, to reflect successful payment
-     */
-    public void pay() {
-        this.tagPaid = true;
-    }
-
-    @Override
     public boolean equals(Object other) {
         //checks if the object is the same
         if (other == this) {
