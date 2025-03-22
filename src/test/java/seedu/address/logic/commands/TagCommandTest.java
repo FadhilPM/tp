@@ -33,10 +33,10 @@ public class TagCommandTest {
         Tag newTag = new Tag("T_3st-x");
         Set<Tag> tags = new LinkedHashSet<>();
         tags.add(newTag);
-        TagCommand tagComd = new TagCommand(phone, tags);
+        TagCommand tagComd = new TagCommand(phone, newTag);
         Person taggedPerson = tagProjectToPerson(personToTag, tags);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS);
+        String expectedMessage = String.format(TagCommand.TAG_MESSAGE_SUCCESS);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToTag, taggedPerson);
 
@@ -51,7 +51,7 @@ public class TagCommandTest {
         Tag newTag = new Tag("test_Equal5");
         Set<Tag> tags = new LinkedHashSet<>();
         tags.add(newTag);
-        TagCommand addTagCommand = new TagCommand(phone, tags);
+        TagCommand addTagCommand = new TagCommand(phone, newTag);
 
         // same object -> returns true
         assertTrue(addTagCommand.equals(addTagCommand));

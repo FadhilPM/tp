@@ -131,16 +131,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Project parseProject(String tag, String dateTime) throws ParseException {
-        requireNonNull(tag, dateTime);
+    public static Project parseProject(String tag) throws ParseException {
+        requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        LocalDateTime deadline = LocalDateTime.parse(dateTime.trim(), formatter);
 
-        return new Project(trimmedTag, deadline);
+        return new Project(trimmedTag);
     }
 
     /**
@@ -151,6 +149,18 @@ public class ParserUtil {
         final Set<Tag> tagSet = new LinkedHashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName.toLowerCase()));
+        }
+        return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> projects} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parseProjects(Collection<String> projects) throws ParseException {
+        requireNonNull(projects);
+        final Set<Tag> tagSet = new LinkedHashSet<>();
+        for (String tagName : projects) {
+            tagSet.add(parseProject(tagName.toLowerCase()));
         }
         return tagSet;
     }

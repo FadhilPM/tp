@@ -32,19 +32,18 @@ public class TagCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TAG + "project-x";
 
-    public static final String TAG_MESSAGE_SUCCESS = "Tag added to Contact";
-    public static final String PROJECT_MESSAGE_SUCCESS = "Project added to Contact";
+    public static final String MESSAGE_SUCCESS = "Tags and/or projects added to Contact";
     private final Phone phone;
-    private final Tag tag;
+    private final Set<Tag> tags;
 
     /**
      * @param phone number of the person in the filtered person list to edit
-     * @param tag to add
+     * @param tags to add
      */
-    public TagCommand(Phone phone, Tag tag) {
+    public TagCommand(Phone phone, Set<Tag> tags) {
         requireNonNull(phone);
         this.phone = phone;
-        this.tag = tag;
+        this.tags = tags;
     }
 
     @Override
@@ -57,16 +56,12 @@ public class TagCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PHONE_NUMBER));
 
-        Person taggedPerson = tagProjectToPerson(personToTag, this.tag);
+        Person taggedPerson = tagProjectToPerson(personToTag, tags);
 
         model.setPerson(personToTag, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        if (this.tag instanceof Project) {
-            return new CommandResult(String.format(PROJECT_MESSAGE_SUCCESS));
-        } else {
-            return new CommandResult(String.format(TAG_MESSAGE_SUCCESS));
-        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
     /**
@@ -74,7 +69,7 @@ public class TagCommand extends Command {
      * @param personToEdit current person to edit
      * @param newlyAddedTags tags to be added
      */
-    public static Person tagProjectToPerson(Person personToEdit, Tag newlyAddedTags) {
+    public static Person tagProjectToPerson(Person personToEdit, Set<Tag> newlyAddedTags) {
         assert personToEdit != null;
 
         Name name = personToEdit.getName();
@@ -85,7 +80,7 @@ public class TagCommand extends Command {
         // Add the current and newly added tags to a single Linked Hash Set
         Set<Tag> newTags = new LinkedHashSet<>();
         newTags.addAll(currentTags);
-        newTags.add(newlyAddedTags);
+        newTags.addAll(newlyAddedTags);
 
         // Return new Person
         return new Person(name, phone, email, newTags);
