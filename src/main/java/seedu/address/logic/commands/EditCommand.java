@@ -181,11 +181,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-            //if (email == null) {
-            //    return Optional.empty();
-            //} else {
-            //    return email;
-            //}
         }
 
         public void setAddress(Address address) {
