@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.TagCommand.tagProjectToPerson;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -28,7 +28,7 @@ public class TagCommandTest {
 
     @Test
     public void execute_tag_success() {
-        Person personToTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToTag = getTypicalPersons().get(1);
         Phone phone = personToTag.getPhone();
         Tag newTag = new Tag("T_3st-x");
         Set<Tag> tags = new LinkedHashSet<>();
@@ -36,7 +36,7 @@ public class TagCommandTest {
         TagCommand tagComd = new TagCommand(phone, tags);
         Person taggedPerson = tagProjectToPerson(personToTag, tags);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS);
+        String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS, taggedPerson.getName());
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToTag, taggedPerson);
 
