@@ -49,8 +49,6 @@ public class UnTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
         Person personToUnTag = model.getFilteredPersonList()
                 .stream()
                 .filter(x -> x.getPhone().equals(phone))
