@@ -84,7 +84,7 @@ public class PersonCard extends UiPart<Region> {
                         paidLabel.getStyleClass().add("project-unpaid");
                     }
 
-                    projectBox.getChildren().addAll(nameLabel, deadlineLabel,  completionLabel, paidLabel);
+                    projectBox.getChildren().addAll(nameLabel, deadlineLabel, completionLabel, paidLabel);
                     projects.getChildren().add(projectBox);
                 });
 
