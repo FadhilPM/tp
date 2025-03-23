@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,6 +121,24 @@ public class ParserUtil {
         return new Tag(trimmedTag);
     }
 
+
+    /**
+     * Parses a {@code String tag} into a {@code Project}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Formats the String datetime to LocalDateTime
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Project parseProject(String tag) throws ParseException {
+        requireNonNull(tag);
+        String trimmedTag = tag.trim();
+        if (!Tag.isValidTagName(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Project(trimmedTag);
+    }
+
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
@@ -128,6 +147,18 @@ public class ParserUtil {
         final Set<Tag> tagSet = new LinkedHashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName.toLowerCase()));
+        }
+        return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> projects} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parseProjects(Collection<String> projects) throws ParseException {
+        requireNonNull(projects);
+        final Set<Tag> tagSet = new LinkedHashSet<>();
+        for (String tagName : projects) {
+            tagSet.add(parseProject(tagName.toLowerCase()));
         }
         return tagSet;
     }

@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,16 +26,17 @@ public class Person {
 
     // Data fields
     private final Set<Tag> tags = new LinkedHashSet<>();
+    private final Set<Tag> projects = new LinkedHashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Optional<Email> optionalEmail, Set<Tag> tags) {
-        requireAllNonNull(name, phone, optionalEmail, tags);
+        requireAllNonNull(name, phone, optionalEmail);
         this.name = name;
         this.phone = phone;
         this.optionalEmail = optionalEmail;
-        this.tags.addAll(tags);
+        tagOrProject(tags);
         this.preferredContactMethod = new PreferredContactMethod("Phone");
     }
 
@@ -53,9 +55,11 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.optionalEmail = optionalEmail;
-        this.tags.addAll(tags);
+        tagOrProject(tags);
         this.preferredContactMethod = preferredContactMethod;
+
     }
+
 
     public Name getName() {
         return name;
@@ -73,11 +77,29 @@ public class Person {
     }
 
     /**
+     * Separates tags from projects and place them in separate LinkedHashSets
+     * @param tags set of tags
+     */
+    public void tagOrProject(Set<Tag> tags) {
+        for (Tag t : tags) {
+            if (t instanceof Project) {
+                this.projects.add(t);
+            } else {
+                this.tags.add(t);
+            }
+        }
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Set<Tag> getProjects() {
+        return Collections.unmodifiableSet(projects);
     }
 
     /**
