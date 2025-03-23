@@ -39,12 +39,8 @@ public class Email {
      * @param email A valid email address.
      */
     public Email(String email) {
-        if (email != null) {
-            requireNonNull(email);
-            checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        } else {
-            email = "No email provided.";
-        }
+        requireNonNull(email);
+        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
         value = email;
     }
 

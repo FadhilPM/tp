@@ -3,6 +3,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.Messages;
@@ -73,7 +74,7 @@ public class SwitchContactCommand extends Command {
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
         Set<Tag> currentTags = personToEdit.getTags();
-        Email email = personToEdit.getEmail();
+        Optional<Email> email = personToEdit.getEmail();
         PreferredContactMethod preferredContactMethod = personToEdit.getPreferredContactMethod();
 
         //Switch the contact method
