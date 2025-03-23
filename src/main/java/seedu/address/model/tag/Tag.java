@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tag names should be alphanumeric with underscore and hyphens. "
-            + "allowed, and be between 1 and 20 characters long.";
+    public static final String MESSAGE_CONSTRAINTS = "Tag/Project names should be alphanumeric characters with "
+            + "underscore and hyphens allowed, and be between 1 and 20 characters long.";
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9_-]{1,20}";
     public final String tagName;
 

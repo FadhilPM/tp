@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -24,15 +25,16 @@ import seedu.address.model.tag.Tag;
 public class UnTagCommand extends Command {
     public static final String COMMAND_WORD = "untag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Remove a project from a contact. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Remove tags or projects from a contact. "
             + "Parameters: "
             + PREFIX_PHONE + "PHONE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_PROJECT + "PROJECT]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TAG + "project-x";
 
-    public static final String MESSAGE_SUCCESS = "Tag removed from Contact";
+    public static final String MESSAGE_SUCCESS = "Tags and/or projects removed from %1$s";
     private final Phone phone;
     private final Set<Tag> tags;
 
@@ -59,7 +61,7 @@ public class UnTagCommand extends Command {
 
         model.setPerson(personToUnTag, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, taggedPerson.getName()));
     }
 
     /**
