@@ -225,14 +225,15 @@ Examples:
 ![save with parameter](images/save_with_param.png)
 
 ### Switching preferred contact : `switchContact`
+
 Switch preferred contact. 
 
 Format: `switchContact p/PHONE`
 
-* If the current preferred contact method is Email, it will switch to Phone.
-* If the current preferred contact method is Phone, it will switch to Email, provided the contact contains an email.
-* Phone is the default preferred contact method when a contact is created.
-* If the contact does not have an email, the preferred contact method will remain as Phone.
+* If the current preferred contact method is email, it will switch to phone.
+* If the current preferred contact method is phone, it will switch to email, provided the contact contains an email.
+* phone is the default preferred contact method when a contact is created.
+* If the contact does not have an email, the preferred contact method will remain as phone.
 
 Examples:
 
