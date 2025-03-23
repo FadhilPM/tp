@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -24,15 +25,17 @@ public class UnTagCommandParser implements Parser<UnTagCommand> {
      */
     public UnTagCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_TAG, PREFIX_PROJECT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PHONE, PREFIX_TAG)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_PHONE)
+                || (argMultimap.getValue(PREFIX_TAG).isEmpty() && argMultimap.getValue(PREFIX_PROJECT).isEmpty())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnTagCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE);
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        tagList.addAll(ParserUtil.parseProjects(argMultimap.getAllValues(PREFIX_PROJECT)));
 
         return new UnTagCommand(phone, tagList);
     }

@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -50,8 +49,6 @@ public class UnTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
         Person personToUnTag = model.getFilteredPersonList()
                 .stream()
                 .filter(x -> x.getPhone().equals(phone))
@@ -81,7 +78,6 @@ public class UnTagCommand extends Command {
         // Remove tagsToRemove from current Tags
         Set<Tag> newTags = new LinkedHashSet<>(currentTags);
         newTags.removeAll(tagsToRemove);
-        System.out.println(newTags);
 
         // Return new Person
         return new Person(name, phone, email, newTags);

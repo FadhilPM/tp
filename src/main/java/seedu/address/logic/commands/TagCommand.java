@@ -32,9 +32,8 @@ public class TagCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TAG + "project-x";
 
-    public static final String MESSAGE_SUCCESS = "Tag added to Contact";
+    public static final String MESSAGE_SUCCESS = "Tags and/or projects added to Contact";
     private final Phone phone;
-
     private final Set<Tag> tags;
 
     /**
@@ -50,17 +49,17 @@ public class TagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         Person personToTag = model.getFilteredPersonList()
                 .stream()
                 .filter(x -> x.getPhone().equals(phone))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PHONE_NUMBER));
 
-        Person taggedPerson = tagProjectToPerson(personToTag, this.tags);
+        Person taggedPerson = tagProjectToPerson(personToTag, tags);
 
         model.setPerson(personToTag, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
@@ -81,8 +80,6 @@ public class TagCommand extends Command {
         Set<Tag> newTags = new LinkedHashSet<>();
         newTags.addAll(currentTags);
         newTags.addAll(newlyAddedTags);
-
-
 
         // Return new Person
         return new Person(name, phone, email, newTags);
