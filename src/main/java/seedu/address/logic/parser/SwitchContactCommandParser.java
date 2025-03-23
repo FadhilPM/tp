@@ -26,6 +26,7 @@ public class SwitchContactCommandParser implements Parser<SwitchContactCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SwitchContactCommand.MESSAGE_USAGE));
         }
 
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE);
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
 

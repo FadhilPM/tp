@@ -32,7 +32,7 @@ public class SwitchContactCommand extends Command {
             + PREFIX_PHONE + "98765432 ";
 
     public static final String MESSAGE_SUCCESS = "Preferred contact method has switched successfully!";
-
+    public static final String NO_EMAIL_FAILURE = "Cannot switch contact method because email is not provided.";
     private final Phone phone;
 
     /**
@@ -54,6 +54,11 @@ public class SwitchContactCommand extends Command {
                 .filter(x -> x.getPhone().equals(phone))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PHONE_NUMBER));
+
+        // Check if the email is present
+        if (personToSwitchPrefContact.getEmail().isEmpty()) {
+            throw new CommandException(NO_EMAIL_FAILURE);
+        }
 
         Person newPrefContactPerson = switchPreferredContactFromPerson(personToSwitchPrefContact);
 
