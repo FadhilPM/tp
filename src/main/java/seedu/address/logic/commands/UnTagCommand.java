@@ -57,6 +57,14 @@ public class UnTagCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PHONE_NUMBER));
 
+        Set<Tag> checktags = new LinkedHashSet<>(personToUnTag.getTags());
+        checktags.addAll(personToUnTag.getProjects());
+        String check = checkForTagInExistingTags(checktags, this.tags);
+        if (!check.equals("")) {
+            throw new CommandException(String.format(Messages.MESSAGE_ABSENT_TAG_PROJECT,
+                    check, personToUnTag.getName(), personToUnTag.getPhone()));
+        }
+
         Person taggedPerson = unTagProjectFromPerson(personToUnTag, this.tags);
 
         model.setPerson(personToUnTag, taggedPerson);
@@ -85,5 +93,20 @@ public class UnTagCommand extends Command {
 
         // Return new Person
         return new Person(name, phone, email, newTags);
+    }
+
+    /**
+     * Checks if tagsToCheck exists within the Set of Tags.
+     * Returns true if found within, false otherwise.
+     * @param tags set
+     * @param tagsToCheck set of tags to check for
+     */
+    public static String checkForTagInExistingTags(Set<Tag> tags, Set<Tag> tagsToCheck) {
+        for (Tag t : tagsToCheck) {
+            if (!(tags.contains(t))) {
+                return t.getTagName();
+            }
+        }
+        return "";
     }
 }
