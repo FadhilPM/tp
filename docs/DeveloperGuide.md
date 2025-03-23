@@ -490,7 +490,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 * 1. Artist wants to switch a Contact’s preferred contact method.
-* 2. Artist enters the contact’s Phone Number
+* 2. Artist enters the contact’s Phone Number.
 * 3. ArtHive toggles the preferred contact method, and shows a success message.
 
 Use case ends.
@@ -500,17 +500,17 @@ Use case ends.
 * 2a. ArtHive detects that the given Phone Number is non-existent.
   * 2a1. ArtHive displays an error message stating that the Contact does not exist.
 
-    Use case resume at step 2.
+    Use case resumes at step 2.
 
 * 2b. The current preferred contact method is Phone, but no Email is recorded for the Contact.
-  * 2b1. ArtHive displays an error message
+  * 2b1. ArtHive displays an error message.
     
-    Use case resume at step 2.
+    Use case resumes at step 2.
 
 * 2c. ArtHive detects that the user input is invalid. 
   * 2c1. ArtHive returns an error message.
 
-    Use case resume at step 2
+    Use case resume at step 2.
 
 ---
 
