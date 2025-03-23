@@ -57,9 +57,9 @@ public class UnTagCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PHONE_NUMBER));
 
-        Set<Tag> checktags = new LinkedHashSet<>(personToUnTag.getTags());
-        checktags.addAll(personToUnTag.getProjects());
-        String check = checkForTagInExistingTags(checktags, this.tags);
+        Set<Tag> currentTags = new LinkedHashSet<>(personToUnTag.getTags());
+        currentTags.addAll(personToUnTag.getProjects());
+        String check = checkForTagInExistingTags(currentTags, this.tags);
         if (!check.equals("")) {
             throw new CommandException(String.format(Messages.MESSAGE_ABSENT_TAG_PROJECT,
                     check, personToUnTag.getName(), personToUnTag.getPhone()));
