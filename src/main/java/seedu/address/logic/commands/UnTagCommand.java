@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.Messages;
@@ -75,7 +76,7 @@ public class UnTagCommand extends Command {
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
         Set<Tag> currentTags = personToEdit.getTags();
-        Email email = personToEdit.getEmail();
+        Optional<Email> email = personToEdit.getEmail();
 
         // Remove tagsToRemove from current Tags
         Set<Tag> newTags = new LinkedHashSet<>(currentTags);
