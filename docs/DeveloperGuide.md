@@ -510,7 +510,7 @@ Use case ends.
 * 2c. ArtHive detects that the user input is invalid. 
   * 2c1. ArtHive returns an error message.
 
-    Use case resume at step 2.
+    Use case resumes at step 2.
 
 ---
 
