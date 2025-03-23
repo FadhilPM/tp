@@ -50,7 +50,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
+        email.setText(person.getEmail().map(email -> email.value).orElseGet(() -> "No email provided."));
         preferredContactMethod.setText(
                 "Preferred method of contact: " + person.getPreferredContactMethod().preferredContactMethod);
         person.getTags().stream()
