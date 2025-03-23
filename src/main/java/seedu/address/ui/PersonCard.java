@@ -60,6 +60,33 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getProjects().stream()
                 .sorted(Comparator.comparing(project -> project.tagName))
-                .forEach(project -> projects.getChildren().add(new Label(project.tagName)));
+                //.forEach(project -> projects.getChildren().add(new Label(project.tagName)));
+                .forEach(project -> {
+                    HBox projectBox = new HBox(5);
+                    projectBox.setStyle("-fx-background-color:#cccccc; -fx-padding:5; -fx-background-radius:3;");
+
+                    Label nameLabel = new Label(project.tagName);
+                    nameLabel.setStyle("-fx-font-weight:bold;");
+
+                    Label deadlineLabel = new Label(project.getDeadline());
+
+                    Label completionLabel = new Label(project.checkIfComplete());
+                    if (project.checkIfComplete().equalsIgnoreCase("Complete")) {
+                        completionLabel.getStyleClass().add("project-complete");
+                    } else {
+                        completionLabel.getStyleClass().add("project-incomplete");
+                    }
+
+                    Label paidLabel = new Label(project.checkIfPaid());
+                    if (project.checkIfPaid().equalsIgnoreCase("Paid")) {
+                        paidLabel.getStyleClass().add("project-paid");
+                    } else {
+                        paidLabel.getStyleClass().add("project-unpaid");
+                    }
+
+                    projectBox.getChildren().addAll(nameLabel, deadlineLabel,  completionLabel, paidLabel);
+                    projects.getChildren().add(projectBox);
+                });
+
     }
 }
