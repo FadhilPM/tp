@@ -74,11 +74,12 @@ public class TagCommand extends Command {
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
         Set<Tag> currentTags = personToEdit.getTags();
+        Set<Tag> currentProjects = personToEdit.getProjects();
         Optional<Email> email = personToEdit.getEmail();
 
         // Add the current and newly added tags to a single Linked Hash Set
-        Set<Tag> newTags = new LinkedHashSet<>();
-        newTags.addAll(currentTags);
+        Set<Tag> newTags = new LinkedHashSet<>(currentTags);
+        newTags.addAll(currentProjects);
         newTags.addAll(newlyAddedTags);
 
         // Return new Person
