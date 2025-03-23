@@ -224,22 +224,6 @@ Examples:
 
 ![save with parameter](images/save_with_param.png)
 
-### Switching preferred contact : `switchContact`
-Switch preferred contact. 
-
-Format: `switchContact p/PHONE`
-
-* If the current preferred contact method is Email, it will switch to Phone.
-* If the current preferred contact method is Phone, it will switch to Email, provided the contact contains an email.
-* Phone is the default preferred contact method when a contact is created.
-* If the contact does not have an email, the preferred contact method will remain as Phone.
-
-Examples:
-
-* `switchContact p/91234567` Switches the preferred contact method for the contact with phone number 91234567.
-
-![switch contact to email](images/switchContactJohn.png)
-
 #### Editing the data file
 
 ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[filename].json`. Advanced users are welcome to update data directly by editing that data file.
@@ -294,6 +278,5 @@ Action | Format, Examples
 **Tag**  | `tag p/PHONE_NUMBER t/TAG [t/TAG]…​` <br> e.g., `tag p/91234567 t/project-x`
 **Untag**| `untag p/PHONE_NUMBER t/TAG [t/TAG]…​` <br> e.g., `untag p/91234567 t/project-x`
 **Save** | `save [FILENAME]` <br> e.g., `save newfile`
-**Change Preferred Contact Method** | `switchContact p/PHONE_NUMBER` <br> e.g, `switchContact p/91234567`
 **Clear** | `clear`
 **Exit** | `exit`
