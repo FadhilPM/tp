@@ -1,6 +1,9 @@
 package seedu.address.commons.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
@@ -18,6 +21,8 @@ public class FileUtil {
     public static boolean isFileExists(Path file) {
         return Files.exists(file) && Files.isRegularFile(file);
     }
+
+    private static boolean isSSFolderExist = false;
 
     /**
      * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
@@ -169,5 +174,28 @@ public class FileUtil {
         } catch (IOException e) {
             System.err.println("Can't list files in: " + e.getMessage());
         }
+    }
+
+    /**
+     * Create a folder at specific folderPath.
+     * @throws IOException throw I/O related error
+     */
+    public static void createFolder() {
+        String directoryName = "snapshots";
+        System.out.println(directoryName);
+
+        String currDirectory = System.getProperty("user.dir");
+        String dirPath = currDirectory + File.separator + directoryName;
+        File directory = new File(dirPath);
+
+        isSSFolderExist = directory.mkdir();
+    }
+
+    /**
+     * Get the boolean value of snapshot folder's existence.
+     * @return True/False
+     */
+    public static boolean isSnapshotFolderExists() {
+        return isSSFolderExist;
     }
 }
