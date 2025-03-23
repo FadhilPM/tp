@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -24,15 +25,16 @@ import seedu.address.model.tag.Tag;
 public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags a project to a contact. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add tags or projects to a contact. "
             + "Parameters: "
             + PREFIX_PHONE + "PHONE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_PROJECT + "PROJECT]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TAG + "project-x";
 
-    public static final String MESSAGE_SUCCESS = "Tags and/or projects added to Contact";
+    public static final String MESSAGE_SUCCESS = "Tags and/or projects added to %1$s";
     private final Phone phone;
     private final Set<Tag> tags;
 
@@ -60,7 +62,7 @@ public class TagCommand extends Command {
         model.setPerson(personToTag, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, taggedPerson.getName()));
     }
 
     /**
@@ -74,11 +76,12 @@ public class TagCommand extends Command {
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
         Set<Tag> currentTags = personToEdit.getTags();
+        Set<Tag> currentProjects = personToEdit.getProjects();
         Optional<Email> email = personToEdit.getEmail();
 
         // Add the current and newly added tags to a single Linked Hash Set
-        Set<Tag> newTags = new LinkedHashSet<>();
-        newTags.addAll(currentTags);
+        Set<Tag> newTags = new LinkedHashSet<>(currentTags);
+        newTags.addAll(currentProjects);
         newTags.addAll(newlyAddedTags);
 
         // Return new Person

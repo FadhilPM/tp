@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PreferredContactMethod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +27,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final String preferredContact;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -33,13 +35,15 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("email") String email, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("preferredContacts") String preferredContact) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.preferredContact = preferredContact;
     }
 
     /**
@@ -52,6 +56,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .toList());
+        preferredContact = source.getPreferredContactMethod().getPreferredContactMethod();
     }
 
     /**
@@ -97,7 +102,9 @@ class JsonAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new LinkedHashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelTags);
+
+        final PreferredContactMethod preferredContactMethod = new PreferredContactMethod(preferredContact);
+        return new Person(modelName, modelPhone, modelEmail, modelTags, preferredContactMethod);
     }
 
 }
