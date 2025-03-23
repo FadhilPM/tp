@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.Messages;
@@ -73,7 +74,7 @@ public class TagCommand extends Command {
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
         Set<Tag> currentTags = personToEdit.getTags();
-        Email email = personToEdit.getEmail();
+        Optional<Email> email = personToEdit.getEmail();
 
         // Add the current and newly added tags to a single Linked Hash Set
         Set<Tag> newTags = new LinkedHashSet<>();

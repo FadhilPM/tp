@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -20,7 +21,7 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
+    private final Optional<Email> optionalEmail;
     private final PreferredContactMethod preferredContactMethod = new PreferredContactMethod();
 
     // Data fields
@@ -46,8 +47,8 @@ public class Person {
     public Phone getPhone() {
         return phone;
     }
-    public Email getEmail() {
-        return email;
+    public Optional<Email> getEmail() {
+        return optionalEmail;
     }
 
     public PreferredContactMethod getPreferredContactMethod() {
@@ -111,14 +112,14 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
+                && optionalEmail.equals(otherPerson.optionalEmail)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, tags);
+        return Objects.hash(name, phone, optionalEmail, tags);
     }
 
     @Override
@@ -126,7 +127,7 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
+                .add("email", optionalEmail)
                 .add("tags", tags)
                 .toString();
     }

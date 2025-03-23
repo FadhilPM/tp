@@ -72,7 +72,7 @@ public class UnTagCommand extends Command {
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
         Set<Tag> currentTags = personToEdit.getTags();
-        Email email = personToEdit.getEmail();
+        Optional<Email> email = personToEdit.getEmail();
 
         // Remove tagsToRemove from current Tags
         Set<Tag> newTags = new LinkedHashSet<>(currentTags);
