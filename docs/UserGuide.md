@@ -224,6 +224,14 @@ Examples:
 
 ![save with parameter](images/save_with_param.png)
 
+### Creating snapshot of data: `snapshot`
+
+Creates snapshot of the existing data in the `snapshots` directory with a datetime stamp ("dMMMuuuu_HHmm").
+
+Format: `snapshot`
+
+![snapshot](images/snapshot.png)
+
 ### Switching preferred contact : `switchContact`
 
 Switch preferred contact. 
@@ -294,8 +302,9 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Tag**  | `tag p/PHONE_NUMBER t/TAG [t/TAG]…​` <br> e.g., `tag p/91234567 t/project-x`
-**Untag**| `untag p/PHONE_NUMBER t/TAG [t/TAG]…​` <br> e.g., `untag p/91234567 t/project-x`
+**Untag** | `untag p/PHONE_NUMBER t/TAG [t/TAG]…​` <br> e.g., `untag p/91234567 t/project-x`
 **Save** | `save [FILENAME]` <br> e.g., `save newfile`
+**Snapshot** | `snapshot`
 **Switch Preferred Contact Method** | `switchContact p/PHONE_NUMBER` <br> e.g, `switchContact p/91234567`
 **Clear** | `clear`
 **Exit** | `exit`
