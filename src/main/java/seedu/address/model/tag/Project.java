@@ -19,6 +19,13 @@ public class Project extends Tag {
      *
      * @param tagName A valid tag name.
      */
+    public Project(String tagName, String isComplete, String isPaid, String deadline) {
+        super(tagName);
+        this.isComplete = (isComplete.equals("Complete"));
+        this.isPaid = (isPaid.equals("Paid"));
+        this.deadline = LocalDateTime.parse(deadline.trim(), DateTimeFormatter.ofPattern("dMMMuuuu_HHmm"));
+    }
+
     public Project(String tagName) {
         super(tagName);
         this.isComplete = false;
