@@ -356,10 +356,47 @@
 }
 
 #projects .label {
-    -fx-text-fill: white;
-    -fx-background-color: #cc6600;
+    -fx-text-fill: black;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#projects .project-box {
+    -fx-background-color: #cccccc;
+    -fx-padding: 5;
+    -fx-background-radius: 3;
+}
+
+#projects .project-label {
+    -fx-font-weight: bold;
+}
+
+#projects .project-complete {
+    -fx-background-color: #184e2a;
+    -fx-text-fill: white;
+    -fx-padding: 2 6 2 6;
+    -fx-background-radius: 3;
+}
+
+#projects .project-incomplete {
+    -fx-background-color: #cc3300;
+    -fx-text-fill: white;
+    -fx-padding: 2 6 2 6;
+    -fx-background-radius: 3;
+}
+
+#projects .project-paid {
+    -fx-background-color: #123b1f;
+    -fx-text-fill: white;
+    -fx-padding: 2 6 2 6;
+    -fx-background-radius: 3;
+}
+
+#projects .project-unpaid {
+    -fx-background-color: #931314;
+    -fx-text-fill: white;
+    -fx-padding: 2 6 2 6;
+    -fx-background-radius: 3;
 }

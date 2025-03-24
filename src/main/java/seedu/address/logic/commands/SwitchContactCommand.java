@@ -15,6 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PreferredContactMethod;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -81,7 +82,7 @@ public class SwitchContactCommand extends Command {
         Phone phone = personToEdit.getPhone();
 
         Set<Tag> currentTags = personToEdit.getTags();
-        Set<Tag> currentProjects = personToEdit.getProjects();
+        Set<Project> currentProjects = personToEdit.getProjects();
         Optional<Email> email = personToEdit.getEmail();
 
         // Add the current and newly added tags to a single Linked Hash Set
