@@ -20,13 +20,13 @@ public class Project extends Tag {
      * @param tagName A valid tag name.
      * @param isComplete Complete or Incomplete.
      * @param isPaid Paid or Unpaid.
-     * @param deadline deadline in dMMMuuuu_HHmm format.
+     * @param deadline deadline in dd MMM yyyy HHmm format.
      */
     public Project(String tagName, String isComplete, String isPaid, String deadline) {
         super(tagName);
         this.isComplete = (isComplete.equals("Complete"));
         this.isPaid = (isPaid.equals("Paid"));
-        this.deadline = LocalDateTime.parse(deadline.trim(), DateTimeFormatter.ofPattern("dMMMuuuu_HHmm"));
+        this.deadline = LocalDateTime.parse(deadline.trim(), DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
     }
 
     /**

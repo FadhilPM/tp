@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Project;
@@ -23,6 +23,19 @@ class JsonAdaptedProject {
      * Constructs a {@code JsonAdaptedProject} with the given {@code tagName}.
      */
     @JsonCreator
+    public JsonAdaptedProject(@JsonProperty("tagName") String tagName,
+                              @JsonProperty("isComplete") String isComplete,
+                              @JsonProperty("isPaid") String isPaid,
+                              @JsonProperty("deadline") String deadline) {
+        this.tagName = tagName;
+        this.isComplete = isComplete;
+        this.isPaid = isPaid;
+        this.deadline = deadline;
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedProject} with the given {@code tagName}.
+     */
     public JsonAdaptedProject(String tagName) {
         this.tagName = tagName;
     }
@@ -38,10 +51,6 @@ class JsonAdaptedProject {
 
     }
 
-    @JsonValue
-    public String getTagName() {
-        return tagName;
-    }
 
     /**
      * Converts this Jackson-friendly adapted project object into the model's {@code Project} object.
@@ -53,6 +62,7 @@ class JsonAdaptedProject {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
 
-        return new Project(tagName);
+
+        return new Project(tagName, isComplete, isPaid, deadline);
     }
 }
