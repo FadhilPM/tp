@@ -1,9 +1,19 @@
-#copyButton, #helpMessage {
-    -fx-text-fill: white;
+.help-container {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.help-content {
+    -fx-padding: 20;
+}
+
+.help-footer {
+    -fx-background-color: derive(#1d1d1d, 10%);
+    -fx-padding: 10;
 }
 
 #copyButton {
     -fx-background-color: dimgray;
+    -fx-text-fill: white;
 }
 
 #copyButton:hover {
@@ -14,6 +24,55 @@
     -fx-background-color: darkgray;
 }
 
-#helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+/* Markdown specific styling */
+.markdown-text {
+    -fx-fill: white;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+}
+
+.markdown-code {
+    -fx-text-fill: white;
+    -fx-fill: white;
+    -fx-wrap-text: true;
+    -fx-font-size: 13px;
+    -fx-max-width: 200px;
+}
+
+.markdown-link {
+    -fx-fill: #4488cc;
+}
+
+.markdown-link-hover {
+    -fx-underline: true;
+}
+
+.markdown-code-background {
+    -fx-background-color: derive(#1d1d1d, 10%);
+    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-wrap-text: true;
+}
+
+/* Table styling */
+.markdown-table-table {
+    -fx-min-width: 690px;
+    -fx-max-width: 690px;
+    -fx-wrap-text: true;
+}
+
+.markdown-table-even, .markdown-table-odd {
+    -fx-background-color: #383838;
+}
+
+.markdown-table-cell {
+    -fx-min-width: 230px;
+    -fx-max-width: 230px;
+    -fx-border-color: #555555;
+    -fx-border-width: 1;
+    -fx-wrap-text: true;
+}
+
+.markdown-table-cell-top {
+    -fx-background-color: #2a2a2a;
+    -fx-font-weight: bold;
 }

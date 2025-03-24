@@ -1,13 +1,18 @@
 package seedu.address.ui;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import one.jpro.platform.mdfx.MarkdownView;
 import seedu.address.commons.core.LogsCenter;
 
 /**
@@ -16,7 +21,7 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s2-cs2103-f10-1.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    private static final String HELP_CONTENT_PATH = "/view/HelpContent.md";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -25,7 +30,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
-    private Label helpMessage;
+    private StackPane helpContentPane;
 
     /**
      * Creates a new HelpWindow.
@@ -34,7 +39,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        loadHelpContent();
     }
 
     /**
@@ -42,6 +47,32 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
+    }
+
+    /**
+     * Loads the Markdown help content into the window.
+     */
+    private void loadHelpContent() {
+        try {
+            InputStream is = getClass().getResourceAsStream(HELP_CONTENT_PATH);
+            byte[] bytes = is.readAllBytes();
+            String content = new String(bytes, StandardCharsets.UTF_8);
+            is.close();
+
+            MarkdownView markdownView = new MarkdownView(content) {
+                @Override
+                protected List<String> getDefaultStylesheets() {
+                    return List.of(
+                        getClass().getResource("/view/DarkTheme.css").toExternalForm(),
+                        getClass().getResource("/view/HelpWindow.css").toExternalForm()
+                    );
+                }
+            };
+            helpContentPane.getChildren().add(markdownView);
+
+        } catch (IOException e) {
+            logger.warning("Error loading help content: " + e.getMessage());
+        }
     }
 
     /**
@@ -65,6 +96,7 @@ public class HelpWindow extends UiPart<Stage> {
     public void show() {
         logger.fine("Showing help page about the application.");
         getRoot().show();
+        getRoot().sizeToScene();
         getRoot().centerOnScreen();
     }
 
