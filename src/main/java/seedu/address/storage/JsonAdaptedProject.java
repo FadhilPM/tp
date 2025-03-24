@@ -4,28 +4,38 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Tag}.
  */
-class JsonAdaptedTag {
+class JsonAdaptedProject {
 
     private final String tagName;
 
+    private String isComplete;
+    private String isPaid;
+    private String deadline;
+
+
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName} and {@code tagType}.
+     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
+    public JsonAdaptedProject(String tagName) {
         this.tagName = tagName;
     }
 
     /**
      * Check given source and label tag type.
      */
-    public JsonAdaptedTag(Tag source) {
+    public JsonAdaptedProject(Project source) {
         tagName = source.tagName;
+        isComplete = source.checkIfComplete();
+        isPaid = source.checkIfPaid();
+        deadline = source.getDeadline();
+
     }
 
     @JsonValue
@@ -38,12 +48,11 @@ class JsonAdaptedTag {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public Tag toModelType() throws IllegalValueException {
+    public Project toModelType() throws IllegalValueException {
         if (!Tag.isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
 
-        return new Tag(tagName);
+        return new Project(tagName);
     }
-
 }
