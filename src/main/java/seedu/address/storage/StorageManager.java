@@ -19,6 +19,7 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private SnapshotStorage snapshotStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
@@ -26,6 +27,7 @@ public class StorageManager implements Storage {
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.snapshotStorage = new JsonSnapshotStorage();
     }
 
     // ================ UserPrefs methods ==============================
@@ -73,6 +75,12 @@ public class StorageManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
+    }
+
+    @Override
+    public void makeSnapshot(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        logger.fine("Attempting to create snapshot to data file: " + filePath);
+        snapshotStorage.makeSnapshot(addressBook, filePath);
     }
 
 }

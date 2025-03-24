@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -18,9 +19,10 @@ import seedu.address.storage.Storage;
 /**
  * Creates snapshots of existing file.
  */
-public class SnapshotCommand extends Command{
+public class SnapshotCommand extends Command {
     public static final String COMMAND_WORD = "snapshot";
     public static final String SUCCESS = "Snapshot saved to %s";
+    public static final String SNAPSHOTS_STRING = "snapshots";
 
     private final Storage storage;
     private final LocalDateTime currentDateTime;
@@ -33,8 +35,7 @@ public class SnapshotCommand extends Command{
         this.storage = requireNonNull(storage);
         this.currentDateTime = LocalDateTime.now();
 
-        boolean snapshotDirExists = FileUtil.isSnapshotFolderExists();
-        if (!snapshotDirExists) {
+        if (!FileUtil.isSnapshotFolderExists()) {
             FileUtil.createFolder();
         }
     }
@@ -50,9 +51,19 @@ public class SnapshotCommand extends Command{
         requireNonNull(model);
 
         try {
+            Path snapshotDir = Paths.get(SNAPSHOTS_STRING);
+
+            if (!Files.exists(snapshotDir)) {
+                Files.createDirectories(snapshotDir);
+            }
+
+            if (!Files.isWritable(snapshotDir)) {
+                throw new CommandException("Can't write to snapshots folder. Check folder permissions.");
+            }
+
             String custom = currentDateTime.format(DateTimeFormatter.ofPattern("dMMMuuuu_HHmmss"));
-            Path pathToBeSaved = Paths.get("snapshots",custom + ".json");
-            storage.saveAddressBook(model.getAddressBook(), pathToBeSaved);
+            Path pathToBeSaved = Paths.get(SNAPSHOTS_STRING, custom + ".json");
+            storage.makeSnapshot(model.getAddressBook(), pathToBeSaved);
 
             return new CommandResult(String.format(SUCCESS, pathToBeSaved), false, false, false);
         } catch (AccessDeniedException e) {
