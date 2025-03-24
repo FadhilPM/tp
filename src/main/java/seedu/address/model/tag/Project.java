@@ -1,6 +1,7 @@
 package seedu.address.model.tag;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Project in the address book.
@@ -64,8 +65,8 @@ public class Project extends Tag {
     /**
      * Get the deadline as LocalDateTime
      */
-    public LocalDateTime getDeadline() {
-        return this.deadline;
+    public String getDeadline() {
+        return this.deadline.format(DateTimeFormatter.ofPattern("d MMM uuuu HHmm"));
     }
 
     /**

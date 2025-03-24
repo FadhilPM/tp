@@ -26,7 +26,7 @@ public class Person {
 
     // Data fields
     private final Set<Tag> tags = new LinkedHashSet<>();
-    private final Set<Tag> projects = new LinkedHashSet<>();
+    private final Set<Project> projects = new LinkedHashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -83,7 +83,7 @@ public class Person {
     public void tagOrProject(Set<Tag> tags) {
         for (Tag t : tags) {
             if (t instanceof Project) {
-                this.projects.add(t);
+                this.projects.add((Project) t);
             } else {
                 this.tags.add(t);
             }
@@ -98,7 +98,7 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Set<Tag> getProjects() {
+    public Set<Project> getProjects() {
         return Collections.unmodifiableSet(projects);
     }
 

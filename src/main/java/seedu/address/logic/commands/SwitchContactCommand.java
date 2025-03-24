@@ -3,6 +3,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PreferredContactMethod;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -78,15 +80,22 @@ public class SwitchContactCommand extends Command {
 
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
+
         Set<Tag> currentTags = personToEdit.getTags();
+        Set<Project> currentProjects = personToEdit.getProjects();
         Optional<Email> email = personToEdit.getEmail();
+
+        // Add the current and newly added tags to a single Linked Hash Set
+        Set<Tag> newTags = new LinkedHashSet<>(currentTags);
+        newTags.addAll(currentProjects);
+
         PreferredContactMethod preferredContactMethod = personToEdit.getPreferredContactMethod();
 
         //Switch the contact method
         PreferredContactMethod newPreferredContactMethod = preferredContactMethod.switchPreferredContactMethod();
 
         // Return new Person
-        return new Person(name, phone, email, currentTags, newPreferredContactMethod);
+        return new Person(name, phone, email, newTags, newPreferredContactMethod);
 
     }
 

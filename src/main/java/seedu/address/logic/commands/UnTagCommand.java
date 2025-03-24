@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -83,7 +84,7 @@ public class UnTagCommand extends Command {
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
         Set<Tag> currentTags = personToEdit.getTags();
-        Set<Tag> currentProjects = personToEdit.getProjects();
+        Set<Project> currentProjects = personToEdit.getProjects();
         Optional<Email> email = personToEdit.getEmail();
 
         // Remove tagsToRemove from current Tags
