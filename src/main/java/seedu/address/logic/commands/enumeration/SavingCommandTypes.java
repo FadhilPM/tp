@@ -9,11 +9,10 @@ public enum SavingCommandTypes {
     CLEAR("clear"),
     DELETE("delete"),
     EDIT("edit"),
+    SNAPSHOT("snapshot"),
     SWITCHCONTACT("switchContact"),
     TAG("tag"),
     UNTAG("untag");
-
-
 
     private final String command;
 
