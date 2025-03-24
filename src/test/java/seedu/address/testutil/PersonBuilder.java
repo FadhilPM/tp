@@ -8,6 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -25,6 +26,7 @@ public class PersonBuilder {
     private Phone phone;
     private Optional<Email> optionalEmail;
     private Set<Tag> tags;
+    private Set<Project> projects;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -34,6 +36,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         optionalEmail = Optional.of(new Email(DEFAULT_EMAIL));
         tags = new LinkedHashSet<>();
+        projects = new LinkedHashSet<>();
     }
 
     /**
@@ -44,6 +47,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         optionalEmail = personToCopy.getEmail();
         tags = new LinkedHashSet<>(personToCopy.getTags());
+        projects = new LinkedHashSet<>(personToCopy.getProjects());
     }
 
     /**
@@ -59,6 +63,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withProjects(String ... projects) {
+        this.projects = SampleDataUtil.getProjectSet(projects);
         return this;
     }
 
