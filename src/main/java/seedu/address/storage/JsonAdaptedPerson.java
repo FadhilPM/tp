@@ -15,6 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PreferredContactMethod;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,7 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String preferredContact;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final List<JsonAdaptedTag> projects = new ArrayList<>();
+    private final List<JsonAdaptedProject> projects = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,7 +40,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("projects") List<String> projects,
+                             @JsonProperty("projects") List<JsonAdaptedProject> projects,
                              @JsonProperty("preferredContacts") String preferredContact) {
         this.name = name;
         this.phone = phone;
@@ -50,9 +51,7 @@ class JsonAdaptedPerson {
         }
 
         if (projects != null) {
-            for (String project : projects) {
-                this.projects.add(new JsonAdaptedTag(project, "PROJ"));
-            }
+            this.projects.addAll(projects);
         }
 
         this.preferredContact = preferredContact;
@@ -71,7 +70,7 @@ class JsonAdaptedPerson {
                 .toList());
 
         projects.addAll(source.getProjects().stream()
-                .map(JsonAdaptedTag::new)
+                .map(JsonAdaptedProject::new)
                 .toList());
 
         preferredContact = source.getPreferredContactMethod().getPreferredContactMethod();
@@ -84,13 +83,13 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        final List<Tag> personProjectTags = new ArrayList<>();
+        final List<Project> personProjectTags = new ArrayList<>();
 
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
 
-        for (JsonAdaptedTag projectTag : projects) {
+        for (JsonAdaptedProject projectTag : projects) {
             personProjectTags.add(projectTag.toModelType());
         }
 
