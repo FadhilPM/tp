@@ -8,7 +8,7 @@ import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link Project}.
  */
 class JsonAdaptedProject {
 
@@ -20,7 +20,7 @@ class JsonAdaptedProject {
 
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedProject} with the given {@code tagName}.
      */
     @JsonCreator
     public JsonAdaptedProject(String tagName) {
@@ -44,9 +44,9 @@ class JsonAdaptedProject {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted project object into the model's {@code Project} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted project.
      */
     public Project toModelType() throws IllegalValueException {
         if (!Tag.isValidTagName(tagName)) {
