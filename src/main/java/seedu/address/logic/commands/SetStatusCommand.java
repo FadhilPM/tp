@@ -6,6 +6,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -62,8 +63,8 @@ public class SetStatusCommand extends Command {
      * corresponding field value of the project.
      */
     public static class SetStatusDescriptor {
-        private boolean isComplete;
-        private boolean isPaid;
+        private boolean isComplete = false;
+        private boolean isPaid = false;
         private LocalDateTime deadline;
 
         public SetStatusDescriptor() {}
@@ -75,24 +76,24 @@ public class SetStatusCommand extends Command {
             return CollectionUtil.isAnyNonNull(isComplete, isPaid, deadline);
         }
 
-        public void setProgress(boolean isComplete) {
-            this.isComplete = isComplete;
+        public void setProgress(String progress) {
+            this.isComplete = (progress.equals("Complete"));
         }
 
         public Optional<Boolean> getProgress() {
             return Optional.of(isComplete);
         }
 
-        public void setPayment(boolean isPaid) {
-            this.isPaid = isPaid;
+        public void setPayment(String payment) {
+            this.isPaid = (payment.equals("Paid"));
         }
 
         public Optional<Boolean> getPayment() {
             return Optional.of(isPaid);
         }
 
-        public void setDeadline(LocalDateTime deadline) {
-            this.deadline = deadline;
+        public void setDeadline(String deadline) {
+            this.deadline = LocalDateTime.parse(deadline.trim(), DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
         }
 
         public Optional<LocalDateTime> getDeadline() {
