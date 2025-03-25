@@ -226,13 +226,13 @@ Examples:
 
 ### Creating snapshot of data: `snapshot`
 
-Creates snapshot of the existing data in the `snapshots` directory with a datetime stamp ("dMMMuuuu_HHmm").
+Creates snapshot of the existing data in the `snapshots` directory with a datetime stamp ("dMMMuuuu_HHmmss").
 
 Format: `snapshot`
 
 Examples:
 
-* `snapshot` proceeds to create a snapshot of the existing save file with the name represented with the current datetime (e.g., 24Mar2025_1721.json).
+* `snapshot` proceeds to create a snapshot of the existing save file with the name represented with the current datetime (e.g., 24Mar2025_172159.json).
 
 ![snapshot](images/snapshot.png)
 
