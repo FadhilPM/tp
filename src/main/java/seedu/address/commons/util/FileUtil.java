@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -12,7 +13,7 @@ import java.util.stream.Stream;
  * Writes and reads files
  */
 public class FileUtil {
-
+    public static final String SNAPSHOTS_STRING = "snapshots";
     private static final String CHARSET = "UTF-8";
 
     public static boolean isFileExists(Path file) {
@@ -169,5 +170,35 @@ public class FileUtil {
         } catch (IOException e) {
             System.err.println("Can't list files in: " + e.getMessage());
         }
+    }
+
+    /**
+     * Create a folder at specific folderPath.
+     * @throws IOException throw I/O related error
+     */
+    public static boolean createFolder() {
+        String directoryName = SNAPSHOTS_STRING;
+        String currDirectory = System.getProperty("user.dir");
+        String dirPath = currDirectory + File.separator + directoryName;
+        File directory = new File(dirPath);
+
+        if (directory.exists() && directory.isDirectory()) {
+            return true;
+        }
+
+        return directory.mkdir();
+    }
+
+    /**
+     * Get the boolean value of snapshot folder's existence.
+     * @return True/False
+     */
+    public static boolean isSnapshotFolderExists() {
+        String directoryName = SNAPSHOTS_STRING;
+        String currDirectory = System.getProperty("user.dir");
+        String dirPath = currDirectory + File.separator + directoryName;
+        File directory = new File(dirPath);
+
+        return directory.exists() && directory.isDirectory();
     }
 }
