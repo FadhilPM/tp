@@ -14,6 +14,9 @@ public class Project extends Tag {
     private boolean isPaid;
     private LocalDateTime deadline;
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Deadline should be in the format dd-MM-yyyy HH:mm";
+
     /**
      * Constructs a {@code Project}.
      *
