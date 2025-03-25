@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -84,6 +87,41 @@ public class ParserUtil {
             return new Email(trimmedEmail);
         } else {
             return new Email(null);
+        }
+    }
+
+    public static boolean parsePayment(String payment) throws ParseException {
+        requireNonNull(payment);
+        String trimmedPayment = payment.trim();
+
+        if (trimmedPayment.equals("Paid")) {
+            return true;
+        } else if (trimmedPayment.equals("Unpaid")) {
+            return false;
+        }
+        return false;
+    }
+
+    public static boolean parseProgress(String progress) throws ParseException {
+        requireNonNull(progress);
+        String trimmedProgress = progress.trim();
+
+        if (trimmedProgress.equals("Complete")) {
+            return true;
+        } else if (trimmedProgress.equals("Incomplete")) {
+            return false;
+        }
+        return false;
+    }
+
+    public static LocalDateTime parseDeadline(String deadline) throws ParseException {
+        requireNonNull(deadline);
+        String trimmedDeadline = deadline.trim();
+
+        try {
+            return LocalDateTime.parse(trimmedDeadline, DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Project.MESSAGE_CONSTRAINTS);
         }
     }
 
