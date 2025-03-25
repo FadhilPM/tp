@@ -1,12 +1,16 @@
 package seedu.address.logic.parser;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.SetStatusCommand;
 import seedu.address.logic.commands.SetStatusCommand.SetStatusDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Project;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROGRESS;
@@ -26,27 +30,33 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
     public SetStatusCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PHONE, PREFIX_PROJECT, PREFIX_PAYMENT, PREFIX_DEADLINE, PREFIX_PROGRESS);
+                ArgumentTokenizer.tokenize(args, PREFIX_PROJECT, PREFIX_PAYMENT, PREFIX_DEADLINE, PREFIX_PROGRESS);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_PROJECT, PREFIX_PAYMENT, PREFIX_DEADLINE, PREFIX_PROGRESS);
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetStatusCommand.MESSAGE_USAGE), pe);
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PROJECT, PREFIX_PAYMENT, PREFIX_DEADLINE, PREFIX_PROGRESS);
 
         SetStatusDescriptor setStatusDescriptor = new SetStatusDescriptor();
 
         if (argMultimap.getValue(PREFIX_PAYMENT).isPresent()) {
-            setStatusDescriptor.setPayment(argMultimap.getValue(PREFIX_PAYMENT).get());
+            setStatusDescriptor.setPayment(ParserUtil.parsePayment(argMultimap.getValue(PREFIX_PAYMENT).get()));
         }
         if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
-            setStatusDescriptor.setDeadline(argMultimap.getValue(PREFIX_DEADLINE).get());
+            setStatusDescriptor.setDeadline(ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get()));
         }
         if (argMultimap.getValue(PREFIX_PROGRESS).isPresent()) {
-            setStatusDescriptor.setProgress(argMultimap.getValue(PREFIX_PAYMENT).get());
+            setStatusDescriptor.setProgress(ParserUtil.parsePayment(argMultimap.getValue(PREFIX_PROGRESS).get()));
         }
-
         if (!setStatusDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new SetStatusCommand(setStatusDescriptor);
+        return new SetStatusCommand(index, setStatusDescriptor);
     }
-
 }

@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.tag.Project;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,15 +26,15 @@ public class SetStatusCommand extends Command {
 
     public static final String COMMAND_WORD = "setstatus";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the status of specified project."
-            + "Parameters: "
-            + PREFIX_PHONE + "PHONE "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the status of specified project of the "
+            + "person identified by the index number used in the displayed person list. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_PROJECT + "PROJECT "
             + "[" + PREFIX_PAYMENT + "PAYMENT] "
             + "[" + PREFIX_DEADLINE + "DEADLINE] "
             + "[" + PREFIX_PROGRESS + "PROGRESS] \n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PHONE + "98765432 "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PROJECT + "PROJECT "
             + PREFIX_PAYMENT + "paid "
             + PREFIX_DEADLINE + "07-09-2025 "
@@ -42,18 +44,27 @@ public class SetStatusCommand extends Command {
     public static final String MESSAGE_NUMBER_NOT_PROVIDED = "Phone number of person to edit must be provided.";
     public static final String MESSAGE_PROJECT_NOT_PROVIDED = "Name of project to edit must be provided.";
 
+    private final Index index;
     //private final Project toSet;
+    private final SetStatusDescriptor setStatusDescriptor;
 
     /**
      * Creates an SetStatusCommand to update the specified {@code Project}
      */
-    public SetStatusCommand(SetStatusDescriptor setStatusDescriptor) {
+    public SetStatusCommand(Index index, SetStatusDescriptor setStatusDescriptor) {
+        requireNonNull(index);
         requireNonNull(setStatusDescriptor);
+
+        this.index = index;
+        this.setStatusDescriptor = new SetStatusDescriptor(setStatusDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+
+
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
@@ -70,30 +81,39 @@ public class SetStatusCommand extends Command {
         public SetStatusDescriptor() {}
 
         /**
+         * Copy constructor.
+         */
+        public SetStatusDescriptor(SetStatusDescriptor toCopy) {
+            setProgress(toCopy.isComplete);
+            setPayment(toCopy.isPaid);
+            setDeadline(toCopy.deadline);
+        }
+
+        /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(isComplete, isPaid, deadline);
         }
 
-        public void setProgress(String progress) {
-            this.isComplete = (progress.equals("Complete"));
+        public void setProgress(boolean isComplete) {
+            this.isComplete = isComplete;
         }
 
         public Optional<Boolean> getProgress() {
             return Optional.of(isComplete);
         }
 
-        public void setPayment(String payment) {
-            this.isPaid = (payment.equals("Paid"));
+        public void setPayment(boolean isPaid) {
+            this.isPaid = isPaid;
         }
 
         public Optional<Boolean> getPayment() {
             return Optional.of(isPaid);
         }
 
-        public void setDeadline(String deadline) {
-            this.deadline = LocalDateTime.parse(deadline.trim(), DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
+        public void setDeadline(LocalDateTime deadline) {
+            this.deadline = deadline;
         }
 
         public Optional<LocalDateTime> getDeadline() {
