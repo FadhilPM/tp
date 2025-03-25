@@ -24,7 +24,6 @@
       <VBox styleClass="help-container">
         <StackPane fx:id="helpContentPane" VBox.vgrow="ALWAYS" styleClass="help-content">
         </StackPane>
-        
         <HBox alignment="CENTER" styleClass="help-footer">
           <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
             <HBox.margin>
