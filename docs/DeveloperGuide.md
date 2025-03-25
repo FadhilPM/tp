@@ -239,11 +239,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -482,6 +477,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2c.   ArtHive detects that the user input is invalid.
   * 2c1.  ArtHive returns an error message.
+
+    Use case resumes at step 2.
+
+**Use Case: Toggle Preferred Contact Method between Email and Phone**
+
+**MSS**
+
+* 1. Artist wants to switch a Contact’s preferred contact method.
+* 2. Artist enters the contact’s Phone Number.
+* 3. ArtHive toggles the preferred contact method, and shows a success message.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. ArtHive detects that the given Phone Number is non-existent.
+  * 2a1. ArtHive displays an error message stating that the Contact does not exist.
+
+    Use case resumes at step 2.
+
+* 2b. The current preferred contact method is Phone, but no Email is recorded for the Contact.
+  * 2b1. ArtHive displays an error message.
+    
+    Use case resumes at step 2.
+
+* 2c. ArtHive detects that the user input is invalid. 
+  * 2c1. ArtHive returns an error message.
 
     Use case resumes at step 2.
 

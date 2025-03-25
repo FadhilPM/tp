@@ -5,9 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,22 +21,45 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
-    private final PreferredContactMethod preferredContactMethod = new PreferredContactMethod();
+    private final Optional<Email> optionalEmail;
+    private final PreferredContactMethod preferredContactMethod;
 
     // Data fields
     private final Set<Tag> tags = new LinkedHashSet<>();
+    private final Set<Project> projects = new LinkedHashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
+    public Person(Name name, Phone phone, Optional<Email> optionalEmail, Set<Tag> tags) {
+        requireAllNonNull(name, phone, optionalEmail);
         this.name = name;
         this.phone = phone;
-        this.email = email;
-        this.tags.addAll(tags);
+        this.optionalEmail = optionalEmail;
+        tagOrProject(tags);
+        this.preferredContactMethod = new PreferredContactMethod("Phone");
     }
+
+    /**
+     * Constructs a {@code Person} with a specified preferred contact method.
+     *
+     * @param name The name of the person.
+     * @param phone The phone number of the person.
+     * @param optionalEmail The email address of the person.
+     * @param tags The set of tags associated with the person.
+     * @param preferredContactMethod The preferred method of contact (Phone or Email).
+     */
+    public Person(Name name, Phone phone, Optional<Email> optionalEmail, Set<Tag> tags, PreferredContactMethod
+            preferredContactMethod) {
+        requireAllNonNull(name, phone, optionalEmail, tags, preferredContactMethod);
+        this.name = name;
+        this.phone = phone;
+        this.optionalEmail = optionalEmail;
+        tagOrProject(tags);
+        this.preferredContactMethod = preferredContactMethod;
+
+    }
+
 
     public Name getName() {
         return name;
@@ -43,12 +68,26 @@ public class Person {
     public Phone getPhone() {
         return phone;
     }
-    public Email getEmail() {
-        return email;
+    public Optional<Email> getEmail() {
+        return optionalEmail;
     }
 
     public PreferredContactMethod getPreferredContactMethod() {
         return preferredContactMethod;
+    }
+
+    /**
+     * Separates tags from projects and place them in separate LinkedHashSets
+     * @param tags set of tags
+     */
+    public void tagOrProject(Set<Tag> tags) {
+        for (Tag t : tags) {
+            if (t instanceof Project) {
+                this.projects.add((Project) t);
+            } else {
+                this.tags.add(t);
+            }
+        }
     }
 
     /**
@@ -57,6 +96,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Set<Project> getProjects() {
+        return Collections.unmodifiableSet(projects);
     }
 
     /**
@@ -90,14 +133,14 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
+                && optionalEmail.equals(otherPerson.optionalEmail)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, tags);
+        return Objects.hash(name, phone, optionalEmail, tags);
     }
 
     @Override
@@ -105,7 +148,7 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
+                .add("email", optionalEmail)
                 .add("tags", tags)
                 .toString();
     }

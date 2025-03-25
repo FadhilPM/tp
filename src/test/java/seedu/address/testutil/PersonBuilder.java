@@ -1,12 +1,14 @@
 package seedu.address.testutil;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,8 +24,9 @@ public class PersonBuilder {
 
     private Name name;
     private Phone phone;
-    private Email email;
+    private Optional<Email> optionalEmail;
     private Set<Tag> tags;
+    private Set<Project> projects;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -31,8 +34,9 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
+        optionalEmail = Optional.of(new Email(DEFAULT_EMAIL));
         tags = new LinkedHashSet<>();
+        projects = new LinkedHashSet<>();
     }
 
     /**
@@ -41,8 +45,9 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
+        optionalEmail = personToCopy.getEmail();
         tags = new LinkedHashSet<>(personToCopy.getTags());
+        projects = new LinkedHashSet<>(personToCopy.getProjects());
     }
 
     /**
@@ -62,6 +67,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withProjects(String ... projects) {
+        this.projects = SampleDataUtil.getProjectSet(projects);
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -72,13 +85,13 @@ public class PersonBuilder {
     /**
      * Sets the {@code Email} of the {@code Person} that we are building with email.
      */
-    public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+    public PersonBuilder withEmail(String input) {
+        this.optionalEmail = Optional.ofNullable(input).map(x -> new Email(x));
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, tags);
+        return new Person(name, phone, optionalEmail, tags);
     }
 
 }

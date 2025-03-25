@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.Messages;
@@ -15,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,17 +26,17 @@ import seedu.address.model.tag.Tag;
 public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Tags a project to a contact. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add tags or projects to a contact. "
             + "Parameters: "
             + PREFIX_PHONE + "PHONE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_PROJECT + "PROJECT]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_TAG + "project-x";
 
-    public static final String MESSAGE_SUCCESS = "Tag added to Contact";
+    public static final String MESSAGE_SUCCESS = "Tags and/or projects added to %1$s";
     private final Phone phone;
-
     private final Set<Tag> tags;
 
     /**
@@ -49,18 +52,18 @@ public class TagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         Person personToTag = model.getFilteredPersonList()
                 .stream()
                 .filter(x -> x.getPhone().equals(phone))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PHONE_NUMBER));
 
-        Person taggedPerson = tagProjectToPerson(personToTag, this.tags);
+        Person taggedPerson = tagProjectToPerson(personToTag, tags);
 
         model.setPerson(personToTag, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, taggedPerson.getName()));
     }
 
     /**
@@ -74,14 +77,13 @@ public class TagCommand extends Command {
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
         Set<Tag> currentTags = personToEdit.getTags();
-        Email email = personToEdit.getEmail();
+        Set<Project> currentProjects = personToEdit.getProjects();
+        Optional<Email> email = personToEdit.getEmail();
 
         // Add the current and newly added tags to a single Linked Hash Set
-        Set<Tag> newTags = new LinkedHashSet<>();
-        newTags.addAll(currentTags);
+        Set<Tag> newTags = new LinkedHashSet<>(currentTags);
+        newTags.addAll(currentProjects);
         newTags.addAll(newlyAddedTags);
-
-
 
         // Return new Person
         return new Person(name, phone, email, newTags);

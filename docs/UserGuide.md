@@ -72,6 +72,11 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Listing all persons : `list`
+
+Shows a list of all persons in ArtHive.
+
+Format: `list`
 
 ### Adding a person: `add`
 
@@ -80,7 +85,7 @@ Adds a person to ArtHive.
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0).
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -88,9 +93,9 @@ The email address is optional. You can choose to leave it blank if you prefer no
 </div>
 
 * Name can only contain alphanumeric characters, spaces, a max of 40 characters and should not be blank.
-* Phone numbers should be exactly 8 digits long, beginning with either 6, 8 or 9
-* Email address must be in a valid format (i.e. username@domain.com), without spaces
-* Tag names can only contain alphanumeric with underscore and hyphens, between 1 and 20 characters long.
+* Phone numbers should be exactly 8 digits long, beginning with either 6, 8 or 9.
+* Email address must be in a valid format (i.e. username@domain.com), without spaces.
+* Tags can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 
 Examples:
 * `add n/Sarah Lee p/91233215`
@@ -99,28 +104,19 @@ Examples:
 
   ![result for 'find alex david'](images/addContactResult.jpg)
 
-### Listing all persons : `list`
-
-Shows a list of all persons in ArtHive.
-
-Format: `list`
-
 ### Editing a person : `edit`
 
 Edits an existing person in ArtHive.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
 ### Locating persons by name: `find`
 
@@ -130,46 +126,85 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* The search must only contain either alphabets or numerals, not both
-* Only the name or phone is searched.
+* The search must only contain alphabetic characters.
+* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Only full phone numbers will be matched e.g `888` will not match `88888888`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find 87438807` returns `Alex Yeoh`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Locating persons by number: `find`
 
-Deletes the specified person from ArtHive.
+Finds persons whose phone numbers contain any of the given keywords.
 
-Format: `delete INDEX`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The order of the keywords does not matter. e.g. `88888888 66666666` will match `66666666 88888888`
+* The search must only contain numerals.
+* Only the phone number is searched.
+* Only full phone numbers will be matched e.g `888` will not match `88888888`
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in ArtHive.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find 87438807` returns `Alex Yeoh`
+* `find 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu` <br>
+  ![result for 'find 87438807 99272758'](images/find87438807_99272758Result.png)
 
-### Clearing all entries : `clear`
+### Deleting a person : `delete`
 
-Clears all entries from ArtHive.
+Deletes the specified contact in the current displayed contact list from ArtHive.
 
-Format: `clear`
+**Format:** `delete INDEX` **or** `delete p/PHONE_NUMBER`
 
-### Exiting the program : `exit`
+* Deletes the contact at the specified `INDEX` **or** with the specified `PHONE_NUMBER`.
+* The `INDEX` refers to the index number shown in the displayed contact list and **must be a positive integer** (1, 2, 3, …).
+* The `PHONE_NUMBER` must be an exact 8-digit phone number and must belong to a contact in the current displayed contact list.
+* **One and only one** of `INDEX` or `p/PHONE_NUMBER` must be provided. 
 
-Exits the program.
+**Examples:**
+* `list` followed by `delete 2` deletes the 2nd contact in ArtHive.
+  ![result for 'delete 2'](images/DeleteByIndexResult.png)
+* `list` followed by `delete p/93210283` deletes the contact with phone number 93210283.
+  ![result for 'delete p/93210283'](images/DeleteByPhoneNumberResult.png)
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
-Format: `exit`
 
-### Saving the data
+### Adding a tag : `tag`
+
+Adds a tag to an existing person in ArtHive.
+
+Format: `tag p/PHONE t/TAG [t/TAG]…​`
+
+* Adds one or more tags to the person specified by `PHONE`.
+* Unlike editing tags, the existing tags of the person will not be removed i.e adding of tags is cumulative.
+* Tags can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+
+Examples:
+*  `tag p/81234567 t/project-x` Adds a tag `project-x` to the person who has the phone number `81234567`.
+*  `tag p/91234567 t/project-y t/Project_z` Adds the tags `project-y` and `Project_z` to the person who has the phone number `91234567`.
+   ![tag](images/tagAdded.png)
+
+
+### Removing a tag : `untag`
+
+Removes a tag from an existing person in ArtHive.
+
+Format: `untag p/PHONE t/TAG [t/TAG]…​`
+
+* Removes one or more tags from the person specified by `PHONE`, if it exists.
+* Tags can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* If a tag does not exist, the remove operation will still complete successfully without any errors or warnings. No additional checks, other than validity of tags, are performed before attempting the removal.
+
+Examples:
+*  Person A with phone number `81234567` has no tags. `untag p/81234567 t/project-x` makes no change and returns a successful untag message.
+  *  Person B with phone number `91234567` has two tags `project-y` and `Project_z`. `untag p/91234567 t/project-y` removes the tag `project-y` only.
+     ![untag](images/tagRemoved.png)
+
+
+### Saving the data : `save`
 
 Saves ArtHive data in the hard disk via passive (automatic) save or active (manual) save. Passive save activates after any command that changes the data. Active save activates when the user type in `save` as the command. This can be coupled with a [filename] parameter to change the name of the saved file. Upon changing the saved file name, all subsequent saves will be written to the new file.
 
@@ -186,7 +221,37 @@ Examples:
 
 ![save with parameter](images/save_with_param.png)
 
-### Editing the data file
+### Creating snapshot of data: `snapshot`
+
+Creates snapshot of the existing data in the `snapshots` directory with a datetime stamp ("dMMMuuuu_HHmmss").
+
+Format: `snapshot`
+
+Examples:
+
+* `snapshot` proceeds to create a snapshot of the existing save file with the name represented with the current datetime (e.g., 24Mar2025_172159.json).
+
+![snapshot](images/snapshot.png)
+
+### Switching preferred contact : `switchContact`
+
+Switch preferred contact. 
+
+Format: `switchContact p/PHONE`
+
+* If the current preferred contact method is email, it will switch to phone.
+* If the current preferred contact method is phone, it will switch to email, provided the contact contains an email.
+* phone is the default preferred contact method when a contact is created.
+* If the contact does not have an email, the preferred contact method will remain as phone.
+
+Examples:
+
+* `switchContact p/91234567` Switches the preferred contact method for the contact with phone number 91234567.
+
+![switch contact to email](images/switchContactJohn.png)
+
+
+#### Editing the data file
 
 ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[filename].json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -199,9 +264,17 @@ If your changes to the data file makes its format invalid, ArtHive will discard 
 Furthermore, certain edits can cause ArtHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Clearing all entries : `clear`
 
-_Details coming soon ..._
+Clears all entries from ArtHive.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -223,13 +296,16 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`
-**List** | `list`
 **Help** | `help`
+**List** | `list`
+**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend t/colleague`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Tag**  | `tag p/PHONE_NUMBER t/TAG [t/TAG]…​` <br> e.g., `tag p/91234567 t/project-x`
+**Untag** | `untag p/PHONE_NUMBER t/TAG [t/TAG]…​` <br> e.g., `untag p/91234567 t/project-x`
 **Save** | `save [FILENAME]` <br> e.g., `save newfile`
-**tag**  | `tag p/PHONE_NUMBER t/TAG` <br> e.g., `tag p/91234567 t/project-x`
-**untag**| `untag p/PHONE_NUMBER t/TAG`<br> e.g., `untag p/91234567 t/project-x`
+**Snapshot** | `snapshot`
+**Switch Preferred Contact Method** | `switchContact p/PHONE_NUMBER` <br> e.g, `switchContact p/91234567`
+**Clear** | `clear`
+**Exit** | `exit`
