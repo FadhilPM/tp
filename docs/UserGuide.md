@@ -300,18 +300,18 @@ Format: `exit`
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Help** | `help`
-**List** | `list`
-**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend t/colleague`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Tag**  | `tag p/PHONE_NUMBER t/TAG [t/TAG]…​` <br> e.g., `tag p/91234567 t/project-x`
-**Untag** | `untag p/PHONE_NUMBER t/TAG [t/TAG]…​` <br> e.g., `untag p/91234567 t/project-x`
-**Save** | `save [FILENAME]` <br> e.g., `save newfile`
-**Snapshot** | `snapshot`
-**Switch Preferred Contact Method** | `switchContact p/PHONE_NUMBER` <br> e.g, `switchContact p/91234567`
-**Clear** | `clear`
-**Exit** | `exit`
+Action | Format, Examples                                                                                                                  
+--------|-----------------------------------------------------------------------------------------------------------------------------------
+**Help** | `help`                                                                                                                            
+**List** | `list`                                                                                                                            
+**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend t/colleague` 
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                             
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`                                            
+**Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                               
+**Tag**   | `tag p/PHONE (t/TAG \| project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie project/project-x`      
+**UnTag**   | `untag p/PHONE (t/TAG \| project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie project/project-x`    
+**Save** | `save [FILENAME]` <br> e.g., `save newfile`                                                                                       
+**Snapshot** | `snapshot`                                                                                                                        
+**Switch Preferred Contact Method** | `switchContact p/PHONE_NUMBER` <br> e.g, `switchContact p/91234567`                                                               
+**Clear** | `clear`                                                                                                                           
+**Exit** | `exit`                                                                                                                            
