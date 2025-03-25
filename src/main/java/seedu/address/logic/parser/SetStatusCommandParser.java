@@ -7,6 +7,8 @@ import seedu.address.logic.commands.SetStatusCommand.SetStatusDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Project;
 
+import java.util.NoSuchElementException;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
@@ -33,16 +35,19 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_PROJECT, PREFIX_PAYMENT, PREFIX_DEADLINE, PREFIX_PROGRESS);
 
         Index index;
+        String projectName;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
+            projectName = argMultimap.getValue(PREFIX_PROJECT).get();
+        } catch (NoSuchElementException | ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetStatusCommand.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PROJECT, PREFIX_PAYMENT, PREFIX_DEADLINE, PREFIX_PROGRESS);
 
         SetStatusDescriptor setStatusDescriptor = new SetStatusDescriptor();
+
 
         if (argMultimap.getValue(PREFIX_PAYMENT).isPresent()) {
             setStatusDescriptor.setPayment(ParserUtil.parsePayment(argMultimap.getValue(PREFIX_PAYMENT).get()));
@@ -57,6 +62,6 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new SetStatusCommand(index, setStatusDescriptor);
+        return new SetStatusCommand(index, projectName, setStatusDescriptor);
     }
 }
