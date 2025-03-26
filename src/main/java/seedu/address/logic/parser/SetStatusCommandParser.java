@@ -5,16 +5,13 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.SetStatusCommand;
 import seedu.address.logic.commands.SetStatusCommand.SetStatusDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Project;
 
 import java.util.NoSuchElementException;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROGRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 
@@ -48,7 +45,6 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
 
         SetStatusDescriptor setStatusDescriptor = new SetStatusDescriptor();
 
-
         if (argMultimap.getValue(PREFIX_PAYMENT).isPresent()) {
             setStatusDescriptor.setPayment(ParserUtil.parsePayment(argMultimap.getValue(PREFIX_PAYMENT).get()));
         }
@@ -58,6 +54,7 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
         if (argMultimap.getValue(PREFIX_PROGRESS).isPresent()) {
             setStatusDescriptor.setProgress(ParserUtil.parsePayment(argMultimap.getValue(PREFIX_PROGRESS).get()));
         }
+
         if (!setStatusDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }

@@ -15,7 +15,7 @@ public class Project extends Tag {
     private LocalDateTime deadline;
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Deadline should be in the format dd-MM-yyyy HH:mm";
+            "Deadline should be in the format dd MMM yyyy HHmm";
 
     /**
      * Constructs a {@code Project}.
@@ -52,6 +52,14 @@ public class Project extends Tag {
         return this.isComplete ? "Complete" : "Incomplete";
     }
 
+    public void setProgress(boolean progress) {
+        this.isComplete = progress;
+    }
+
+    public boolean getProgress() {
+        return this.isComplete;
+    }
+
     /**
      * Set isComplete to true, denoting that the project is complete.
      */
@@ -73,19 +81,40 @@ public class Project extends Tag {
         return this.isPaid ? "Paid" : "Unpaid";
     }
 
+    public void setPayment(boolean payment) {
+        this.isPaid = payment;
+    }
+
+    public boolean getPayment() {
+        return this.isPaid;
+    }
+
     /**
      * Set the isPaid attribute to true, to reflect successful payment.
      */
-    public void pay() {
+    public void setPaid() {
         this.isPaid = true;
+    }
+
+    public void setUnpaid() {
+        this.isPaid = false;
+    }
+
+    /**
+     * Get the deadline as String
+     */
+    public String getDeadlineString() {
+        return this.deadline.format(DateTimeFormatter.ofPattern("d MMM uuuu HHmm"));
     }
 
     /**
      * Get the deadline as LocalDateTime
      */
-    public String getDeadline() {
-        return this.deadline.format(DateTimeFormatter.ofPattern("d MMM uuuu HHmm"));
+    public LocalDateTime getDeadline() {
+        return this.deadline;
     }
+
+
 
     /**
      * Set deadline attribute.
@@ -98,6 +127,6 @@ public class Project extends Tag {
     @Override
     public String toString() {
         return '[' + tagName + " | " + checkIfPaid() + " | " + checkIfComplete()
-                + " | Deadline: " + getDeadline() + ']';
+                + " | Deadline: " + getDeadlineString() + ']';
     }
 }

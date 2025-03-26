@@ -3,19 +3,20 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Project;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROGRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 
@@ -45,26 +46,42 @@ public class SetStatusCommand extends Command {
     public static final String MESSAGE_PROJECT_NOT_PROVIDED = "Name of project to edit must be provided.";
 
     private final Index index;
-    //private final Project toSet;
+    private final String projectName;
     private final SetStatusDescriptor setStatusDescriptor;
 
     /**
      * Creates an SetStatusCommand to update the specified {@code Project}
      */
-    public SetStatusCommand(Index index, SetStatusDescriptor setStatusDescriptor) {
+    public SetStatusCommand(Index index, String projectName, SetStatusDescriptor setStatusDescriptor) {
         requireNonNull(index);
+        requireNonNull(projectName);
         requireNonNull(setStatusDescriptor);
 
         this.index = index;
+        this.projectName = projectName;
         this.setStatusDescriptor = new SetStatusDescriptor(setStatusDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Project projectToEdit = personToEdit.getProjects()
+                .stream()
+                .filter(x -> x.getTagName().equals(projectName))
+                .findFirst()
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PROJECT)); //correct message?
 
 
-
+        projectToEdit.setPayment(setStatusDescriptor.getPayment().orElse(projectToEdit.getPayment()));
+        projectToEdit.setProgress(setStatusDescriptor.getProgress().orElse(projectToEdit.getProgress()));
+        projectToEdit.setDeadline(setStatusDescriptor.getDeadline().orElse(projectToEdit.getDeadline()));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
@@ -74,8 +91,8 @@ public class SetStatusCommand extends Command {
      * corresponding field value of the project.
      */
     public static class SetStatusDescriptor {
-        private boolean isComplete = false;
-        private boolean isPaid = false;
+        private Boolean isComplete;
+        private Boolean isPaid;
         private LocalDateTime deadline;
 
         public SetStatusDescriptor() {}
