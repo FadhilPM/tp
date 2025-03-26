@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -99,4 +100,20 @@ public class SwitchContactCommand extends Command {
 
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof SwitchContactCommand swcc) {
+            return this.phone.equals(swcc.phone);
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+            .add("phone", phone)
+            .toString();
+    }
 }
