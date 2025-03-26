@@ -17,7 +17,7 @@ Class Person
 Class Name
 Class Phone
 Class Email
-Class Preferred_Contact
+Class PreferredContactMethod
 Class Tag
 Class Project
 
@@ -41,7 +41,7 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Preferred_Contact
+Person *--> PreferredContactMethod
 Person *--> "*" Tag
 Person *--> "*" Project
 
@@ -50,8 +50,8 @@ UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Email
-Email -[hidden]right-> Preferred_Contact
-Preferred_Contact -[hidden]right-> Tag
+Email -[hidden]right-> PreferredContactMethod
+PreferredContactMethod -[hidden]right-> Tag
 Project -[hidden]right-> Project
 
 ModelManager --> "~* filtered" Person
