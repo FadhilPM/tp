@@ -42,8 +42,6 @@ public class SetStatusCommand extends Command {
             + PREFIX_PROGRESS + "complete ";
 
     public static final String MESSAGE_SUCCESS = "Project status is updated";
-    public static final String MESSAGE_NUMBER_NOT_PROVIDED = "Phone number of person to edit must be provided.";
-    public static final String MESSAGE_PROJECT_NOT_PROVIDED = "Name of project to edit must be provided.";
 
     private final Index index;
     private final String projectName;

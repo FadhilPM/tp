@@ -92,11 +92,11 @@ public class ParserUtil {
 
     public static boolean parsePayment(String payment) throws ParseException {
         requireNonNull(payment);
-        String trimmedPayment = payment.trim();
+        String formattedPayment = payment.trim().toLowerCase();
 
-        if (trimmedPayment.equals("Paid")) {
+        if (formattedPayment.equals("paid")) {
             return true;
-        } else if (trimmedPayment.equals("Unpaid")) {
+        } else if (formattedPayment.equals("unpaid")) {
             return false;
         }
         return false;
@@ -104,11 +104,11 @@ public class ParserUtil {
 
     public static boolean parseProgress(String progress) throws ParseException {
         requireNonNull(progress);
-        String trimmedProgress = progress.trim();
+        String formattedProgress = progress.trim().toLowerCase();
 
-        if (trimmedProgress.equals("Complete")) {
+        if (formattedProgress.equals("complete")) {
             return true;
-        } else if (trimmedProgress.equals("Incomplete")) {
+        } else if (formattedProgress.equals("incomplete")) {
             return false;
         }
         return false;

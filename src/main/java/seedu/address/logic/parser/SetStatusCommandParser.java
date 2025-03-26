@@ -52,7 +52,7 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
             setStatusDescriptor.setDeadline(ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get()));
         }
         if (argMultimap.getValue(PREFIX_PROGRESS).isPresent()) {
-            setStatusDescriptor.setProgress(ParserUtil.parsePayment(argMultimap.getValue(PREFIX_PROGRESS).get()));
+            setStatusDescriptor.setProgress(ParserUtil.parseProgress(argMultimap.getValue(PREFIX_PROGRESS).get()));
         }
 
         if (!setStatusDescriptor.isAnyFieldEdited()) {
