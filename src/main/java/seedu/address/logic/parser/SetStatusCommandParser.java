@@ -37,8 +37,8 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
             projectName = argMultimap.getValue(PREFIX_PROJECT).get();
-        } catch (NoSuchElementException | ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetStatusCommand.MESSAGE_USAGE), pe);
+        } catch (NoSuchElementException | ParseException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetStatusCommand.MESSAGE_USAGE), e);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PROJECT, PREFIX_PAYMENT, PREFIX_DEADLINE, PREFIX_PROGRESS);

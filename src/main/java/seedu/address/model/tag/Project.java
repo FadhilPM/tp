@@ -10,8 +10,12 @@ import java.time.format.DateTimeFormatter;
  */
 public class Project extends Tag {
 
-    public static final String MESSAGE_CONSTRAINTS =
+    public static final String MESSAGE_DEADLINE_CONSTRAINTS =
             "Deadline should be in the format dd MMM yyyy HHmm";
+    public static final String MESSAGE_PROGRESS_CONSTRAINTS =
+            "Progress should be either be 'Complete' or 'Incomplete'";
+    public static final String MESSAGE_PAYMENT_CONSTRAINTS =
+            "Payment should be either be 'Paid' or 'Unpaid'";
 
     private boolean isComplete;
     private boolean isPaid;
