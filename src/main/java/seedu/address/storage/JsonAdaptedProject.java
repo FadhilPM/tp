@@ -47,7 +47,7 @@ class JsonAdaptedProject {
         tagName = source.tagName;
         isComplete = source.checkIfComplete();
         isPaid = source.checkIfPaid();
-        deadline = source.getDeadline();
+        deadline = source.getDeadlineString();
 
     }
 

@@ -10,6 +10,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class Project extends Tag {
 
+    public static final String MESSAGE_DEADLINE_CONSTRAINTS =
+            "Deadline should be in the format 'dd MMM yyyy HHmm'  with the first letter of the month capitalised "
+                    + "(e.g 01 Apr 2026 2359)";
+    public static final String MESSAGE_PROGRESS_CONSTRAINTS =
+            "Progress should be either be 'Complete' or 'Incomplete'";
+    public static final String MESSAGE_PAYMENT_CONSTRAINTS =
+            "Payment should be either be 'Paid' or 'Unpaid'";
+
     private boolean isComplete;
     private boolean isPaid;
     private LocalDateTime deadline;
@@ -49,18 +57,12 @@ public class Project extends Tag {
         return this.isComplete ? "Complete" : "Incomplete";
     }
 
-    /**
-     * Set isComplete to true, denoting that the project is complete.
-     */
-    public void setComplete() {
-        this.isComplete = true;
+    public void setProgress(boolean progress) {
+        this.isComplete = progress;
     }
 
-    /**
-     * Set isComplete to false, denoting that the project is not complete.
-     */
-    public void setNotComplete() {
-        this.isComplete = false;
+    public boolean getProgress() {
+        return this.isComplete;
     }
 
     /**
@@ -70,19 +72,29 @@ public class Project extends Tag {
         return this.isPaid ? "Paid" : "Unpaid";
     }
 
+    public void setPayment(boolean payment) {
+        this.isPaid = payment;
+    }
+
+    public boolean getPayment() {
+        return this.isPaid;
+    }
+
     /**
-     * Set the isPaid attribute to true, to reflect successful payment.
+     * Get the deadline as String
      */
-    public void pay() {
-        this.isPaid = true;
+    public String getDeadlineString() {
+        return this.deadline.format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm"));
     }
 
     /**
      * Get the deadline as LocalDateTime
      */
-    public String getDeadline() {
-        return this.deadline.format(DateTimeFormatter.ofPattern("d MMM uuuu HHmm"));
+    public LocalDateTime getDeadline() {
+        return this.deadline;
     }
+
+
 
     /**
      * Set deadline attribute.
@@ -95,6 +107,6 @@ public class Project extends Tag {
     @Override
     public String toString() {
         return '[' + tagName + " | " + checkIfPaid() + " | " + checkIfComplete()
-                + " | Deadline: " + getDeadline() + ']';
+                + " | Deadline: " + getDeadlineString() + ']';
     }
 }

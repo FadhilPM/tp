@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -23,8 +26,9 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -85,9 +89,59 @@ public class ParserUtil {
         } else {
             return new Email(null);
         }
+    }
 
+    /**
+     * Parses a {@code String payment} into a boolean value.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code String payment} is invalid.
+     */
+    public static boolean parsePayment(String payment) throws ParseException {
+        requireNonNull(payment);
+        String formattedPayment = payment.trim().toLowerCase();
 
+        if (formattedPayment.equals("paid")) {
+            return true;
+        } else if (formattedPayment.equals("unpaid")) {
+            return false;
+        }
+        throw new ParseException(Project.MESSAGE_PAYMENT_CONSTRAINTS);
+    }
 
+    /**
+     * Parses a {@code String progress} into a boolean value.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code String progress} is invalid.
+     */
+    public static boolean parseProgress(String progress) throws ParseException {
+        requireNonNull(progress);
+        String formattedProgress = progress.trim().toLowerCase();
+
+        if (formattedProgress.equals("complete")) {
+            return true;
+        } else if (formattedProgress.equals("incomplete")) {
+            return false;
+        }
+        throw new ParseException(Project.MESSAGE_PROGRESS_CONSTRAINTS);
+    }
+
+    /**
+     * Parses a {@code String deadline} into a LocalDateTime object.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code String deadline} is invalid.
+     */
+    public static LocalDateTime parseDeadline(String deadline) throws ParseException {
+        requireNonNull(deadline);
+        String trimmedDeadline = deadline.trim();
+
+        try {
+            return LocalDateTime.parse(trimmedDeadline, DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Project.MESSAGE_DEADLINE_CONSTRAINTS);
+        }
     }
 
     /**

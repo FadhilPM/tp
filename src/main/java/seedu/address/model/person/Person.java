@@ -91,6 +91,20 @@ public class Person {
     }
 
     /**
+     * Replaces a project in a person.
+     * @param project to replace with.
+     */
+    public Person replaceProject(Project project) {
+        for (Project p : this.projects) {
+            if (p.getTagName().equals(project.getTagName())) {
+                this.projects.remove(p);
+                this.projects.add(project);
+            }
+        }
+        return this;
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
