@@ -11,6 +11,7 @@ package "Parser Classes" as ParserClasses{
 Class XYZCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
+Class "<<enum>>\nSavingCommandTypes" as SCT
 
 
 Class "<<interface>>\nLogic" as Logic
@@ -40,6 +41,10 @@ Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
 note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+
+CommandResult .down.> AddressBookParser
+CommandResult .up.> SCT
+
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
