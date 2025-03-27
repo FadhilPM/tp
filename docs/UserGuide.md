@@ -52,6 +52,9 @@ ArtHive is a **desktop application for artists to manage clients and commissions
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* Items in round brackets with a vertical line `|` indicate a required choice between options.<br>
+  e.g. `(t/TAG | project/PROJECT)` means the user must provide either `t/TAG` or `project/PROJECT`.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -82,7 +85,7 @@ Format: `list`
 
 Adds a person to ArtHive.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​ [project/PROJECT]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0).
@@ -95,12 +98,12 @@ The email address is optional. You can choose to leave it blank if you prefer no
 * Name can only contain alphanumeric characters, spaces, a max of 40 characters and should not be blank.
 * Phone numbers should be exactly 8 digits long, beginning with either 6, 8 or 9.
 * Email address must be in a valid format (i.e. username@domain.com), without spaces.
-* Tags can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* Tags/Projects can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 
 Examples:
 * `add n/Sarah Lee p/91233215`
 * `add n/John Doe p/98765432 e/johnd@example.com`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/92345678`
+* `add n/Betsy Crowe e/betsycrowe@example.com p/92345678 t/friend project/betsy_project`
 
   ![result for 'find alex david'](images/addContactResult.jpg)
 
@@ -108,18 +111,15 @@ Examples:
 
 Edits an existing person in ArtHive.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
 ### Locating persons by name: `find`
 
@@ -175,36 +175,39 @@ Deletes the specified contact in the current displayed contact list from ArtHive
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 
-### Adding a tag : `tag`
+### Tagging a Contact with a Tag/Project : `tag`
 
-Adds a tag to an existing person in ArtHive.
+Assigns a Tag and/or a Project to an existing person in ArtHive.
 
-Format: `tag p/PHONE t/TAG [t/TAG]…​`
+Format: `tag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`
 
-* Adds one or more tags to the person specified by `PHONE`.
-* Unlike editing tags, the existing tags of the person will not be removed i.e adding of tags is cumulative.
-* Tags can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* Adds one or more Tags/Projects to the person specified by `PHONE`.
+* In each use of this command, there must be at least one Tag or Project specified.
+* The existing Tags/Projects of the person will not be removed i.e adding of tags is cumulative.
+* Tags/Projects can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* Projects will have a default values of "Incomplete", "Unpaid", and a deadline set 1 day after creation. Modifications can be made using the `setstatus` command.
 
 Examples:
-*  `tag p/81234567 t/project-x` Adds a tag `project-x` to the person who has the phone number `81234567`.
-*  `tag p/91234567 t/project-y t/Project_z` Adds the tags `project-y` and `Project_z` to the person who has the phone number `91234567`.
+*  `tag p/81234567 t/friend` Adds a Tag `friend` to the person who has the phone number `81234567`.
+*  `tag p/91234567 t/friend project/friend-project` Adds the Tag`friend` and Project `friend-project` to the person who has the phone number `91234567`.
    ![tag](images/tagAdded.png)
 
 
-### Removing a tag : `untag`
+### Untagging a Contact with a Tag/Project : `untag`
 
-Removes a tag from an existing person in ArtHive.
+Deletes a Tag and/or a Project from an existing person in ArtHive.
 
-Format: `untag p/PHONE t/TAG [t/TAG]…​`
+Format: `untag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`
 
-* Removes one or more tags from the person specified by `PHONE`, if it exists.
-* Tags can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
-* If a tag does not exist, the remove operation will still complete successfully without any errors or warnings. No additional checks, other than validity of tags, are performed before attempting the removal.
+* Removes one or more Tags/Projects from the person specified by `PHONE`, if it exists.
+* In each use of this command, there must be at least one Tag or Project specified.
+* Tags/Projects can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* Untagging a Tag/Project from a person deletes the Tag/Project forever.
 
 Examples:
-*  Person A with phone number `81234567` has no tags. `untag p/81234567 t/project-x` makes no change and returns a successful untag message.
-  *  Person B with phone number `91234567` has two tags `project-y` and `Project_z`. `untag p/91234567 t/project-y` removes the tag `project-y` only.
-     ![untag](images/tagRemoved.png)
+*  Person A with phone number `81234567` has no tags. `untag p/81234567 t/friend` returns an error message as the Tag does not exist.
+*  Person B with phone number `91234567` has 1 Tag `friend` and 1 Project `friend-project`. `untag p/91234567 project/friend-project` removes the Project `friend-project` only.
+   ![untag](images/tagRemoved.png)
 
 
 ### Saving the data : `save`
@@ -223,6 +226,18 @@ Examples:
 * `save newFile` proceeds to save the data to `newFile.json`, deletes old saved file, and updates `preferences.json`.
 
 ![save with parameter](images/save_with_param.png)
+
+### Creating snapshot of data: `snapshot`
+
+Creates snapshot of the existing data in the `snapshots` directory with a datetime stamp ("dMMMuuuu_HHmmss").
+
+Format: `snapshot`
+
+Examples:
+
+* `snapshot` proceeds to create a snapshot of the existing save file with the name represented with the current datetime (e.g., 24Mar2025_172159.json).
+
+![snapshot](images/snapshot.png)
 
 ### Switching preferred contact : `switchContact`
 
@@ -285,17 +300,18 @@ Format: `exit`
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Help** | `help`
-**List** | `list`
-**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend t/colleague`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Tag**  | `tag p/PHONE_NUMBER t/TAG [t/TAG]…​` <br> e.g., `tag p/91234567 t/project-x`
-**Untag**| `untag p/PHONE_NUMBER t/TAG [t/TAG]…​` <br> e.g., `untag p/91234567 t/project-x`
-**Save** | `save [FILENAME]` <br> e.g., `save newfile`
-**Switch Preferred Contact Method** | `switchContact p/PHONE_NUMBER` <br> e.g, `switchContact p/91234567`
-**Clear** | `clear`
-**Exit** | `exit`
+Action | Format, Examples                                                                                                                  
+--------|-----------------------------------------------------------------------------------------------------------------------------------
+**Help** | `help`                                                                                                                            
+**List** | `list`                                                                                                                            
+**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend t/colleague` 
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                             
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`                                            
+**Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                               
+**Tag**   | `tag p/PHONE (t/TAG \| project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie project/project-x`      
+**UnTag**   | `untag p/PHONE (t/TAG \| project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie project/project-x`    
+**Save** | `save [FILENAME]` <br> e.g., `save newfile`                                                                                       
+**Snapshot** | `snapshot`                                                                                                                        
+**Switch Preferred Contact Method** | `switchContact p/PHONE_NUMBER` <br> e.g, `switchContact p/91234567`                                                               
+**Clear** | `clear`                                                                                                                           
+**Exit** | `exit`                                                                                                                            
