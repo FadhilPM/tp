@@ -11,8 +11,8 @@ import java.time.format.DateTimeFormatter;
 public class Project extends Tag {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
-            "Deadline should be in the format 'dd MMM yyyy HHmm'  with the first letter of the month capitalised " +
-                    "(e.g 01 Apr 2026 2359)";
+            "Deadline should be in the format 'dd MMM yyyy HHmm'  with the first letter of the month capitalised "
+                    + "(e.g 01 Apr 2026 2359)";
     public static final String MESSAGE_PROGRESS_CONSTRAINTS =
             "Progress should be either be 'Complete' or 'Incomplete'";
     public static final String MESSAGE_PAYMENT_CONSTRAINTS =

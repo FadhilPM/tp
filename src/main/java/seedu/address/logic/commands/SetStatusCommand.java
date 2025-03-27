@@ -42,7 +42,7 @@ public class SetStatusCommand extends Command {
             + PREFIX_DEADLINE + "07-Mar-2025 "
             + PREFIX_PROGRESS + "complete ";
 
-    public static final String MESSAGE_SUCCESS = "Project status is updated";
+    public static final String MESSAGE_SUCCESS = "Project status is updated: %1$s";
 
     private final Index index;
     private final String projectName;
@@ -87,7 +87,7 @@ public class SetStatusCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, projectToEdit));
     }
 
     /**
