@@ -10,12 +10,12 @@ import java.time.format.DateTimeFormatter;
  */
 public class Project extends Tag {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Deadline should be in the format dd MMM yyyy HHmm";
+
     private boolean isComplete;
     private boolean isPaid;
     private LocalDateTime deadline;
-
-    public static final String MESSAGE_CONSTRAINTS =
-            "Deadline should be in the format dd MMM yyyy HHmm";
 
     /**
      * Constructs a {@code Project}.
