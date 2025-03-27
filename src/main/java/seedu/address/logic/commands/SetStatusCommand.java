@@ -39,7 +39,7 @@ public class SetStatusCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PROJECT + "PROJECT "
             + PREFIX_PAYMENT + "paid "
-            + PREFIX_DEADLINE + "07-Mar-2025 "
+            + PREFIX_DEADLINE + "07 Mar 2025 1800"
             + PREFIX_PROGRESS + "complete ";
 
     public static final String MESSAGE_SUCCESS = "Project status is updated: %1$s";
