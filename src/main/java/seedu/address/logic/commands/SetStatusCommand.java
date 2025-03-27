@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROGRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -80,7 +81,7 @@ public class SetStatusCommand extends Command {
         projectToEdit.setProgress(setStatusDescriptor.getProgress().orElse(projectToEdit.getProgress()));
         projectToEdit.setDeadline(setStatusDescriptor.getDeadline().orElse(projectToEdit.getDeadline()));
 
-        //model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
