@@ -34,6 +34,7 @@ public class Project extends Tag {
         this.isComplete = (isComplete.equals("Complete"));
         this.isPaid = (isPaid.equals("Paid"));
         this.deadline = LocalDateTime.parse(deadline.trim(), DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
+        System.out.println(this.deadline);
     }
 
     /**
@@ -65,20 +66,6 @@ public class Project extends Tag {
     }
 
     /**
-     * Set isComplete to true, denoting that the project is complete.
-     */
-    public void setComplete() {
-        this.isComplete = true;
-    }
-
-    /**
-     * Set isComplete to false, denoting that the project is not complete.
-     */
-    public void setNotComplete() {
-        this.isComplete = false;
-    }
-
-    /**
      * Returns Paid if project has isPaid attribute of true, returns Unpaid otherwise.
      */
     public String checkIfPaid() {
@@ -94,21 +81,10 @@ public class Project extends Tag {
     }
 
     /**
-     * Set the isPaid attribute to true, to reflect successful payment.
-     */
-    public void setPaid() {
-        this.isPaid = true;
-    }
-
-    public void setUnpaid() {
-        this.isPaid = false;
-    }
-
-    /**
      * Get the deadline as String
      */
     public String getDeadlineString() {
-        return this.deadline.format(DateTimeFormatter.ofPattern("d MMM uuuu HHmm"));
+        return this.deadline.format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm"));
     }
 
     /**

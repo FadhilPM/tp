@@ -81,6 +81,11 @@ public class SetStatusCommand extends Command {
         projectToEdit.setProgress(setStatusDescriptor.getProgress().orElse(projectToEdit.getProgress()));
         projectToEdit.setDeadline(setStatusDescriptor.getDeadline().orElse(projectToEdit.getDeadline()));
 
+        // Create new person with updated project, to replace old person with old project
+        // This will ensure a new objectID and allow JavaFX to detect the change and update UI
+        Person editedPerson = personToEdit.replaceProject(projectToEdit);
+        model.setPerson(personToEdit, editedPerson);
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
@@ -94,7 +99,8 @@ public class SetStatusCommand extends Command {
         private Boolean isPaid;
         private LocalDateTime deadline;
 
-        public SetStatusDescriptor() {}
+        public SetStatusDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -112,7 +118,7 @@ public class SetStatusCommand extends Command {
             return CollectionUtil.isAnyNonNull(isComplete, isPaid, deadline);
         }
 
-        public void setProgress(boolean isComplete) {
+        public void setProgress(Boolean isComplete) {
             this.isComplete = isComplete;
         }
 
@@ -120,7 +126,7 @@ public class SetStatusCommand extends Command {
             return Optional.ofNullable(isComplete);
         }
 
-        public void setPayment(boolean isPaid) {
+        public void setPayment(Boolean isPaid) {
             this.isPaid = isPaid;
         }
 
@@ -135,7 +141,6 @@ public class SetStatusCommand extends Command {
         public Optional<LocalDateTime> getDeadline() {
             return Optional.ofNullable(deadline);
         }
-
 
         @Override
         public boolean equals(Object other) {
