@@ -34,7 +34,7 @@ public class Project extends Tag {
         this.isComplete = (isComplete.equals("Complete"));
         this.isPaid = (isPaid.equals("Paid"));
         this.deadline = LocalDateTime.parse(deadline.trim(), DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
-        System.out.println(this.deadline);
+        logger.log(Level.INFO, "Project deadline set to: " + this.deadline);
     }
 
     /**
