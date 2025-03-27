@@ -1,5 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROGRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -8,17 +19,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Project;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PROGRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 
 /**
  * Adds a person to the address book.
@@ -74,13 +74,13 @@ public class SetStatusCommand extends Command {
                 .stream()
                 .filter(x -> x.getTagName().equals(projectName))
                 .findFirst()
-                .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PROJECT)); //correct message?
-
+                .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PROJECT));
 
         projectToEdit.setPayment(setStatusDescriptor.getPayment().orElse(projectToEdit.getPayment()));
         projectToEdit.setProgress(setStatusDescriptor.getProgress().orElse(projectToEdit.getProgress()));
         projectToEdit.setDeadline(setStatusDescriptor.getDeadline().orElse(projectToEdit.getDeadline()));
 
+        //model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
@@ -116,7 +116,7 @@ public class SetStatusCommand extends Command {
         }
 
         public Optional<Boolean> getProgress() {
-            return Optional.of(isComplete);
+            return Optional.ofNullable(isComplete);
         }
 
         public void setPayment(boolean isPaid) {
@@ -124,7 +124,7 @@ public class SetStatusCommand extends Command {
         }
 
         public Optional<Boolean> getPayment() {
-            return Optional.of(isPaid);
+            return Optional.ofNullable(isPaid);
         }
 
         public void setDeadline(LocalDateTime deadline) {
