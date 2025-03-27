@@ -206,7 +206,7 @@ Format: `untag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]
 
 Examples:
 *  Person A with phone number `81234567` has no tags. `untag p/81234567 t/friend` returns an error message as the Tag does not exist.
-*  Person B with phone number `91234567` has 1 Tag `bestie` and 1 Project `project-b`. `untag p/91234567 project/project-b` removes the Project `project-b` only.
+*  Person B with phone number `91234567` has 1 Tag `friend` and 1 Project `friend-project`. `untag p/91234567 project/friend-project` removes the Project `friend-project` only.
    ![untag](images/tagRemoved.png)
 
 
