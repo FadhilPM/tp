@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -51,16 +50,6 @@ public class SnapshotCommand extends Command {
         requireNonNull(model);
 
         try {
-            Path snapshotDir = Paths.get(SNAPSHOTS_STRING);
-
-            if (!Files.exists(snapshotDir)) {
-                Files.createDirectories(snapshotDir);
-            }
-
-            if (!Files.isWritable(snapshotDir)) {
-                throw new CommandException("Can't write to snapshots folder. Check folder permissions.");
-            }
-
             String custom = currentDateTime.format(DateTimeFormatter.ofPattern("dMMMuuuu_HHmmss"));
             Path pathToBeSaved = Paths.get(SNAPSHOTS_STRING, custom + ".json");
             storage.makeSnapshot(model.getAddressBook(), pathToBeSaved);
@@ -71,18 +60,5 @@ public class SnapshotCommand extends Command {
         } catch (IOException e) {
             throw new CommandException(String.format(LogicManager.FILE_OPS_ERROR_FORMAT, e.getMessage()), e);
         }
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (object.hashCode() == this.hashCode()) {
-            return true;
-        }
-
-        if (!(object instanceof SnapshotCommand snapshotCommand)) {
-            return false;
-        }
-
-        return currentDateTime.equals(snapshotCommand.currentDateTime);
     }
 }
