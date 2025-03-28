@@ -60,7 +60,6 @@ public class Person {
 
     }
 
-
     public Name getName() {
         return name;
     }
@@ -79,11 +78,10 @@ public class Person {
     /**
      * Creates and returns a new {@code Person} with updated details.
      */
-    public Person createEditedPerson(Optional<Name> optName, Optional<Phone> optPhone, Optional<Email> optEmail) {
-
-        Name updatedName = optName.orElse(this.name);
-        Phone updatedPhone = optPhone.orElse(this.phone);
-        Optional<Email> updatedEmail = optEmail.or(() -> this.optionalEmail);
+    public Person createEditedPerson(EditPersonDescriptor epd) {
+        Name updatedName = epd.name().orElse(this.name);
+        Phone updatedPhone = epd.phone().orElse(this.phone);
+        Optional<Email> updatedEmail = epd.email().or(() -> this.optionalEmail);
 
         Set<Project> currentProjects = this.projects;
         Set<Tag> updatedTags = new LinkedHashSet<>(this.tags);
