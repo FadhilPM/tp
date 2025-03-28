@@ -77,6 +77,22 @@ public class Person {
     }
 
     /**
+     * Creates and returns a new {@code Person} with updated details.
+     */
+    public Person createEditedPerson(Optional<Name> optName, Optional<Phone> optPhone, Optional<Email> optEmail) {
+
+        Name updatedName = optName.orElse(this.name);
+        Phone updatedPhone = optPhone.orElse(this.phone);
+        Optional<Email> updatedEmail = optEmail.or(() -> this.optionalEmail);
+
+        Set<Project> currentProjects = this.projects;
+        Set<Tag> updatedTags = new LinkedHashSet<>(this.tags);
+        updatedTags.addAll(currentProjects);
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags);
+    }
+
+    /**
      * Separates tags from projects and place them in separate LinkedHashSets
      * @param tags set of tags
      */
