@@ -134,7 +134,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
 
