@@ -1,12 +1,21 @@
 package seedu.address.model.tag;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TagTest {
+
+    private Tag valid_tag;
+    @BeforeEach
+    public void setUp(){
+        valid_tag = new Tag("valid_tag");
+    }
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -20,7 +29,13 @@ public class TagTest {
     }
 
     @Test
-    public void isValidTagName() {
+    public void test_getTagName() {
+        assertEquals(valid_tag.getTagName(), "valid_tag");
+        assertNotEquals(valid_tag.getTagName(), "valid-tag");
+    }
+
+    @Test
+    public void test_isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
 
@@ -38,11 +53,33 @@ public class TagTest {
     }
 
     @Test
-    public void equals() {
-        Tag tag = new Tag("Valid-Tag");
+    public void test_equals() {
+
+        // Same object -> true
+        assertTrue(valid_tag.equals(valid_tag));
+
+        // Null -> false
+        assertFalse(valid_tag.equals(null));
 
         // case insensitive
-        assertTrue(tag.equals(new Tag("valid-tag")));
+        assertTrue(valid_tag.equals(new Tag("Valid_tag")));
+
+        assertTrue(valid_tag.equals(new Tag("valid_tag")));
+
+        // hyphen instead of underscore
+        assertFalse(valid_tag.equals(new Tag("valid-tag")));
+    }
+
+    @Test
+    public void test_hashCode() {
+        int hashCode = valid_tag.hashCode();
+        assertEquals(hashCode, valid_tag.hashCode());
+    }
+
+    @Test
+    public void test_toString() {
+        assertEquals(valid_tag.toString(), "[valid_tag]");
+        assertNotEquals(valid_tag.toString(), "[valid-tag]");
     }
 
 
