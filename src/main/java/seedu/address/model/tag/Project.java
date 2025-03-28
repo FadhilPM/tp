@@ -109,8 +109,7 @@ public class Project extends Tag {
      * Get the deadline as String.
      */
     public String getDeadlineString() {
-        String deadline = this.deadline.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
-        return String.format(deadline + "H");
+        return this.deadline.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
     }
 
     /**
@@ -133,7 +132,7 @@ public class Project extends Tag {
      */
     @Override
     public String toString() {
-        return '[' + getTagName() + " | Deadline: " + getDeadlineString() + " | " + getProgressString()
+        return '[' + getTagName() + " | Deadline: " + getDeadlineString() + "H | " + getProgressString()
                 + " | " + getPaymentString() + ']';
     }
 }
