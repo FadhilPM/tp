@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -67,7 +66,8 @@ public class UnTagCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToTag, unTaggedPerson);
         CommandException thrown = assertThrows(CommandException.class, () -> untagComd.execute(model));
-        assertEquals(String.format(Messages.MESSAGE_ABSENT_TAG_PROJECT, check, personToTag.getName(), personToTag.getPhone()), thrown.getMessage());
+        assertEquals(String.format(Messages.MESSAGE_ABSENT_TAG_PROJECT, check, personToTag.getName(),
+                personToTag.getPhone()), thrown.getMessage());
     }
 
     @Test

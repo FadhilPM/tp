@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -26,15 +27,21 @@ public class TagCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    private Tag sampleTag;
+    private Set<Tag> tagsToAdd;
+    @BeforeEach
+    public void setUp() {
+        sampleTag = new Tag("T_3st-x");
+        tagsToAdd = new LinkedHashSet<>();
+        tagsToAdd.add(sampleTag);
+    }
+
     @Test
     public void execute_tag_success() {
         Person personToTag = getTypicalPersons().get(1);
         Phone phone = personToTag.getPhone();
-        Tag newTag = new Tag("T_3st-x");
-        Set<Tag> tags = new LinkedHashSet<>();
-        tags.add(newTag);
-        TagCommand tagComd = new TagCommand(phone, tags);
-        Person taggedPerson = tagProjectToPerson(personToTag, tags);
+        TagCommand tagComd = new TagCommand(phone, tagsToAdd);
+        Person taggedPerson = tagProjectToPerson(personToTag, tagsToAdd);
 
         String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS, taggedPerson.getName());
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -46,12 +53,9 @@ public class TagCommandTest {
 
     @Test
     public void equals() {
-        Person p = new PersonBuilder().withTags("test_Equal5").build();
+        Person p = new PersonBuilder().withTags("T_3st-x").build();
         Phone phone = p.getPhone();
-        Tag newTag = new Tag("test_Equal5");
-        Set<Tag> tags = new LinkedHashSet<>();
-        tags.add(newTag);
-        TagCommand addTagCommand = new TagCommand(phone, tags);
+        TagCommand addTagCommand = new TagCommand(phone, tagsToAdd);
 
         // same object -> returns true
         assertTrue(addTagCommand.equals(addTagCommand));

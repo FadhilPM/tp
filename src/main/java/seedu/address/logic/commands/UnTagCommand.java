@@ -113,4 +113,19 @@ public class UnTagCommand extends Command {
         }
         return "";
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UnTagCommand)) {
+            return false;
+        }
+
+        UnTagCommand otherCommand = (UnTagCommand) other;
+        return phone.equals(otherCommand.phone)
+                && tags.equals(otherCommand.tags);
+    }
 }
