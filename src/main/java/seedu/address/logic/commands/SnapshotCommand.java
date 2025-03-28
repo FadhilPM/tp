@@ -49,11 +49,11 @@ public class SnapshotCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        try {
-            String custom = currentDateTime.format(DateTimeFormatter.ofPattern("dMMMuuuu_HHmmss"));
-            Path pathToBeSaved = Paths.get(SNAPSHOTS_STRING, custom + ".json");
-            storage.makeSnapshot(model.getAddressBook(), pathToBeSaved);
+        String custom = currentDateTime.format(DateTimeFormatter.ofPattern("dMMMuuuu_HHmmss"));
+        Path pathToBeSaved = Paths.get(SNAPSHOTS_STRING, custom + ".json");
 
+        try {
+            storage.makeSnapshot(model.getAddressBook(), pathToBeSaved);
             return new CommandResult(String.format(SUCCESS, pathToBeSaved), false, false, false);
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
