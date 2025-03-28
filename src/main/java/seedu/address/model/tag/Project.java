@@ -36,7 +36,7 @@ public class Project extends Tag {
         super(tagName);
         this.isComplete = (isComplete.equalsIgnoreCase("complete"));
         this.isPaid = (isPaid.equalsIgnoreCase("paid"));
-        this.deadline = dateTimeStringtoLDT(deadline);
+        this.deadline = dateTimeStringToLDT(deadline);
     }
 
     /**
@@ -55,8 +55,8 @@ public class Project extends Tag {
      * Converts String to LocalDateTime based on DATETIME_FORMAT
      * @param dateTime String representation of datetime
      */
-    public static LocalDateTime dateTimeStringtoLDT(String dateTime) {
-        return LocalDateTime.parse(dateTime.trim(), DateTimeFormatter.ofPattern(DATETIME_FORMAT);
+    public static LocalDateTime dateTimeStringToLDT(String dateTime) {
+        return LocalDateTime.parse(dateTime.trim(), DateTimeFormatter.ofPattern(DATETIME_FORMAT));
     }
 
     /**
