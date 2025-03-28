@@ -7,17 +7,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROGRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Project;
+import seedu.address.model.tag.Project.SetStatusDescriptor;
 
 /**
  * Adds a person to the address book.
@@ -75,56 +73,14 @@ public class SetStatusCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PROJECT));
 
-        projectToEdit.setPayment(setStatusDescriptor.getPayment().orElse(projectToEdit.getPayment()));
-        projectToEdit.setProgress(setStatusDescriptor.getProgress().orElse(projectToEdit.getProgress()));
-        projectToEdit.setDeadline(setStatusDescriptor.getDeadline().orElse(projectToEdit.getDeadline()));
+        Project editedProject = projectToEdit.createEditedProject(setStatusDescriptor);
 
         // Create new person with updated project, to replace old person with old project
         // This will ensure a new objectID and allow JavaFX to detect the change and update UI
-        Person editedPerson = personToEdit.replaceProject(projectToEdit);
+        Person editedPerson = personToEdit.replaceProject(editedProject);
         model.setPerson(personToEdit, editedPerson);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, projectToEdit));
-    }
-
-    /**
-     * Stores the details to set the project with. Each non-empty field value will replace the
-     * corresponding field value of the project.
-     */
-    public record SetStatusDescriptor(Optional<Boolean> isComplete,
-                                      Optional<Boolean> isPaid,
-                                      Optional<LocalDateTime> deadline) {
-
-        // No-argument constructor creating an "empty" descriptor.
-        public SetStatusDescriptor() {
-            this(Optional.empty(), Optional.empty(), Optional.empty());
-        }
-
-        // Copy constructor.
-        public SetStatusDescriptor(SetStatusDescriptor toCopy) {
-            this(toCopy.isComplete, toCopy.isPaid, toCopy.deadline);
-        }
-
-        public Optional<Boolean> getProgress() {
-            return isComplete;
-        }
-
-        public Optional<Boolean> getPayment() {
-            return isPaid;
-        }
-
-        public Optional<LocalDateTime> getDeadline() {
-            return deadline;
-        }
-
-        @Override
-        public String toString() {
-            return new ToStringBuilder(this)
-                    .add("progress", isComplete)
-                    .add("payment", isPaid)
-                    .add("deadline", deadline)
-                    .toString();
-        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedProject));
     }
 }

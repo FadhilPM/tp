@@ -2,6 +2,9 @@ package seedu.address.model.tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Project in the address book.
@@ -22,6 +25,13 @@ public class Project extends Tag {
     private boolean isPaid;
     private LocalDateTime deadline;
 
+    private Project(String tagName, boolean isComplete, boolean isPaid, LocalDateTime deadline) {
+        super(tagName);
+        this.isComplete = isComplete;
+        this.isPaid = isPaid;
+        this.deadline = deadline;
+    }
+
     /**
      * Constructs a {@code Project}.
      *
@@ -31,10 +41,10 @@ public class Project extends Tag {
      * @param deadline deadline in dd MMM yyyy HHmm format.
      */
     public Project(String tagName, String isComplete, String isPaid, String deadline) {
-        super(tagName);
-        this.isComplete = (isComplete.equals("Complete"));
-        this.isPaid = (isPaid.equals("Paid"));
-        this.deadline = LocalDateTime.parse(deadline.trim(), DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
+        this(tagName,
+                isComplete.equals("Complete"),
+                isPaid.equals("Paid"),
+                LocalDateTime.parse(deadline.trim(), DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")));
     }
 
     /**
@@ -43,12 +53,19 @@ public class Project extends Tag {
      * @param tagName A valid tag name.
      */
     public Project(String tagName) {
-        super(tagName);
-        this.isComplete = false;
-        this.isPaid = false;
-        this.deadline = LocalDateTime.now().plusDays(1); // Set the deadline to 1 day from creation.
+        // Set the deadline to 1 day from creation.
+        this(tagName, false, false, LocalDateTime.now().plusDays(1));
     }
 
+    /**
+     * Creates and returns a new {@code Project} with updated details.
+     */
+    public Project createEditedProject(SetStatusDescriptor setStatusDescriptor) {
+        boolean newIsPaid = setStatusDescriptor.isPaid().orElse(this.isPaid);
+        boolean newIsComplete = setStatusDescriptor.isComplete().orElse(this.isComplete);
+        LocalDateTime newDeadline = setStatusDescriptor.deadline().orElse(this.deadline);
+        return new Project(tagName, newIsPaid, newIsComplete, newDeadline);
+    }
 
     /**
      * Get the completion status of the project, complete or incomplete.
@@ -102,6 +119,34 @@ public class Project extends Tag {
      */
     public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
+    }
+
+    /**
+     * Stores the details to set the project with. Each non-empty field value will replace the
+     * corresponding field value of the project.
+     */
+    public record SetStatusDescriptor(Optional<Boolean> isComplete,
+                                      Optional<Boolean> isPaid,
+                                      Optional<LocalDateTime> deadline) {
+
+        // No-argument constructor creating an "empty" descriptor.
+        public SetStatusDescriptor() {
+            this(Optional.empty(), Optional.empty(), Optional.empty());
+        }
+
+        // Copy constructor.
+        public SetStatusDescriptor(SetStatusDescriptor toCopy) {
+            this(toCopy.isComplete, toCopy.isPaid, toCopy.deadline);
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .add("progress", isComplete)
+                    .add("payment", isPaid)
+                    .add("deadline", deadline)
+                    .toString();
+        }
     }
 
     @Override
