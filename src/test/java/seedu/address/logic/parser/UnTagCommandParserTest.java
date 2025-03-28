@@ -71,11 +71,11 @@ public class UnTagCommandParserTest {
         assertParseFailure(parser, INVALID_PHONE_DESC
                 + TAG_DESC_FRIENDS, Phone.MESSAGE_CONSTRAINTS);
 
-        // Invalid Tag (Contains non-alphanumerical characters, beyond hyphens/dashes)
+        // Invalid Tag (Contains non-alphanumerical characters, beyond hyphens/underscore)
         assertParseFailure(parser, PHONE_DESC_BENSON
                 + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
 
-        // Invalid Project Name (Contains non-alphanumerical characters, beyond hyphens/dashes)
+        // Invalid Project Name (Contains non-alphanumerical characters, beyond hyphens/underscore)
         assertParseFailure(parser, PHONE_DESC_BENSON
                 + INVALID_PROJECT_DESC, Tag.MESSAGE_CONSTRAINTS);
     }
