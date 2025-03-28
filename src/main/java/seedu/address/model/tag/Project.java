@@ -21,9 +21,9 @@ public class Project extends Tag {
     public static final String MESSAGE_PAYMENT_CONSTRAINTS =
             "Payment should be either be 'Paid' or 'Unpaid'";
 
-    private boolean isComplete;
-    private boolean isPaid;
-    private LocalDateTime deadline;
+    private final boolean isComplete;
+    private final boolean isPaid;
+    private final LocalDateTime deadline;
 
     private Project(String tagName, boolean isComplete, boolean isPaid, LocalDateTime deadline) {
         super(tagName);
@@ -61,10 +61,10 @@ public class Project extends Tag {
      * Creates and returns a new {@code Project} with updated details.
      */
     public Project createEditedProject(SetStatusDescriptor setStatusDescriptor) {
-        boolean newIsPaid = setStatusDescriptor.isPaid().orElse(this.isPaid);
         boolean newIsComplete = setStatusDescriptor.isComplete().orElse(this.isComplete);
+        boolean newIsPaid = setStatusDescriptor.isPaid().orElse(this.isPaid);
         LocalDateTime newDeadline = setStatusDescriptor.deadline().orElse(this.deadline);
-        return new Project(tagName, newIsPaid, newIsComplete, newDeadline);
+        return new Project(this.tagName, newIsComplete, newIsPaid, newDeadline);
     }
 
     /**
@@ -72,10 +72,6 @@ public class Project extends Tag {
      */
     public String checkIfComplete() {
         return this.isComplete ? "Complete" : "Incomplete";
-    }
-
-    public void setProgress(boolean progress) {
-        this.isComplete = progress;
     }
 
     public boolean getProgress() {
@@ -87,10 +83,6 @@ public class Project extends Tag {
      */
     public String checkIfPaid() {
         return this.isPaid ? "Paid" : "Unpaid";
-    }
-
-    public void setPayment(boolean payment) {
-        this.isPaid = payment;
     }
 
     public boolean getPayment() {
@@ -109,16 +101,6 @@ public class Project extends Tag {
      */
     public LocalDateTime getDeadline() {
         return this.deadline;
-    }
-
-
-
-    /**
-     * Set deadline attribute.
-     * @param deadline LocalDateTime
-     */
-    public void setDeadline(LocalDateTime deadline) {
-        this.deadline = deadline;
     }
 
     /**
