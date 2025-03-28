@@ -32,7 +32,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Optional<Email> optionalEmail, Set<Tag> tags) {
-        requireAllNonNull(name, phone, optionalEmail);
+        requireAllNonNull(name, phone, optionalEmail, tags);
         this.name = name;
         this.phone = phone;
         this.optionalEmail = optionalEmail;
@@ -96,8 +96,8 @@ public class Person {
      */
     public void tagOrProject(Set<Tag> tags) {
         for (Tag t : tags) {
-            if (t instanceof Project) {
-                this.projects.add((Project) t);
+            if (t instanceof Project project) {
+                this.projects.add(project);
             } else {
                 this.tags.add(t);
             }
