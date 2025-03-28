@@ -11,6 +11,8 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import java.util.Optional;
+
 /**
  * Parses input arguments and creates a new EditCommand object
  */
@@ -38,14 +40,18 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        Optional<String> optionalName = argMultimap.getValue(PREFIX_NAME);
+        Optional<String> optionalPhone = argMultimap.getValue(PREFIX_PHONE);
+        Optional<String> optionalEmail = argMultimap.getValue(PREFIX_EMAIL);
+
+        if (optionalName.isPresent()) {
+            editPersonDescriptor.setName(ParserUtil.parseName(optionalName.get()));
         }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        if (optionalPhone.isPresent()) {
+            editPersonDescriptor.setPhone(ParserUtil.parsePhone(optionalPhone.get()));
         }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        if (optionalEmail.isPresent()) {
+            editPersonDescriptor.setEmail(ParserUtil.parseEmail(optionalEmail.get()));
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
