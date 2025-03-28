@@ -9,11 +9,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -94,69 +92,30 @@ public class SetStatusCommand extends Command {
      * Stores the details to set the project with. Each non-empty field value will replace the
      * corresponding field value of the project.
      */
-    public static class SetStatusDescriptor {
-        private Boolean isComplete;
-        private Boolean isPaid;
-        private LocalDateTime deadline;
+    public record SetStatusDescriptor(Optional<Boolean> isComplete,
+                                      Optional<Boolean> isPaid,
+                                      Optional<LocalDateTime> deadline) {
 
+        // No-argument constructor creating an "empty" descriptor.
         public SetStatusDescriptor() {
+            this(Optional.empty(), Optional.empty(), Optional.empty());
         }
 
-        /**
-         * Copy constructor.
-         */
+        // Copy constructor.
         public SetStatusDescriptor(SetStatusDescriptor toCopy) {
-            setProgress(toCopy.isComplete);
-            setPayment(toCopy.isPaid);
-            setDeadline(toCopy.deadline);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(isComplete, isPaid, deadline);
-        }
-
-        public void setProgress(Boolean isComplete) {
-            this.isComplete = isComplete;
+            this(toCopy.isComplete, toCopy.isPaid, toCopy.deadline);
         }
 
         public Optional<Boolean> getProgress() {
-            return Optional.ofNullable(isComplete);
-        }
-
-        public void setPayment(Boolean isPaid) {
-            this.isPaid = isPaid;
+            return isComplete;
         }
 
         public Optional<Boolean> getPayment() {
-            return Optional.ofNullable(isPaid);
-        }
-
-        public void setDeadline(LocalDateTime deadline) {
-            this.deadline = deadline;
+            return isPaid;
         }
 
         public Optional<LocalDateTime> getDeadline() {
-            return Optional.ofNullable(deadline);
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            if (other == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(other instanceof SetStatusDescriptor)) {
-                return false;
-            }
-
-            SetStatusDescriptor otherSetStatusDescriptor = (SetStatusDescriptor) other;
-            return Objects.equals(isComplete, otherSetStatusDescriptor.isComplete)
-                    && Objects.equals(isPaid, otherSetStatusDescriptor.isPaid)
-                    && Objects.equals(deadline, otherSetStatusDescriptor.deadline);
+            return deadline;
         }
 
         @Override

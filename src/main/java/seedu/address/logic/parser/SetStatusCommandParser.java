@@ -7,7 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROGRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 
+import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
@@ -43,21 +45,37 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PROJECT, PREFIX_PAYMENT, PREFIX_DEADLINE, PREFIX_PROGRESS);
 
-        SetStatusDescriptor setStatusDescriptor = new SetStatusDescriptor();
+        Optional<String> optionalProgressString = argMultimap.getValue(PREFIX_PROGRESS);
+        Optional<String> optionalPaymentString = argMultimap.getValue(PREFIX_PAYMENT);
+        Optional<String> optionalDeadlineString = argMultimap.getValue(PREFIX_DEADLINE);
 
-        if (argMultimap.getValue(PREFIX_PAYMENT).isPresent()) {
-            setStatusDescriptor.setPayment(ParserUtil.parsePayment(argMultimap.getValue(PREFIX_PAYMENT).get()));
+        Optional<Boolean> optionalProgress = Optional.empty();
+        Optional<Boolean> optionalPayment = Optional.empty();
+        Optional<LocalDateTime> optionalDeadline = Optional.empty();
+
+
+        if (optionalProgressString.isPresent()) {
+            optionalProgress = Optional.of(ParserUtil.parseProgress(optionalProgressString.get()));
         }
-        if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
-            setStatusDescriptor.setDeadline(ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get()));
+        if (optionalPaymentString.isPresent()) {
+            optionalPayment = Optional.of(ParserUtil.parsePayment(optionalPaymentString.get()));
         }
-        if (argMultimap.getValue(PREFIX_PROGRESS).isPresent()) {
-            setStatusDescriptor.setProgress(ParserUtil.parseProgress(argMultimap.getValue(PREFIX_PROGRESS).get()));
+        if (optionalDeadlineString.isPresent()) {
+            optionalDeadline = Optional.of(ParserUtil.parseDeadline(optionalDeadlineString.get()));
         }
 
-        if (!setStatusDescriptor.isAnyFieldEdited()) {
+
+        boolean isAnyFieldEdited = optionalProgress.isPresent() || optionalPayment.isPresent()
+                || optionalDeadline.isPresent();
+
+        if (!isAnyFieldEdited) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
+
+        SetStatusDescriptor setStatusDescriptor = new SetStatusDescriptor(
+                optionalProgress,
+                optionalPayment,
+                optionalDeadline);
 
         return new SetStatusCommand(index, projectName, setStatusDescriptor);
     }
