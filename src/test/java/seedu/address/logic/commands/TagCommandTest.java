@@ -62,8 +62,8 @@ public class TagCommandTest {
         assertTrue(addTagCommand.equals(addTagCommand));
 
         // same values -> returns true
-        TagCommand TagCommandCopy = new TagCommand(phone, tagsToAdd);
-        assertTrue(addTagCommand.equals(TagCommandCopy));
+        TagCommand tagCommandCopy = new TagCommand(phone, tagsToAdd);
+        assertTrue(addTagCommand.equals(tagCommandCopy));
 
         // different types -> returns false
         assertFalse(addTagCommand.equals(1));

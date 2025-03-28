@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 
 public class TagTest {
 
-    private Tag valid_tag;
+    private Tag validTag;
     @BeforeEach
-    public void setUp(){
-        valid_tag = new Tag("valid_tag");
+    public void setUp() {
+        validTag = new Tag("valid_tag");
     }
 
     @Test
@@ -30,8 +30,8 @@ public class TagTest {
 
     @Test
     public void test_getTagName() {
-        assertEquals(valid_tag.getTagName(), "valid_tag");
-        assertNotEquals(valid_tag.getTagName(), "valid-tag");
+        assertEquals(validTag.getTagName(), "valid_tag");
+        assertNotEquals(validTag.getTagName(), "valid-tag");
     }
 
     @Test
@@ -56,30 +56,30 @@ public class TagTest {
     public void test_equals() {
 
         // Same object -> true
-        assertTrue(valid_tag.equals(valid_tag));
+        assertTrue(validTag.equals(validTag));
 
         // Null -> false
-        assertFalse(valid_tag.equals(null));
+        assertFalse(validTag.equals(null));
 
         // case insensitive
-        assertTrue(valid_tag.equals(new Tag("Valid_tag")));
+        assertTrue(validTag.equals(new Tag("Valid_tag")));
 
-        assertTrue(valid_tag.equals(new Tag("valid_tag")));
+        assertTrue(validTag.equals(new Tag("valid_tag")));
 
         // hyphen instead of underscore
-        assertFalse(valid_tag.equals(new Tag("valid-tag")));
+        assertFalse(validTag.equals(new Tag("valid-tag")));
     }
 
     @Test
     public void test_hashCode() {
-        int hashCode = valid_tag.hashCode();
-        assertEquals(hashCode, valid_tag.hashCode());
+        int hashCode = validTag.hashCode();
+        assertEquals(hashCode, validTag.hashCode());
     }
 
     @Test
     public void test_toString() {
-        assertEquals(valid_tag.toString(), "[valid_tag]");
-        assertNotEquals(valid_tag.toString(), "[valid-tag]");
+        assertEquals(validTag.toString(), "[valid_tag]");
+        assertNotEquals(validTag.toString(), "[valid-tag]");
     }
 
 

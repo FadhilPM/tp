@@ -98,8 +98,8 @@ public class UnTagCommandTest {
         assertTrue(removeTagCommand.equals(removeTagCommand));
 
         // same values -> returns true
-        UnTagCommand UnTagCommandCopy = new UnTagCommand(phone, tagsToRemove);
-        assertTrue(removeTagCommand.equals(UnTagCommandCopy));
+        UnTagCommand unTagCommandCopy = new UnTagCommand(phone, tagsToRemove);
+        assertTrue(removeTagCommand.equals(unTagCommandCopy));
 
         // different types -> returns false
         assertFalse(removeTagCommand.equals(1));
