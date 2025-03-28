@@ -26,7 +26,7 @@ public class Person {
 
     // Data fields
     private final Set<Tag> tags = new LinkedHashSet<>();
-    private Set<Project> projects = new LinkedHashSet<>();
+    private final Set<Project> projects = new LinkedHashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -109,10 +109,9 @@ public class Person {
      * @param project to replace with.
      */
     public Person replaceProject(Project project) {
-        this.projects = new LinkedHashSet<Project>(this.projects
-            .stream()
-            .map(p -> p.getTagName().equals(project.getTagName()) ? project : p)
-            .toList());
+        if (this.projects.remove(project)) {
+            projects.add(project);
+        }
         return this;
     }
 
