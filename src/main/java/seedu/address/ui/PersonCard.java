@@ -68,7 +68,7 @@ public class PersonCard extends UiPart<Region> {
                     Label nameLabel = new Label(project.tagName);
                     nameLabel.setStyle("-fx-font-weight:bold;");
 
-                    Label deadlineLabel = new Label(project.getDeadlineString()+"H");
+                    Label deadlineLabel = new Label(project.getDeadlineString() + "H");
 
                     Label completionLabel = new Label(project.getProgressString());
                     if (project.getProgressString().equalsIgnoreCase("Complete")) {
