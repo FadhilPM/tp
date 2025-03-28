@@ -18,6 +18,8 @@ public class Project extends Tag {
     public static final String MESSAGE_PAYMENT_CONSTRAINTS =
             "Payment should be either be 'Paid' or 'Unpaid'";
 
+    public static final String DATETIME_FORMAT = "dd MMM uuuu HHmm";
+
     private boolean isComplete;
     private boolean isPaid;
     private LocalDateTime deadline;
@@ -32,9 +34,9 @@ public class Project extends Tag {
      */
     public Project(String tagName, String isComplete, String isPaid, String deadline) {
         super(tagName);
-        this.isComplete = (isComplete.equals("Complete"));
-        this.isPaid = (isPaid.equals("Paid"));
-        this.deadline = LocalDateTime.parse(deadline.trim(), DateTimeFormatter.ofPattern("dd MMM uuuu HHmm"));
+        this.isComplete = (isComplete.equalsIgnoreCase("complete"));
+        this.isPaid = (isPaid.equalsIgnoreCase("paid"));
+        this.deadline = dateTimeStringtoLDT(deadline);
     }
 
     /**
@@ -47,6 +49,14 @@ public class Project extends Tag {
         this.isComplete = false;
         this.isPaid = false;
         this.deadline = LocalDateTime.now().plusDays(1); // Set the deadline to 1 day from creation.
+    }
+
+    /**
+     * Converts String to LocalDateTime based on DATETIME_FORMAT
+     * @param dateTime String representation of datetime
+     */
+    public static LocalDateTime dateTimeStringtoLDT(String dateTime) {
+        return LocalDateTime.parse(dateTime.trim(), DateTimeFormatter.ofPattern(DATETIME_FORMAT);
     }
 
     /**
@@ -80,7 +90,6 @@ public class Project extends Tag {
         return this.isPaid ? "Paid" : "Unpaid";
     }
 
-
     /**
      * Get the payment status as a boolean value.
      */
@@ -100,7 +109,7 @@ public class Project extends Tag {
      * Get the deadline as String.
      */
     public String getDeadlineString() {
-        String deadline = this.deadline.format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm"));
+        String deadline = this.deadline.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
         return String.format(deadline + "H");
     }
 
