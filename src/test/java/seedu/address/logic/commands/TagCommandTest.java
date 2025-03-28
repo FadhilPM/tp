@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.TagCommand.tagProjectToPerson;
@@ -50,14 +51,27 @@ public class TagCommandTest {
         assertCommandSuccess(tagComd, model, expectedMessage, expectedModel);
     }
 
-
     @Test
     public void equals() {
         Person p = new PersonBuilder().withTags("T_3st-x").build();
         Phone phone = p.getPhone();
         TagCommand addTagCommand = new TagCommand(phone, tagsToAdd);
+        TagCommand otherAddTagCommand = new TagCommand(phone, new LinkedHashSet<>());
 
         // same object -> returns true
         assertTrue(addTagCommand.equals(addTagCommand));
+
+        // same values -> returns true
+        TagCommand TagCommandCopy = new TagCommand(phone, tagsToAdd);
+        assertTrue(addTagCommand.equals(TagCommandCopy));
+
+        // different types -> returns false
+        assertFalse(addTagCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(addTagCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(addTagCommand.equals(otherAddTagCommand));
     }
 }

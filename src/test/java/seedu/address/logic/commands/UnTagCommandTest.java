@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -88,11 +89,25 @@ public class UnTagCommandTest {
 
     @Test
     public void equals() {
-        Person p = new PersonBuilder().withTags("friends").build();
+        Person p = new PersonBuilder().withTags("T_3st-x").build();
         Phone phone = p.getPhone();
         UnTagCommand removeTagCommand = new UnTagCommand(phone, tagsToRemove);
+        UnTagCommand otherRemoveTagCommand = new UnTagCommand(phone, new LinkedHashSet<>());
 
         // same object -> returns true
         assertTrue(removeTagCommand.equals(removeTagCommand));
+
+        // same values -> returns true
+        UnTagCommand UnTagCommandCopy = new UnTagCommand(phone, tagsToRemove);
+        assertTrue(removeTagCommand.equals(UnTagCommandCopy));
+
+        // different types -> returns false
+        assertFalse(removeTagCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(removeTagCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(removeTagCommand.equals(otherRemoveTagCommand));
     }
 }
