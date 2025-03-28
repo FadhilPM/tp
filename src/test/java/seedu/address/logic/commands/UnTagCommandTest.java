@@ -1,7 +1,11 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.UnTagCommand.checkForTagInExistingTags;
 import static seedu.address.logic.commands.UnTagCommand.unTagProjectFromPerson;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
@@ -9,8 +13,11 @@ import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -25,33 +32,65 @@ import seedu.address.testutil.PersonBuilder;
 public class UnTagCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Tag sampleTag;
+    private Set<Tag> tagsToRemove;
+    @BeforeEach
+    public void setUp() {
+        sampleTag = new Tag("friends");
+        tagsToRemove = new LinkedHashSet<>();
+        tagsToRemove.add(sampleTag);
+    }
 
     @Test
     public void execute_unTag_success() {
         Person personToTag = getTypicalPersons().get(1);
         Phone phone = personToTag.getPhone();
-        Tag newTag = new Tag("friends");
-        Set<Tag> tags = new LinkedHashSet<>();
-        tags.add(newTag);
-        UnTagCommand untagComd = new UnTagCommand(phone, tags);
-        Person unTaggedPerson = unTagProjectFromPerson(personToTag, tags);
+        UnTagCommand untagComd = new UnTagCommand(phone, tagsToRemove);
+        Person unTaggedPerson = unTagProjectFromPerson(personToTag, tagsToRemove);
+        String check = checkForTagInExistingTags(personToTag.getTags(), tagsToRemove);
 
         String expectedMessage = String.format(UnTagCommand.MESSAGE_SUCCESS, unTaggedPerson.getName());
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToTag, unTaggedPerson);
-
         assertCommandSuccess(untagComd, model, expectedMessage, expectedModel);
+        assertEquals("", check);
+    }
 
+    @Test
+    public void execute_unTag_failure() {
+        Person personToTag = getTypicalPersons().get(2);
+        Phone phone = personToTag.getPhone();
+        UnTagCommand untagComd = new UnTagCommand(phone, tagsToRemove);
+        Person unTaggedPerson = unTagProjectFromPerson(personToTag, tagsToRemove);
+        String check = checkForTagInExistingTags(personToTag.getTags(), tagsToRemove);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToTag, unTaggedPerson);
+        CommandException thrown = assertThrows(CommandException.class, () -> untagComd.execute(model));
+        assertEquals(String.format(Messages.MESSAGE_ABSENT_TAG_PROJECT, check, personToTag.getName(), personToTag.getPhone()), thrown.getMessage());
+    }
+
+    @Test
+    public void checkForTag_success() {
+        Person person = getTypicalPersons().get(1);
+        Set<Tag> personTags = person.getTags();
+        String check = checkForTagInExistingTags(personTags, tagsToRemove);
+        assertEquals("", check);
+    }
+
+    @Test
+    public void checkForTag_failure() {
+        Person person = getTypicalPersons().get(2);
+        Set<Tag> personTags = person.getTags();
+        String check = checkForTagInExistingTags(personTags, tagsToRemove);
+        assertEquals("friends", check);
     }
 
     @Test
     public void equals() {
-        Person p = new PersonBuilder().withTags("test_Equal5").build();
+        Person p = new PersonBuilder().withTags("friends").build();
         Phone phone = p.getPhone();
-        Tag newTag = new Tag("test_Equal5");
-        Set<Tag> tags = new LinkedHashSet<>();
-        tags.add(newTag);
-        UnTagCommand removeTagCommand = new UnTagCommand(phone, tags);
+        UnTagCommand removeTagCommand = new UnTagCommand(phone, tagsToRemove);
 
         // same object -> returns true
         assertTrue(removeTagCommand.equals(removeTagCommand));

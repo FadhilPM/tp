@@ -97,15 +97,18 @@ public class UnTagCommand extends Command {
     }
 
     /**
-     * Checks if tagsToCheck exists within the Set of Tags.
-     * Returns true if found within, false otherwise.
-     * @param tags set
-     * @param tagsToCheck set of tags to check for
+     * For each Tag in tagsToRemove, check if Tag currently exists within the existingTags.
+     * Returns tagName if not found within existingTags, "" otherwise.
+     * @param existingTags set of tags that currently exist
+     * @param tagsToRemove set of tags that should be untagged/removed
      */
-    public static String checkForTagInExistingTags(Set<Tag> tags, Set<Tag> tagsToCheck) {
-        for (Tag t : tagsToCheck) {
-            if (!(tags.contains(t))) {
-                return t.getTagName();
+    public static String checkForTagInExistingTags(Set<Tag> existingTags, Set<Tag> tagsToRemove) {
+        assert existingTags != null;
+        assert tagsToRemove != null;
+
+        for (Tag tagToRemove : tagsToRemove) {
+            if (!(existingTags.contains(tagToRemove))) {
+                return tagToRemove.getTagName();
             }
         }
         return "";
