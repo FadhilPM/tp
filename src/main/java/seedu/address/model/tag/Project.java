@@ -132,6 +132,16 @@ public class Project extends Tag {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Project otherProject) {
+            return this.tagName.equals(otherProject.tagName);
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return '[' + tagName + " | " + checkIfPaid() + " | " + checkIfComplete()
                 + " | Deadline: " + getDeadlineString() + ']';
