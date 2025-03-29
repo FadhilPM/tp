@@ -135,6 +135,18 @@ public class Project extends Tag {
             this(toCopy.isComplete, toCopy.isPaid, toCopy.deadline);
         }
 
+        public SetStatusDescriptor setIsComplete(boolean newIsComplete) {
+            return new SetStatusDescriptor(Optional.of(newIsComplete), isPaid, deadline);
+        }
+
+        public SetStatusDescriptor setIsPaid(boolean newIsPaid) {
+            return new SetStatusDescriptor(isComplete, Optional.of(newIsPaid), deadline);
+        }
+
+        public SetStatusDescriptor setDeadline(LocalDateTime newDeadline) {
+            return new SetStatusDescriptor(isComplete, isPaid, Optional.of(newDeadline));
+        }
+
         @Override
         public String toString() {
             return new ToStringBuilder(this)
