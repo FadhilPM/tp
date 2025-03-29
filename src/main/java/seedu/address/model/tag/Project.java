@@ -2,6 +2,8 @@ package seedu.address.model.tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Locale;
 
 /**
  * Represents a Project in the address book.
@@ -19,6 +21,8 @@ public class Project extends Tag {
             "Payment should be either be 'Paid' or 'Unpaid'";
 
     public static final String DATETIME_FORMAT = "dd MMM uuuu HHmm";
+    private static final DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive()
+            .appendPattern("dd MMM uuuu HHmm").toFormatter(Locale.ENGLISH);
 
     private boolean isComplete;
     private boolean isPaid;
@@ -56,7 +60,7 @@ public class Project extends Tag {
      * @param dateTime String representation of datetime
      */
     public static LocalDateTime dateTimeStringToLocalDateTime(String dateTime) {
-        return LocalDateTime.parse(dateTime.trim(), DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        return LocalDateTime.parse(dateTime.trim(), formatter);
     }
 
     /**

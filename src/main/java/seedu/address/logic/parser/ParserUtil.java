@@ -138,7 +138,7 @@ public class ParserUtil {
         String trimmedDeadline = deadline.trim();
 
         try {
-            return LocalDateTime.parse(trimmedDeadline, DateTimeFormatter.ofPattern("dd MMM uuuu HHmm"));
+            return Project.dateTimeStringToLocalDateTime(trimmedDeadline);
         } catch (DateTimeParseException e) {
             throw new ParseException(Project.MESSAGE_DEADLINE_CONSTRAINTS);
         }
