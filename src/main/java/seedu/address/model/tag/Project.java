@@ -22,7 +22,7 @@ public class Project extends Tag {
 
     public static final String DATETIME_FORMAT = "dd MMM uuuu HHmm";
     private static final DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive()
-            .appendPattern("dd MMM uuuu HHmm").toFormatter(Locale.ENGLISH);
+            .appendPattern(DATETIME_FORMAT).toFormatter(Locale.ENGLISH);
 
     private boolean isComplete;
     private boolean isPaid;
