@@ -227,6 +227,19 @@ Examples:
 
 ![save with parameter](images/save_with_param.png)
 
+#### Editing the data file
+
+ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[filename].json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-primary">:exclamation: **Note:**
+[filename] refers to the saved file name that is specified in `preferences.json`
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, ArtHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause ArtHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</div>
+
 ### Creating snapshot of data: `snapshot`
 
 Creates snapshot of the existing data in the `snapshots` directory with a datetime stamp ("dMMMuuuu_HHmmss").
@@ -256,19 +269,6 @@ Examples:
 
 ![switch contact to email](images/switchContactJohn.png)
 
-
-#### Editing the data file
-
-ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[filename].json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-primary">:exclamation: **Note:**
-[filename] refers to the saved file name that is specified in `preferences.json`
-</div>
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ArtHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause ArtHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
 
 ### Clearing all entries : `clear`
 
@@ -312,6 +312,6 @@ Action | Format, Examples
 **UnTag**   | `untag p/PHONE (t/TAG \| project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie project/project-x`    
 **Save** | `save [FILENAME]` <br> e.g., `save newfile`                                                                                       
 **Snapshot** | `snapshot`                                                                                                                        
-**Switch Preferred Contact Method** | `switchContact p/PHONE_NUMBER` <br> e.g, `switchContact p/91234567`                                                               
+**Switch Preferred Contact Method** | `switchcontact p/PHONE_NUMBER` <br> e.g, `switchcontact p/91234567`                                                               
 **Clear** | `clear`                                                                                                                           
 **Exit** | `exit`                                                                                                                            
