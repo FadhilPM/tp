@@ -55,4 +55,5 @@ PreferredContactMethod -[hidden]right-> Tag
 Project -[hidden]right-> Project
 
 ModelManager --> "~* filtered" Person
+
 @enduml
