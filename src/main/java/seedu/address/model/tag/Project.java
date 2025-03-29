@@ -2,10 +2,10 @@ package seedu.address.model.tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
-
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Locale;
+import java.util.Optional;
+
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -14,7 +14,6 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Project extends Tag {
-
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
             "Deadline should be in the format 'dd MMM uuuu HHmm'  with the first letter of the month capitalised "
                     + "(e.g 01 Apr 2026 2359)";
@@ -22,13 +21,14 @@ public class Project extends Tag {
             "Progress should be either be 'Complete' or 'Incomplete'";
     public static final String MESSAGE_PAYMENT_CONSTRAINTS =
             "Payment should be either be 'Paid' or 'Unpaid'";
+    public static final String DATETIME_FORMAT = "dd MMM uuuu HHmm";
+    private static final DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive()
+            .appendPattern(DATETIME_FORMAT).toFormatter(Locale.ENGLISH);
 
     private final boolean isComplete;
     private final boolean isPaid;
     private final LocalDateTime deadline;
-    public static final String DATETIME_FORMAT = "dd MMM uuuu HHmm";
-    private static final DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive()
-            .appendPattern(DATETIME_FORMAT).toFormatter(Locale.ENGLISH);
+
 
     private Project(String tagName, boolean isComplete, boolean isPaid, LocalDateTime deadline) {
         super(tagName);
