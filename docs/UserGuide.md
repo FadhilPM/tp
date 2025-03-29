@@ -252,11 +252,11 @@ Examples:
 
 ![snapshot](images/snapshot.png)
 
-### Switching preferred contact : `switchContact`
+### Switching preferred contact : `switchcontact`
 
 Switch preferred contact. 
 
-Format: `switchContact p/PHONE`
+Format: `switchcontact p/PHONE`
 
 * If the current preferred contact method is email, it will switch to phone.
 * If the current preferred contact method is phone, it will switch to email, provided the contact contains an email.
@@ -265,7 +265,7 @@ Format: `switchContact p/PHONE`
 
 Examples:
 
-* `switchContact p/91234567` Switches the preferred contact method for the contact with phone number 91234567.
+* `switchcontact p/91234567` Switches the preferred contact method for the contact with phone number 91234567.
 
 ![switch contact to email](images/switchContactJohn.png)
 
