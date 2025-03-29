@@ -46,7 +46,7 @@ public class Project extends Tag {
      * @param deadline deadline in dd MMM uuuu HHmm format.
      */
     public Project(String tagName, String isComplete, String isPaid, String deadline) {
-        this(tagName,
+        super(tagName);
         this.isComplete = (isComplete.equalsIgnoreCase("complete"));
         this.isPaid = (isPaid.equalsIgnoreCase("paid"));
         this.deadline = dateTimeStringToLocalDateTime(deadline);
@@ -59,7 +59,6 @@ public class Project extends Tag {
      */
     public Project(String tagName) {
         // Set the deadline to 1 day from creation.
-        this(tagName, false, false, LocalDateTime.now().plusDays(1));
         super(tagName);
         this.isComplete = false;
         this.isPaid = false;
@@ -100,14 +99,6 @@ public class Project extends Tag {
     }
 
     /**
-     * Set the progress status isComplete as true or false.
-     * @param progress progress status.
-     */
-    public void setProgress(boolean progress) {
-        this.isComplete = progress;
-    }
-
-    /**
      * Get the payment status as a String.
      * Returns 'Paid' if true, 'Unpaid' if false.
      */
@@ -123,14 +114,6 @@ public class Project extends Tag {
     }
 
     /**
-     * Set the payment status isPaid as true or false.
-     * @param payment payment status.
-     */
-    public void setPayment(boolean payment) {
-        this.isPaid = payment;
-    }
-
-    /**
      * Get the deadline as String.
      */
     public String getDeadlineString() {
@@ -143,8 +126,6 @@ public class Project extends Tag {
     public LocalDateTime getDeadline() {
         return this.deadline;
     }
-
-
 
     /**
      * Stores the details to set the project with. Each non-empty field value will replace the
