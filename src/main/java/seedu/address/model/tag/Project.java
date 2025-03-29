@@ -30,6 +30,13 @@ public class Project extends Tag {
     private final LocalDateTime deadline;
 
 
+    /**
+     * Constructs a {@code Project}.
+     * @param tagName A valid tag name.
+     * @param isComplete progress status.
+     * @param isPaid payment status.
+     * @param deadline deadline in dd MMM uuuu HHmm format.
+     */
     private Project(String tagName, boolean isComplete, boolean isPaid, LocalDateTime deadline) {
         super(tagName);
         this.isComplete = isComplete;
@@ -38,7 +45,8 @@ public class Project extends Tag {
     }
 
     /**
-     * Constructs a {@code Project}.
+     * Constructs a {@code Project} using String representation of Project attributes.
+     * Used by JsonAdaptedProject.java
      *
      * @param tagName A valid tag name.
      * @param isComplete Complete or Incomplete.
@@ -58,7 +66,6 @@ public class Project extends Tag {
      * @param tagName A valid tag name.
      */
     public Project(String tagName) {
-        // Set the deadline to 1 day from creation.
         super(tagName);
         this.isComplete = false;
         this.isPaid = false;
@@ -91,10 +98,7 @@ public class Project extends Tag {
         return this.isComplete ? "Complete" : "Incomplete";
     }
 
-    /**
-     * Get the progress status as boolean value
-     */
-    public boolean getProgress() {
+    public boolean getProcessBoolean() {
         return this.isComplete;
     }
 
@@ -107,24 +111,10 @@ public class Project extends Tag {
     }
 
     /**
-     * Get the payment status as a boolean value.
-     */
-    public boolean getPayment() {
-        return this.isPaid;
-    }
-
-    /**
      * Get the deadline as String.
      */
     public String getDeadlineString() {
         return this.deadline.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
-    }
-
-    /**
-     * Get the deadline as LocalDateTime.
-     */
-    public LocalDateTime getDeadline() {
-        return this.deadline;
     }
 
     /**
