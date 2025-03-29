@@ -24,7 +24,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SwitchContactCommand extends Command {
 
-    public static final String COMMAND_WORD = "switchContact";
+    public static final String COMMAND_WORD = "switchcontact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches the preferred contact method between phone "
             + "and email. If the current preferred contact is set to phone, this command will change it to email, "
