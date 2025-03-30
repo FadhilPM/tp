@@ -10,11 +10,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Email {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
-    public static final String MESSAGE_CONSTRAINTS = "Emails must be in Name@Domain format, for example: user@yahoo.com.\n"
+    public static final String MESSAGE_CONSTRAINTS = "Emails must be in Name@Domain format, for example:"
+            + "user@yahoo.com.\n"
             + "1. Name: Alphanumeric + special characters: " + SPECIAL_CHARACTERS + ", but cannot start/end "
             + "with a special character.\n"
             + "2. Domain: A domain is made up of domain labels, which are parts separated by periods."
-            +" Domain must end with at least 2 character long domain label."
+            + " Domain must end with at least 2 character long domain label."
             + " Labels must start/end with alphanumeric characters, allowing hyphens in between.";
 
     // alphanumeric and special characters
