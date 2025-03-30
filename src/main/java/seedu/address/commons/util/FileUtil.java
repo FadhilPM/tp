@@ -122,6 +122,7 @@ public class FileUtil {
                         .filter(file -> !file.getFileName().equals(oldPath.getFileName()))
                         .forEach(file -> {
                             try {
+                                file.toFile().setWritable(true);
                                 Files.deleteIfExists(file);
                                 System.err.println("Deleted old savefile: " + file);
                             } catch (IOException e) {
@@ -160,6 +161,7 @@ public class FileUtil {
                         .filter(file -> !file.getFileName().toString().equals("preferences.json"))
                         .forEach(file -> {
                             try {
+                                file.toFile().setWritable(true);
                                 Files.deleteIfExists(file);
                                 System.err.println("Deleted old savefile: " + file);
                             } catch (IOException e) {
