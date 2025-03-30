@@ -25,7 +25,7 @@ public class Person {
     private final PreferredContactMethod preferredContactMethod;
 
     // Data fields
-    private final Set<Tag> tags = new LinkedHashSet<>();
+    private Set<Tag> tags = new LinkedHashSet<>();
     private Set<Project> projects = new LinkedHashSet<>();
 
     /**

@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -138,7 +137,7 @@ public class ParserUtil {
         String trimmedDeadline = deadline.trim();
 
         try {
-            return LocalDateTime.parse(trimmedDeadline, DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
+            return Project.dateTimeStringToLocalDateTime(trimmedDeadline);
         } catch (DateTimeParseException e) {
             throw new ParseException(Project.MESSAGE_DEADLINE_CONSTRAINTS);
         }

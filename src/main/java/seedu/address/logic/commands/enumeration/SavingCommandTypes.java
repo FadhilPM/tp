@@ -10,8 +10,7 @@ public enum SavingCommandTypes {
     DELETE("delete"),
     EDIT("edit"),
     SETSTATUS("setstatus"),
-    SNAPSHOT("snapshot"),
-    SWITCHCONTACT("switchContact"),
+    SWITCHCONTACT("switchcontact"),
     TAG("tag"),
     UNTAG("untag");
 
