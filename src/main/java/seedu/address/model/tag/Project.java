@@ -2,6 +2,8 @@ package seedu.address.model.tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Locale;
 
 /**
  * Represents a Project in the address book.
@@ -11,12 +13,16 @@ import java.time.format.DateTimeFormatter;
 public class Project extends Tag {
 
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
-            "Deadline should be in the format 'dd MMM yyyy HHmm'  with the first letter of the month capitalised "
+            "Deadline should be in the format 'dd MMM uuuu HHmm'  with the first letter of the month capitalised "
                     + "(e.g 01 Apr 2026 2359)";
     public static final String MESSAGE_PROGRESS_CONSTRAINTS =
             "Progress should be either be 'Complete' or 'Incomplete'";
     public static final String MESSAGE_PAYMENT_CONSTRAINTS =
             "Payment should be either be 'Paid' or 'Unpaid'";
+
+    public static final String DATETIME_FORMAT = "dd MMM uuuu HHmm";
+    private static final DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive()
+            .appendPattern(DATETIME_FORMAT).toFormatter(Locale.ENGLISH);
 
     private boolean isComplete;
     private boolean isPaid;
@@ -28,13 +34,13 @@ public class Project extends Tag {
      * @param tagName A valid tag name.
      * @param isComplete Complete or Incomplete.
      * @param isPaid Paid or Unpaid.
-     * @param deadline deadline in dd MMM yyyy HHmm format.
+     * @param deadline deadline in dd MMM uuuu HHmm format.
      */
     public Project(String tagName, String isComplete, String isPaid, String deadline) {
         super(tagName);
-        this.isComplete = (isComplete.equals("Complete"));
-        this.isPaid = (isPaid.equals("Paid"));
-        this.deadline = LocalDateTime.parse(deadline.trim(), DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
+        this.isComplete = (isComplete.equalsIgnoreCase("complete"));
+        this.isPaid = (isPaid.equalsIgnoreCase("paid"));
+        this.deadline = dateTimeStringToLocalDateTime(deadline);
     }
 
     /**
@@ -49,64 +55,88 @@ public class Project extends Tag {
         this.deadline = LocalDateTime.now().plusDays(1); // Set the deadline to 1 day from creation.
     }
 
+    /**
+     * Converts String to LocalDateTime based on DATETIME_FORMAT
+     * @param dateTime String representation of datetime
+     */
+    public static LocalDateTime dateTimeStringToLocalDateTime(String dateTime) {
+        return LocalDateTime.parse(dateTime.trim(), formatter);
+    }
 
     /**
-     * Get the completion status of the project, complete or incomplete.
+     * Get the progress status as a String
+     * 'Complete' if true, 'Incomplete' if false
      */
-    public String checkIfComplete() {
+    public String getProgressString() {
         return this.isComplete ? "Complete" : "Incomplete";
     }
 
-    public void setProgress(boolean progress) {
-        this.isComplete = progress;
-    }
-
+    /**
+     * Get the progress status as boolean value
+     */
     public boolean getProgress() {
         return this.isComplete;
     }
 
     /**
-     * Returns Paid if project has isPaid attribute of true, returns Unpaid otherwise.
+     * Set the progress status isComplete as true or false.
+     * @param progress progress status.
      */
-    public String checkIfPaid() {
+    public void setProgress(boolean progress) {
+        this.isComplete = progress;
+    }
+
+    /**
+     * Get the payment status as a String.
+     * Returns 'Paid' if true, 'Unpaid' if false.
+     */
+    public String getPaymentString() {
         return this.isPaid ? "Paid" : "Unpaid";
     }
 
-    public void setPayment(boolean payment) {
-        this.isPaid = payment;
-    }
-
+    /**
+     * Get the payment status as a boolean value.
+     */
     public boolean getPayment() {
         return this.isPaid;
     }
 
     /**
-     * Get the deadline as String
+     * Set the payment status isPaid as true or false.
+     * @param payment payment status.
      */
-    public String getDeadlineString() {
-        return this.deadline.format(DateTimeFormatter.ofPattern("dd MMM uuuu HHmm"));
+    public void setPayment(boolean payment) {
+        this.isPaid = payment;
     }
 
     /**
-     * Get the deadline as LocalDateTime
+     * Get the deadline as String.
+     */
+    public String getDeadlineString() {
+        return this.deadline.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+    }
+
+    /**
+     * Get the deadline as LocalDateTime.
      */
     public LocalDateTime getDeadline() {
         return this.deadline;
     }
 
-
-
     /**
      * Set deadline attribute.
-     * @param deadline LocalDateTime
+     * @param deadline LocalDateTime.
      */
     public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
 
+    /**
+     * Returns a String representation of the Project
+     */
     @Override
     public String toString() {
-        return '[' + tagName + " | " + checkIfPaid() + " | " + checkIfComplete()
-                + " | Deadline: " + getDeadlineString() + ']';
+        return '[' + getTagName() + " | Deadline: " + getDeadlineString() + "H | " + getProgressString()
+                + " | " + getPaymentString() + ']';
     }
 }
