@@ -217,6 +217,9 @@ Saves ArtHive data in the hard disk via passive (automatic) save or active (manu
 Format: `save [filename]`
 
 * Saves the data to the hard disk.
+* `filename` restrictions:
+    * May only contain letters (a-z, A-Z), numbers (0-9), underscore (_), and hyphen (-).
+    * No spaces or other special characters are allowed.
 
 Examples:
 * `save` proceeds to save the data to the filename pointed in `preferences.json`.
