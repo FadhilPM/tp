@@ -69,7 +69,7 @@ public class SetStatusCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Project projectToEdit = personToEdit.getProjects()
                 .stream()
-                .filter(x -> x.getTagName().equals(projectName))
+                .filter(x -> x.hasSameName(projectName))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PROJECT));
 

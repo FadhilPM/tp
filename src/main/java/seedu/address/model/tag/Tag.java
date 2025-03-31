@@ -32,6 +32,10 @@ public class Tag {
         return this.tagName;
     }
 
+    public boolean hasSameName(String otherName) {
+        return this.tagName.equals(otherName);
+    }
+    
     /**
      * Returns true if a given string is a valid tag name.
      */
