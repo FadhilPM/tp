@@ -541,6 +541,8 @@ Use case ends.
 * **GUI** Graphical User Interface - the visual elements that display information and receive user input.
 * **CLI**: Command Line Interface - the text-based method of interacting with ArtHive through integrated typed commands.
 * **Regex**: Regular Expression - a sequence of characters that defines a certain search pattern, used in ArtHive to validate phone numbers.
+* **Domain (Email Domain)**: - The part of an email address after the "@" symbol that identifies the mail server handling emails, such as yahoo.com in user@yahoo.com.
+* **Domain Label**: - A part of a domain name, separated by dots, such as www, example, and com in www.yahoo.com.
 
 --------------------------------------------------------------------------------------------------------------------
 
