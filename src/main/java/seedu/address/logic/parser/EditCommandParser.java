@@ -6,10 +6,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person.EditPersonDescriptor;
+import seedu.address.model.person.Phone;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -36,23 +41,35 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        Optional<String> optionalNameString = argMultimap.getValue(PREFIX_NAME);
+        Optional<String> optionalPhoneString = argMultimap.getValue(PREFIX_PHONE);
+        Optional<String> optionalEmailString = argMultimap.getValue(PREFIX_EMAIL);
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        Optional<Name> optionalName = Optional.empty();
+        Optional<Phone> optionalPhone = Optional.empty();
+        Optional<Email> optionalEmail = Optional.empty();
+
+        if (optionalNameString.isPresent()) {
+            optionalName = Optional.of(ParserUtil.parseName(optionalNameString.get()));
         }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        if (optionalPhoneString.isPresent()) {
+            optionalPhone = Optional.of(ParserUtil.parsePhone(optionalPhoneString.get()));
         }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        if (optionalEmailString.isPresent()) {
+            optionalEmail = Optional.of(ParserUtil.parseEmail(optionalEmailString.get()));
         }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        boolean isAnyFieldEdited = optionalName.isPresent() || optionalPhone.isPresent() || optionalEmail.isPresent();
+
+        if (!isAnyFieldEdited) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(
+                optionalName,
+                optionalPhone,
+                optionalEmail);
+
         return new EditCommand(index, editPersonDescriptor);
     }
-
 }
