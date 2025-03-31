@@ -222,7 +222,8 @@ public class Person {
             return name.equals(otherPerson.name)
                     && phone.equals(otherPerson.phone)
                     && optionalEmail.equals(otherPerson.optionalEmail)
-                    && tags.equals(otherPerson.tags);
+                    && tags.equals(otherPerson.tags)
+                    && projects.equals(otherPerson.projects);
         }
         return false;
     }
@@ -240,6 +241,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", optionalEmail)
                 .add("tags", tags)
+                .add("projects", projects)
                 .toString();
     }
 }
