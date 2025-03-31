@@ -101,6 +101,10 @@ public class Person {
         return preferredContactMethod;
     }
 
+    public boolean hasSamePhone(Phone toCompare) {
+        return this.phone.equals(toCompare);
+    }
+
     /**
      * Creates and returns a new {@code Person} with updated details.
      */

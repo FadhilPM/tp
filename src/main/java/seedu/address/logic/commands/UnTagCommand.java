@@ -50,7 +50,7 @@ public class UnTagCommand extends Command {
         requireNonNull(model);
         Person personToUnTag = model.getFilteredPersonList()
                 .stream()
-                .filter(x -> x.getPhone().equals(phone))
+                .filter(x -> x.hasSamePhone(phone))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PHONE_NUMBER));
 
