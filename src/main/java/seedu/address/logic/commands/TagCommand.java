@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,15 +34,17 @@ public class TagCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Tags and/or projects added to %1$s";
     private final Phone phone;
     private final Set<Tag> tags;
+    private final Set<Project> projects;
 
     /**
      * @param phone number of the person in the filtered person list to edit
      * @param tags to add
      */
-    public TagCommand(Phone phone, Set<Tag> tags) {
+    public TagCommand(Phone phone, Set<Tag> tags, Set<Project> projects) {
         requireNonNull(phone);
         this.phone = phone;
         this.tags = tags;
+        this.projects = projects;
     }
 
     @Override
@@ -53,7 +56,7 @@ public class TagCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PHONE_NUMBER));
 
-        Person taggedPerson = personToTag.tagPerson(tags);
+        Person taggedPerson = personToTag.tagPerson(tags, projects);
 
         model.setPerson(personToTag, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

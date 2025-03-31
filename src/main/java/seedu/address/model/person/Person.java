@@ -115,17 +115,12 @@ public class Person {
     /**
      * Creates and returns a new {@code Person} with specified tags added.
     **/
-    public Person tagPerson(Set<Tag> newlyAddedTags) {
+    public Person tagPerson(Set<Tag> newlyAddedTags, Set<Project> newlyAddedProjects) {
         Set<Tag> newTags = new LinkedHashSet<>(this.tags);
         Set<Project> newProjects = new LinkedHashSet<>(this.projects);
 
-        for (Tag t : newlyAddedTags) {
-            if (t instanceof Project project) {
-                newProjects.add(project);
-            } else {
-                newTags.add(t);
-            }
-        }
+        newTags.addAll(newlyAddedTags);
+        newProjects.addAll(newlyAddedProjects);
 
         return new Person(name, phone, optionalEmail, newTags, newProjects, preferredContactMethod);
     }
