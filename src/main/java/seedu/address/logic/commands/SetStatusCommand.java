@@ -15,7 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Project;
-import seedu.address.model.tag.Project.SetStatusDescriptor;
+import seedu.address.model.tag.SetStatusDescriptor;
 
 /**
  * Adds a person to the address book.
