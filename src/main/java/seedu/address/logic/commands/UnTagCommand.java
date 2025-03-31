@@ -62,22 +62,11 @@ public class UnTagCommand extends Command {
                     check, personToUnTag.getName(), personToUnTag.getPhone()));
         }
 
-        Person taggedPerson = unTagProjectFromPerson(personToUnTag, this.tags);
+        Person taggedPerson = personToUnTag.unTagPerson(this.tags);
 
         model.setPerson(personToUnTag, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, taggedPerson.getName()));
-    }
-
-    /**
-     * Create an edited person with the refreshed tag set
-     * @param personToEdit current person to edit
-     * @param tagsToRemove tags to be removed
-     */
-    public static Person unTagProjectFromPerson(Person personToEdit, Set<Tag> tagsToRemove) {
-        assert personToEdit != null;
-
-        return personToEdit.unTagPerson(tagsToRemove);
     }
 
     /**

@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.UnTagCommand.checkForTagInExistingTags;
-import static seedu.address.logic.commands.UnTagCommand.unTagProjectFromPerson;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
@@ -46,7 +45,7 @@ public class UnTagCommandTest {
         Person personToTag = getTypicalPersons().get(1);
         Phone phone = personToTag.getPhone();
         UnTagCommand untagComd = new UnTagCommand(phone, tagsToRemove);
-        Person unTaggedPerson = unTagProjectFromPerson(personToTag, tagsToRemove);
+        Person unTaggedPerson = personToTag.unTagPerson(tagsToRemove);
         String check = checkForTagInExistingTags(personToTag.getTags(), tagsToRemove);
 
         String expectedMessage = String.format(UnTagCommand.MESSAGE_SUCCESS, unTaggedPerson.getName());
@@ -61,7 +60,7 @@ public class UnTagCommandTest {
         Person personToTag = getTypicalPersons().get(2);
         Phone phone = personToTag.getPhone();
         UnTagCommand untagComd = new UnTagCommand(phone, tagsToRemove);
-        Person unTaggedPerson = unTagProjectFromPerson(personToTag, tagsToRemove);
+        Person unTaggedPerson = personToTag.unTagPerson(tagsToRemove);
         String check = checkForTagInExistingTags(personToTag.getTags(), tagsToRemove);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
