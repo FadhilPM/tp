@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.TagCommand.tagProjectToPerson;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
@@ -42,7 +41,7 @@ public class TagCommandTest {
         Person personToTag = getTypicalPersons().get(1);
         Phone phone = personToTag.getPhone();
         TagCommand tagComd = new TagCommand(phone, tagsToAdd);
-        Person taggedPerson = tagProjectToPerson(personToTag, tagsToAdd);
+        Person taggedPerson = personToTag.tagPerson(tagsToAdd);
 
         String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS, taggedPerson.getName());
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

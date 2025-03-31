@@ -81,19 +81,7 @@ public class UnTagCommand extends Command {
     public static Person unTagProjectFromPerson(Person personToEdit, Set<Tag> tagsToRemove) {
         assert personToEdit != null;
 
-        Name name = personToEdit.getName();
-        Phone phone = personToEdit.getPhone();
-        Set<Tag> currentTags = personToEdit.getTags();
-        Set<Project> currentProjects = personToEdit.getProjects();
-        Optional<Email> email = personToEdit.getEmail();
-
-        // Remove tagsToRemove from current Tags
-        Set<Tag> newTags = new LinkedHashSet<>(currentTags);
-        newTags.addAll(currentProjects);
-        newTags.removeAll(tagsToRemove);
-
-        // Return new Person
-        return new Person(name, phone, email, newTags);
+        return personToEdit.unTagPerson(tagsToRemove);
     }
 
     /**
@@ -118,14 +106,10 @@ public class UnTagCommand extends Command {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof UnTagCommand otherCommand) {
+            return phone.equals(otherCommand.phone)
+                    && tags.equals(otherCommand.tags);
         }
-
-        if (!(other instanceof UnTagCommand)) {
-            return false;
-        }
-
-        UnTagCommand otherCommand = (UnTagCommand) other;
-        return phone.equals(otherCommand.phone)
-                && tags.equals(otherCommand.tags);
+        return false;
     }
 }

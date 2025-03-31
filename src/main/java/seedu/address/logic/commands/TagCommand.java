@@ -58,7 +58,7 @@ public class TagCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PHONE_NUMBER));
 
-        Person taggedPerson = tagProjectToPerson(personToTag, tags);
+        Person taggedPerson = personToTag.tagPerson(tags);
 
         model.setPerson(personToTag, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -66,41 +66,14 @@ public class TagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, taggedPerson.getName()));
     }
 
-    /**
-     * Create an edited person with the refreshed tag set
-     * @param personToEdit current person to edit
-     * @param newlyAddedTags tags to be added
-     */
-    public static Person tagProjectToPerson(Person personToEdit, Set<Tag> newlyAddedTags) {
-        assert personToEdit != null;
-
-        Name name = personToEdit.getName();
-        Phone phone = personToEdit.getPhone();
-        Set<Tag> currentTags = personToEdit.getTags();
-        Set<Project> currentProjects = personToEdit.getProjects();
-        Optional<Email> email = personToEdit.getEmail();
-
-        // Add the current and newly added tags to a single Linked Hash Set
-        Set<Tag> newTags = new LinkedHashSet<>(currentTags);
-        newTags.addAll(currentProjects);
-        newTags.addAll(newlyAddedTags);
-
-        // Return new Person
-        return new Person(name, phone, email, newTags);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof TagCommand otherCommand) {
+            return phone.equals(otherCommand.phone)
+                    && tags.equals(otherCommand.tags);
         }
-
-        if (!(other instanceof TagCommand)) {
-            return false;
-        }
-
-        TagCommand otherCommand = (TagCommand) other;
-        return phone.equals(otherCommand.phone)
-                && tags.equals(otherCommand.tags);
+        return false;
     }
 }

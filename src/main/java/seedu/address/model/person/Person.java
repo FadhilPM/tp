@@ -25,18 +25,25 @@ public class Person {
     private final PreferredContactMethod preferredContactMethod;
 
     // Data fields
-    private final Set<Tag> tags = new LinkedHashSet<>();
-    private final Set<Project> projects = new LinkedHashSet<>();
+    private final Set<Tag> tags;
+    private final Set<Project> projects;
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Person} with a specified preferred contact method.
+     *
+     * @param name The name of the person.
+     * @param phone The phone number of the person.
+     * @param optionalEmail The email address of the person.
+     * @param tags The set of tags associated with the person.
+     * @param projects The set of projects associated with the person
      */
-    public Person(Name name, Phone phone, Optional<Email> optionalEmail, Set<Tag> tags) {
-        requireAllNonNull(name, phone, optionalEmail, tags);
+    public Person(Name name, Phone phone, Optional<Email> optionalEmail,
+                  Set<Tag> tags, Set<Project> projects) {
         this.name = name;
         this.phone = phone;
         this.optionalEmail = optionalEmail;
-        tagOrProject(tags);
+        this.tags = tags;
+        this.projects = projects;
         this.preferredContactMethod = new PreferredContactMethod("Phone");
     }
 
@@ -47,17 +54,17 @@ public class Person {
      * @param phone The phone number of the person.
      * @param optionalEmail The email address of the person.
      * @param tags The set of tags associated with the person.
+     * @param projects The set of projects associated with the person.
      * @param preferredContactMethod The preferred method of contact (Phone or Email).
      */
-    public Person(Name name, Phone phone, Optional<Email> optionalEmail, Set<Tag> tags, PreferredContactMethod
-            preferredContactMethod) {
-        requireAllNonNull(name, phone, optionalEmail, tags, preferredContactMethod);
+    public Person(Name name, Phone phone, Optional<Email> optionalEmail,
+                   Set<Tag> tags, Set<Project> projects, PreferredContactMethod preferredContactMethod) {
         this.name = name;
         this.phone = phone;
         this.optionalEmail = optionalEmail;
-        tagOrProject(tags);
+        this.tags = tags;
+        this.projects = projects;
         this.preferredContactMethod = preferredContactMethod;
-
     }
 
     public Name getName() {
@@ -69,6 +76,22 @@ public class Person {
     }
     public Optional<Email> getEmail() {
         return optionalEmail;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable project set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Project> getProjects() {
+        return Collections.unmodifiableSet(projects);
     }
 
     public PreferredContactMethod getPreferredContactMethod() {
@@ -83,25 +106,37 @@ public class Person {
         Phone updatedPhone = epd.phone().orElse(this.phone);
         Optional<Email> updatedEmail = epd.email().or(() -> this.optionalEmail);
 
-        Set<Project> currentProjects = this.projects;
-        Set<Tag> updatedTags = new LinkedHashSet<>(this.tags);
-        updatedTags.addAll(currentProjects);
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, tags, projects, preferredContactMethod);
     }
 
-    /**
-     * Separates tags from projects and place them in separate LinkedHashSets
-     * @param tags set of tags
-     */
-    public void tagOrProject(Set<Tag> tags) {
-        for (Tag t : tags) {
+    public Person tagPerson(Set<Tag> newlyAddedTags) {
+       Set<Tag> newTags = new LinkedHashSet<>(this.tags);
+       Set<Project> newProjects = new LinkedHashSet<>(this.projects);
+
+        for (Tag t : newlyAddedTags) {
             if (t instanceof Project project) {
-                this.projects.add(project);
+                newProjects.add(project);
             } else {
-                this.tags.add(t);
+                newTags.add(t);
             }
         }
+
+        return new Person(name, phone, optionalEmail, newTags, newProjects, preferredContactMethod);
+    }
+
+    public Person unTagPerson(Set<Tag> tagsToRemove) {
+        Set<Tag> newTags = new LinkedHashSet<>(this.tags);
+        Set<Project> newProjects = new LinkedHashSet<>(this.projects);
+
+        for (Tag t : tagsToRemove) {
+            if (t instanceof Project project) {
+                newProjects.remove(project);
+            } else {
+                newTags.remove(t);
+            }
+        }
+
+        return new Person(name, phone, optionalEmail, newTags, newProjects, preferredContactMethod);
     }
 
     /**
@@ -113,31 +148,6 @@ public class Person {
             projects.add(project);
         }
         return this;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    public Set<Project> getProjects() {
-        return Collections.unmodifiableSet(projects);
-    }
-
-    /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
-     */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -179,6 +189,19 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getPhone().equals(getPhone());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -198,7 +221,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, optionalEmail, tags);
+        return Objects.hash(name, phone, optionalEmail, tags, projects);
     }
 
     @Override
