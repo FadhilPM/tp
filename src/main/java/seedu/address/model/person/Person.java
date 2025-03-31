@@ -39,6 +39,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Optional<Email> optionalEmail,
                   Set<Tag> tags, Set<Project> projects) {
+        requireAllNonNull(name, phone, optionalEmail, tags, projects);
         this.name = name;
         this.phone = phone;
         this.optionalEmail = optionalEmail;
@@ -59,6 +60,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Optional<Email> optionalEmail,
                    Set<Tag> tags, Set<Project> projects, PreferredContactMethod preferredContactMethod) {
+        requireAllNonNull(name, phone, optionalEmail, tags, projects, preferredContactMethod);
         this.name = name;
         this.phone = phone;
         this.optionalEmail = optionalEmail;
@@ -74,6 +76,7 @@ public class Person {
     public Phone getPhone() {
         return phone;
     }
+
     public Optional<Email> getEmail() {
         return optionalEmail;
     }
@@ -109,9 +112,12 @@ public class Person {
         return new Person(updatedName, updatedPhone, updatedEmail, tags, projects, preferredContactMethod);
     }
 
+    /**
+     * Creates and returns a new {@code Person} with specified tags added.
+    **/
     public Person tagPerson(Set<Tag> newlyAddedTags) {
-       Set<Tag> newTags = new LinkedHashSet<>(this.tags);
-       Set<Project> newProjects = new LinkedHashSet<>(this.projects);
+        Set<Tag> newTags = new LinkedHashSet<>(this.tags);
+        Set<Project> newProjects = new LinkedHashSet<>(this.projects);
 
         for (Tag t : newlyAddedTags) {
             if (t instanceof Project project) {
@@ -124,6 +130,9 @@ public class Person {
         return new Person(name, phone, optionalEmail, newTags, newProjects, preferredContactMethod);
     }
 
+    /**
+     * Creates and returns a new {@code Person} with specified tags removed.
+     **/
     public Person unTagPerson(Set<Tag> tagsToRemove) {
         Set<Tag> newTags = new LinkedHashSet<>(this.tags);
         Set<Project> newProjects = new LinkedHashSet<>(this.projects);
