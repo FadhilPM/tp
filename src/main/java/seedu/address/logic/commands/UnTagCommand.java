@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.Messages;
@@ -14,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,15 +36,17 @@ public class UnTagCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Tags and/or projects removed from %1$s";
     private final Phone phone;
     private final Set<Tag> tags;
+    private final Set<Project> projects;
 
     /**
      * @param phone number of the person in the filtered person list to edit
      * @param tags to remove
      */
-    public UnTagCommand(Phone phone, Set<Tag> tags) {
+    public UnTagCommand(Phone phone, Set<Tag> tags, Set<Project> projects) {
         requireNonNull(phone);
         this.phone = phone;
         this.tags = tags;
+        this.projects = projects;
     }
 
     @Override
@@ -54,37 +58,22 @@ public class UnTagCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PHONE_NUMBER));
 
-        Set<Tag> currentTags = new LinkedHashSet<>(personToUnTag.getTags());
-        currentTags.addAll(personToUnTag.getProjects());
-        String check = checkForTagInExistingTags(currentTags, this.tags);
-        if (!check.equals("")) {
+        List<Tag> tagsNotFound = personToUnTag.tagsNotInTagSet(this.tags);
+        List<Project> projectsNotFound = personToUnTag.projectsNotInProjectSet(this.projects);
+
+        if (!tagsNotFound.isEmpty()) {
             throw new CommandException(String.format(Messages.MESSAGE_ABSENT_TAG_PROJECT,
-                    check, personToUnTag.getName(), personToUnTag.getPhone()));
+                    tagsNotFound.get(0).getTagName(), personToUnTag.getName(), personToUnTag.getPhone()));
+        } else if (!projectsNotFound.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_ABSENT_TAG_PROJECT,
+                    projectsNotFound.get(0).getTagName(), personToUnTag.getName(), personToUnTag.getPhone()));
         }
 
-        Person taggedPerson = personToUnTag.unTagPerson(this.tags);
+        Person taggedPerson = personToUnTag.unTagPerson(this.tags, this.projects);
 
         model.setPerson(personToUnTag, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, taggedPerson.getName()));
-    }
-
-    /**
-     * For each Tag in tagsToRemove, check if Tag currently exists within the existingTags.
-     * Returns tagName if not found within existingTags, "" otherwise.
-     * @param existingTags set of tags that currently exist
-     * @param tagsToRemove set of tags that should be untagged/removed
-     */
-    public static String checkForTagInExistingTags(Set<Tag> existingTags, Set<Tag> tagsToRemove) {
-        assert existingTags != null;
-        assert tagsToRemove != null;
-
-        for (Tag tagToRemove : tagsToRemove) {
-            if (!(existingTags.contains(tagToRemove))) {
-                return tagToRemove.getTagName();
-            }
-        }
-        return "";
     }
 
     @Override

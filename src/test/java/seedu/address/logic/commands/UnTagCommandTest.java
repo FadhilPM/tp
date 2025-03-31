@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.UnTagCommand.checkForTagInExistingTags;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
@@ -44,60 +43,39 @@ public class UnTagCommandTest {
     public void execute_unTag_success() {
         Person personToTag = getTypicalPersons().get(1);
         Phone phone = personToTag.getPhone();
-        UnTagCommand untagComd = new UnTagCommand(phone, tagsToRemove);
-        Person unTaggedPerson = personToTag.unTagPerson(tagsToRemove);
-        String check = checkForTagInExistingTags(personToTag.getTags(), tagsToRemove);
+        UnTagCommand untagComd = new UnTagCommand(phone, tagsToRemove, new LinkedHashSet<>());
+        Person unTaggedPerson = personToTag.unTagPerson(tagsToRemove, new LinkedHashSet<>());
 
         String expectedMessage = String.format(UnTagCommand.MESSAGE_SUCCESS, unTaggedPerson.getName());
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToTag, unTaggedPerson);
         assertCommandSuccess(untagComd, model, expectedMessage, expectedModel);
-        assertEquals("", check);
     }
 
     @Test
     public void execute_unTag_failure() {
         Person personToTag = getTypicalPersons().get(2);
         Phone phone = personToTag.getPhone();
-        UnTagCommand untagComd = new UnTagCommand(phone, tagsToRemove);
-        Person unTaggedPerson = personToTag.unTagPerson(tagsToRemove);
-        String check = checkForTagInExistingTags(personToTag.getTags(), tagsToRemove);
+        UnTagCommand untagComd = new UnTagCommand(phone, tagsToRemove, new LinkedHashSet<>());
+        Person unTaggedPerson = personToTag.unTagPerson(tagsToRemove, new LinkedHashSet<>());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToTag, unTaggedPerson);
         CommandException thrown = assertThrows(CommandException.class, () -> untagComd.execute(model));
-        assertEquals(String.format(Messages.MESSAGE_ABSENT_TAG_PROJECT, check, personToTag.getName(),
-                personToTag.getPhone()), thrown.getMessage());
-    }
-
-    @Test
-    public void checkForTag_success() {
-        Person person = getTypicalPersons().get(1);
-        Set<Tag> personTags = person.getTags();
-        String check = checkForTagInExistingTags(personTags, tagsToRemove);
-        assertEquals("", check);
-    }
-
-    @Test
-    public void checkForTag_failure() {
-        Person person = getTypicalPersons().get(2);
-        Set<Tag> personTags = person.getTags();
-        String check = checkForTagInExistingTags(personTags, tagsToRemove);
-        assertEquals("friends", check);
     }
 
     @Test
     public void equals() {
         Person p = new PersonBuilder().withTags("T_3st-x").build();
         Phone phone = p.getPhone();
-        UnTagCommand removeTagCommand = new UnTagCommand(phone, tagsToRemove);
-        UnTagCommand otherRemoveTagCommand = new UnTagCommand(phone, new LinkedHashSet<>());
+        UnTagCommand removeTagCommand = new UnTagCommand(phone, tagsToRemove, new LinkedHashSet<>());
+        UnTagCommand otherRemoveTagCommand = new UnTagCommand(phone, new LinkedHashSet<>(), new LinkedHashSet<>());
 
         // same object -> returns true
         assertTrue(removeTagCommand.equals(removeTagCommand));
 
         // same values -> returns true
-        UnTagCommand unTagCommandCopy = new UnTagCommand(phone, tagsToRemove);
+        UnTagCommand unTagCommandCopy = new UnTagCommand(phone, tagsToRemove, new LinkedHashSet<>());
         assertTrue(removeTagCommand.equals(unTagCommandCopy));
 
         // different types -> returns false

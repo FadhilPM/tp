@@ -2,11 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Project;
@@ -101,6 +97,14 @@ public class Person {
         return preferredContactMethod;
     }
 
+    public List<Tag> tagsNotInTagSet(Set<Tag> tagSet) {
+        return tagSet.stream().filter(x -> !this.tags.contains(x)).toList();
+    }
+
+    public List<Project> projectsNotInProjectSet(Set<Project> projectSet) {
+        return projectSet.stream().filter(x -> !this.projects.contains(x)).toList();
+    }
+
     public boolean hasSamePhone(Phone toCompare) {
         return this.phone.equals(toCompare);
     }
@@ -132,17 +136,12 @@ public class Person {
     /**
      * Creates and returns a new {@code Person} with specified tags removed.
      **/
-    public Person unTagPerson(Set<Tag> tagsToRemove) {
+    public Person unTagPerson(Set<Tag> tagsToRemove, Set<Project> projectsToRemove) {
         Set<Tag> newTags = new LinkedHashSet<>(this.tags);
         Set<Project> newProjects = new LinkedHashSet<>(this.projects);
 
-        for (Tag t : tagsToRemove) {
-            if (t instanceof Project project) {
-                newProjects.remove(project);
-            } else {
-                newTags.remove(t);
-            }
-        }
+        newTags.removeAll(tagsToRemove);
+        newProjects.removeAll(projectsToRemove);
 
         return new Person(name, phone, optionalEmail, newTags, newProjects, preferredContactMethod);
     }
