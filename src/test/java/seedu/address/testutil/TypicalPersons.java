@@ -26,11 +26,11 @@ public class TypicalPersons {
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withProjects("project-b").build();
+            .withTags("owesMoney", "friends").withProjects("project-x").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withProjects("project-c").build();
+            .withEmail("heinz@example.com").withProjects("project-x").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withTags("friends").withProjects("project-d").build();
+            .withEmail("cornelia@example.com").withTags("friends").withProjects("project-x").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822247")
             .withEmail("werner@example.com").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824277")

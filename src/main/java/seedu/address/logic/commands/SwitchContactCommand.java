@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -23,7 +24,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SwitchContactCommand extends Command {
 
-    public static final String COMMAND_WORD = "switchContact";
+    public static final String COMMAND_WORD = "switchcontact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches the preferred contact method between phone "
             + "and email. If the current preferred contact is set to phone, this command will change it to email, "
@@ -99,4 +100,20 @@ public class SwitchContactCommand extends Command {
 
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof SwitchContactCommand swcc) {
+            return this.phone.equals(swcc.phone);
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+            .add("phone", phone)
+            .toString();
+    }
 }

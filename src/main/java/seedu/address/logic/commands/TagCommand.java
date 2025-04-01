@@ -88,4 +88,19 @@ public class TagCommand extends Command {
         // Return new Person
         return new Person(name, phone, email, newTags);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof TagCommand)) {
+            return false;
+        }
+
+        TagCommand otherCommand = (TagCommand) other;
+        return phone.equals(otherCommand.phone)
+                && tags.equals(otherCommand.tags);
+    }
 }
