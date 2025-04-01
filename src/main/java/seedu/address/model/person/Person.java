@@ -97,14 +97,17 @@ public class Person {
     }
 
     public List<Tag> tagsNotInTagSet(Set<Tag> tagSet) {
+        requireAllNonNull(tagSet);
         return tagSet.stream().filter(x -> !this.tags.contains(x)).toList();
     }
 
     public List<Project> projectsNotInProjectSet(Set<Project> projectSet) {
+        requireAllNonNull(projectSet);
         return projectSet.stream().filter(x -> !this.projects.contains(x)).toList();
     }
 
     public boolean hasSamePhone(Phone toCompare) {
+        requireAllNonNull(toCompare);
         return this.phone.equals(toCompare);
     }
 
@@ -112,6 +115,7 @@ public class Person {
      * Creates and returns a new {@code Person} with updated details.
      */
     public Person createEditedPerson(EditPersonDescriptor epd) {
+        requireAllNonNull(epd);
         Name updatedName = epd.name().orElse(this.name);
         Phone updatedPhone = epd.phone().orElse(this.phone);
         Optional<Email> updatedEmail = epd.email().or(() -> this.optionalEmail);
@@ -123,6 +127,7 @@ public class Person {
      * Creates and returns a new {@code Person} with specified tags or projects added.
     **/
     public Person tagPerson(Set<Tag> newlyAddedTags, Set<Project> newlyAddedProjects) {
+        requireAllNonNull(newlyAddedTags, newlyAddedProjects);
         Set<Tag> newTags = new LinkedHashSet<>(this.tags);
         Set<Project> newProjects = new LinkedHashSet<>(this.projects);
 
@@ -136,6 +141,7 @@ public class Person {
      * Creates and returns a new {@code Person} with specified tags or projects removed.
      **/
     public Person unTagPerson(Set<Tag> tagsToRemove, Set<Project> projectsToRemove) {
+        requireAllNonNull(tagsToRemove, projectsToRemove);
         Set<Tag> newTags = new LinkedHashSet<>(this.tags);
         Set<Project> newProjects = new LinkedHashSet<>(this.projects);
 
@@ -150,6 +156,7 @@ public class Person {
      * @param project to replace with.
      */
     public Person replaceProject(Project project) {
+        requireAllNonNull(project);
         LinkedHashSet<Project> newProjectSet = new LinkedHashSet<>(this.projects);
 
         if (newProjectSet.remove(project)) {
