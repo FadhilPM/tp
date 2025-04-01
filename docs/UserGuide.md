@@ -139,12 +139,13 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find NAME [NAME]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * The search must only contain alphabetic characters.
-* Whitespaces in the keywords will be trimmed. e.g. A search input for "Hans&nbsp;&nbsp;&nbsp;" (3 spaces)  will be trimmed to "Hans"
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* Leading and trailing whitespaces around each NAME keyword will be trimmed. For example, "Hans   " (with trailing spaces) will be treated as "Hans", and "   Hans" (with leading spaces) will also be trimmed.
+* However, spaces between NAME keywords will not be trimmed. For example, "Hans Bo" will be treated as two separate keywords, while "Ha ns" (with a space inside) will remain as-is and will not match "Hans".
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
@@ -159,10 +160,12 @@ Examples:
 
 Finds persons whose phone numbers contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find PHONE [PHONE]`
 
-* The order of the keywords does not matter. e.g. `88888888 66666666` will match `66666666 88888888`
+* The order of the PHONE keywords does not matter. e.g. `88888888 66666666` will match `66666666 88888888`
 * The search must only contain numerals.
+* Leading and trailing whitespaces around each PHONE keyword will be trimmed. For example, "88888888   " (with trailing spaces) will be treated as "88888888", and "   88888888" (with leading spaces) will also be trimmed.
+* However, spaces between PHONE keywords will not be trimmed. For example, "88888888   66666666" will be treated as two separate keywords, while "8888 8888" (with a space inside a number) will remain as-is and will not match "88888888".
 * Only the phone number is searched.
 * Only full phone numbers will be matched e.g `888` will not match `88888888`
 
