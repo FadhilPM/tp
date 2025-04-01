@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.enumeration.PrefixEnum;
 import seedu.address.storage.JsonSnapshotStorage;
 
 /**
@@ -18,7 +19,8 @@ public class Name {
     public static final String INVALID_NAME_CHARACTERS_MESSAGE = "Name contains invalid characters. Only letters,"
             + " numbers, spaces, '-', '_', '.', and '/' are allowed.";
     public static final String NAME_LENGTH_ERROR = "Name must not exceed 40 characters.";
-    public static final String EMPTY_NAME_MSG = "Name field cannot be empty";
+    public static final String EMPTY_NAME_MSG = "Name field cannot be empty.";
+    public static final String NAME_CONTAINS_PREFIX = "Name cannot contain prefixes.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -44,8 +46,13 @@ public class Name {
      */
     public static Optional<String> invaildNameCheck(String test) {
 
+        //Check if there is blank
         if (test.isBlank()) {
             return Optional.of(EMPTY_NAME_MSG);
+        }
+
+        if (PrefixEnum.containsPrefix(test)) {
+            return Optional.of(NAME_CONTAINS_PREFIX);
         }
 
         logger.fine("Remaining String length: " + test.length());
