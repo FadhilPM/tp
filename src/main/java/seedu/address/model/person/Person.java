@@ -2,7 +2,12 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Project;
@@ -121,7 +126,7 @@ public class Person {
     }
 
     /**
-     * Creates and returns a new {@code Person} with specified tags added.
+     * Creates and returns a new {@code Person} with specified tags or projects added.
     **/
     public Person tagPerson(Set<Tag> newlyAddedTags, Set<Project> newlyAddedProjects) {
         Set<Tag> newTags = new LinkedHashSet<>(this.tags);
@@ -134,7 +139,7 @@ public class Person {
     }
 
     /**
-     * Creates and returns a new {@code Person} with specified tags removed.
+     * Creates and returns a new {@code Person} with specified tags or projects removed.
      **/
     public Person unTagPerson(Set<Tag> tagsToRemove, Set<Project> projectsToRemove) {
         Set<Tag> newTags = new LinkedHashSet<>(this.tags);

@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import java.util.Optional;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Stores the details to edit the person with. Each non-empty field value will replace the
