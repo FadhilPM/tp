@@ -122,7 +122,18 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+
+<div style="display: flex; gap: 10px; text-align: center;">
+  <div style="flex: 1;">
+    <img src="images/editbefore.png" alt="Before edit" width="100%">
+    <p><em>Before edit</em></p>
+  </div>
+  <div style="flex: 1;">
+    <img src="images/editafter.png" alt="After edit" width="100%">
+    <p><em>After edit</em></p>
+  </div>
+</div>
+
 
 ### Locating persons by name: `find NAME [NAME]`
 
@@ -284,17 +295,22 @@ Clears all entries from ArtHive, and deletes all the data from the savefile.
 Format: `clear`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-This command (if successful) will cause all contact data to be lost permanently and is irreversible.
+Successful execution of this command  will cause all contact data to be lost permanently and is irreversible.
 </div>
 
-<div style="display: flex; gap: 10px;">
-  <img src="images/clearbefore.png" alt="clear(before)" width="45%">
-  <img src="images/clearafter.png" alt="clear(after)" width="45%">
+<div style="display: flex; gap: 10px; text-align: center;">
+  <div style="flex: 1;">
+    <img src="images/clearbefore.png" alt="Before clear" width="100%">
+    <p><em>Before clear</em></p>
+  </div>
+  <div style="flex: 1;">
+    <img src="images/clearafter.png" alt="After clear" width="100%">
+    <p><em>After clear</em></p>
+  </div>
 </div>
-
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the program. The application window will close soon after.
 
 Format: `exit`
 
