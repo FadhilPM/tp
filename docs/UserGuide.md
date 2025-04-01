@@ -197,7 +197,7 @@ Deletes the specified contact in the current displayed contact list from ArtHive
 
 Assigns a Tag and/or a Project to an existing person in ArtHive.
 
-Format: `tag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`
+Format: `tag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`
 
 * Adds one or more Tags/Projects to the person specified by `PHONE`.
 * In each use of this command, there must be at least one Tag or Project specified.
@@ -207,7 +207,7 @@ Format: `tag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]�
 
 Examples:
 *  `tag p/81234567 t/friend` Adds a Tag `friend` to the person who has the phone number `81234567`.
-*  `tag p/91234567 t/friend project/friend-project` Adds the Tag`friend` and Project `friend-project` to the person who has the phone number `91234567`.
+*  `tag p/91234567 t/friend proj/friend-project` Adds the Tag`friend` and Project `friend-project` to the person who has the phone number `91234567`.
    ![tag](images/tagAdded.png)
 
 
@@ -215,7 +215,7 @@ Examples:
 
 Deletes a Tag and/or a Project from an existing person in ArtHive.
 
-Format: `untag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`
+Format: `untag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`
 
 * Removes one or more Tags/Projects from the person specified by `PHONE`, if it exists.
 * In each use of this command, there must be at least one Tag or Project specified.
@@ -224,7 +224,7 @@ Format: `untag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]
 
 Examples:
 *  Person A with phone number `81234567` has no tags. `untag p/81234567 t/friend` returns an error message as the Tag does not exist.
-*  Person B with phone number `91234567` has 1 Tag `friend` and 1 Project `friend-project`. `untag p/91234567 project/friend-project` removes the Project `friend-project` only.
+*  Person B with phone number `91234567` has 1 Tag `friend` and 1 Project `friend-project`. `untag p/91234567 proj/friend-project` removes the Project `friend-project` only.
    ![untag](images/tagRemoved.png)
 
 
@@ -343,8 +343,8 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                             
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`                                            
 **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                               
-**Tag**   | `tag p/PHONE (t/TAG \| project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie project/project-x`      
-**UnTag**   | `untag p/PHONE (t/TAG \| project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie project/project-x`    
+**Tag**   | `tag p/PHONE (t/TAG \| proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie project/project-x`      
+**UnTag**   | `untag p/PHONE (t/TAG \| proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie project/project-x`    
 **Save** | `save [FILENAME]` <br> e.g., `save newfile`                                                                                       
 **Snapshot** | `snapshot`                                                                                                                        
 **Switch Preferred Contact Method** | `switchcontact p/PHONE_NUMBER` <br> e.g, `switchcontact p/91234567`                                                               
