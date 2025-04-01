@@ -23,6 +23,19 @@ public class NameTest {
     }
 
     @Test
+    public void nameContainsPrefix() {
+        assertFalse(Name.isValidName("abcn/991")); // with known delimiter
+        assertFalse(Name.isValidName("abcp/991")); // with known delimiter
+        assertFalse(Name.isValidName("abce/991")); // with known delimiter
+        assertFalse(Name.isValidName("abct/991")); // with known delimiter
+        assertFalse(Name.isValidName("abcproject/991")); // with known delimiter
+        assertFalse(Name.isValidName("abcd/991")); // with known delimiter
+        assertFalse(Name.isValidName("abcpay/991")); // with known delimiter
+        assertFalse(Name.isValidName("abcpaprog/991")); // with known delimiter
+
+    }
+
+    @Test
     public void isValidName() {
         // null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
@@ -43,11 +56,13 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("John Doe.")); // with doe
-        assertTrue(Name.isValidName("John/Doe")); // with slash
+        assertTrue(Name.isValidName("Joh/Doe")); // with slash
         assertTrue(Name.isValidName("John_Doe")); // with underscore
         assertTrue(Name.isValidName("Dr. /Prof John")); // with slash and dot
+        assertTrue(Name.isValidName("Oneida / ka")); // with slash and dot
+        assertTrue(Name.isValidName("Tom s/o Tommy")); // with slash and dot
         assertTrue(Name.isValidName("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")); // 40 characters
-        assertTrue(Name.isValidName("p/91919191")); // with known delimiter
+
     }
 
     @Test
