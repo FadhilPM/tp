@@ -40,13 +40,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Optional<Email> optionalEmail,
                   Set<Tag> tags, Set<Project> projects) {
-        requireAllNonNull(name, phone, optionalEmail, tags, projects);
-        this.name = name;
-        this.phone = phone;
-        this.optionalEmail = optionalEmail;
-        this.tags = tags;
-        this.projects = projects;
-        this.preferredContactMethod = new PreferredContactMethod("Phone");
+        this(name, phone, optionalEmail, tags, projects, new PreferredContactMethod("Phone"));
     }
 
     /**
@@ -65,8 +59,8 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.optionalEmail = optionalEmail;
-        this.tags = tags;
-        this.projects = projects;
+        this.tags = Collections.unmodifiableSet(tags);
+        this.projects = Collections.unmodifiableSet(projects);
         this.preferredContactMethod = preferredContactMethod;
     }
 
@@ -87,7 +81,7 @@ public class Person {
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+        return tags;
     }
 
     /**
@@ -95,7 +89,7 @@ public class Person {
      * if modification is attempted.
      */
     public Set<Project> getProjects() {
-        return Collections.unmodifiableSet(projects);
+        return projects;
     }
 
     public PreferredContactMethod getPreferredContactMethod() {
@@ -156,10 +150,12 @@ public class Person {
      * @param project to replace with.
      */
     public Person replaceProject(Project project) {
-        if (this.projects.remove(project)) {
-            projects.add(project);
+        LinkedHashSet<Project> newProjectSet = new LinkedHashSet<>(this.projects);
+
+        if (newProjectSet.remove(project)) {
+            newProjectSet.add(project);
         }
-        return this;
+        return new Person(name, phone, optionalEmail, tags, newProjectSet, preferredContactMethod);
     }
 
     /**
