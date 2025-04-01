@@ -541,6 +541,8 @@ Use case ends.
 * **GUI** Graphical User Interface - the visual elements that display information and receive user input.
 * **CLI**: Command Line Interface - the text-based method of interacting with ArtHive through integrated typed commands.
 * **Regex**: Regular Expression - a sequence of characters that defines a certain search pattern, used in ArtHive to validate phone numbers.
+* **Domain (Email Domain)**: - The part of an email address after the "@" symbol that identifies the mail server handling emails, such as yahoo.com in user@yahoo.com.
+* **Domain Label**: - A part of a domain name, separated by dots, such as www, example, and com in www.yahoo.com.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -559,7 +561,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file<br>
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 1. Saving window preferences
 
@@ -567,8 +570,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -585,12 +586,33 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Save data
 
-### Saving data
+1. Saving data without parameter
 
-1. Dealing with missing/corrupted data files
+   1. Key in `save` in the command space.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Locate and enter `/data` directory through file browser or command-line interface.<br>
+    **Note**: `/data` should be in the same directory as ArtHive.
 
-1. _{ more test cases …​ }_
+   1. There should only be one file in `/data` called `arthive.json`.
+
+1. Saving data with parameter
+
+   1. Key in `save <filename>` in the command space.
+
+   1. Locate and enter `/data` directory through file browser or command-line interface.<br>
+    **Note**: `/data` should be in the same directory as ArtHive.
+
+   1. There should only be one file in `/data` with the same name as `<filename>`.
+
+### Snapshot
+
+1. Creating a snapshot of the existing data
+
+   1. Key in `snapshot` in the command space.
+
+   1. Locate and enter `/snapshot` directory through file browser or command-line interface.<br>
+    **Note**: `/snapshot` should be in the same directory as ArtHive.
+
+   1. There should be a new file in `/snapshot` with the name consisting of `datetime` in the format of `dMMMuuuu_HHmmss`.  

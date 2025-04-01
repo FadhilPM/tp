@@ -25,14 +25,14 @@ public class Person {
     private final PreferredContactMethod preferredContactMethod;
 
     // Data fields
-    private Set<Tag> tags = new LinkedHashSet<>();
-    private Set<Project> projects = new LinkedHashSet<>();
+    private final Set<Tag> tags = new LinkedHashSet<>();
+    private final Set<Project> projects = new LinkedHashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Optional<Email> optionalEmail, Set<Tag> tags) {
-        requireAllNonNull(name, phone, optionalEmail);
+        requireAllNonNull(name, phone, optionalEmail, tags);
         this.name = name;
         this.phone = phone;
         this.optionalEmail = optionalEmail;
@@ -60,7 +60,6 @@ public class Person {
 
     }
 
-
     public Name getName() {
         return name;
     }
@@ -77,13 +76,28 @@ public class Person {
     }
 
     /**
+     * Creates and returns a new {@code Person} with updated details.
+     */
+    public Person createEditedPerson(EditPersonDescriptor epd) {
+        Name updatedName = epd.name().orElse(this.name);
+        Phone updatedPhone = epd.phone().orElse(this.phone);
+        Optional<Email> updatedEmail = epd.email().or(() -> this.optionalEmail);
+
+        Set<Project> currentProjects = this.projects;
+        Set<Tag> updatedTags = new LinkedHashSet<>(this.tags);
+        updatedTags.addAll(currentProjects);
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags);
+    }
+
+    /**
      * Separates tags from projects and place them in separate LinkedHashSets
      * @param tags set of tags
      */
     public void tagOrProject(Set<Tag> tags) {
         for (Tag t : tags) {
-            if (t instanceof Project) {
-                this.projects.add((Project) t);
+            if (t instanceof Project project) {
+                this.projects.add(project);
             } else {
                 this.tags.add(t);
             }
@@ -95,10 +109,9 @@ public class Person {
      * @param project to replace with.
      */
     public Person replaceProject(Project project) {
-        this.projects = new LinkedHashSet<Project>(this.projects
-            .stream()
-            .map(p -> p.getTagName().equals(project.getTagName()) ? project : p)
-            .toList());
+        if (this.projects.remove(project)) {
+            projects.add(project);
+        }
         return this;
     }
 
@@ -128,6 +141,44 @@ public class Person {
     }
 
     /**
+     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
+     */
+    public record EditPersonDescriptor(Optional<Name> name, Optional<Phone> phone, Optional<Email> email) {
+
+        // No-arg constructor, defaults all fields to Optional.empty.
+        public EditPersonDescriptor() {
+            this(Optional.empty(), Optional.empty(), Optional.empty());
+        }
+
+        // Copy constructor.
+        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            this(toCopy.name, toCopy.phone, toCopy.email);
+        }
+
+        public EditPersonDescriptor setName(Name newName) {
+            return new EditPersonDescriptor(Optional.ofNullable(newName), this.phone, this.email);
+        }
+
+        public EditPersonDescriptor setPhone(Phone newPhone) {
+            return new EditPersonDescriptor(this.name, Optional.ofNullable(newPhone), this.email);
+        }
+
+        public EditPersonDescriptor setEmail(Email newEmail) {
+            return new EditPersonDescriptor(this.name, this.phone, Optional.ofNullable(newEmail));
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .add("name", name)
+                    .add("phone", phone)
+                    .add("email", email)
+                    .toString();
+        }
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -135,18 +186,13 @@ public class Person {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof Person otherPerson) {
+            return name.equals(otherPerson.name)
+                    && phone.equals(otherPerson.phone)
+                    && optionalEmail.equals(otherPerson.optionalEmail)
+                    && tags.equals(otherPerson.tags);
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof Person)) {
-            return false;
-        }
-
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && optionalEmail.equals(otherPerson.optionalEmail)
-                && tags.equals(otherPerson.tags);
+        return false;
     }
 
     @Override
@@ -164,5 +210,4 @@ public class Person {
                 .add("tags", tags)
                 .toString();
     }
-
 }
