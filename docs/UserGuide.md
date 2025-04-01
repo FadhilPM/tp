@@ -217,6 +217,9 @@ Saves ArtHive data in the hard disk via passive (automatic) save or active (manu
 Format: `save [filename]`
 
 * Saves the data to the hard disk.
+* `filename` restrictions:
+    * May only contain letters (a-z, A-Z), numbers (0-9), underscore (_), and hyphen (-).
+    * No spaces or other special characters are allowed.
 
 Examples:
 * `save` proceeds to save the data to the filename pointed in `preferences.json`.
@@ -226,36 +229,6 @@ Examples:
 * `save newFile` proceeds to save the data to `newFile.json`, deletes old saved file, and updates `preferences.json`.
 
 ![save with parameter](images/save_with_param.png)
-
-### Creating snapshot of data: `snapshot`
-
-Creates snapshot of the existing data in the `snapshots` directory with a datetime stamp ("dMMMuuuu_HHmmss").
-
-Format: `snapshot`
-
-Examples:
-
-* `snapshot` proceeds to create a snapshot of the existing save file with the name represented with the current datetime (e.g., 24Mar2025_172159.json).
-
-![snapshot](images/snapshot.png)
-
-### Switching preferred contact : `switchContact`
-
-Switch preferred contact. 
-
-Format: `switchContact p/PHONE`
-
-* If the current preferred contact method is email, it will switch to phone.
-* If the current preferred contact method is phone, it will switch to email, provided the contact contains an email.
-* phone is the default preferred contact method when a contact is created.
-* If the contact does not have an email, the preferred contact method will remain as phone.
-
-Examples:
-
-* `switchContact p/91234567` Switches the preferred contact method for the contact with phone number 91234567.
-
-![switch contact to email](images/switchContactJohn.png)
-
 
 #### Editing the data file
 
@@ -269,6 +242,36 @@ ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[f
 If your changes to the data file makes its format invalid, ArtHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause ArtHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
+### Creating snapshot of data: `snapshot`
+
+Creates snapshot of the existing data in the `snapshots` directory with a datetime stamp ("dMMMuuuu_HHmmss").
+
+Format: `snapshot`
+
+Examples:
+
+* `snapshot` proceeds to create a snapshot of the existing save file with the name represented with the current datetime (e.g., 24Mar2025_172159.json).
+
+![snapshot](images/snapshot.png)
+
+### Switching preferred contact : `switchcontact`
+
+Switch preferred contact. 
+
+Format: `switchcontact p/PHONE`
+
+* If the current preferred contact method is email, it will switch to phone.
+* If the current preferred contact method is phone, it will switch to email, provided the contact contains an email.
+* phone is the default preferred contact method when a contact is created.
+* If the contact does not have an email, the preferred contact method will remain as phone.
+
+Examples:
+
+* `switchcontact p/91234567` Switches the preferred contact method for the contact with phone number 91234567.
+
+![switch contact to email](images/switchContactJohn.png)
+
 
 ### Clearing all entries : `clear`
 
@@ -312,6 +315,6 @@ Action | Format, Examples
 **UnTag**   | `untag p/PHONE (t/TAG \| project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie project/project-x`    
 **Save** | `save [FILENAME]` <br> e.g., `save newfile`                                                                                       
 **Snapshot** | `snapshot`                                                                                                                        
-**Switch Preferred Contact Method** | `switchContact p/PHONE_NUMBER` <br> e.g, `switchContact p/91234567`                                                               
+**Switch Preferred Contact Method** | `switchcontact p/PHONE_NUMBER` <br> e.g, `switchcontact p/91234567`                                                               
 **Clear** | `clear`                                                                                                                           
 **Exit** | `exit`                                                                                                                            
