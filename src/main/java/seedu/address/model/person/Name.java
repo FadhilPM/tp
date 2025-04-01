@@ -20,7 +20,7 @@ public class Name {
             + " numbers, spaces, '-', '_', '.', and '/' are allowed.";
     public static final String NAME_LENGTH_ERROR = "Name must not exceed 40 characters.";
     public static final String EMPTY_NAME_MSG = "Name field cannot be empty.";
-    public static final String NAME_CONTAINS_PREFIX = "Name cannot contain prefixes.";
+    public static final String NAME_CONTAINS_PREFIX = "Name contains command prefix.";
 
     /*
      * The first character of the address must not be a whitespace,
