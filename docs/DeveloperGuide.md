@@ -484,9 +484,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-* 1. Artist wants to switch a Contact’s preferred contact method.
-* 2. Artist enters the contact’s Phone Number.
-* 3. ArtHive toggles the preferred contact method, and shows a success message.
+1. Artist wants to switch a Contact’s preferred contact method.
+2. Artist enters the contact’s Phone Number.
+3. ArtHive toggles the preferred contact method, and shows a success message.
 
 Use case ends.
 
