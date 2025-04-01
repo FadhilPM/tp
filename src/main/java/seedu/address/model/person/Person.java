@@ -96,23 +96,49 @@ public class Person {
         return preferredContactMethod;
     }
 
+    /**
+     * Returns a {@code List} of {@code Tag}s from the given {@code tagSet} that are not associated with this person.
+     *
+     * @param tagSet the set of tags to compare against this person's tags; must not be null
+     * @return a list of tags from {@code tagSet} that this person does not have
+     * @throws NullPointerException if {@code tagSet} or any of its elements are null
+     */
     public List<Tag> tagsNotInTagSet(Set<Tag> tagSet) {
         requireAllNonNull(tagSet);
         return tagSet.stream().filter(x -> !this.tags.contains(x)).toList();
     }
 
+    /**
+     * Returns a {@code List} of {@code Project}s from the given {@code projectSet}
+     * that are not associated with this person.
+     * @param projectSet the set of projects to compare against this person's projects; must not be null
+     * @return a list of projects from {@code projectSet} that this person does not have
+     * @throws NullPointerException if {@code projectSet} or any of its elements are null
+     */
     public List<Project> projectsNotInProjectSet(Set<Project> projectSet) {
         requireAllNonNull(projectSet);
         return projectSet.stream().filter(x -> !this.projects.contains(x)).toList();
     }
 
+    /**
+     * Checks if this person has the same phone number as the specified {@code Phone} object.
+     *
+     * @param toCompare the phone number to compare with this person's phone; must not be null
+     * @return {@code true} if the phone numbers are equal, {@code false} otherwise
+     * @throws NullPointerException if {@code toCompare} is null
+     */
     public boolean hasSamePhone(Phone toCompare) {
         requireAllNonNull(toCompare);
         return this.phone.equals(toCompare);
     }
 
     /**
-     * Creates and returns a new {@code Person} with updated details.
+     * Creates and returns a new {@code Person} with updated details based on the given {@code EditPersonDescriptor}.
+     * Fields not specified in the descriptor will retain their original values.
+     *
+     * @param epd the descriptor containing the fields to update; must not be null
+     * @return a new {@code Person} instance with the updated details
+     * @throws NullPointerException if {@code epd} is null
      */
     public Person createEditedPerson(EditPersonDescriptor epd) {
         requireAllNonNull(epd);
@@ -124,8 +150,13 @@ public class Person {
     }
 
     /**
-     * Creates and returns a new {@code Person} with specified tags or projects added.
-    **/
+     * Creates and returns a new {@code Person} with the specified tags and projects added to the existing ones.
+     *
+     * @param newlyAddedTags the tags to add; must not be null
+     * @param newlyAddedProjects the projects to add; must not be null
+     * @return a new {@code Person} instance with the additional tags and projects
+     * @throws NullPointerException if {@code newlyAddedTags} or {@code newlyAddedProjects} is null
+     */
     public Person tagPerson(Set<Tag> newlyAddedTags, Set<Project> newlyAddedProjects) {
         requireAllNonNull(newlyAddedTags, newlyAddedProjects);
         Set<Tag> newTags = new LinkedHashSet<>(this.tags);
@@ -138,8 +169,13 @@ public class Person {
     }
 
     /**
-     * Creates and returns a new {@code Person} with specified tags or projects removed.
-     **/
+     * Creates and returns a new {@code Person} with the specified tags and projects removed from the existing ones.
+     *
+     * @param tagsToRemove the tags to remove; must not be null
+     * @param projectsToRemove the projects to remove; must not be null
+     * @return a new {@code Person} instance with the specified tags and projects removed
+     * @throws NullPointerException if {@code tagsToRemove} or {@code projectsToRemove} is null
+     */
     public Person unTagPerson(Set<Tag> tagsToRemove, Set<Project> projectsToRemove) {
         requireAllNonNull(tagsToRemove, projectsToRemove);
         Set<Tag> newTags = new LinkedHashSet<>(this.tags);
@@ -152,8 +188,12 @@ public class Person {
     }
 
     /**
-     * Replaces a project in a person.
-     * @param project to replace with.
+     * Creates and returns a new {@code Person} with the specified project replaced.
+     * If the project exists in the current set,
+     * it will be removed and then re-added (e.g., to reflect updated details).
+     * @param project the project to replace; must not be null
+     * @return a new {@code Person} instance with the updated project
+     * @throws NullPointerException if {@code project} is null
      */
     public Person replaceProject(Project project) {
         requireAllNonNull(project);
