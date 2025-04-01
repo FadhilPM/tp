@@ -228,6 +228,27 @@ Examples:
    ![untag](images/tagRemoved.png)
 
 
+### Updating the status of a Project : `setstatus`
+
+Updates the status of a Project from an existing person in ArtHive.
+
+Format: `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS]`
+
+* Updates the Project tagged to the person at the specified `INDEX`. The `INDEX` refers to the index number shown in the displayed person list. The `INDEX` must be a positive integer 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* `PAYMENT` must be either `paid` or `unpaid` (case-insensitive).
+* `DEADLINE` must be in a `dd MMM uuuu HHmm` format
+* `PROGRESS` must be either `complete` or `incomplete` (case-insensitive).
+* Existing values will be updated to the input values.
+
+Examples:
+*  `Alex Yeoh` at `INDEX` 1 has a `PROJECT` called `friend-project`.
+   ![setstatus sample state](images/setstatusSampleState.png)
+* 
+
+
+
+
 ### Saving the data : `save`
 
 Saves ArtHive data in the hard disk via passive (automatic) save or active (manual) save. Passive save activates after any command that changes the data. Active save activates when the user type in `save` as the command. This can be coupled with a [filename] parameter to change the name of the saved file. Upon changing the saved file name, all subsequent saves will be written to the new file.
