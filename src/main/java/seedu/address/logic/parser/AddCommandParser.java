@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -18,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Project;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -55,12 +55,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Set<Tag> currentProjects = ParserUtil.parseProjects(argMultimap.getAllValues(PREFIX_PROJECT));
+        Set<Project> currentProjects = ParserUtil.parseProjects(argMultimap.getAllValues(PREFIX_PROJECT));
 
-        Set<Tag> newTags = new LinkedHashSet<>(tagList);
-        newTags.addAll(currentProjects);
-
-        Person person = new Person(name, phone, optionalEmail, newTags);
+        Person person = new Person(name, phone, optionalEmail, tagList, currentProjects);
 
         return new AddCommand(person);
     }

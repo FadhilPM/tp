@@ -94,9 +94,10 @@ class JsonAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new LinkedHashSet<>();
+        final Set<Project> modelProjects = new LinkedHashSet<>();
 
         modelTags.addAll(personTags);
-        modelTags.addAll(personProjectTags);
+        modelProjects.addAll(personProjectTags);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -131,7 +132,7 @@ class JsonAdaptedPerson {
 
         final PreferredContactMethod preferredContactMethod = new PreferredContactMethod(preferredContact);
 
-        return new Person(modelName, modelPhone, modelEmail, modelTags, preferredContactMethod);
+        return new Person(modelName, modelPhone, modelEmail, modelTags, modelProjects, preferredContactMethod);
     }
 
 }

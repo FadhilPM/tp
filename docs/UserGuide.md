@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-ArtHive is a **desktop application for artists to manage clients and commissions**, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ArtHive can get your tasks done faster than traditional GUI apps.
+ArtHive is a **desktop application for artists to manage clients and commissions**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ArtHive can get your tasks done faster than traditional GUI apps. 
+
+ArtHive is intended for managing Singapore-based contacts, where the phone numbers are 8 digits long starting with 6, 8 or 9.
 
 * Table of Contents
 {:toc}
@@ -20,7 +22,7 @@ ArtHive is a **desktop application for artists to manage clients and commissions
 1. Copy the file to the folder you want to use as the _home folder_ for ArtHive.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar arthive.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. The app may already contain some sample data which may not be the same as shown below.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -88,7 +90,7 @@ Adds a person to ArtHive.
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​ [project/PROJECT]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0).
+A person can have any number of tags and/or projects (including 0).
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -97,7 +99,7 @@ The email address is optional. You can choose to leave it blank if you prefer no
 
 * Name can only contain alphanumeric characters, spaces, a max of 40 characters and should not be blank.
 * Phone numbers should be exactly 8 digits long, beginning with either 6, 8 or 9.
-* Email address must be in a valid format (i.e. username@domain.com), without spaces.
+* Email address (if provided) must be in a valid format (i.e. name@domain.com), without spaces.
 * Tags/Projects can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 
 Examples:
@@ -105,7 +107,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
 * `add n/Betsy Crowe e/betsycrowe@example.com p/92345678 t/friend project/betsy_project`
 
-  ![result for 'find alex david'](images/addContactResult.jpg)
+  ![result for 'find alex david'](images/addContactResult.png)
 
 ### Editing a person : `edit`
 
@@ -114,22 +116,36 @@ Edits an existing person in ArtHive.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Only edits to a person's name, phone number and email address is allowed.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
-### Locating persons by name: `find`
+<div style="display: flex; gap: 10px; text-align: center;">
+  <div style="flex: 1;">
+    <img src="images/editbefore.png" alt="Before edit" width="100%">
+    <p><em>Before edit</em></p>
+  </div>
+  <div style="flex: 1;">
+    <img src="images/editafter.png" alt="After edit" width="100%">
+    <p><em>After edit</em></p>
+  </div>
+</div>
+
+
+### Locating persons by name: `find NAME [NAME]`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find NAME [NAME]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * The search must only contain alphabetic characters.
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* Leading and trailing whitespaces around each NAME keyword will be trimmed. For example, "Hans   " (with trailing spaces) will be treated as "Hans", and "   Hans" (with leading spaces) will also be trimmed.
+* However, spaces between NAME keywords will not be trimmed. For example, "Hans Bo" will be treated as two separate keywords, while "Ha ns" (with a space inside) will remain as-is and will not match "Hans".
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
@@ -140,14 +156,16 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating persons by number: `find`
+### Locating persons by number: `find PHONE [PHONE]`
 
 Finds persons whose phone numbers contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find PHONE [PHONE]`
 
-* The order of the keywords does not matter. e.g. `88888888 66666666` will match `66666666 88888888`
+* The order of the PHONE keywords does not matter. e.g. `88888888 66666666` will match `66666666 88888888`
 * The search must only contain numerals.
+* Leading and trailing whitespaces around each PHONE keyword will be trimmed. For example, "88888888   " (with trailing spaces) will be treated as "88888888", and "   88888888" (with leading spaces) will also be trimmed.
+* However, spaces between PHONE keywords will not be trimmed. For example, "88888888   66666666" will be treated as two separate keywords, while "8888 8888" (with a space inside a number) will remain as-is and will not match "88888888".
 * Only the phone number is searched.
 * Only full phone numbers will be matched e.g `888` will not match `88888888`
 
@@ -275,13 +293,27 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from ArtHive.
+Clears all entries from ArtHive, and deletes all the data from the savefile.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Successful execution of this command  will cause all contact data to be lost permanently and is irreversible.
+</div>
+
+<div style="display: flex; gap: 10px; text-align: center;">
+  <div style="flex: 1;">
+    <img src="images/clearbefore.png" alt="Before clear" width="100%">
+    <p><em>Before clear</em></p>
+  </div>
+  <div style="flex: 1;">
+    <img src="images/clearafter.png" alt="After clear" width="100%">
+    <p><em>After clear</em></p>
+  </div>
+</div>
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the program. The application window will close soon after.
 
 Format: `exit`
 
