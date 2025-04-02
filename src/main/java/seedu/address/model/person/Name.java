@@ -17,10 +17,10 @@ import seedu.address.storage.JsonSnapshotStorage;
 public class Name {
 
     public static final String INVALID_NAME_CHARACTERS_MESSAGE = "Name contains invalid characters. Only letters,"
-            + " numbers, spaces, '-', '_', '.', and '/' are allowed.";
-    public static final String NAME_LENGTH_ERROR = "Name must not exceed 40 characters.";
-    public static final String EMPTY_NAME_MSG = "Name field cannot be empty.";
-    public static final String NAME_CONTAINS_PREFIX = "Name contains command prefix.";
+            + " numbers, spaces, '-', '_', '.', ',' and '/' are allowed.";
+    public static final String MESSAGE_NAME_LENGTH_ERROR = "Name must not exceed 40 characters.";
+    public static final String MESSAGE_EMPTY_NAME_MSG = "Name field cannot be empty.";
+    public static final String MESSAGE_NAME_CONTAINS_PREFIX = "Name contains command prefix.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -48,11 +48,11 @@ public class Name {
 
         //Check if there is blank
         if (test.isBlank()) {
-            return Optional.of(EMPTY_NAME_MSG);
+            return Optional.of(MESSAGE_EMPTY_NAME_MSG);
         }
 
         if (PrefixEnum.containsPrefix(test)) {
-            return Optional.of(NAME_CONTAINS_PREFIX);
+            return Optional.of(MESSAGE_NAME_CONTAINS_PREFIX);
         }
 
         logger.fine("Remaining String length: " + test.length());
@@ -61,7 +61,7 @@ public class Name {
         if (!test.matches(VALIDATION_REGEX)) {
             return Optional.of(INVALID_NAME_CHARACTERS_MESSAGE);
         } else if (test.length() > 40) {
-            return Optional.of(NAME_LENGTH_ERROR);
+            return Optional.of(MESSAGE_NAME_LENGTH_ERROR );
         }
 
         return Optional.empty();

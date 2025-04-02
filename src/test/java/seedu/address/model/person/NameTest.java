@@ -104,7 +104,7 @@ public class NameTest {
         String nameTooLong = "a".repeat(41); // 41 characters, should be invalid
         Optional<String> errorMessage = Name.invaildNameCheck(nameTooLong);
         assertTrue(errorMessage.isPresent());
-        assertEquals(Name.NAME_LENGTH_ERROR, errorMessage.get());
+        assertEquals(Name.MESSAGE_NAME_LENGTH_ERROR, errorMessage.get());
     }
 
     @Test
@@ -112,7 +112,7 @@ public class NameTest {
         String emptyName = ""; // Empty name
         Optional<String> errorMessage = Name.invaildNameCheck(emptyName);
         assertTrue(errorMessage.isPresent());
-        assertEquals(Name.EMPTY_NAME_MSG, errorMessage.get());
+        assertEquals(Name.MESSAGE_EMPTY_NAME_MSG, errorMessage.get());
     }
 
     @Test
@@ -120,6 +120,6 @@ public class NameTest {
         String emptyName = " "; // Empty name
         Optional<String> errorMessage = Name.invaildNameCheck(emptyName);
         assertTrue(errorMessage.isPresent());
-        assertEquals(Name.EMPTY_NAME_MSG, errorMessage.get());
+        assertEquals(Name.MESSAGE_EMPTY_NAME_MSG, errorMessage.get());
     }
 }
