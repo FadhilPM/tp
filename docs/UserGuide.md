@@ -220,9 +220,9 @@ Assigns a Tag and/or a Project to an existing person in ArtHive.
 
 Format: `tag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`
 
-* Adds one or more `TAG`/`PROJECT` to the person specified by `PHONE`.
+* Adds one or more Tags/Projects to the person specified by `PHONE`.
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
-* In each use of this command, there must be at least one Tag or Project specified.
+* In each use of this command, there must be at least one `TAG` or `PROJECT` specified.
 * The existing Tags/Projects of the person will not be removed i.e adding of tags is cumulative.
 * `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 * Projects will have a default values of "Incomplete", "Unpaid", and a deadline set 1 day after creation. Modifications can be made using the `setstatus` command.
@@ -240,9 +240,9 @@ Deletes a Tag and/or a Project from an existing person in ArtHive.
 
 Format: `untag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`
 
-* Removes one or more `TAG`/`PROJECT` from the person specified by `PHONE`, if it exists.
+* Removes one or more Tags/Projects from the person specified by `PHONE`, if it exists.
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
-* In each use of this command, there must be at least one Tag or Project specified.
+* In each use of this command, there must be at least one `TAG` or `PROJECT` specified.
 * `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 * Untagging a Tag/Project from a person deletes the Tag/Project forever.
 
