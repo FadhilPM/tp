@@ -422,7 +422,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Artist wants to save contact(s).
-2. ArtHive saves contact(s) to 'arthive.json'.
+2. ArtHive saves contact(s).
 3. ArtHive displays confirmation message.
 
    Use case ends.
