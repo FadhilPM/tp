@@ -258,11 +258,11 @@ _{more aspects and alternatives to be added}_
 **Target user profile**:
 
 * Freelance Artists
-* has a need to manage a significant number of contacts with highly specific requests
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of contacts with highly specific requests
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
 **Value proposition**: organise client information clearly and efficiently, reminds users of upcoming deadlines and is optimised for users who prefer a command line interface.
 
@@ -315,13 +315,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case: Tag Project to Contact**
+**Use case: Add a Tag/Project to Contact**
 
 **MSS**
 
-1.  Artist wants to tag a Project to a Contact.
-2.  Artist enters the contact's Phone Number and Project Name.
-3.  ArtHive adds the Project Name to the Contact, and shows a success message.
+1.  Artist wants to add a Tag/Project to a Contact.
+2.  Artist enters the contact's Phone Number and Tag/Project Name.
+3.  ArtHive adds the Tag/Project Name to the Contact, and shows a success message.
 
     Use case ends.
 
@@ -333,12 +333,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 2.
 
 * 2b.   ArtHive detects that the Project Name is non-existent.
-  * 2b1.  ArtHive creates the Project with a paid attribute value of "False".
+  * 2b1.  ArtHive creates the Project with the following default statuses:
+    * Payment: 'Unpaid'     
+    * Deadline: One day after the creation of the project in a 'dd MMM uuuu HHmm' format
+    * Progress: 'Incomplete'
 
     Use case resumes at step 3.
 
-* 2c.   ArtHive detects that the user input is invalid.
-  * 2c1.  ArtHive displays an error message.
+
+* 2c.   ArtHive detects that the Tag Name is non-existent.
+    * 2c1.  ArtHive creates the Tag with the provided name.
+
+      Use case resumes at step 3.
+  
+* 2d.   ArtHive detects that the user input is invalid.
+  * 2d1.  ArtHive displays an error message.
 
     Use case resumes at step 2.
 
@@ -453,19 +462,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: Track Payment**
+**Use case: Update Project Status**
 
 **MSS**
 
-1.  Artist wants to track the payment status of a project.
-2.  Artist enters the payment status, contact's phone number, and project name.
-3.  ArtHive tags the corresponding contact’s project with the provided payment status, and shows a "paid" or "unpaid" tag on user profile.
+1.  Artist wants to update the status of a project.
+2.  Artist enters the associated contact's display index, project name, and the fields they wish to update.
+3.  ArtHive updates the corresponding contact’s project with the provided payment status, deadline or progress.
 
     Use case ends.
 
 **Extensions**
 
-* 2a.   ArtHive detects that the given Phone Number is non-existent.
+
+* 2a.   ArtHive detects that the given Index is non-existent.
   * 2a1.  ArtHive displays an error message.
 
     Use case resumes at step 2.
@@ -475,10 +485,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-* 2c.   ArtHive detects that the user input is invalid.
-  * 2c1.  ArtHive displays an error message.
+
+* 2c.   ArtHive detects that there are no fields provided to be updated.
+    * 2c1.  ArtHive returns an error message.
+
+      Use case resumes at step 2.
+  
+* 2d.   ArtHive detects that the user input is invalid.
+  * 2d1.  ArtHive returns an error message.
 
     Use case resumes at step 2.
+
 
 **Use Case: Toggle Preferred Contact Method between Email and Phone**
 
@@ -511,9 +528,9 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should be able to respond within 3 seconds.
 5. The system should not lose any data up till the latest successful operation due to accidental closure of the application.
 6. The data file should be stored locally on the computer and should be in a human editable text file.
@@ -529,8 +546,11 @@ Use case ends.
 * **Client**: An individual or organization that engages the artist's services.
 * **Contact**: An entry in ArtHive that contains client information, such as, name, phone number, and associated project tags.
 * **Phone Number**: A unique 8-digit Singapore phone number starting with '6','8', or '9' that acts as the unique and primary identifier for each contact in ArtHive.
-* **Project Tag**: A label assigned to contacts to group them by project. Project tags are alphanumeric strings with underscores and hyphens, up to 20 characters.
-* **Payment Status**: A boolean attribute (paid/unpaid) associated with a project tag that indicates whether payment has been received.
+* **Project**: A project that the contact is working on. Project names are alphanumeric strings with underscores and hyphens, up to 20 characters. A project contains associated payment, deadline and progress information.
+* **Tag**: A tag is an alphanumeric strings with underscores and hyphens that can be associated with a contact.
+* **Payment**: A boolean attribute (paid/unpaid) associated with a project that indicates whether payment has been received.
+* **Deadline**: A date-time representation associated with a project that indicates when the project is due.
+* **Progress**: A boolean attribute (complete/incomplete) associated with a project that indicates whether the project is finished or not.
 * **Command Format**: The specific syntax required to execute functions in ArtHive (e.g., "add n/<Client Name> p/<Phone Number> t/<ProjectTag Name>").
 * **Parameter**: A piece of information required by a command, such as client name, phone number, or project tag.
 * **Data Persistence**: The ability to save contact information to a file for later retrieval, ensuring data is not lost when the application is closed.
