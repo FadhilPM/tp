@@ -301,17 +301,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. ArtHive detects that the entered Phone Number is invalid.
-  * 2a1. ArtHive displays an error message with the correct phone number format.
+  * 2a1. ArtHive displays an error message.
 
     Use case resumes at step 2.
 
 * 2b. ArtHive detects that the client Name contains invalid characters or exceeds 40 characters.
-  * 2b1. ArtHive displays an error message specifying the issue.
+  * 2b1. ArtHive displays an error message.
 
     Use case resumes at step 2.
 
 * 2c. ArtHive detects that the entered Project Tag is invalid.
-  * 2c1. ArtHive displays an error message specifying the issue (excessive length or invalid characters).
+  * 2c1. ArtHive displays an error message.
 
     Use case resumes at step 2.
 
@@ -340,6 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 3.
 
+
 * 2c.   ArtHive detects that the Tag Name is non-existent.
     * 2c1.  ArtHive creates the Tag with the provided name.
 
@@ -363,12 +364,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a.   ArtHive detects an error where the search keyword(s) contains invalid characters.
-  * 2a1.  ArtHive displays an error message stating that the search keyword(s) contains invalid characters.
+  * 2a1.  ArtHive displays an error message.
 
     Use case resumes at step 2.
 
 * 2b.   ArtHive is unable to find Client Names that match the search keyword(s).
-  * 2b1.  ArtHive displays an empty list with a message stating that no matching contacts are found.
+  * 2b1.  ArtHive displays an empty list.
 
     Use case ends.
 
@@ -385,12 +386,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a.   ArtHive detects an error where the search keyword(s) contains invalid characters.
-    * 2a1.  ArtHive displays an error message stating that the search keyword(s) contains invalid characters.
+    * 2a1.  ArtHive displays an error message.
 
       Use case resumes at step 2.
 
 * 2b.   ArtHive is unable to find Phone Numbers that match the search keyword(s).
-    * 2b1.  ArtHive displays an empty list with a message stating that no matching contacts are found.
+    * 2b1.  ArtHive displays an empty list.
 
       Use case ends.
 
@@ -408,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. ArtHive detects that the entered Phone Number is invalid.
-  * 2a1. ArtHive displays an error message with valid phone number format examples.
+  * 2a1. ArtHive displays an error message.
   * 2a2. Artist enters new data.
 
     Step 2a1-2a2 are repeated until the data entered are correct.
@@ -421,7 +422,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Artist chooses to clear all contacts.
 2. ArtHive clears all contacts and associated project tags.
-3. ArtHive displays confirmation message stating that the contacts has been cleared.
+3. ArtHive displays confirmation message.
 
    Use case ends.
 
@@ -430,7 +431,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Artist wants to save contact(s).
-2. ArtHive saves contact(s) to 'arthive.json'.
+2. ArtHive saves contact(s).
 3. ArtHive displays confirmation message.
 
    Use case ends.
@@ -449,13 +450,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 3.
 
 * 1c. Artist specifies an invalid filename consisting of unrecognised characters.
-  * 1c1. ArtHive displays error message indicating invalid filename.
+  * 1c1. ArtHive displays error message.
   * 1c2. Artist acknowledges the error.
 
     Use case returns to step 1.
 
 * 2a. ArtHive encounters an error during saving.
-  * 2a1. ArtHive displays error message with details.
+  * 2a1. ArtHive displays an error message.
   * 2a2. Artist acknowledges the error.
 
     Use case ends.
@@ -473,6 +474,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
+
 * 2a.   ArtHive detects that the given Index is non-existent.
   * 2a1.  ArtHive displays an error message.
 
@@ -482,6 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2b1.  ArtHive displays an error message.
 
     Use case resumes at step 2.
+
 
 * 2c.   ArtHive detects that there are no fields provided to be updated.
     * 2c1.  ArtHive returns an error message.
@@ -507,7 +510,7 @@ Use case ends.
 **Extensions**
 
 * 2a. ArtHive detects that the given Phone Number is non-existent.
-  * 2a1. ArtHive displays an error message stating that the Contact does not exist.
+  * 2a1. ArtHive displays an error message.
 
     Use case resumes at step 2.
 
@@ -517,7 +520,7 @@ Use case ends.
     Use case resumes at step 2.
 
 * 2c. ArtHive detects that the user input is invalid. 
-  * 2c1. ArtHive returns an error message.
+  * 2c1. ArtHive displays an error message.
 
     Use case resumes at step 2.
 
