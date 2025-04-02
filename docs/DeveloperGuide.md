@@ -537,8 +537,11 @@ Use case ends.
 * **Client**: An individual or organization that engages the artist's services.
 * **Contact**: An entry in ArtHive that contains client information, such as, name, phone number, and associated project tags.
 * **Phone Number**: A unique 8-digit Singapore phone number starting with '6','8', or '9' that acts as the unique and primary identifier for each contact in ArtHive.
-* **Project Tag**: A label assigned to contacts to group them by project. Project tags are alphanumeric strings with underscores and hyphens, up to 20 characters.
-* **Payment Status**: A boolean attribute (paid/unpaid) associated with a project tag that indicates whether payment has been received.
+* **Project**: A project that the contact is working on. Project names are alphanumeric strings with underscores and hyphens, up to 20 characters. A project contains associated payment, deadline and progress information.
+* **Tag**: A tag is an alphanumeric strings with underscores and hyphens that can be associated with a contact.
+* **Payment**: A boolean attribute (paid/unpaid) associated with a project that indicates whether payment has been received.
+* **Deadline**: A date-time representation associated with a project that indicates when the project is due.
+* **Progress**: A boolean attribute (complete/incomplete) associated with a project that indicates whether the project is finished or not.
 * **Command Format**: The specific syntax required to execute functions in ArtHive (e.g., "add n/<Client Name> p/<Phone Number> t/<ProjectTag Name>").
 * **Parameter**: A piece of information required by a command, such as client name, phone number, or project tag.
 * **Data Persistence**: The ability to save contact information to a file for later retrieval, ensuring data is not lost when the application is closed.
