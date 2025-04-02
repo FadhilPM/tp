@@ -421,7 +421,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Artist wants to save contact(s).
+1. Artist choose to save contact(s).
 2. ArtHive saves contact(s).
 3. ArtHive displays confirmation message.
 
@@ -441,13 +441,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 3.
 
 * 1c. Artist specifies an invalid filename consisting of unrecognised characters.
-  * 1c1. ArtHive displays error message indicating invalid filename.
+  * 1c1. ArtHive displays error message.
   * 1c2. Artist acknowledges the error.
 
     Use case returns to step 1.
 
 * 2a. ArtHive encounters an error during saving.
-  * 2a1. ArtHive displays error message with details.
+  * 2a1. ArtHive displays an error message.
   * 2a2. Artist acknowledges the error.
 
     Use case ends.
