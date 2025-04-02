@@ -8,6 +8,7 @@
 | **Delete**                          | `delete INDEX`                                             | `delete 3`                                                            |
 | **Tag**                             | `tag p/PHONE_NUMBER t/TAG [t/TAG]…​`                       | `tag p/91234567 t/project-x`                                          |
 | **Untag**                           | `untag p/PHONE_NUMBER t/TAG [t/TAG]…​`                     | `untag p/91234567 t/project-x`                                        |
+| **Set Status**                      | `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS]`| `setstatus 1 proj/friend-project pay/paid by/05 Apr 2025 2359` |
 | **Save**                            | `save [FILENAME]`                                          | `save newfile`                                                        |
 | **Switch Preferred Contact Method** | `switchContact p/PHONE_NUMBER`                             | `switchContact p/91234567`                                            |
 | **Clear**                           | `clear`                                                    | —                                                                     |
