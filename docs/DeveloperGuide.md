@@ -301,17 +301,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. ArtHive detects that the entered Phone Number is invalid.
-  * 2a1. ArtHive displays an error message with the correct phone number format.
+  * 2a1. ArtHive displays an error message.
 
     Use case resumes at step 2.
 
 * 2b. ArtHive detects that the client Name contains invalid characters or exceeds 40 characters.
-  * 2b1. ArtHive displays an error message specifying the issue.
+  * 2b1. ArtHive displays an error message.
 
     Use case resumes at step 2.
 
 * 2c. ArtHive detects that the entered Project Tag is invalid.
-  * 2c1. ArtHive displays an error message specifying the issue (excessive length or invalid characters).
+  * 2c1. ArtHive displays an error message.
 
     Use case resumes at step 2.
 
