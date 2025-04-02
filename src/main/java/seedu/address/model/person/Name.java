@@ -55,7 +55,7 @@ public class Name {
             return Optional.of(MESSAGE_NAME_CONTAINS_PREFIX);
         }
 
-        logger.fine("Remaining String length: " + test.length());
+        logger.fine("Remaining String length: " + test.length() );
         logger.fine("Name input: " + test);
 
         if (!test.matches(VALIDATION_REGEX)) {

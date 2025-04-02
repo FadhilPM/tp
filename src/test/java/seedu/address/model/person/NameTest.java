@@ -61,6 +61,7 @@ public class NameTest {
         assertTrue(Name.isValidName("Oneida / ka")); // with slash and dot
         assertTrue(Name.isValidName("Tom s/o Tommy")); // with slash and dot
         assertTrue(Name.isValidName("Tom, Tea Tommy")); // with comma
+        assertTrue(Name.isValidName("O'neil Tommy")); // with apostrophe
         assertTrue(Name.isValidName("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")); // 40 characters
 
     }
