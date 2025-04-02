@@ -103,7 +103,7 @@ The email address is optional. You can choose to leave it blank if you prefer no
         * Special characters: -, _, ., /
         * Maximum length: 40 characters
     * **Not Allowed Characters:**
-        * Prefix commands (n/, p/, e/, t/, project/, d/, pay/, prog/) are NOT allowed
+        * Prefix commands (n/, p/, e/, t/, proj/, by/, pay/, prog/) are NOT allowed
         * Any other special characters outside the allowed list
 * Phone numbers should be exactly 8 digits long, beginning with either 6, 8 or 9.
 * The `EMAIL` (if provided) must be in a valid email address format (i.e. name@domain.com), without spaces.
@@ -130,7 +130,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
         * Special characters: -, _, ., /
         * Maximum length: 40 characters
     * **Not Allowed Characters:**
-        * Prefix commands (n/, p/, e/, t/, project/, d/, pay/, prog/) are NOT allowed
+        * Prefix commands (n/, p/, e/, t/, proj/, by/, pay/, prog/) are NOT allowed
         * Any other special characters outside the allowed list
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current displayed contact list.
 * The `EMAIL` (if provided) must be in a valid email address format (i.e. name@domain.com), without spaces.
