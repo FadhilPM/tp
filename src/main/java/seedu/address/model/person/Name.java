@@ -17,7 +17,7 @@ import seedu.address.storage.JsonSnapshotStorage;
 public class Name {
 
     public static final String INVALID_NAME_CHARACTERS_MESSAGE = "Name contains invalid characters. Only letters,"
-            + " numbers, spaces, '-', '_', '.', ',' and '/' are allowed.";
+            + " numbers, spaces, '-', '_', '.', ',', apostrophe (') and '/' are allowed.";
     public static final String MESSAGE_NAME_LENGTH_ERROR = "Name must not exceed 40 characters.";
     public static final String MESSAGE_EMPTY_NAME_MSG = "Name field cannot be empty.";
     public static final String MESSAGE_NAME_CONTAINS_PREFIX = "Name contains command prefix.";
@@ -26,7 +26,7 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[-a-zA-Z0-9_.,\\/ ]*";
+    public static final String VALIDATION_REGEX = "^[-a-zA-Z0-9_'.,\\/ ]*";
     private static final Logger logger = LogsCenter.getLogger(JsonSnapshotStorage.class);
     public final String fullName;
 
