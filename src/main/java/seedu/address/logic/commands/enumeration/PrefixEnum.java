@@ -8,8 +8,8 @@ public enum PrefixEnum {
     PREFIX_PHONE("p/"),
     PREFIX_EMAIL("e/"),
     PREFIX_TAG("t/"),
-    PREFIX_PROJECT("project/"),
-    PREFIX_DEADLINE("d/"),
+    PREFIX_PROJECT("proj/"),
+    PREFIX_DEADLINE("by/"),
     PREFIX_PAYMENT("pay/"),
     PREFIX_PROGRESS("prog/");
     private final String prefix;
