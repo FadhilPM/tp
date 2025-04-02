@@ -258,11 +258,11 @@ _{more aspects and alternatives to be added}_
 **Target user profile**:
 
 * Freelance Artists
-* has a need to manage a significant number of contacts with highly specific requests
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of contacts with highly specific requests
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
 **Value proposition**: organise client information clearly and efficiently, reminds users of upcoming deadlines and is optimised for users who prefer a command line interface.
 
@@ -315,13 +315,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case: Tag Project to Contact**
+**Use case: Add a Tag/Project to Contact**
 
 **MSS**
 
-1.  Artist wants to tag a Project to a Contact.
-2.  Artist enters the contact's Phone Number and Project Name.
-3.  ArtHive adds the Project Name to the Contact, and shows a success message.
+1.  Artist wants to add a Tag/Project to a Contact.
+2.  Artist enters the contact's Phone Number and Tag/Project Name.
+3.  ArtHive adds the Tag/Project Name to the Contact, and shows a success message.
 
     Use case ends.
 
@@ -333,12 +333,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 2.
 
 * 2b.   ArtHive detects that the Project Name is non-existent.
-  * 2b1.  ArtHive creates the Project with a paid attribute value of "False".
+  * 2b1.  ArtHive creates the Project with the following default statuses:
+    * Payment: 'Unpaid'     
+    * Deadline: One day after the creation of the project in a 'dd MMM uuuu HHmm' format
+    * Progress: 'Incomplete'
 
     Use case resumes at step 3.
 
-* 2c.   ArtHive detects that the user input is invalid.
-  * 2c1.  ArtHive returns an error message.
+* 2c.   ArtHive detects that the Tag Name is non-existent.
+    * 2c1.  ArtHive creates the Tag with the provided name.
+
+      Use case resumes at step 3.
+  
+* 2d.   ArtHive detects that the user input is invalid.
+  * 2d1.  ArtHive returns an error message.
 
     Use case resumes at step 2.
 
