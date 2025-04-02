@@ -466,17 +466,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a.   ArtHive detects that the given Phone Number is non-existent.
-  * 2a1.  ArtHive displays an error message stating that the Contact does not exist.
+  * 2a1.  ArtHive displays an error message.
 
     Use case resumes at step 2.
 
 * 2b.   ArtHive detects that the Project Name is non-existent.
-  * 2b1.  ArtHive displays an error message stating that the Project does not exist.
+  * 2b1.  ArtHive displays an error message.
 
     Use case resumes at step 2.
 
 * 2c.   ArtHive detects that the user input is invalid.
-  * 2c1.  ArtHive returns an error message.
+  * 2c1.  ArtHive displays an error message.
 
     Use case resumes at step 2.
 
