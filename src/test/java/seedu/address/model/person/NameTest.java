@@ -28,8 +28,8 @@ public class NameTest {
         assertFalse(Name.isValidName("abcp/991")); // with known delimiter
         assertFalse(Name.isValidName("abce/991")); // with known delimiter
         assertFalse(Name.isValidName("abct/991")); // with known delimiter
-        assertFalse(Name.isValidName("abcproject/991")); // with known delimiter
-        assertFalse(Name.isValidName("abcd/991")); // with known delimiter
+        assertFalse(Name.isValidName("abcproj/991")); // with known delimiter
+        assertFalse(Name.isValidName("abcby/991")); // with known delimiter
         assertFalse(Name.isValidName("abcpay/991")); // with known delimiter
         assertFalse(Name.isValidName("abcpaprog/991")); // with known delimiter
 
