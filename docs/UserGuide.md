@@ -87,7 +87,7 @@ Format: `list`
 
 Adds a person to ArtHive.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​ [project/PROJECT]…​`
+Format: `add n/NAME p/PHONE [e/EMAIL] [t/TAG]…​ [project/PROJECT]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags and/or projects (including 0).
@@ -97,7 +97,7 @@ A person can have any number of tags and/or projects (including 0).
 The email address is optional. You can choose to leave it blank if you prefer not to provide it.
 </div>
 
-* When specifying a name, please ensure it follows these rules:
+* When specifying a `NAME`, please ensure it follows these rules:
     * **Allowed Characters:**
         * Alphanumeric characters (A-Z, a-z, 0-9)
         * Special characters: -, _, ., /
@@ -105,9 +105,9 @@ The email address is optional. You can choose to leave it blank if you prefer no
     * **Not Allowed Characters:**
         * Prefix commands (n/, p/, e/, t/, proj/, by/, pay/, prog/) are NOT allowed
         * Any other special characters outside the allowed list
-* Phone numbers should be exactly 8 digits long, beginning with either 6, 8 or 9.
+* `PHONE` should be exactly 8 digits long, beginning with either 6, 8 or 9.
 * The `EMAIL` (if provided) must be in a valid email address format (i.e. name@domain.com), without spaces.
-* Tags/Projects can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 
 Examples:
 * `add n/Sarah Lee p/91233215`
@@ -124,7 +124,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * Only edits to a person's name, phone number and email address is allowed.
-* When specifying a name, please ensure it follows these rules:
+* When specifying a `NAME`, please ensure it follows these rules:
     * **Allowed Characters:**
         * Alphanumeric characters (A-Z, a-z, 0-9)
         * Special characters: -, _, ., /
@@ -180,10 +180,10 @@ Finds persons whose phone numbers contain any of the given keywords.
 
 Format: `find PHONE [PHONE]`
 
-* The order of the PHONE keywords does not matter. e.g. `88888888 66666666` will match `66666666 88888888`
+* The order of the `PHONE` does not matter. e.g. `88888888 66666666` will match `66666666 88888888`
 * The search must only contain numerals.
 * Leading and trailing whitespaces around each PHONE keyword will be trimmed. For example, "88888888   " (with trailing spaces) will be treated as "88888888", and "   88888888" (with leading spaces) will also be trimmed.
-* However, spaces between PHONE keywords will not be trimmed. For example, "88888888   66666666" will be treated as two separate keywords, while "8888 8888" (with a space inside a number) will remain as-is and will not match "88888888".
+* However, spaces between `PHONE` will not be trimmed. For example, "88888888   66666666" will be treated as two separate keywords, while "8888 8888" (with a space inside a number) will remain as-is and will not match "88888888".
 * Only the phone number is searched.
 * Only full phone numbers will be matched e.g `888` will not match `88888888`
 
@@ -220,11 +220,11 @@ Assigns a Tag and/or a Project to an existing person in ArtHive.
 
 Format: `tag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`
 
-* Adds one or more Tags/Projects to the person specified by `PHONE`.
+* Adds one or more `TAG`/`PROJECT` to the person specified by `PHONE`.
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
 * In each use of this command, there must be at least one Tag or Project specified.
 * The existing Tags/Projects of the person will not be removed i.e adding of tags is cumulative.
-* Tags/Projects can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 * Projects will have a default values of "Incomplete", "Unpaid", and a deadline set 1 day after creation. Modifications can be made using the `setstatus` command.
 
 Examples:
@@ -240,10 +240,10 @@ Deletes a Tag and/or a Project from an existing person in ArtHive.
 
 Format: `untag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`
 
-* Removes one or more Tags/Projects from the person specified by `PHONE`, if it exists.
+* Removes one or more `TAG`/`PROJECT` from the person specified by `PHONE`, if it exists.
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
 * In each use of this command, there must be at least one Tag or Project specified.
-* Tags/Projects can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 * Untagging a Tag/Project from a person deletes the Tag/Project forever.
 
 Examples:
