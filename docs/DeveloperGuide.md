@@ -461,19 +461,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: Track Payment**
+**Use case: Update Project Status**
 
 **MSS**
 
-1.  Artist wants to track the payment status of a project.
-2.  Artist enters the payment status, contact's phone number, and project name.
-3.  ArtHive tags the corresponding contact’s project with the provided payment status, and shows a "paid" or "unpaid" tag on user profile.
+1.  Artist wants to update the status of a project.
+2.  Artist enters the associated contact's display index, project name, and the fields they wish to update.
+3.  ArtHive updates the corresponding contact’s project with the provided payment status, deadline or progress.
 
     Use case ends.
 
 **Extensions**
 
-* 2a.   ArtHive detects that the given Phone Number is non-existent.
+* 2a.   ArtHive detects that the given Index is non-existent.
   * 2a1.  ArtHive displays an error message stating that the Contact does not exist.
 
     Use case resumes at step 2.
@@ -483,10 +483,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-* 2c.   ArtHive detects that the user input is invalid.
-  * 2c1.  ArtHive returns an error message.
+* 2c.   ArtHive detects that there are no fields provided to be updated.
+    * 2c1.  ArtHive returns an error message stating that at least one field must be provided.
+
+      Use case resumes at step 2.
+  
+* 2d.   ArtHive detects that the user input is invalid.
+  * 2d1.  ArtHive returns an error message.
 
     Use case resumes at step 2.
+
 
 **Use Case: Toggle Preferred Contact Method between Email and Phone**
 
@@ -519,9 +525,9 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should be able to respond within 3 seconds.
 5. The system should not lose any data up till the latest successful operation due to accidental closure of the application.
 6. The data file should be stored locally on the computer and should be in a human editable text file.
