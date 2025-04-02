@@ -413,7 +413,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Artist chooses to clear all contacts.
 2. ArtHive clears all contacts and associated project tags.
-3. ArtHive displays confirmation message stating that the contacts has been cleared.
+3. ArtHive displays confirmation message.
 
    Use case ends.
 
