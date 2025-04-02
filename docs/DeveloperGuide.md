@@ -355,12 +355,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a.   ArtHive detects an error where the search keyword(s) contains invalid characters.
-  * 2a1.  ArtHive displays an error message stating that the search keyword(s) contains invalid characters.
+  * 2a1.  ArtHive displays an error message.
 
     Use case resumes at step 2.
 
 * 2b.   ArtHive is unable to find Client Names that match the search keyword(s).
-  * 2b1.  ArtHive displays an empty list with a message stating that no matching contacts are found.
+  * 2b1.  ArtHive displays an empty list.
 
     Use case ends.
 
