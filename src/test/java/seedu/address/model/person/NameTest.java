@@ -32,7 +32,6 @@ public class NameTest {
         assertFalse(Name.isValidName("abcby/991")); // with known delimiter
         assertFalse(Name.isValidName("abcpay/991")); // with known delimiter
         assertFalse(Name.isValidName("abcpaprog/991")); // with known delimiter
-
     }
 
     @Test
@@ -61,6 +60,7 @@ public class NameTest {
         assertTrue(Name.isValidName("Dr. /Prof John")); // with slash and dot
         assertTrue(Name.isValidName("Oneida / ka")); // with slash and dot
         assertTrue(Name.isValidName("Tom s/o Tommy")); // with slash and dot
+        assertTrue(Name.isValidName("Tom, Tea Tommy")); // with comma
         assertTrue(Name.isValidName("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")); // 40 characters
 
     }
