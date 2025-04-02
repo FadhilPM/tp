@@ -400,7 +400,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. ArtHive detects that the entered Phone Number is invalid.
-  * 2a1. ArtHive displays an error message with valid phone number format examples.
+  * 2a1. ArtHive displays an error message.
   * 2a2. Artist enters new data.
 
     Step 2a1-2a2 are repeated until the data entered are correct.
