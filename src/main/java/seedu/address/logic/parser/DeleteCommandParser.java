@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INDEX_OR_PHONE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -31,7 +32,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         boolean phoneNumberIsPresent = !phoneNumber.isEmpty();
 
         if (preambleIsPresent && phoneNumberIsPresent) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_INDEX_OR_PHONE + "\n" + DeleteCommand.MESSAGE_USAGE));
         }
 
         try {
@@ -43,7 +45,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 return new DeleteByIndexCommand(index);
             }
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, pe.getMessage() + "\n" + DeleteCommand.MESSAGE_USAGE),
+                    pe
+            );
         }
     }
 }

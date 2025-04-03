@@ -15,6 +15,7 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INDEX_OR_PHONE = "Provide a valid index OR a valid phone number";
     public static final String MESSAGE_ABSENT_PHONE_NUMBER = "No person found with that phone number";
     public static final String MESSAGE_ABSENT_TAG_PROJECT = "Tag/Project \"%1$s\" is not found with %2$s (%3$s)";
     public static final String MESSAGE_ABSENT_PROJECT = "No project found with that name";
