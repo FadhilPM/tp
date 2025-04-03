@@ -51,14 +51,10 @@ public class Tag {
         //checks if the object is the same
         if (other == this) {
             return true;
+        } else if (other instanceof Tag otherTag) {
+            return tagName.equalsIgnoreCase(otherTag.tagName);
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof Tag)) {
-            return false;
-        }
-        Tag otherTag = (Tag) other;
-        return tagName.equalsIgnoreCase(otherTag.tagName);
+        return false;
     }
 
     @Override

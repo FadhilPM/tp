@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -56,7 +57,7 @@ public class HelpWindow extends UiPart<Stage> {
     private void loadHelpContent() {
         try {
             InputStream is = getClass().getResourceAsStream(HELP_CONTENT_PATH);
-            byte[] bytes = is.readAllBytes();
+            byte[] bytes = Objects.requireNonNull(is).readAllBytes();
             String content = new String(bytes, StandardCharsets.UTF_8);
             is.close();
 
@@ -64,8 +65,8 @@ public class HelpWindow extends UiPart<Stage> {
                 @Override
                 protected List<String> getDefaultStylesheets() {
                     return List.of(
-                        getClass().getResource("/view/DarkTheme.css").toExternalForm(),
-                        getClass().getResource("/view/HelpWindow.css").toExternalForm()
+                        Objects.requireNonNull(getClass().getResource("/view/DarkTheme.css")).toExternalForm(),
+                        Objects.requireNonNull(getClass().getResource("/view/HelpWindow.css")).toExternalForm()
                     );
                 }
             };
