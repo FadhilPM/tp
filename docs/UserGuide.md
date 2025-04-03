@@ -267,9 +267,16 @@ Format: `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS
 
 Examples:
 * `Alex Yeoh` at `INDEX` 1 has a `PROJECT` called `friend-project`.
-   ![setstatus sample state](images/setstatusSampleState.png)
+
+![setstatus sample state](images/setstatusSampleState.png)
+
 * `setstatus 1 proj/friend-project pay/paid by/05 Apr 2025 2359` Updates the `PAYMENT` to `Paid` and the `DEADLINE` to `05 Apr 2025 2359`
-* `setstatus 1 proj/friend-project prog/complete` Updates the `PROGRESS` to `Complete`
+
+![setstatusPaymentDeadline.png](images/setstatusPaymentDeadline.png)
+
+*`setstatus 1 proj/friend-project prog/complete` Updates the `PROGRESS` to `Complete`
+
+![setstatusProgress.png](images/setstatusProgress.png)
 
 
 ### Saving the data : `save`
