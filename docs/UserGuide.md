@@ -252,6 +252,32 @@ Examples:
    ![untag](images/tagRemoved.png)
 
 
+### Updating the status of a Project : `setstatus`
+
+Updates the status of a Project from an existing person in ArtHive.
+
+Format: `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS]`
+
+* Updates the Project tagged to the person at the specified `INDEX`. The `INDEX` refers to the index number shown in the displayed person list. The `INDEX` must be a positive integer 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* `PAYMENT` must be either `Paid` or `Unpaid` (case-insensitive).
+* `DEADLINE` must be in a `dd MMM uuuu HHmm` format
+* `PROGRESS` must be either `Complete` or `Incomplete` (case-insensitive).
+* Existing values will be updated to the input values.
+
+Examples:
+* `Alex Yeoh` at `INDEX` 1 has a `PROJECT` called `friend-project`.
+
+![setstatus sample state](images/setstatusSampleState.png)
+
+* `setstatus 1 proj/friend-project pay/paid by/05 Apr 2025 2359` Updates the `PAYMENT` to `Paid` and the `DEADLINE` to `05 Apr 2025 2359`
+
+![setstatusPaymentDeadline.png](images/setstatusPaymentDeadline.png)
+
+*`setstatus 1 proj/friend-project prog/complete` Updates the `PROGRESS` to `Complete`
+
+![setstatusProgress.png](images/setstatusProgress.png)
+
 
 ### Saving the data : `save`
 
