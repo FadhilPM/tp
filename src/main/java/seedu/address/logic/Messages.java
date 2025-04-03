@@ -16,7 +16,11 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_ABSENT_PHONE_NUMBER = "No person found with that phone number";
-    public static final String MESSAGE_ABSENT_TAG_PROJECT = "Tag/Project \"%1$s\" is not found with %2$s (%3$s)";
+    public static final String MESSAGE_ABSENT_TAG_PROJECT =
+            """
+                    The following
+                    %1$s
+                    could not be found within %2$s (%3$s). No changes have been made.""";
     public static final String MESSAGE_ABSENT_PROJECT = "No project found with that name";
 
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
