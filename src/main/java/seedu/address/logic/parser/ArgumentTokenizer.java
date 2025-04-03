@@ -87,7 +87,7 @@ public class ArgumentTokenizer {
     private static ArgumentMultimap extractArguments(String argsString, List<PrefixPosition> prefixPositions) {
 
         // Sort by start position
-        prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
+        prefixPositions.sort((prefix1, prefix2) -> prefix1.startPosition() - prefix2.startPosition());
 
         // Insert a PrefixPosition to represent the preamble
         PrefixPosition preambleMarker = new PrefixPosition(new Prefix(""), 0);
@@ -101,7 +101,7 @@ public class ArgumentTokenizer {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         for (int i = 0; i < prefixPositions.size() - 1; i++) {
             // Extract and store prefixes and their arguments
-            Prefix argPrefix = prefixPositions.get(i).getPrefix();
+            Prefix argPrefix = prefixPositions.get(i).prefix();
             String argValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
             argMultimap.put(argPrefix, argValue);
         }
@@ -116,10 +116,10 @@ public class ArgumentTokenizer {
     private static String extractArgumentValue(String argsString,
                                         PrefixPosition currentPrefixPosition,
                                         PrefixPosition nextPrefixPosition) {
-        Prefix prefix = currentPrefixPosition.getPrefix();
+        Prefix prefix = currentPrefixPosition.prefix();
 
-        int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.prefix().length();
-        String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
+        int valueStartPos = currentPrefixPosition.startPosition() + prefix.prefix().length();
+        String value = argsString.substring(valueStartPos, nextPrefixPosition.startPosition());
 
         return value.trim();
     }
@@ -127,22 +127,6 @@ public class ArgumentTokenizer {
     /**
      * Represents a prefix's position in an arguments string.
      */
-    private static class PrefixPosition {
-        private int startPosition;
-        private final Prefix prefix;
-
-        PrefixPosition(Prefix prefix, int startPosition) {
-            this.prefix = prefix;
-            this.startPosition = startPosition;
-        }
-
-        int getStartPosition() {
-            return startPosition;
-        }
-
-        Prefix getPrefix() {
-            return prefix;
-        }
-    }
+    private record PrefixPosition(Prefix prefix, int startPosition) {}
 
 }
