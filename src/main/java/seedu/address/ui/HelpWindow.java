@@ -40,7 +40,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        root.setResizable(false);
         loadHelpContent();
     }
 
@@ -78,7 +77,6 @@ public class HelpWindow extends UiPart<Stage> {
 
             helpContentPane.getChildren().add(scrollPane);
 
-
         } catch (IOException e) {
             logger.warning("Error loading help content: " + e.getMessage());
         }
@@ -113,6 +111,7 @@ public class HelpWindow extends UiPart<Stage> {
             // Set window size to fit screen if necessary
             double maxScreenWidth = screenBounds.getWidth();
             double maxScreenHeight = screenBounds.getHeight();
+
             double dialogWidth = getRoot().getWidth();
             double dialogHeight = getRoot().getHeight();
 
@@ -121,10 +120,10 @@ public class HelpWindow extends UiPart<Stage> {
 
             getRoot().setWidth(finalDialogWidth);
             getRoot().setHeight(finalDialogHeight);
+            getRoot().centerOnScreen();
         });
 
         getRoot().show();
-        getRoot().centerOnScreen();
     }
 
     /**
