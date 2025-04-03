@@ -28,7 +28,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         Optional<String> phoneNumber = argMultimap.getValue(PREFIX_PHONE);
 
         boolean preambleIsPresent = !preamble.isEmpty();
-        boolean phoneNumberIsPresent = !phoneNumber.isEmpty();
+        boolean phoneNumberIsPresent = phoneNumber.isPresent();
 
         if (preambleIsPresent && phoneNumberIsPresent) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
