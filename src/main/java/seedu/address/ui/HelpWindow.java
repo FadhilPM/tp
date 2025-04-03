@@ -111,8 +111,8 @@ public class HelpWindow extends UiPart<Stage> {
             javafx.geometry.Rectangle2D screenBounds = javafx.stage.Screen.getPrimary().getVisualBounds();
 
             // Set window size to fit screen if necessary
-            double maxScreenWidth = screenBounds.getWidth();  // 90% of screen width
-            double maxScreenHeight = screenBounds.getHeight();  // 90% of screen height
+            double maxScreenWidth = screenBounds.getWidth();
+            double maxScreenHeight = screenBounds.getHeight();
             double dialogWidth = getRoot().getWidth();
             double dialogHeight = getRoot().getHeight();
 
