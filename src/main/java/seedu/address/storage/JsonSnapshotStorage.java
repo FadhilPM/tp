@@ -18,10 +18,10 @@ public class JsonSnapshotStorage implements SnapshotStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonSnapshotStorage.class);
 
     /**
-     * Create snapshot of {@link ReadOnlyAddressBook} to sppecified path.
+     * Create snapshot of {@link ReadOnlyAddressBook} to specified path.
      * @param addressBook can't be null.
      * @param filePath where the snapshot will be saved.
-     * @throws IOException
+     * @throws IOException if an I/O error occurs while saving the snapshot.
      */
     @Override
     public void makeSnapshot(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {

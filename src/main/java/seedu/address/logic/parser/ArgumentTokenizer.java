@@ -64,7 +64,7 @@ public class ArgumentTokenizer {
      * is valid if there is a whitespace before {@code prefix}. Returns -1 if no
      * such occurrence can be found.
      * <p>
-     * E.g if {@code argsString} = "e/hip/900", {@code prefix} = "p/" and
+     * e.g. if {@code argsString} = "e/hip/900", {@code prefix} = "p/" and
      * {@code fromIndex} = 0, this method returns -1 as there are no valid
      * occurrences of "p/" with whitespace before it. However, if
      * {@code argsString} = "e/hi p/900", {@code prefix} = "p/" and

@@ -53,8 +53,8 @@ public class CommandResult {
     }
 
     /**
-     * Return the boolean of isSaveLocationModified
-     * @return
+     * Returns whether the save location has been modified.
+     * @return true if the save location has been modified, false otherwise.
      */
     public boolean isSaveLocationModified() {
         return isSaveLocationModified;
