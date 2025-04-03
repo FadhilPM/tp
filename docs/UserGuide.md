@@ -151,44 +151,36 @@ Examples:
   </div>
 </div>
 
+### Locating persons: `find`
 
-### Locating persons by name: `find NAME [NAME]`
+Finds persons whose name or phone numbers contain any of the given keywords
 
-Finds persons whose names contain any of the given keywords.
+Format: `find NAME [NAME]` or  `find PHONE [PHONE]`
 
-Format: `find NAME [NAME]`
+* Only one type of search per command is allowed, either by `NAME` (alphabetic characters) or by `PHONE` (integers 0-9).
 
-* The order of the NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* The search must only contain alphabetic characters.
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* Leading and trailing whitespaces around each NAME keyword will be trimmed. For example, "Hans   " (with trailing spaces) will be treated as "Hans", and "   Hans" (with leading spaces) will also be trimmed.
-* However, spaces between NAME keywords will not be trimmed. For example, "Hans Bo" will be treated as two separate keywords, while "Ha ns" (with a space inside) will remain as-is and will not match "Hans".
-* Only the name is searched.
+**Search by NAME**
+* The order of the `NAME` does not matter. e.g.`Hans Bo` will match `Bo Hans`.
+* The search for `NAME` is case-insensitive. e.g `hans` will match `Hans`
+* Leading and trailing whitespaces around each `NAME` keyword will be trimmed. For example, "Hans   " (with trailing spaces) will be treated as "Hans", and "   Hans" (with leading spaces) will also be trimmed.
+* Spaces between `NAME` keywords will not be trimmed. For example, "Hans Bo" will be treated as two separate keywords, while "Ha ns" (with a space inside) will remain as-is and will not match "Hans".
+* Only the Person's name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  
-![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Locating persons by number: `find PHONE [PHONE]`
-
-Finds persons whose phone numbers contain any of the given keywords.
-
-Format: `find PHONE [PHONE]`
-
-* The order of the `PHONE` does not matter. e.g. `88888888 66666666` will match `66666666 88888888`.
-* The search must only contain numerals.
-* Leading and trailing whitespaces around each PHONE keyword will be trimmed. For example, "88888888   " (with trailing spaces) will be treated as "88888888", and "   88888888" (with leading spaces) will also be trimmed.
-* However, spaces between `PHONE` will not be trimmed. For example, "88888888   66666666" will be treated as two separate keywords, while "8888 8888" (with a space inside a number) will remain as-is and will not match "88888888".
-* Only the phone number is searched.
+**Search by PHONE**
+* The order of the `PHONE` does not matter. e.g.`88888888 66666666` will match `66666666 88888888`.
+* Leading and trailing whitespaces around each `PHONE` keyword will be trimmed. For example, "88888888   " (with trailing spaces) will be treated as "88888888", and "   88888888" (with leading spaces) will also be trimmed.
+* Spaces between `PHONE` will not be trimmed. For example, "88888888   66666666" will be treated as two separate keywords, while "8888 8888" (with a space inside a number) will remain as-is and will not match "88888888".
+* Only the Person's phone number is searched.
 * Only full phone numbers will be matched e.g `888` will not match `88888888`.
 
 Examples:
-* `find 87438807` returns `Alex Yeoh`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+![result for 'find alex david'](images/findAlexDavidResult.png)
+
 * `find 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu` <br>
   
 ![result for 'find 87438807 99272758'](images/find87438807_99272758Result.png)
@@ -197,14 +189,14 @@ Examples:
 
 Deletes the specified contact in the current displayed contact list from ArtHive.
 
-**Format:** `delete INDEX` **or** `delete p/PHONE`
+Format: `delete INDEX` or `delete p/PHONE`
 
 * Deletes the contact at the specified `INDEX` **or** with the specified `PHONE`.
 * The `INDEX` refers to the index number shown in the displayed contact list and **must be a positive integer** (1, 2, 3, …).
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current displayed contact list.
 * **One and only one** of `INDEX` or `p/PHONE` must be provided. 
 
-**Examples:**
+Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in ArtHive.
   
 ![result for 'delete 2'](images/DeleteByIndexResult.png)
