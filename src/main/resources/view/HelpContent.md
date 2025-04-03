@@ -4,7 +4,7 @@
 | **List**                            | `list`                                        | —                                                                         |
 | **Add**                             | `add n/NAME p/PHONE [e/EMAIL] [t/TAG] [proj/PROJECT]…​` | `add n/James Ho p/91234567 e/jamesho@example.com t/friend proj/project-x` |
 | **Edit**                            | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`     | `edit 2 n/James Lee p/91231234 e/jameslee@example.com`                    |
-| **Find**                            | `find NAME [NAME]` or `find PHONE [PHONE]`    | `find James Jake` or `find 87487765 88888888`                             |
+| **Find**                            | `find NAME [NAME]…​` or `find PHONE [PHONE]…​`    | `find James Jake` or `find 87487765 88888888`                             |
 | **Delete**                          | `delete (p/PHONE ​| ​ INDEX)`                                                                 | `delete 3` or `delete p/91231234`                                      |
 | **Tag**                             | `tag p/PHONE (t/TAG ​| ​  proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`                              | `tag p/91234567 t/bestie proj/project-x`                               |
 | **Untag**                           | `untag p/PHONE (t/TAG ​| ​ proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​​`                              | `untag p/91234567 t/bestie proj/project-x`                             |
