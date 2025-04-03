@@ -1,7 +1,6 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,26 +18,39 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"),
+            new Person(new Name("Alex Yeoh"),
+                    new Phone("87438807"),
                     Optional.of(new Email("alexyeoh@example.com")),
-                getTagSet("friends"), new LinkedHashSet<>()),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"),
+                    getTagSet("friends"),
+                    getProjectSet("Website-Redesign", "Mobile-App")),
+            new Person(new Name("Bernice Yu"),
+                    new Phone("99272758"),
                     Optional.empty(),
-                getTagSet("colleagues", "friends"), new LinkedHashSet<>()),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
+                    getTagSet("colleagues", "friends"),
+                    getProjectSet("Logo-Design", "Branding")),
+            new Person(new Name("Charlotte Oliveiro"),
+                    new Phone("93210283"),
                     Optional.of(new Email("charlotte@example.com")),
-                getTagSet("neighbours"), new LinkedHashSet<>()),
-            new Person(new Name("David Li"), new Phone("91031282"),
+                    getTagSet("neighbours"),
+                    getProjectSet("Portrait-Commission")),
+            new Person(new Name("David Li"),
+                    new Phone("91031282"),
                     Optional.of(new Email("lidavid@example.com")),
-                getTagSet("family"), new LinkedHashSet<>()),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"),
+                    getTagSet("family"),
+                    getProjectSet("Wedding-Photography", "Family-Portraits")),
+            new Person(new Name("Irfan Ibrahim"),
+                    new Phone("92492021"),
                     Optional.of(new Email("irfan@example.com")),
-                getTagSet("classmates"), new LinkedHashSet<>()),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"),
+                    getTagSet("classmates"),
+                    getProjectSet("Graduation-Photos", "Exhibition")),
+            new Person(new Name("Roy Balakrishnan"),
+                    new Phone("92624417"),
                     Optional.of(new Email("royb@example.com")),
-                getTagSet("colleagues"), new LinkedHashSet<>())
+                    getTagSet("colleagues"),
+                    getProjectSet("Corporate-Branding", "Annual-Report-Design"))
         };
     }
 
@@ -55,8 +67,8 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+        .map(Tag::new)
+        .collect(Collectors.toSet());
     }
 
     /**
@@ -64,8 +76,8 @@ public class SampleDataUtil {
      */
     public static Set<Project> getProjectSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Project::new)
-                .collect(Collectors.toSet());
+        .map(Project::new)
+        .collect(Collectors.toSet());
     }
 
 }
