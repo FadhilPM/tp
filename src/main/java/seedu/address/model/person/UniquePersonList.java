@@ -119,11 +119,10 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniquePersonList)) {
+        if (!(other instanceof UniquePersonList otherUniquePersonList)) {
             return false;
         }
 
-        UniquePersonList otherUniquePersonList = (UniquePersonList) other;
         return internalList.equals(otherUniquePersonList.internalList);
     }
 

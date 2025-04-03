@@ -42,11 +42,10 @@ public class DeleteByIndexCommand extends DeleteCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteByIndexCommand)) {
+        if (!(other instanceof DeleteByIndexCommand otherDeleteCommand)) {
             return false;
         }
 
-        DeleteByIndexCommand otherDeleteCommand = (DeleteByIndexCommand) other;
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 
