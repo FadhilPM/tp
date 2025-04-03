@@ -3,12 +3,12 @@
 }
 
 .help-content {
-    -fx-padding: 20;
+    -fx-padding: 10;
 }
 
 .help-footer {
     -fx-background-color: derive(#1d1d1d, 10%);
-    -fx-padding: 10;
+    -fx-padding: 5;
 }
 
 #copyButton {
@@ -28,15 +28,15 @@
 .markdown-text {
     -fx-fill: white;
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 13px;
+    -fx-font-size: 8pt;
 }
 
 .markdown-code {
     -fx-text-fill: white;
     -fx-fill: white;
     -fx-wrap-text: true;
-    -fx-font-size: 13px;
-    -fx-max-width: 200px;
+    -fx-font-size: 8pt;
+    -fx-max-width: 30em;
 }
 
 .markdown-link {
@@ -55,8 +55,8 @@
 
 /* Table styling */
 .markdown-table-table {
-    -fx-min-width: 690px;
-    -fx-max-width: 690px;
+    -fx-min-width: 90em;
+    -fx-max-width: 90em;
     -fx-wrap-text: true;
 }
 
@@ -65,8 +65,8 @@
 }
 
 .markdown-table-cell {
-    -fx-min-width: 230px;
-    -fx-max-width: 230px;
+    -fx-min-width: 30em;
+    -fx-max-width: 30em;
     -fx-border-color: #555555;
     -fx-border-width: 1;
     -fx-wrap-text: true;

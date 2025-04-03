@@ -13,8 +13,4 @@
 | **Switch Preferred Contact Method** | `switchcontact p/PHONE`                             | `switchcontact p/91234567`                                            |
 | **Clear**                           | `clear`                                                    | —                                                                     |
 | **Exit**                            | `exit`                                                     | —                                                                     |
-
-
-For further information, go to:
-
-[https://ay2425s2-cs2103-f10-1.github.io/tp/UserGuide.html](https://ay2425s2-cs2103-f10-1.github.io/tp/UserGuide.html)
+For further information, go to: [https://ay2425s2-cs2103-f10-1.github.io/tp/UserGuide.html](https://ay2425s2-cs2103-f10-1.github.io/tp/UserGuide.html)
