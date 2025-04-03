@@ -15,7 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Project;
-import seedu.address.model.tag.Project.SetStatusDescriptor;
+import seedu.address.model.tag.SetStatusDescriptor;
 
 /**
  * Adds a person to the address book.
@@ -26,6 +26,8 @@ public class SetStatusCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the status of specified project of the "
             + "person identified by the index number used in the displayed person list. "
+            + "At least one of the optional fields must be provided. \n"
+
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_PROJECT + "PROJECT "
@@ -69,7 +71,7 @@ public class SetStatusCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Project projectToEdit = personToEdit.getProjects()
                 .stream()
-                .filter(x -> x.getTagName().equals(projectName))
+                .filter(x -> x.hasSameName(projectName))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PROJECT));
 

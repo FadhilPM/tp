@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -94,15 +95,16 @@ class JsonAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new LinkedHashSet<>();
+        final Set<Project> modelProjects = new LinkedHashSet<>();
 
         modelTags.addAll(personTags);
-        modelTags.addAll(personProjectTags);
+        modelProjects.addAll(personProjectTags);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Messages.INVALID_NAME_CHARACTERS_MESSAGE);
         }
         final Name modelName = new Name(name);
 
@@ -131,7 +133,7 @@ class JsonAdaptedPerson {
 
         final PreferredContactMethod preferredContactMethod = new PreferredContactMethod(preferredContact);
 
-        return new Person(modelName, modelPhone, modelEmail, modelTags, preferredContactMethod);
+        return new Person(modelName, modelPhone, modelEmail, modelTags, modelProjects, preferredContactMethod);
     }
 
 }

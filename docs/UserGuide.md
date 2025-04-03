@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-ArtHive is a **desktop application for artists to manage clients and commissions**, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ArtHive can get your tasks done faster than traditional GUI apps.
+ArtHive is a **desktop application for artists to manage clients and commissions**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ArtHive can get your tasks done faster than traditional GUI apps. 
+
+ArtHive is intended for managing Singapore-based contacts, where the phone numbers are 8 digits long starting with 6, 8 or 9.
 
 * Table of Contents
 {:toc}
@@ -20,7 +22,7 @@ ArtHive is a **desktop application for artists to manage clients and commissions
 1. Copy the file to the folder you want to use as the _home folder_ for ArtHive.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar arthive.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. The app may already contain some sample data which may not be the same as shown below.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -85,27 +87,34 @@ Format: `list`
 
 Adds a person to ArtHive.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​ [project/PROJECT]…​`
+Format: `add n/NAME p/PHONE [e/EMAIL] [t/TAG]…​ [project/PROJECT]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0).
+A person can have any number of tags and/or projects (including 0).
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The email address is optional. You can choose to leave it blank if you prefer not to provide it.
 </div>
 
-* Name can only contain alphanumeric characters, spaces, a max of 40 characters and should not be blank.
-* Phone numbers should be exactly 8 digits long, beginning with either 6, 8 or 9.
-* Email address must be in a valid format (i.e. username@domain.com), without spaces.
-* Tags/Projects can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* When specifying a `NAME`, please ensure it follows these rules:
+    * **Allowed Characters:**
+        * Alphanumeric characters (A-Z, a-z, 0-9)
+        * Special characters: `-`, `_`, `.`, `/`, `,` and `'`
+        * Maximum length: 40 characters
+    * **Not Allowed Characters:**
+        * Prefix commands (n/, p/, e/, t/, proj/, by/, pay/, prog/) are NOT allowed
+        * Any other special characters outside the allowed list
+* `PHONE` should be exactly 8 digits long, beginning with either 6, 8 or 9.
+* The `EMAIL` (if provided) must be in a valid email address format (i.e. name@domain.com), without spaces.
+* `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 
 Examples:
 * `add n/Sarah Lee p/91233215`
 * `add n/John Doe p/98765432 e/johnd@example.com`
 * `add n/Betsy Crowe e/betsycrowe@example.com p/92345678 t/friend project/betsy_project`
 
-  ![result for 'find alex david'](images/addContactResult.jpg)
+  ![result for 'find alex david'](images/addContactResult.png)
 
 ### Editing a person : `edit`
 
@@ -114,22 +123,46 @@ Edits an existing person in ArtHive.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Only edits to a person's name, phone number and email address is allowed.
+* When specifying a `NAME`, please ensure it follows these rules:
+    * **Allowed Characters:**
+        * Alphanumeric characters (A-Z, a-z, 0-9)
+        * Special characters: `-`, `_`, `.`, `/`, `,` and `'`
+        * Maximum length: 40 characters
+    * **Not Allowed Characters:**
+        * Prefix commands (n/, p/, e/, t/, proj/, by/, pay/, prog/) are NOT allowed
+        * Any other special characters outside the allowed list
+* The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current displayed contact list.
+* The `EMAIL` (if provided) must be in a valid email address format (i.e. name@domain.com), without spaces.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 
-### Locating persons by name: `find`
+<div style="display: flex; gap: 10px; text-align: center;">
+  <div style="flex: 1;">
+    <img src="images/editbefore.png" alt="Before edit" width="100%">
+    <p><em>Before edit</em></p>
+  </div>
+  <div style="flex: 1;">
+    <img src="images/editafter.png" alt="After edit" width="100%">
+    <p><em>After edit</em></p>
+  </div>
+</div>
+
+
+### Locating persons by name: `find NAME [NAME]`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find NAME [NAME]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * The search must only contain alphabetic characters.
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* Leading and trailing whitespaces around each NAME keyword will be trimmed. For example, "Hans   " (with trailing spaces) will be treated as "Hans", and "   Hans" (with leading spaces) will also be trimmed.
+* However, spaces between NAME keywords will not be trimmed. For example, "Hans Bo" will be treated as two separate keywords, while "Ha ns" (with a space inside) will remain as-is and will not match "Hans".
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
@@ -138,40 +171,46 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  
+![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating persons by number: `find`
+### Locating persons by number: `find PHONE [PHONE]`
 
 Finds persons whose phone numbers contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find PHONE [PHONE]`
 
-* The order of the keywords does not matter. e.g. `88888888 66666666` will match `66666666 88888888`
+* The order of the `PHONE` does not matter. e.g. `88888888 66666666` will match `66666666 88888888`.
 * The search must only contain numerals.
+* Leading and trailing whitespaces around each PHONE keyword will be trimmed. For example, "88888888   " (with trailing spaces) will be treated as "88888888", and "   88888888" (with leading spaces) will also be trimmed.
+* However, spaces between `PHONE` will not be trimmed. For example, "88888888   66666666" will be treated as two separate keywords, while "8888 8888" (with a space inside a number) will remain as-is and will not match "88888888".
 * Only the phone number is searched.
-* Only full phone numbers will be matched e.g `888` will not match `88888888`
+* Only full phone numbers will be matched e.g `888` will not match `88888888`.
 
 Examples:
 * `find 87438807` returns `Alex Yeoh`
 * `find 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu` <br>
-  ![result for 'find 87438807 99272758'](images/find87438807_99272758Result.png)
+  
+![result for 'find 87438807 99272758'](images/find87438807_99272758Result.png)
 
 ### Deleting a person : `delete`
 
 Deletes the specified contact in the current displayed contact list from ArtHive.
 
-**Format:** `delete INDEX` **or** `delete p/PHONE_NUMBER`
+**Format:** `delete INDEX` **or** `delete p/PHONE`
 
-* Deletes the contact at the specified `INDEX` **or** with the specified `PHONE_NUMBER`.
+* Deletes the contact at the specified `INDEX` **or** with the specified `PHONE`.
 * The `INDEX` refers to the index number shown in the displayed contact list and **must be a positive integer** (1, 2, 3, …).
-* The `PHONE_NUMBER` must be an exact 8-digit phone number and must belong to a contact in the current displayed contact list.
-* **One and only one** of `INDEX` or `p/PHONE_NUMBER` must be provided. 
+* The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current displayed contact list.
+* **One and only one** of `INDEX` or `p/PHONE` must be provided. 
 
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd contact in ArtHive.
-  ![result for 'delete 2'](images/DeleteByIndexResult.png)
+  
+![result for 'delete 2'](images/DeleteByIndexResult.png)
 * `list` followed by `delete p/93210283` deletes the contact with phone number 93210283.
-  ![result for 'delete p/93210283'](images/DeleteByPhoneNumberResult.png)
+  
+![result for 'delete p/93210283'](images/DeleteByPhoneNumberResult.png)
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 
@@ -179,35 +218,65 @@ Deletes the specified contact in the current displayed contact list from ArtHive
 
 Assigns a Tag and/or a Project to an existing person in ArtHive.
 
-Format: `tag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`
+Format: `tag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`
 
 * Adds one or more Tags/Projects to the person specified by `PHONE`.
-* In each use of this command, there must be at least one Tag or Project specified.
+* The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
+* In each use of this command, there must be at least one `TAG` or `PROJECT` specified.
 * The existing Tags/Projects of the person will not be removed i.e adding of tags is cumulative.
-* Tags/Projects can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 * Projects will have a default values of "Incomplete", "Unpaid", and a deadline set 1 day after creation. Modifications can be made using the `setstatus` command.
 
 Examples:
 *  `tag p/81234567 t/friend` Adds a Tag `friend` to the person who has the phone number `81234567`.
-*  `tag p/91234567 t/friend project/friend-project` Adds the Tag`friend` and Project `friend-project` to the person who has the phone number `91234567`.
+*  `tag p/91234567 t/friend proj/friend-project` Adds the Tag`friend` and Project `friend-project` to the person who has the phone number `91234567`.
    ![tag](images/tagAdded.png)
+
 
 
 ### Untagging a Contact with a Tag/Project : `untag`
 
 Deletes a Tag and/or a Project from an existing person in ArtHive.
 
-Format: `untag p/PHONE (t/TAG | project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`
+Format: `untag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`
 
 * Removes one or more Tags/Projects from the person specified by `PHONE`, if it exists.
-* In each use of this command, there must be at least one Tag or Project specified.
-* Tags/Projects can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
+* In each use of this command, there must be at least one `TAG` or `PROJECT` specified.
+* `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 * Untagging a Tag/Project from a person deletes the Tag/Project forever.
 
 Examples:
 *  Person A with phone number `81234567` has no tags. `untag p/81234567 t/friend` returns an error message as the Tag does not exist.
-*  Person B with phone number `91234567` has 1 Tag `friend` and 1 Project `friend-project`. `untag p/91234567 project/friend-project` removes the Project `friend-project` only.
+*  Person B with phone number `91234567` has 1 Tag `friend` and 1 Project `friend-project`. `untag p/91234567 proj/friend-project` removes the Project `friend-project` only.
    ![untag](images/tagRemoved.png)
+
+
+### Updating the status of a Project : `setstatus`
+
+Updates the status of a Project from an existing person in ArtHive.
+
+Format: `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS]`
+
+* Updates the Project tagged to the person at the specified `INDEX`. The `INDEX` refers to the index number shown in the displayed person list. The `INDEX` must be a positive integer 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* `PAYMENT` must be either `Paid` or `Unpaid` (case-insensitive).
+* `DEADLINE` must be in a `dd MMM uuuu HHmm` format
+* `PROGRESS` must be either `Complete` or `Incomplete` (case-insensitive).
+* Existing values will be updated to the input values.
+
+Examples:
+* `Alex Yeoh` at `INDEX` 1 has a `PROJECT` called `friend-project`.
+
+![setstatus sample state](images/setstatusSampleState.png)
+
+* `setstatus 1 proj/friend-project pay/paid by/05 Apr 2025 2359` Updates the `PAYMENT` to `Paid` and the `DEADLINE` to `05 Apr 2025 2359`
+
+![setstatusPaymentDeadline.png](images/setstatusPaymentDeadline.png)
+
+*`setstatus 1 proj/friend-project prog/complete` Updates the `PROGRESS` to `Complete`
+
+![setstatusProgress.png](images/setstatusProgress.png)
 
 
 ### Saving the data : `save`
@@ -265,6 +334,7 @@ Format: `switchcontact p/PHONE`
 * If the current preferred contact method is phone, it will switch to email, provided the contact contains an email.
 * phone is the default preferred contact method when a contact is created.
 * If the contact does not have an email, the preferred contact method will remain as phone.
+* The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
 
 Examples:
 
@@ -275,13 +345,27 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from ArtHive.
+Clears all entries from ArtHive, and deletes all the data from the savefile.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Successful execution of this command  will cause all contact data to be lost permanently and is irreversible.
+</div>
+
+<div style="display: flex; gap: 10px; text-align: center;">
+  <div style="flex: 1;">
+    <img src="images/clearbefore.png" alt="Before clear" width="100%">
+    <p><em>Before clear</em></p>
+  </div>
+  <div style="flex: 1;">
+    <img src="images/clearafter.png" alt="After clear" width="100%">
+    <p><em>After clear</em></p>
+  </div>
+</div>
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the program. The application window will close soon after.
 
 Format: `exit`
 
@@ -311,8 +395,8 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                             
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`                                            
 **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                               
-**Tag**   | `tag p/PHONE (t/TAG \| project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie project/project-x`      
-**UnTag**   | `untag p/PHONE (t/TAG \| project/PROJECT) [t/TAG]…​ [project/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie project/project-x`    
+**Tag**   | `tag p/PHONE (t/TAG \| proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie proj/project-x`      
+**UnTag**   | `untag p/PHONE (t/TAG \| proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`<br> e.g., `untag p/91234567 t/bestie proj/project-x`    
 **Save** | `save [FILENAME]` <br> e.g., `save newfile`                                                                                       
 **Snapshot** | `snapshot`                                                                                                                        
 **Switch Preferred Contact Method** | `switchcontact p/PHONE_NUMBER` <br> e.g, `switchcontact p/91234567`                                                               
