@@ -95,10 +95,6 @@ public class Project extends Tag {
         return this.isComplete ? "Complete" : "Incomplete";
     }
 
-    public boolean getProcessBoolean() {
-        return this.isComplete;
-    }
-
     /**
      * Get the payment status as a String.
      * Returns 'Paid' if true, 'Unpaid' if false.
