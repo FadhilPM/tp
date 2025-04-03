@@ -5,7 +5,7 @@ title: User Guide
 
 ArtHive is a **desktop application for artists to manage clients and commissions**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ArtHive can get your tasks done faster than traditional GUI apps. 
 
-ArtHive is intended for managing Singapore-based contacts, where the phone numbers are 8 digits long starting with 6, 8 or 9.
+ArtHive is intended for managing Singapore-based contacts, where phone numbers are 8 digits long and start with 3, 6, 8 or 9.
 
 * Table of Contents
 {:toc}
