@@ -53,16 +53,12 @@ public class GuiSettings implements Serializable {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof GuiSettings otherGuiSettings) {
+            return windowWidth == otherGuiSettings.windowWidth
+                    && windowHeight == otherGuiSettings.windowHeight
+                    && Objects.equals(windowCoordinates, otherGuiSettings.windowCoordinates);
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof GuiSettings otherGuiSettings)) {
-            return false;
-        }
-
-        return windowWidth == otherGuiSettings.windowWidth
-                && windowHeight == otherGuiSettings.windowHeight
-                && Objects.equals(windowCoordinates, otherGuiSettings.windowCoordinates);
+        return false;
     }
 
     @Override

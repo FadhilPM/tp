@@ -43,14 +43,10 @@ public class Phone {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof Phone otherPhone) {
+            return value.equals(otherPhone.value);
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof Phone otherPhone)) {
-            return false;
-        }
-
-        return value.equals(otherPhone.value);
+        return false;
     }
 
     @Override

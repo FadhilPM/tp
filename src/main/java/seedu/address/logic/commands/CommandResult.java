@@ -64,16 +64,12 @@ public class CommandResult {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof CommandResult otherCommandResult) {
+            return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                    && showHelp == otherCommandResult.showHelp
+                    && exit == otherCommandResult.exit;
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof CommandResult otherCommandResult)) {
-            return false;
-        }
-
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+        return false;
     }
 
     @Override

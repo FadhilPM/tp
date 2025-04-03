@@ -15,13 +15,9 @@ public record Prefix(String prefix) {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof Prefix otherPrefix) {
+            return prefix.equals(otherPrefix.prefix);
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof Prefix otherPrefix)) {
-            return false;
-        }
-
-        return prefix.equals(otherPrefix.prefix);
+        return false;
     }
 }

@@ -90,14 +90,11 @@ public class Name {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof Name otherName) {
+            return fullName.equals(otherName.fullName);
         }
+        return false;
 
-        // instanceof handles nulls
-        if (!(other instanceof Name otherName)) {
-            return false;
-        }
-
-        return fullName.equals(otherName.fullName);
     }
 
     @Override

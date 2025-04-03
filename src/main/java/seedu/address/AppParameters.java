@@ -48,14 +48,10 @@ public class AppParameters {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof AppParameters otherAppParameters) {
+            return Objects.equals(configPath, otherAppParameters.configPath);
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof AppParameters otherAppParameters)) {
-            return false;
-        }
-
-        return Objects.equals(configPath, otherAppParameters.configPath);
+        return false;
     }
 
     @Override

@@ -51,14 +51,10 @@ public class Index {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof Index otherIndex) {
+            return zeroBasedIndex == otherIndex.zeroBasedIndex;
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof Index otherIndex)) {
-            return false;
-        }
-
-        return zeroBasedIndex == otherIndex.zeroBasedIndex;
+        return false;
     }
 
     @Override
