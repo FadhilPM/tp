@@ -51,6 +51,8 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Projects: ");
+        person.getProjects().forEach(builder::append);
         return builder.toString();
     }
 
