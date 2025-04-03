@@ -53,8 +53,8 @@ public class CommandResult {
     }
 
     /**
-     * Return the boolean of isSaveLocationModified
-     * @return
+     * Returns whether the save location has been modified.
+     * @return true if the save location has been modified, false otherwise.
      */
     public boolean isSaveLocationModified() {
         return isSaveLocationModified;
@@ -64,17 +64,12 @@ public class CommandResult {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof CommandResult otherCommandResult) {
+            return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                    && showHelp == otherCommandResult.showHelp
+                    && exit == otherCommandResult.exit;
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof CommandResult)) {
-            return false;
-        }
-
-        CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+        return false;
     }
 
     @Override

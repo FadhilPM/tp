@@ -15,13 +15,24 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INDEX_OR_PHONE = "Provide a valid index OR a valid phone number";
     public static final String MESSAGE_ABSENT_PHONE_NUMBER = "No person found with that phone number";
-    public static final String MESSAGE_ABSENT_TAG_PROJECT = "Tag/Project \"%1$s\" is not found with %2$s (%3$s)";
+    public static final String MESSAGE_ABSENT_TAG_PROJECT =
+            """
+                    The following
+                    %1$s
+                    could not be found within %2$s (%3$s). No changes have been made.""";
     public static final String MESSAGE_ABSENT_PROJECT = "No project found with that name";
 
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+
+    public static final String INVALID_NAME_CHARACTERS_MESSAGE = "Name contains invalid characters. Only letters,"
+            + " numbers, spaces, '-', '_', '.', ',', apostrophe (') and '/' are allowed.";
+    public static final String MESSAGE_NAME_LENGTH_ERROR = "Name must not exceed 40 characters.";
+    public static final String MESSAGE_EMPTY_NAME_MSG = "Name field cannot be empty.";
+    public static final String MESSAGE_NAME_CONTAINS_PREFIX = "Name contains command prefix.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -41,10 +52,17 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Tags: ");
+                .append("; Phone: ").append(person.getPhone())
+                .append("; Email: ").append(person.getEmailString())
+                .append(System.lineSeparator());
+        builder.append("Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append(System.lineSeparator());
+        builder.append("Projects: ");
+        person.getProjects().stream()
+                .map(project -> project.getTagName())
+                .forEach(project ->
+                builder.append("[").append(project).append("]"));
         return builder.toString();
     }
 

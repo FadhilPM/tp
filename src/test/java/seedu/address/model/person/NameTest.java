@@ -9,6 +9,8 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+
 public class NameTest {
 
     @Test
@@ -95,32 +97,32 @@ public class NameTest {
     @Test
     public void invalidName_characters_invalid() {
         String invalidName = "John@Doe"; // Invalid because of '@'
-        Optional<String> errorMessage = Name.invaildNameCheck(invalidName);
+        Optional<String> errorMessage = Name.invalidNameCheck(invalidName);
         assertTrue(errorMessage.isPresent());
-        assertEquals(Name.INVALID_NAME_CHARACTERS_MESSAGE, errorMessage.get());
+        assertEquals(Messages.INVALID_NAME_CHARACTERS_MESSAGE, errorMessage.get());
     }
 
     @Test
     public void nameTooLong_invalid() {
         String nameTooLong = "a".repeat(41); // 41 characters, should be invalid
-        Optional<String> errorMessage = Name.invaildNameCheck(nameTooLong);
+        Optional<String> errorMessage = Name.invalidNameCheck(nameTooLong);
         assertTrue(errorMessage.isPresent());
-        assertEquals(Name.MESSAGE_NAME_LENGTH_ERROR, errorMessage.get());
+        assertEquals(Messages.MESSAGE_NAME_LENGTH_ERROR, errorMessage.get());
     }
 
     @Test
     public void emptyName_invalid() {
         String emptyName = ""; // Empty name
-        Optional<String> errorMessage = Name.invaildNameCheck(emptyName);
+        Optional<String> errorMessage = Name.invalidNameCheck(emptyName);
         assertTrue(errorMessage.isPresent());
-        assertEquals(Name.MESSAGE_EMPTY_NAME_MSG, errorMessage.get());
+        assertEquals(Messages.MESSAGE_EMPTY_NAME_MSG, errorMessage.get());
     }
 
     @Test
     public void spaceName_invalid() {
         String emptyName = " "; // Empty name
-        Optional<String> errorMessage = Name.invaildNameCheck(emptyName);
+        Optional<String> errorMessage = Name.invalidNameCheck(emptyName);
         assertTrue(errorMessage.isPresent());
-        assertEquals(Name.MESSAGE_EMPTY_NAME_MSG, errorMessage.get());
+        assertEquals(Messages.MESSAGE_EMPTY_NAME_MSG, errorMessage.get());
     }
 }

@@ -1,9 +1,12 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INDEX_OR_PHONE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.model.person.Phone.MESSAGE_CONSTRAINTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -40,7 +43,10 @@ public class DeleteCommandParserTest {
         int index = 1;
         assertParseFailure(parser,
                            String.format("%d p/%s", index, VALID_PHONE_AMY),
-                           String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MESSAGE_INDEX_OR_PHONE
+                                + "\n"
+                                + DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -48,18 +54,28 @@ public class DeleteCommandParserTest {
         int index = 1;
         assertParseFailure(parser,
                            String.format(" p/%s %d", VALID_PHONE_AMY, index),
-                           String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MESSAGE_CONSTRAINTS
+                                + "\n"
+                                + DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidIndex_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MESSAGE_INVALID_INDEX
+                                + "\n"
+                                + DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidPhone_throwsParseException() {
         assertParseFailure(parser,
                            " p/8123456",
-                           String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        MESSAGE_CONSTRAINTS
+                                + "\n"
+                                + DeleteCommand.MESSAGE_USAGE));
     }
 }

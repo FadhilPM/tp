@@ -48,7 +48,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            String errorMessage = Name.invaildNameCheck(trimmedName).get();
+            String errorMessage = Name.invalidNameCheck(trimmedName).get();
 
             throw new ParseException(errorMessage);
         }

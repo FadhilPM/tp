@@ -38,16 +38,11 @@ public class Config {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof Config otherConfig) {
+            return Objects.equals(logLevel, otherConfig.logLevel)
+                    && Objects.equals(userPrefsFilePath, otherConfig.userPrefsFilePath);
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof Config)) {
-            return false;
-        }
-
-        Config otherConfig = (Config) other;
-        return Objects.equals(logLevel, otherConfig.logLevel)
-                && Objects.equals(userPrefsFilePath, otherConfig.userPrefsFilePath);
+        return false;
     }
 
     @Override

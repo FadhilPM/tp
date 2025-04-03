@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,11 +48,11 @@ public class ArgumentTokenizer {
     private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
         List<PrefixPosition> positions = new ArrayList<>();
 
-        int prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), 0);
+        int prefixPosition = findPrefixPosition(argsString, prefix.prefix(), 0);
         while (prefixPosition != -1) {
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, prefixPosition);
             positions.add(extendedPrefix);
-            prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition);
+            prefixPosition = findPrefixPosition(argsString, prefix.prefix(), prefixPosition);
         }
 
         return positions;
@@ -62,8 +63,8 @@ public class ArgumentTokenizer {
      * {@code argsString} starting from index {@code fromIndex}. An occurrence
      * is valid if there is a whitespace before {@code prefix}. Returns -1 if no
      * such occurrence can be found.
-     *
-     * E.g if {@code argsString} = "e/hip/900", {@code prefix} = "p/" and
+     * <p>
+     * e.g. if {@code argsString} = "e/hip/900", {@code prefix} = "p/" and
      * {@code fromIndex} = 0, this method returns -1 as there are no valid
      * occurrences of "p/" with whitespace before it. However, if
      * {@code argsString} = "e/hi p/900", {@code prefix} = "p/" and
@@ -87,7 +88,7 @@ public class ArgumentTokenizer {
     private static ArgumentMultimap extractArguments(String argsString, List<PrefixPosition> prefixPositions) {
 
         // Sort by start position
-        prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
+        prefixPositions.sort(Comparator.comparingInt(PrefixPosition::startPosition));
 
         // Insert a PrefixPosition to represent the preamble
         PrefixPosition preambleMarker = new PrefixPosition(new Prefix(""), 0);
@@ -101,7 +102,7 @@ public class ArgumentTokenizer {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         for (int i = 0; i < prefixPositions.size() - 1; i++) {
             // Extract and store prefixes and their arguments
-            Prefix argPrefix = prefixPositions.get(i).getPrefix();
+            Prefix argPrefix = prefixPositions.get(i).prefix();
             String argValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
             argMultimap.put(argPrefix, argValue);
         }
@@ -116,10 +117,10 @@ public class ArgumentTokenizer {
     private static String extractArgumentValue(String argsString,
                                         PrefixPosition currentPrefixPosition,
                                         PrefixPosition nextPrefixPosition) {
-        Prefix prefix = currentPrefixPosition.getPrefix();
+        Prefix prefix = currentPrefixPosition.prefix();
 
-        int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
-        String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
+        int valueStartPos = currentPrefixPosition.startPosition() + prefix.prefix().length();
+        String value = argsString.substring(valueStartPos, nextPrefixPosition.startPosition());
 
         return value.trim();
     }
@@ -127,22 +128,6 @@ public class ArgumentTokenizer {
     /**
      * Represents a prefix's position in an arguments string.
      */
-    private static class PrefixPosition {
-        private int startPosition;
-        private final Prefix prefix;
-
-        PrefixPosition(Prefix prefix, int startPosition) {
-            this.prefix = prefix;
-            this.startPosition = startPosition;
-        }
-
-        int getStartPosition() {
-            return startPosition;
-        }
-
-        Prefix getPrefix() {
-            return prefix;
-        }
-    }
+    private record PrefixPosition(Prefix prefix, int startPosition) {}
 
 }

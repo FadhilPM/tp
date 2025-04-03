@@ -57,15 +57,10 @@ public class Email {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof Email otherEmail) {
+            return value.equals(otherEmail.value);
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof Email)) {
-            return false;
-        }
-
-        Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        return false;
     }
 
     @Override

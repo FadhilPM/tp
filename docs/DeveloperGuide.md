@@ -400,7 +400,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Artist wants to delete a contact.
-2. Artist enters the phone number.
+2. Artist enters the phone number or the index of the contact.
 3. ArtHive deletes the contact and any associated project tags.
 4. ArtHive displays confirmation of deletion.
 
@@ -412,9 +412,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a1. ArtHive displays an error message.
   * 2a2. Artist enters new data.
 
-    Step 2a1-2a2 are repeated until the data entered are correct.
+    Steps 2a1-2a2 are repeated until the data entered is correct.
 
     Use case resumes at step 3.
+    
+* 2b. ArtHive detects that the entered index is invalid.
+  * 2b1. ArtHive displays an error message.
+  * 2b2. Artist enters new data.
+  
+  Steps 2b1-2b2 are repeated until the data entered is correct.
 
 **Use case: Clear Contact(s)**
 

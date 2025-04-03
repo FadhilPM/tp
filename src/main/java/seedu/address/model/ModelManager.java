@@ -132,17 +132,12 @@ public class ModelManager implements Model {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof ModelManager otherModelManager) {
+            return addressBook.equals(otherModelManager.addressBook)
+                    && userPrefs.equals(otherModelManager.userPrefs)
+                    && filteredPersons.equals(otherModelManager.filteredPersons);
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
-            return false;
-        }
-
-        ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+        return false;
     }
 
 }
