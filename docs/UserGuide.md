@@ -5,7 +5,7 @@ title: User Guide
 
 ArtHive is a **desktop application for artists to manage clients and commissions**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ArtHive can get your tasks done faster than traditional GUI apps. 
 
-ArtHive is intended for managing Singapore-based contacts, where the phone numbers are 8 digits long starting with 6, 8 or 9.
+ArtHive is intended for managing Singapore-based contacts, where phone numbers are 8 digits long and start with 3, 6, 8 or 9.
 
 * Table of Contents
 {:toc}
@@ -87,7 +87,7 @@ Format: `list`
 
 Adds a person to ArtHive.
 
-Format: `add n/NAME p/PHONE [e/EMAIL] [t/TAG]…​ [project/PROJECT]…​`
+Format: `add n/NAME p/PHONE [e/EMAIL] [t/TAG]…​ [proj/PROJECT]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags and/or projects (including 0).
@@ -151,44 +151,36 @@ Examples:
   </div>
 </div>
 
+### Locating persons: `find`
 
-### Locating persons by name: `find NAME [NAME]`
+Finds persons whose name or phone numbers contain any of the given keywords
 
-Finds persons whose names contain any of the given keywords.
+Format: `find NAME [NAME]` or  `find PHONE [PHONE]`
 
-Format: `find NAME [NAME]`
+* Only one type of search per command is allowed, either by `NAME` (alphabetic characters) or by `PHONE` (integers 0-9).
 
-* The order of the NAME keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* The search must only contain alphabetic characters.
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* Leading and trailing whitespaces around each NAME keyword will be trimmed. For example, "Hans   " (with trailing spaces) will be treated as "Hans", and "   Hans" (with leading spaces) will also be trimmed.
-* However, spaces between NAME keywords will not be trimmed. For example, "Hans Bo" will be treated as two separate keywords, while "Ha ns" (with a space inside) will remain as-is and will not match "Hans".
-* Only the name is searched.
+**Search by NAME**
+* The order of the `NAME` does not matter. e.g.`Hans Bo` will match `Bo Hans`.
+* The search for `NAME` is case-insensitive. e.g `hans` will match `Hans`
+* Leading and trailing whitespaces around each `NAME` keyword will be trimmed. For example, "Hans   " (with trailing spaces) will be treated as "Hans", and "   Hans" (with leading spaces) will also be trimmed.
+* Spaces between `NAME` keywords will not be trimmed. For example, "Hans Bo" will be treated as two separate keywords, while "Ha ns" (with a space inside) will remain as-is and will not match "Hans".
+* Only the Person's name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  
-![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Locating persons by number: `find PHONE [PHONE]`
-
-Finds persons whose phone numbers contain any of the given keywords.
-
-Format: `find PHONE [PHONE]`
-
-* The order of the `PHONE` does not matter. e.g. `88888888 66666666` will match `66666666 88888888`.
-* The search must only contain numerals.
-* Leading and trailing whitespaces around each PHONE keyword will be trimmed. For example, "88888888   " (with trailing spaces) will be treated as "88888888", and "   88888888" (with leading spaces) will also be trimmed.
-* However, spaces between `PHONE` will not be trimmed. For example, "88888888   66666666" will be treated as two separate keywords, while "8888 8888" (with a space inside a number) will remain as-is and will not match "88888888".
-* Only the phone number is searched.
+**Search by PHONE**
+* The order of the `PHONE` does not matter. e.g.`88888888 66666666` will match `66666666 88888888`.
+* Leading and trailing whitespaces around each `PHONE` keyword will be trimmed. For example, "88888888   " (with trailing spaces) will be treated as "88888888", and "   88888888" (with leading spaces) will also be trimmed.
+* Spaces between `PHONE` will not be trimmed. For example, "88888888   66666666" will be treated as two separate keywords, while "8888 8888" (with a space inside a number) will remain as-is and will not match "88888888".
+* Only the Person's phone number is searched.
 * Only full phone numbers will be matched e.g `888` will not match `88888888`.
 
 Examples:
-* `find 87438807` returns `Alex Yeoh`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+![result for 'find alex david'](images/findAlexDavidResult.png)
+
 * `find 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu` <br>
   
 ![result for 'find 87438807 99272758'](images/find87438807_99272758Result.png)
@@ -197,14 +189,14 @@ Examples:
 
 Deletes the specified contact in the current displayed contact list from ArtHive.
 
-**Format:** `delete INDEX` **or** `delete p/PHONE`
+Format: `delete INDEX` or `delete p/PHONE`
 
 * Deletes the contact at the specified `INDEX` **or** with the specified `PHONE`.
 * The `INDEX` refers to the index number shown in the displayed contact list and **must be a positive integer** (1, 2, 3, …).
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current displayed contact list.
 * **One and only one** of `INDEX` or `p/PHONE` must be provided. 
 
-**Examples:**
+Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in ArtHive.
   
 ![result for 'delete 2'](images/DeleteByIndexResult.png)
@@ -251,6 +243,32 @@ Examples:
 *  Person B with phone number `91234567` has 1 Tag `friend` and 1 Project `friend-project`. `untag p/91234567 proj/friend-project` removes the Project `friend-project` only.
    ![untag](images/tagRemoved.png)
 
+
+### Updating the status of a Project : `setstatus`
+
+Updates the status of a Project from an existing person in ArtHive.
+
+Format: `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS]`
+
+* Updates the Project tagged to the person at the specified `INDEX`. The `INDEX` refers to the index number shown in the displayed person list. The `INDEX` must be a positive integer 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* `PAYMENT` must be either `Paid` or `Unpaid` (case-insensitive).
+* `DEADLINE` must be in a `dd MMM uuuu HHmm` format
+* `PROGRESS` must be either `Complete` or `Incomplete` (case-insensitive).
+* Existing values will be updated to the input values.
+
+Examples:
+* `Alex Yeoh` at `INDEX` 1 has a `PROJECT` called `friend-project`.
+
+![setstatus sample state](images/setstatusSampleState.png)
+
+* `setstatus 1 proj/friend-project pay/paid by/05 Apr 2025 2359` Updates the `PAYMENT` to `Paid` and the `DEADLINE` to `05 Apr 2025 2359`
+
+![setstatusPaymentDeadline.png](images/setstatusPaymentDeadline.png)
+
+*`setstatus 1 proj/friend-project prog/complete` Updates the `PROGRESS` to `Complete`
+
+![setstatusProgress.png](images/setstatusProgress.png)
 
 
 ### Saving the data : `save`
@@ -365,10 +383,10 @@ Action | Format, Examples
 --------|-----------------------------------------------------------------------------------------------------------------------------------
 **Help** | `help`                                                                                                                            
 **List** | `list`                                                                                                                            
-**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend t/colleague` 
+**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [t/TAG] [proj/PROJECT]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend p/project-work` 
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                             
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` or `find 87487765 88888888`                                            
-**Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                               
+**Find** | `find NAME [NAME]` or `find PHONE [PHONE]` <br> e.g., `find James Jake` or `find 87487765 88888888`                                            
+**Delete** | `delete INDEX` or `delete p/PHONE`<br> e.g., `delete 3` or `delete p/88888888`                                                                                             
 **Tag**   | `tag p/PHONE (t/TAG \| proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`<br> e.g., `tag p/91234567 t/bestie proj/project-x`      
 **UnTag**   | `untag p/PHONE (t/TAG \| proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`<br> e.g., `untag p/91234567 t/bestie proj/project-x`    
 **Save** | `save [FILENAME]` <br> e.g., `save newfile`                                                                                       

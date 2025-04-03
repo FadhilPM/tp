@@ -17,9 +17,9 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays all contacts whose names or phone numbers "
-            + "contain any of the keywords (case-insensitive).\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Lists matching contacts. Partial name matching supported. Use either names or phone numbers.\n"
+            + "Parameters: find (NAME [NAME]... | PHONE [PHONE]...)\n"
             + "Example 1: " + COMMAND_WORD + " alice bob charlie \n"
             + "Example 2: " + COMMAND_WORD + " 87438807 88888888";
 

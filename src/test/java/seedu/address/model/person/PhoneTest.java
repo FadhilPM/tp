@@ -32,7 +32,6 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("12345678")); //starting with 1
         assertFalse(Phone.isValidPhone("22345678")); //starting with 2
-        assertFalse(Phone.isValidPhone("32345678")); //starting with 3
         assertFalse(Phone.isValidPhone("42345678")); //starting with 4
         assertFalse(Phone.isValidPhone("52345678")); //starting with 5
         assertFalse(Phone.isValidPhone("72345678")); //starting with 7
@@ -44,6 +43,7 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("63121534"));
         assertTrue(Phone.isValidPhone("83121534"));
+        assertTrue(Phone.isValidPhone("33121534"));
 
     }
 
