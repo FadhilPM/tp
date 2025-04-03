@@ -42,11 +42,11 @@ public class Name {
     public static Optional<String> invaildNameCheck(String test) {
 
         logger.fine("Name input: " + test);
-        logger.fine("Length of Name: " + test.length() );
+        logger.fine("Length of Name: " + test.length());
 
         //Check if there is blank
         if (test.isBlank()) {
-            logger.fine("Length of name: " + test.length() );
+            logger.fine("Length of name: " + test.length());
             return Optional.of(Messages.MESSAGE_EMPTY_NAME_MSG);
         }
 
@@ -60,10 +60,10 @@ public class Name {
             return Optional.of(Messages.INVALID_NAME_CHARACTERS_MESSAGE);
         } else if (test.length() > 40) {
             logger.fine("More than 40 characters: " + test);
-            return Optional.of(Messages.MESSAGE_NAME_LENGTH_ERROR );
+            return Optional.of(Messages.MESSAGE_NAME_LENGTH_ERROR);
         }
 
-        logger.fine("Name is valid!: " + test );
+        logger.fine("Name is valid!: " + test);
         return Optional.empty();
     }
 
