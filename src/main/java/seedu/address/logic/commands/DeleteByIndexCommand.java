@@ -39,15 +39,10 @@ public class DeleteByIndexCommand extends DeleteCommand {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof DeleteByIndexCommand otherDeleteCommand) {
+            return targetIndex.equals(otherDeleteCommand.targetIndex);
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof DeleteByIndexCommand)) {
-            return false;
-        }
-
-        DeleteByIndexCommand otherDeleteCommand = (DeleteByIndexCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return false;
     }
 
     @Override

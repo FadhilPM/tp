@@ -41,15 +41,10 @@ public class FindCommand extends Command {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof FindCommand otherFindCommand) {
+            return predicate.equals(otherFindCommand.predicate);
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
-            return false;
-        }
-
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return false;
     }
 
     @Override

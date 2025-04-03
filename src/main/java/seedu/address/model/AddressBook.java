@@ -112,15 +112,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof AddressBook otherAddressBook) {
+            return persons.equals(otherAddressBook.persons);
         }
-
-        // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
-            return false;
-        }
-
-        AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return false;
     }
 
     @Override

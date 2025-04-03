@@ -37,16 +37,29 @@ public class Name {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Validates the given name string based on multiple criteria.
+     * <p>
+     * This method checks that the name is not blank, does not contain any disallowed prefixes,
+     * consists only of valid characters (as defined by {@code VALIDATION_REGEX}),
+     * and does not exceed 40 characters in length.
+     * </p>
+     * <p>
+     * If any of these checks fail, an {@code Optional} containing the appropriate error message is returned.
+     * If the name passes all checks, an empty {@code Optional} is returned.
+     * </p>
+     *
+     * @param test the name string to validate; must not be null
+     * @return an {@code Optional} containing an error message if the name is invalid,
+     *      or an empty {@code Optional} if the name is valid
      */
-    public static Optional<String> invaildNameCheck(String test) {
+    public static Optional<String> invalidNameCheck(String test) {
 
         logger.fine("Name input: " + test);
-        logger.fine("Length of Name: " + test.length() );
+        logger.fine("Length of Name: " + test.length());
 
         //Check if there is blank
         if (test.isBlank()) {
-            logger.fine("Length of name: " + test.length() );
+            logger.fine("Length of name: " + test.length());
             return Optional.of(Messages.MESSAGE_EMPTY_NAME_MSG);
         }
 
@@ -60,10 +73,10 @@ public class Name {
             return Optional.of(Messages.INVALID_NAME_CHARACTERS_MESSAGE);
         } else if (test.length() > 40) {
             logger.fine("More than 40 characters: " + test);
-            return Optional.of(Messages.MESSAGE_NAME_LENGTH_ERROR );
+            return Optional.of(Messages.MESSAGE_NAME_LENGTH_ERROR);
         }
 
-        logger.fine("Name is valid!: " + test );
+        logger.fine("Name is valid!: " + test);
         return Optional.empty();
     }
 
@@ -74,7 +87,7 @@ public class Name {
      * @return {@code true} if the name is valid, {@code false} otherwise.
      */
     public static boolean isValidName(String test) {
-        Optional<String> errorMessage = invaildNameCheck(test);
+        Optional<String> errorMessage = invalidNameCheck(test);
 
         //Checks if name contains invalid characters
         return errorMessage.isEmpty();
@@ -90,15 +103,11 @@ public class Name {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        } else if (other instanceof Name otherName) {
+            return fullName.equals(otherName.fullName);
         }
+        return false;
 
-        // instanceof handles nulls
-        if (!(other instanceof Name)) {
-            return false;
-        }
-
-        Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
     }
 
     @Override

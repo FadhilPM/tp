@@ -94,11 +94,8 @@ class JsonAdaptedPerson {
             personProjectTags.add(projectTag.toModelType());
         }
 
-        final Set<Tag> modelTags = new LinkedHashSet<>();
-        final Set<Project> modelProjects = new LinkedHashSet<>();
-
-        modelTags.addAll(personTags);
-        modelProjects.addAll(personProjectTags);
+        final Set<Tag> modelTags = new LinkedHashSet<>(personTags);
+        final Set<Project> modelProjects = new LinkedHashSet<>(personProjectTags);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
