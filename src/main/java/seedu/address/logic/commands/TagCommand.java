@@ -29,7 +29,8 @@ public class TagCommand extends Command {
             + "[" + PREFIX_PROJECT + "PROJECT]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_TAG + "project-x";
+            + PREFIX_TAG + "client "
+            + PREFIX_PROJECT + "project-x";
 
     public static final String MESSAGE_SUCCESS = "Tags and/or projects added to %1$s";
     private final Phone phone;

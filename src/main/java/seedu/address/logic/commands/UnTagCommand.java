@@ -7,7 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -57,22 +60,38 @@ public class UnTagCommand extends Command {
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_ABSENT_PHONE_NUMBER));
 
-        List<Tag> tagsNotFound = personToUnTag.tagsNotInTagSet(this.tags);
-        List<Project> projectsNotFound = personToUnTag.projectsNotInProjectSet(this.projects);
+        Optional<String> optionalMissingTagsProjects = findMissingTagsProjects(personToUnTag);
 
-        if (!tagsNotFound.isEmpty()) {
+        if (optionalMissingTagsProjects.isPresent()) {
+            String missingTagsProjects = optionalMissingTagsProjects.get();
             throw new CommandException(String.format(Messages.MESSAGE_ABSENT_TAG_PROJECT,
-                    tagsNotFound.get(0).getTagName(), personToUnTag.getName(), personToUnTag.getPhone()));
-        } else if (!projectsNotFound.isEmpty()) {
-            throw new CommandException(String.format(Messages.MESSAGE_ABSENT_TAG_PROJECT,
-                    projectsNotFound.get(0).getTagName(), personToUnTag.getName(), personToUnTag.getPhone()));
+                    missingTagsProjects, personToUnTag.getName(), personToUnTag.getPhone()));
         }
 
-        Person taggedPerson = personToUnTag.unTagPerson(this.tags, this.projects);
+        Person untaggedPerson = personToUnTag.unTagPerson(this.tags, this.projects);
 
-        model.setPerson(personToUnTag, taggedPerson);
+        model.setPerson(personToUnTag, untaggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, taggedPerson.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, untaggedPerson.getName()));
+    }
+
+    private Optional<String> findMissingTagsProjects(Person personToUnTag) {
+        List<Tag> missingTags = personToUnTag.tagsNotInTagSet(tags);
+        List<Project> missingProjects = personToUnTag.projectsNotInProjectSet(projects);
+
+        Function<List<? extends Tag>, Optional<String>> listToString = x -> x.stream()
+                .map(Tag::getTagName)
+                .reduce((a, b) -> a + ", " + b);
+
+        Optional<String> optMissingTagString = listToString.apply(missingTags)
+                .map(x -> "Tag(s): " + x);
+
+        Optional<String> optMissingProjectString = listToString.apply(missingProjects)
+                .map(x -> "Project(s): " + x);
+
+        return Stream.of(optMissingTagString, optMissingProjectString)
+                .flatMap(Optional::stream)
+                .reduce((a, b) -> a + "\n" + b);
     }
 
     @Override

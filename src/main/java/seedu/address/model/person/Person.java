@@ -76,6 +76,10 @@ public class Person {
         return optionalEmail;
     }
 
+    public String getEmailString() {
+        return optionalEmail.map(Email::toString).orElse("No email");
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
