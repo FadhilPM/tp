@@ -51,10 +51,17 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Tags: ");
+                .append("; Phone: ").append(person.getPhone())
+                .append("; Email: ").append(person.getEmailString())
+                .append(System.lineSeparator());
+        builder.append("Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append(System.lineSeparator());
+        builder.append("Projects: ");
+        person.getProjects().stream()
+                .map(project -> project.getTagName())
+                .forEach(project ->
+                builder.append("[").append(project).append("]"));
         return builder.toString();
     }
 
