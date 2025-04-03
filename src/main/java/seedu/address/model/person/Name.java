@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.enumeration.PrefixEnum;
 import seedu.address.storage.JsonSnapshotStorage;
 
@@ -15,12 +16,6 @@ import seedu.address.storage.JsonSnapshotStorage;
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
-
-    public static final String INVALID_NAME_CHARACTERS_MESSAGE = "Name contains invalid characters. Only letters,"
-            + " numbers, spaces, '-', '_', '.', ',', apostrophe (') and '/' are allowed.";
-    public static final String MESSAGE_NAME_LENGTH_ERROR = "Name must not exceed 40 characters.";
-    public static final String MESSAGE_EMPTY_NAME_MSG = "Name field cannot be empty.";
-    public static final String MESSAGE_NAME_CONTAINS_PREFIX = "Name contains command prefix.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -46,26 +41,30 @@ public class Name {
      */
     public static Optional<String> invaildNameCheck(String test) {
 
+        logger.fine("Name input: " + test);
+        logger.fine("Length of Name: " + test.length() );
+
         //Check if there is blank
         if (test.isBlank()) {
-            return Optional.of(MESSAGE_EMPTY_NAME_MSG);
+            logger.fine("Length of name: " + test.length() );
+            return Optional.of(Messages.MESSAGE_EMPTY_NAME_MSG);
         }
 
         if (PrefixEnum.containsPrefix(test)) {
-            return Optional.of(MESSAGE_NAME_CONTAINS_PREFIX);
+            logger.fine("Name contains prefix: " + test);
+            return Optional.of(Messages.MESSAGE_NAME_CONTAINS_PREFIX);
         }
-
-        logger.fine("Remaining String length: " + test.length() );
-        logger.fine("Name input: " + test);
 
         if (!test.matches(VALIDATION_REGEX)) {
-            return Optional.of(INVALID_NAME_CHARACTERS_MESSAGE);
+            logger.fine("Contains invalid characters name: " + test);
+            return Optional.of(Messages.INVALID_NAME_CHARACTERS_MESSAGE);
         } else if (test.length() > 40) {
-            return Optional.of(MESSAGE_NAME_LENGTH_ERROR );
+            logger.fine("More than 40 characters: " + test);
+            return Optional.of(Messages.MESSAGE_NAME_LENGTH_ERROR );
         }
 
+        logger.fine("Name is valid!: " + test );
         return Optional.empty();
-
     }
 
     /**

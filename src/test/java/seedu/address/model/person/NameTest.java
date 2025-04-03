@@ -9,6 +9,8 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+
 public class NameTest {
 
     @Test
@@ -97,7 +99,7 @@ public class NameTest {
         String invalidName = "John@Doe"; // Invalid because of '@'
         Optional<String> errorMessage = Name.invaildNameCheck(invalidName);
         assertTrue(errorMessage.isPresent());
-        assertEquals(Name.INVALID_NAME_CHARACTERS_MESSAGE, errorMessage.get());
+        assertEquals(Messages.INVALID_NAME_CHARACTERS_MESSAGE, errorMessage.get());
     }
 
     @Test
@@ -105,7 +107,7 @@ public class NameTest {
         String nameTooLong = "a".repeat(41); // 41 characters, should be invalid
         Optional<String> errorMessage = Name.invaildNameCheck(nameTooLong);
         assertTrue(errorMessage.isPresent());
-        assertEquals(Name.MESSAGE_NAME_LENGTH_ERROR, errorMessage.get());
+        assertEquals(Messages.MESSAGE_NAME_LENGTH_ERROR, errorMessage.get());
     }
 
     @Test
@@ -113,7 +115,7 @@ public class NameTest {
         String emptyName = ""; // Empty name
         Optional<String> errorMessage = Name.invaildNameCheck(emptyName);
         assertTrue(errorMessage.isPresent());
-        assertEquals(Name.MESSAGE_EMPTY_NAME_MSG, errorMessage.get());
+        assertEquals(Messages.MESSAGE_EMPTY_NAME_MSG, errorMessage.get());
     }
 
     @Test
@@ -121,6 +123,6 @@ public class NameTest {
         String emptyName = " "; // Empty name
         Optional<String> errorMessage = Name.invaildNameCheck(emptyName);
         assertTrue(errorMessage.isPresent());
-        assertEquals(Name.MESSAGE_EMPTY_NAME_MSG, errorMessage.get());
+        assertEquals(Messages.MESSAGE_EMPTY_NAME_MSG, errorMessage.get());
     }
 }
