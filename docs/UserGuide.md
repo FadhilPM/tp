@@ -383,7 +383,7 @@ Action | Format, Examples
 --------|-----------------------------------------------------------------------------------------------------------------------------------
 **Help** | `help`                                                                                                                            
 **List** | `list`                                                                                                                            
-**Add** | `add n/NAME p/PHONE [e/EMAIL] [t/TAG] [proj/PROJECT]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend p/project-work` 
+**Add** | `add n/NAME p/PHONE [e/EMAIL] [t/TAG] [proj/PROJECT]…​` <br> e.g., `add n/James Ho p/91234567 e/jamesho@example.com t/friend proj/project-work` 
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                             
 **Find** | `find NAME [NAME]` or `find PHONE [PHONE]` <br> e.g., `find James Jake` or `find 87487765 88888888`                                         
 **Delete** | `delete (p/PHONE \| INDEX)`<br> e.g., `delete 3` or `delete p/87487765`                                                                                              
