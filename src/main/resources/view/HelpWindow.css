@@ -28,14 +28,14 @@
 .markdown-text {
     -fx-fill: white;
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 8pt;
+    -fx-font-size: 11px;
 }
 
 .markdown-code {
     -fx-text-fill: white;
     -fx-fill: white;
     -fx-wrap-text: true;
-    -fx-font-size: 8pt;
+    -fx-font-size: 11px;
     -fx-max-width: 30em;
 }
 
@@ -75,4 +75,39 @@
 .markdown-table-cell-top {
     -fx-background-color: #2a2a2a;
     -fx-font-weight: bold;
+}
+
+.help-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-pannable: true;
+    -fx-hbar-policy: as-needed;
+    -fx-vbar-policy: as-needed;
+}
+
+.help-scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Make sure scrollbars are visible */
+.help-scroll-pane .scroll-bar:vertical {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-opacity: 1;
+    -fx-padding: 0;
+}
+
+.help-scroll-pane .scroll-bar:horizontal {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-opacity: 1;
+    -fx-padding: 0;
+}
+
+.help-scroll-pane .scroll-bar .thumb {
+    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-radius: 0;
+}
+
+.help-scroll-pane .scroll-bar .thumb:hover {
+    -fx-background-color: derive(#1d1d1d, 70%);
 }

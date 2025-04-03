@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.StackPane;
@@ -39,6 +40,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+        root.setResizable(false);
         loadHelpContent();
     }
 
@@ -68,7 +70,14 @@ public class HelpWindow extends UiPart<Stage> {
                     );
                 }
             };
-            helpContentPane.getChildren().add(markdownView);
+            // Create a ScrollPane with proper configuration
+            ScrollPane scrollPane = new ScrollPane(markdownView);
+            scrollPane.setFitToHeight(true);
+            scrollPane.setFitToWidth(true);
+            scrollPane.getStyleClass().add("help-scroll-pane");
+
+            helpContentPane.getChildren().add(scrollPane);
+
 
         } catch (IOException e) {
             logger.warning("Error loading help content: " + e.getMessage());
@@ -95,8 +104,26 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
+
+
+        getRoot().setOnShown(e -> {
+            // Get screen dimensions
+            javafx.geometry.Rectangle2D screenBounds = javafx.stage.Screen.getPrimary().getVisualBounds();
+
+            // Set window size to fit screen if necessary
+            double maxScreenWidth = screenBounds.getWidth();  // 90% of screen width
+            double maxScreenHeight = screenBounds.getHeight();  // 90% of screen height
+            double dialogWidth = getRoot().getWidth();
+            double dialogHeight = getRoot().getHeight();
+
+            double finalDialogWidth = Math.min(maxScreenWidth, dialogWidth);
+            double finalDialogHeight = Math.min(maxScreenHeight, dialogHeight);
+
+            getRoot().setWidth(finalDialogWidth);
+            getRoot().setHeight(finalDialogHeight);
+        });
+
         getRoot().show();
-        getRoot().sizeToScene();
         getRoot().centerOnScreen();
     }
 
