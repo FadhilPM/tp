@@ -215,8 +215,10 @@ Format: `tag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`
 * Adds one or more Tags/Projects to the person specified by `PHONE`.
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
 * In each use of this command, there must be at least one `TAG` or `PROJECT` specified.
-* The existing Tags/Projects of the person will not be removed i.e adding of tags is cumulative.
+* The existing Tags/Projects of the person will not be removed when new Tags/Projects are added.
+* Adding a Tag/Project that already exists for a person will not result in an error, and the system will remain unchanged.
 * `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* `TAG`/`PROJECT` are case-insensitive and will be automatically converted to lowercase regardless of input. For example, `PROJ-X` will be saved and displayed as `proj-x`. If another `Proj-X` is added to the same person, it will be considered as adding a Tag/Project that already exists.
 * Projects will have a default values of "Incomplete", "Unpaid", and a deadline set 1 day after creation. Modifications can be made using the `setstatus` command.
 
 Examples:
