@@ -189,7 +189,7 @@ Examples:
 
 Deletes the specified contact in the current displayed contact list from ArtHive.
 
-Format: `delete INDEX` or `delete p/PHONE`
+Format: `delete (INDEX | PHONE )`
 
 * Deletes the contact at the specified `INDEX` **or** with the specified `PHONE`.
 * The `INDEX` refers to the index number shown in the displayed contact list and **must be a positive integer** (1, 2, 3, …).
