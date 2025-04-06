@@ -255,7 +255,7 @@ Format: `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS
 * Updates the Project tagged to the person at the specified `INDEX`. The `INDEX` refers to the index number shown in the displayed person list. The `INDEX` must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * `PAYMENT` must be either `Paid` or `Unpaid` (case-insensitive).
-* `DEADLINE` must be in a `dd MMM uuuu HHmm` format
+* `DEADLINE` must be in a `dd MMM uuuu HHmm` format. (e.g 01 Apr 2025 2359)
 * `PROGRESS` must be either `Complete` or `Incomplete` (case-insensitive).
 * Existing values will be updated to the input values.
 
