@@ -133,6 +133,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
         * Prefix commands (n/, p/, e/, t/, proj/, by/, pay/, prog/) are NOT allowed
         * Any other special characters outside the allowed list
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current displayed contact list.
+* When editing a contact’s phone number, the new number must not already be used by another contact.
 * The `EMAIL` (if provided) must be in a valid email address format (i.e. name@domain.com), without spaces.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
