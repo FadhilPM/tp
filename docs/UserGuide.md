@@ -100,6 +100,7 @@ The email address is optional. You can choose to leave it blank if you prefer no
 * When specifying a `NAME`, please ensure it follows these rules:
     * **Allowed Characters:**
         * Alphanumeric characters (A-Z, a-z, 0-9)
+        * Names can contain spaces
         * Special characters: `-`, `_`, `.`, `/`, `,` and `'`
         * Maximum length: 40 characters
     * **Not Allowed Characters:**
@@ -127,6 +128,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 * When specifying a `NAME`, please ensure it follows these rules:
     * **Allowed Characters:**
         * Alphanumeric characters (A-Z, a-z, 0-9)
+        * Names can contain spaces
         * Special characters: `-`, `_`, `.`, `/`, `,` and `'`
         * Maximum length: 40 characters
     * **Not Allowed Characters:**
