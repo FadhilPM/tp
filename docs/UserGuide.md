@@ -196,7 +196,7 @@ Examples:
 
 Deletes the specified contact in the current displayed contact list from ArtHive.
 
-Format: `delete (INDEX | p/PHONE )`
+Format: `delete (INDEX | p/PHONE)`
 
 * Deletes the contact at the specified `INDEX` **or** with the specified `PHONE`.
 * The `INDEX` refers to the index number shown in the displayed contact list and **must be a positive integer** (1, 2, 3, …).
@@ -313,7 +313,7 @@ ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[f
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ArtHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file make its format invalid, ArtHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause ArtHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. Hence these are some steps that you should take prior to editing the data file:
 <ol>
     <li>Create a snapshot using the <code>snapshot</code> command.</li>
@@ -353,9 +353,9 @@ Format: `switchcontact p/PHONE`
 
 * If the current preferred contact method is email, it will switch to phone.
 * If the current preferred contact method is phone, it will switch to email, provided the contact contains an email.
-* phone is the default preferred contact method when a contact is created.
+* Phone is the default preferred contact method when a contact is created.
 * If the contact does not have an email, the preferred contact method will remain as phone.
-* The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
+* `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
 
 Examples:
 
