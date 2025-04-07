@@ -97,6 +97,10 @@ A person can have any number of tags and/or projects (including 0).
 The email address is optional. You can choose to leave it blank if you prefer not to provide it.
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The app allows duplicate names but does not allow duplicate phone numbers.
+</div>
+
 * When specifying a `NAME`, please ensure it follows these rules:
     * **Allowed Characters:**
         * Alphanumeric characters (A-Z, a-z, 0-9)
