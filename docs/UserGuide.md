@@ -97,9 +97,14 @@ A person can have any number of tags and/or projects (including 0).
 The email address is optional. You can choose to leave it blank if you prefer not to provide it.
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The app allows duplicate names but does not allow duplicate phone numbers.
+</div>
+
 * When specifying a `NAME`, please ensure it follows these rules:
     * **Allowed Characters:**
         * Alphanumeric characters (A-Z, a-z, 0-9)
+        * Names can contain spaces. However, trailing and leading white space will be trimmed (e.g. "  Johnny Test  " will be saved as "Johnny Test").
         * Special characters: `-`, `_`, `.`, `/`, `,` and `'`
         * Maximum length: 40 characters
     * **Not Allowed Characters:**
@@ -122,11 +127,13 @@ Edits an existing person in ArtHive.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the positive integer within the bounds of the displayed person list  1, 2, 3, …​
+* The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed person list).
 * Only edits to a person's name, phone number and email address is allowed.
 * When specifying a `NAME`, please ensure it follows these rules:
     * **Allowed Characters:**
         * Alphanumeric characters (A-Z, a-z, 0-9)
+        * Names can contain spaces. However, trailing and leading white space will be trimmed (e.g. "  Johnny Test  " will be saved as "Johnny Test").
         * Special characters: `-`, `_`, `.`, `/`, `,` and `'`
         * Maximum length: 40 characters
     * **Not Allowed Characters:**
@@ -189,7 +196,7 @@ Examples:
 
 Deletes the specified contact in the current displayed contact list from ArtHive.
 
-Format: `delete INDEX` or `delete p/PHONE`
+Format: `delete (INDEX | p/PHONE )`
 
 * Deletes the contact at the specified `INDEX` **or** with the specified `PHONE`.
 * The `INDEX` refers to the index number shown in the displayed contact list and **must be a positive integer** (1, 2, 3, …).
@@ -215,8 +222,10 @@ Format: `tag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`
 * Adds one or more Tags/Projects to the person specified by `PHONE`.
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
 * In each use of this command, there must be at least one `TAG` or `PROJECT` specified.
-* The existing Tags/Projects of the person will not be removed i.e adding of tags is cumulative.
+* The existing Tags/Projects of the person will not be removed when new Tags/Projects are added.
+* Adding a Tag/Project that already exists for a person will not result in an error, and the system will remain unchanged.
 * `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* `TAG`/`PROJECT` are case-insensitive and will be automatically converted to lowercase regardless of input. For example, `PROJ-X` will be saved and displayed as `proj-x`. If another `Proj-X` is added to the same person, it will be considered as adding a Tag/Project that already exists.
 * Projects will have a default values of "Incomplete", "Unpaid", and a deadline set 1 day after creation. Modifications can be made using the `setstatus` command.
 
 Examples:
@@ -253,7 +262,7 @@ Format: `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS
 * Updates the Project tagged to the person at the specified `INDEX`. The `INDEX` refers to the index number shown in the displayed person list. The `INDEX` must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * `PAYMENT` must be either `Paid` or `Unpaid` (case-insensitive).
-* `DEADLINE` must be in a `dd MMM uuuu HHmm` format
+* `DEADLINE` must be in a `dd MMM uuuu HHmm` format. (e.g 01 Apr 2025 2359)
 * `PROGRESS` must be either `Complete` or `Incomplete` (case-insensitive).
 * Existing values will be updated to the input values.
 
@@ -273,7 +282,11 @@ Examples:
 
 ### Saving the data : `save`
 
-Saves ArtHive data in the hard disk via passive (automatic) save or active (manual) save. Passive save activates after any command that changes the data. Active save activates when the user type in `save` as the command. This can be coupled with a [filename] parameter to change the name of the saved file. Upon changing the saved file name, all subsequent saves will be written to the new file.
+Saves ArtHive data in the hard disk via passive (automatic) save or active (manual) save. Passive save activates after any command that changes the data. Active save activates when the user type in `save` as the command. This can be coupled with a `[filename]` parameter to change the name of the saved file. Upon changing the saved file name, all subsequent saves will be written to the new file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+When using <code>save [filename]</code>, if a file with the same name already exists in the <code>[JAR file location]/data/</code> directory (even if unrelated to ArtHive), it will be overwritten without warning.
+</div>
 
 Format: `save [filename]`
 
@@ -283,11 +296,11 @@ Format: `save [filename]`
     * No spaces or other special characters are allowed.
 
 Examples:
-* `save` proceeds to save the data to the filename pointed in `preferences.json`.
+* `save` proceeds to save the data to the `[JAR file location]/data/` directory with the `filename` specified in `preferences.json`.
 
 ![save without parameter](images/save_no_param.png)
 
-* `save newFile` proceeds to save the data to `newFile.json`, deletes old saved file, and updates `preferences.json`.
+* `save newFile` proceeds to save the data to `[JAR file location]/data/newFile.json`, deletes old saved file, and updates `preferences.json`.
 
 ![save with parameter](images/save_with_param.png)
 
@@ -301,7 +314,13 @@ ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[f
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ArtHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause ArtHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause ArtHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. Hence these are some steps that you should take prior to editing the data file:
+<ol>
+    <li>Create a snapshot using the <code>snapshot</code> command.</li>
+    <li>Make a separate manual backup of your data file (just in case).</li>
+    <li>Exercise extreme caution when editing JSON structures.</li>
+</ol>
+If you experience data corruption after manual edits, you can restore from a snapshot as describe in the "Creating the snapshot of data" section.
 </div>
 
 ### Creating snapshot of data: `snapshot`
@@ -315,6 +334,16 @@ Examples:
 * `snapshot` proceeds to create a snapshot of the existing save file with the name represented with the current datetime (e.g., 24Mar2025_172159.json).
 
 ![snapshot](images/snapshot.png)
+
+<div markdown="span" class="alert alert-primary">:exclamation: **Note:**
+Currently, ArtHive does not provide a direct command to restore from snapshots. To use a snapshot:
+<ol>
+    <li>Locate the snapshot file in the <code>[JAR file location]/snapshots/</code> directory.</li>
+    <li>Copy the desired snapshot file to <code>[JAR file location]/data/</code>.</li>
+    <li>Rename the snapshot file to match the filename specified in <code>preferences.json</code>.</li>
+    <li>Restart ArtHive to load the restored data.</li>
+</ol>
+</div>
 
 ### Switching preferred contact : `switchcontact`
 
@@ -373,6 +402,13 @@ Format: `exit`
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+    <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+    Deleting <code>preferences.json</code> will reset ArtHive to use the sample data provided,and it will be saved to the file name specified in <code>preferences.json</code>. If you previously used the <code>save [filename]</code> command to change your save file, you should first:
+    <ul>
+        <li>Back up your current data file from <code>[JAR file location]/data/[custom-filename.json]</code>.</li>
+        <li>After deleting <code>preferences.json</code> and restarting ArtHive, use the <code>save</code> command again or manually copy your backed-up data to the default location.</li>
+    </ul>
+    </div>
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
