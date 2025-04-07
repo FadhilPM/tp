@@ -33,6 +33,7 @@ public class Messages {
     public static final String MESSAGE_NAME_LENGTH_ERROR = "Name must not exceed 40 characters.";
     public static final String MESSAGE_EMPTY_NAME_MSG = "Name field cannot be empty.";
     public static final String MESSAGE_NAME_CONTAINS_PREFIX = "Name contains command prefix.";
+    public static final String MESSAGE_MULTIPLE_PREFIXES_PROVIDED = "Provide only one prefix.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
