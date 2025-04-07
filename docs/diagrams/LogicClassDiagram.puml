@@ -30,10 +30,10 @@ HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
 LogicManager -right->"1" ParserClasses
-ParserClasses ..> XYZCommand : <<create>>
+ParserClasses ..> XYZCommand
 
 XYZCommand -up-|> Command
-LogicManager .left.> Command : <<call>>
+LogicManager .left.> Command
 
 LogicManager --> Model
 LogicManager --> Storage
@@ -48,5 +48,5 @@ CommandResult .up.> SCT
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
-Command .up.> CommandResult : <<create>>
+Command .up.> CommandResult
 @enduml
