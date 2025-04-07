@@ -304,10 +304,14 @@ Payments (`pay/PAYMENT`)
 * `PAYMENT` must be either `Paid` or `Unpaid` (case-insensitive).
 
 Deadlines(`by/DEADLINE`)
-* `DEADLINE` must be in a `dd MMM uuuu HHmm` format. (e.g 01 Apr 2025 2359)
+* `DEADLINE` must be in a `dd MMM uuuu HHmm` format. (e.g 01 Apr 2025 2359). No check for past date is done 
 
 Progress (`prog/PROGRESS`)
 * `PROGRESS` must be either `Complete` or `Incomplete` (case-insensitive).
+
+<div markdown="span" class="alert alert-primary">:exclamation: **Note:**
+Deadlines set in the past are allowed, and ArtHive does not notify users of approaching or missed deadlines.
+</div>
 
 Examples:
 * `Alex Yeoh` at `INDEX` 1 has a `PROJECT` called `friend-project`.
