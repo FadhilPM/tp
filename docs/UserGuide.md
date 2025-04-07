@@ -101,6 +101,8 @@ The email address is optional. You can choose to leave it blank if you prefer no
 The app allows duplicate names but does not allow duplicate phone numbers.
 </div>
 
+Name (`n/NAME`)
+
 * When specifying a `NAME`, please ensure it follows these rules:
     * **Allowed Characters:**
         * Alphanumeric characters (A-Z, a-z, 0-9)
@@ -110,8 +112,18 @@ The app allows duplicate names but does not allow duplicate phone numbers.
     * **Not Allowed Characters:**
         * Prefix commands (n/, p/, e/, t/, proj/, by/, pay/, prog/) are NOT allowed
         * Any other special characters outside the allowed list
-* `PHONE` should be exactly 8 digits long, beginning with either 3, 6, 8 or 9.
+
+Phone (`p/PHONE`)
+* `PHONE` must be exactly 8 digits long, beginning with either 3, 6, 8 or 9.
+
+Email (`e/EMAIL`)
 * The `EMAIL` (if provided) must be in a valid email address format (i.e. name@domain.com), without spaces.
+* Local-part of an email must NOT contain 2 or more consecutive dots (e.g. johny..test@gmail.com would be invalid)
+* Local-part of an email are ALLOWED to have multiple consecutive special characters (`+`, `-`, `_`)
+* Local-part of an email are ALLOWED to have dots (.), but the dots must not appear consecutively (e.g. Johnny.....test@example.com)
+* Email MUST contain a Top-Level Domain.
+
+Tag/Project (`t/TAG` / `p/PROJECT`)
 * `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 
 Examples:
@@ -127,9 +139,15 @@ Edits an existing person in ArtHive.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
-* Edits the person at the specified `INDEX`. The index refers to the positive integer within the bounds of the displayed person list  1, 2, 3, …​
-* The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed person list).
+* Edits the person at the specified `INDEX`. 
+  * The index refers to the positive integer within the bounds of the displayed person list  1, 2, 3, …​
+  * The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed person list).
+
 * Only edits to a person's name, phone number and email address is allowed.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Name (`n/NAME`)
 * When specifying a `NAME`, please ensure it follows these rules:
     * **Allowed Characters:**
         * Alphanumeric characters (A-Z, a-z, 0-9)
@@ -139,10 +157,17 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
     * **Not Allowed Characters:**
         * Prefix commands (n/, p/, e/, t/, proj/, by/, pay/, prog/) are NOT allowed
         * Any other special characters outside the allowed list
-* The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current displayed contact list.
+
+Phone (`p/PHONE`)
+* `PHONE` must be exactly 8 digits long, beginning with either 3, 6, 8 or 9. 
+* Additionally, the new number must not already be assigned to any existing contact in the list.
+
+Email (`e/EMAIL`)
 * The `EMAIL` (if provided) must be in a valid email address format (i.e. name@domain.com), without spaces.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* Local-part of an email must NOT contain 2 or more consecutive dots (e.g. johny..test@gmail.com would be invalid)
+* Local-part of an email are ALLOWED to have multiple consecutive special characters (`+`, `-`, `_`)
+* Local-part of an email are ALLOWED to have dots (.), but the dots must not appear consecutively (e.g. Johnny.....test@example.com)
+* Email MUST contain a Top-Level Domain.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -162,11 +187,12 @@ Examples:
 
 Finds persons whose name or phone numbers contain any of the given keywords
 
-Format: `find (NAME [NAME]…​ | PHONE [PHONE]…​)`
+Format: `find (n/NAME [NAME]…​ | p/PHONE [PHONE]…​)`
 
-* Only one type of search per command is allowed, either by `NAME` (alphabetic characters) or by `PHONE` (integers 0-9).
+* Only one type of search per command is allowed, either by `NAME` (alphabetic characters) or by `PHONE` (integers 0-9). 
+* In each use of this command, there must be at least one `NAME` or `PHONE` specified.
 
-**Search by NAME**
+**Search by NAME (`n/NAME`)**
 * The order of the `NAME` does not matter. e.g.`Hans Bo` will match `Bo Hans`.
 * The search for `NAME` is case-insensitive. e.g `hans` will match `Hans`
 * Leading and trailing whitespaces around each `NAME` keyword will be trimmed. For example, "Hans   " (with trailing spaces) will be treated as "Hans", and "   Hans" (with leading spaces) will also be trimmed.
@@ -176,7 +202,7 @@ Format: `find (NAME [NAME]…​ | PHONE [PHONE]…​)`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-**Search by PHONE**
+**Search by PHONE (`p/PHONE`)**
 * The order of the `PHONE` does not matter. e.g.`88888888 66666666` will match `66666666 88888888`.
 * Leading and trailing whitespaces around each `PHONE` keyword will be trimmed. For example, "88888888   " (with trailing spaces) will be treated as "88888888", and "   88888888" (with leading spaces) will also be trimmed.
 * Spaces between `PHONE` will not be trimmed. For example, "88888888   66666666" will be treated as two separate keywords, while "8888 8888" (with a space inside a number) will remain as-is and will not match "88888888".
@@ -184,11 +210,11 @@ Format: `find (NAME [NAME]…​ | PHONE [PHONE]…​)`
 * Only full phone numbers will be matched e.g `888` will not match `88888888`.
 
 Examples:
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-* `find 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu` <br>
+* `find p/87438807 99272758` returns `Alex Yeoh`, `Bernice Yu` <br>
   
 ![result for 'find 87438807 99272758'](images/find87438807_99272758Result.png)
 
@@ -198,10 +224,16 @@ Deletes the specified contact in the current displayed contact list from ArtHive
 
 Format: `delete (INDEX | p/PHONE )`
 
+* **One and only one** of `INDEX` or `p/PHONE` must be provided.
+
 * Deletes the contact at the specified `INDEX` **or** with the specified `PHONE`.
-* The `INDEX` refers to the index number shown in the displayed contact list and **must be a positive integer** (1, 2, 3, …).
+
+    * The index refers to the positive integer within the bounds of the displayed person list  1, 2, 3, …​
+    * The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed person list).
+    
+
+Phone (`p/PHONE`)
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current displayed contact list.
-* **One and only one** of `INDEX` or `p/PHONE` must be provided. 
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in ArtHive.
@@ -220,20 +252,22 @@ Assigns a Tag and/or a Project to an existing person in ArtHive.
 Format: `tag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`
 
 * Adds one or more Tags/Projects to the person specified by `PHONE`.
-* The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
 * In each use of this command, there must be at least one `TAG` or `PROJECT` specified.
-* The existing Tags/Projects of the person will not be removed when new Tags/Projects are added.
-* Adding a Tag/Project that already exists for a person will not result in an error, and the system will remain unchanged.
+
+Phone (`p/PHONE`)
+* The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
+
+Tag/Project (`t/TAG`/`p/PROJECT`)
 * `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 * `TAG`/`PROJECT` are case-insensitive and will be automatically converted to lowercase regardless of input. For example, `PROJ-X` will be saved and displayed as `proj-x`. If another `Proj-X` is added to the same person, it will be considered as adding a Tag/Project that already exists.
 * Projects will have a default values of "Incomplete", "Unpaid", and a deadline set 1 day after creation. Modifications can be made using the `setstatus` command.
+* The existing Tags/Projects of the person will not be removed when new Tags/Projects are added.
+* Adding a Tag/Project that already exists for a person will not result in an error, and the system will remain unchanged.
 
 Examples:
 *  `tag p/81234567 t/friend` Adds a Tag `friend` to the person who has the phone number `81234567`.
 *  `tag p/91234567 t/friend proj/friend-project` Adds the Tag`friend` and Project `friend-project` to the person who has the phone number `91234567`.
    ![tag](images/tagAdded.png)
-
-
 
 ### Untagging a Contact with a Tag/Project : `untag`
 
@@ -242,7 +276,11 @@ Deletes a Tag and/or a Project from an existing person in ArtHive.
 Format: `untag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`
 
 * Removes one or more Tags/Projects from the person specified by `PHONE`, if it exists.
+
+Phone (`p/PHONE`)
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
+
+Tag/Project (`t/TAG`/`p/PROJECT`)
 * In each use of this command, there must be at least one `TAG` or `PROJECT` specified.
 * `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 * Untagging a Tag/Project from a person deletes the Tag/Project forever.
@@ -260,11 +298,22 @@ Updates the status of a Project from an existing person in ArtHive.
 Format: `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS]`
 
 * Updates the Project tagged to the person at the specified `INDEX`. The `INDEX` refers to the index number shown in the displayed person list. The `INDEX` must be a positive integer 1, 2, 3, …​
+* The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed person list).
 * At least one of the optional fields must be provided.
-* `PAYMENT` must be either `Paid` or `Unpaid` (case-insensitive).
-* `DEADLINE` must be in a `dd MMM uuuu HHmm` format. (e.g 01 Apr 2025 2359)
-* `PROGRESS` must be either `Complete` or `Incomplete` (case-insensitive).
 * Existing values will be updated to the input values.
+
+Payments (`pay/PAYMENT`)
+* `PAYMENT` must be either `Paid` or `Unpaid` (case-insensitive).
+
+Deadlines(`by/DEADLINE`)
+* `DEADLINE` must be in a `dd MMM uuuu HHmm` format. (e.g 01 Apr 2025 2359). No check for past date is done 
+
+Progress (`prog/PROGRESS`)
+* `PROGRESS` must be either `Complete` or `Incomplete` (case-insensitive).
+
+<div markdown="span" class="alert alert-primary">:exclamation: **Note:**
+Deadlines set in the past are allowed, and ArtHive does not notify users of approaching or missed deadlines.
+</div>
 
 Examples:
 * `Alex Yeoh` at `INDEX` 1 has a `PROJECT` called `friend-project`.
@@ -315,11 +364,11 @@ ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[f
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ArtHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause ArtHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. Hence these are some steps that you should take prior to editing the data file:
-<ol>
-    <li>Create a snapshot using the <code>snapshot</code> command.</li>
-    <li>Make a separate manual backup of your data file (just in case).</li>
-    <li>Exercise extreme caution when editing JSON structures.</li>
-</ol>
+
+1. Create a snapshot using the <code>snapshot</code> command.
+2. Make a separate manual backup of your data file (just in case).
+3. Exercise extreme caution when editing JSON structures.
+
 If you experience data corruption after manual edits, you can restore from a snapshot as describe in the "Creating the snapshot of data" section.
 </div>
 
@@ -337,11 +386,11 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:exclamation: **Note:**
 Currently, ArtHive does not provide a direct command to restore from snapshots. To use a snapshot:
-<ol>
-    <li>Locate the snapshot file in the <code>[JAR file location]/snapshots/</code> directory.</li>
-    <li>Copy the desired snapshot file to <code>[JAR file location]/data/</code>.</li>
-    <li>Rename the snapshot file to match the filename specified in <code>preferences.json</code>.</li>
-    <li>Restart ArtHive to load the restored data.</li>
+
+1. Locate the snapshot file in the <code>[JAR file location]/snapshots/</code> directory.
+2. Copy the desired snapshot file to <code>[JAR file location]/data/</code>.
+3. Rename the snapshot file to match the filename specified in <code>preferences.json</code>.
+4. Restart ArtHive to load the restored data.
 </ol>
 </div>
 
@@ -404,10 +453,10 @@ Format: `exit`
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
     <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
     Deleting <code>preferences.json</code> will reset ArtHive to use the sample data provided,and it will be saved to the file name specified in <code>preferences.json</code>. If you previously used the <code>save [filename]</code> command to change your save file, you should first:
-    <ul>
-        <li>Back up your current data file from <code>[JAR file location]/data/[custom-filename.json]</code>.</li>
-        <li>After deleting <code>preferences.json</code> and restarting ArtHive, use the <code>save</code> command again or manually copy your backed-up data to the default location.</li>
-    </ul>
+    
+* Back up your current data file from <code>[JAR file location]/data/[custom-filename.json]</code>.
+* After deleting <code>preferences.json</code> and restarting ArtHive, use the <code>save</code> command again or manually copy your backed-up data to the default location.
+
     </div>
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
