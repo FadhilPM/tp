@@ -4,7 +4,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_X;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_Y;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -26,10 +25,11 @@ import seedu.address.testutil.SetStatusDescriptorBuilder;
  */
 public class SetStatusCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private static final String VALID_PAYMENT_PAID = "paid";
     private static final String VALID_DEADLINE = "07 Mar 2025 1800";
+    private static final String VALID_PAYMENT_PAID = "paid";
     private static final String VALID_PROGRESS_COMPLETE = "complete";
+
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecified_success() throws ParseException {

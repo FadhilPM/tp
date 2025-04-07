@@ -1,12 +1,9 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_X;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,9 +20,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Project;
-import seedu.address.model.tag.SetStatusDescriptor;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.SetStatusDescriptorBuilder;
 
 public class SetStatusCommandParserTest {
     private static final String VALID_PAYMENT_PAID = "paid";
@@ -35,7 +30,7 @@ public class SetStatusCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetStatusCommand.MESSAGE_USAGE);
 
-    private SetStatusCommandParser parser = new SetStatusCommandParser();
+    private final SetStatusCommandParser parser = new SetStatusCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
