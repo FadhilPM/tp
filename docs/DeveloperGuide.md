@@ -237,8 +237,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -271,17 +269,15 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | add a new contact              |                                                                        |
-| `* * *`  | user                                       | delete a contact               | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a contact by name         | locate details of persons without having to go through the entire list |
-| `* * *`  | user with many clients                     | save my client's contacts      | keep track of all my clients's information                             |
-| `* * *`  | user with many clients                     | track payments                 | check whether my clients have paid my commission                       |
-| `* *`    | user                                       | blacklist or tag clients       | identify unreasonable clients easily and not take work from them       |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                | I want to …​                         | So that I can…​                                                       |
+|----------|------------------------|--------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | user                   | add a new contact                    |                                                                       |
+| `* * *`  | user                   | delete a contact                     | remove entries that I no longer need                                  |
+| `* * *`  | user with many clients | save my client's contacts            | keep track of all my clients's information                            |
+| `* * *`  | user with many clients | track payments                       | check whether my clients have paid my commission                      |
+| `* *`    | user                   | blacklist or tag clients             | identify unreasonable clients easily and not take more work from them |
+| `* *`    | user with many clients | find contact by name or phone number | locate a person easily                                                |
 
-*{More to be added}*
 
 ---
 ### Use cases
@@ -547,29 +543,28 @@ Use case ends.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS.
-* **Private contact detail**: A contact detail that is not meant to be shared with others.
-* **Client**: An individual or organization that engages the artist's services.
-* **Contact**: An entry in ArtHive that contains client information, such as, name, phone number, and associated project tags.
-* **Phone Number**: A unique 8-digit Singapore phone number starting with '6','8', or '9' that acts as the unique and primary identifier for each contact in ArtHive.
-* **Project**: A project that the contact is working on. Project names are alphanumeric strings with underscores and hyphens, up to 20 characters. A project contains associated payment, deadline and progress information.
-* **Tag**: A tag is an alphanumeric strings with underscores and hyphens that can be associated with a contact.
-* **Payment**: A boolean attribute (paid/unpaid) associated with a project that indicates whether payment has been received.
-* **Deadline**: A date-time representation associated with a project that indicates when the project is due.
-* **Progress**: A boolean attribute (complete/incomplete) associated with a project that indicates whether the project is finished or not.
-* **Command Format**: The specific syntax required to execute functions in ArtHive (e.g., "add n/<Client Name> p/<Phone Number> t/<ProjectTag Name>").
-* **Parameter**: A piece of information required by a command, such as client name, phone number, or project tag.
-* **Data Persistence**: The ability to save contact information to a file for later retrieval, ensuring data is not lost when the application is closed.
 * **Alphanumeric**: Characters that consists of only letters (A-Z, a-z) and numbers (0-9).
 * **Case Insensitive**: The property where uppercase and lowercase letters are treated as equivalent (e.g., "John Smith" vs "jOhn SmITh").
-* **Trim**: The process of removing leading and trailing spaces from input.
-* **JSON File**: The file format used to store contact information (arthive.json).
-* **GUI** Graphical User Interface - the visual elements that display information and receive user input.
 * **CLI**: Command Line Interface - the text-based method of interacting with ArtHive through integrated typed commands.
-* **Regex**: Regular Expression - a sequence of characters that defines a certain search pattern, used in ArtHive to validate phone numbers.
+* **Client**: An individual or organization that engages the artist's services.
+* **Command Format**: The specific syntax required to execute functions in ArtHive (e.g., "add n/<Client Name> p/<Phone Number> t/<ProjectTag Name>").
+* **Contact**: An entry in ArtHive that contains client information, such as, name, phone number, and associated project tags.
+* **Data Persistence**: The ability to save contact information to a file for later retrieval, ensuring data is not lost when the application is closed.
+* **Deadline**: A date-time representation associated with a project that indicates when the project is due.
 * **Domain (Email Domain)**: - The part of an email address after the "@" symbol that identifies the mail server handling emails, such as yahoo.com in user@yahoo.com.
 * **Domain Label**: - A part of a domain name, separated by dots, such as www, example, and com in www.yahoo.com.
+* **GUI** Graphical User Interface - the visual elements that display information and receive user input.
 * **JAR**: - JAR stands for Java ARchive. It is a format based on the widely used ZIP file structure, designed to bundle multiple files into one.
+* **JSON File**: The file format used to store contact information (arthive.json).
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Parameter**: A piece of information required by a command, such as client name, phone number, or project tag.
+* **Payment**: A boolean attribute (paid/unpaid) associated with a project that indicates whether payment has been received.
+* **Phone Number**: A unique 8-digit Singapore phone number starting with '6','8', or '9' that acts as the unique and primary identifier for each contact in ArtHive.
+* **Progress**: A boolean attribute (complete/incomplete) associated with a project that indicates whether the project is completed or not.
+* **Project**: A task or commission that the artist is currently working on or has completed for a client (contact). Each project is associated with a specific contact and includes key details such as payment status, deadline and progress. Project names are alphanumeric strings with underscores and hyphens, up to 20 characters.
+* **Regex**: Regular Expression - a sequence of characters that defines a certain search pattern, used in ArtHive to validate phone numbers.
+* **Tag**: A short descriptive label used to categorize or highlight specific contacts or projects. Tags are alphanumeric strings with underscores and hyphens, up to 20 characters.
+* **Trim**: The process of removing leading and trailing spaces from input.
 
 --------------------------------------------------------------------------------------------------------------------
 
