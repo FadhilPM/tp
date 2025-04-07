@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.Arrays;
 import java.util.Optional;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -43,8 +44,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (trimmedPhone.isEmpty()) {
                 throw new ParseException("Phone number must not be empty.");
             }
-
             String[] keywords = optPhone.get().split("\\s+");
+            if (!StringUtil.isNumeric(keywords)) {
+                throw new ParseException("Phone number must be numeric.");
+            }
             return new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList(keywords)));
         } else if (optName.isPresent()) {
 
