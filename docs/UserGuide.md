@@ -364,11 +364,11 @@ ArtHive data are saved automatically as a JSON file `[JAR file location]/data/[f
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ArtHive will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause ArtHive to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. Hence these are some steps that you should take prior to editing the data file:
-<ol>
-    <li>Create a snapshot using the <code>snapshot</code> command.</li>
-    <li>Make a separate manual backup of your data file (just in case).</li>
-    <li>Exercise extreme caution when editing JSON structures.</li>
-</ol>
+
+1. Create a snapshot using the <code>snapshot</code> command.
+2. Make a separate manual backup of your data file (just in case).
+3. Exercise extreme caution when editing JSON structures.
+
 If you experience data corruption after manual edits, you can restore from a snapshot as describe in the "Creating the snapshot of data" section.
 </div>
 
@@ -386,11 +386,11 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:exclamation: **Note:**
 Currently, ArtHive does not provide a direct command to restore from snapshots. To use a snapshot:
-<ol>
-    <li>Locate the snapshot file in the <code>[JAR file location]/snapshots/</code> directory.</li>
-    <li>Copy the desired snapshot file to <code>[JAR file location]/data/</code>.</li>
-    <li>Rename the snapshot file to match the filename specified in <code>preferences.json</code>.</li>
-    <li>Restart ArtHive to load the restored data.</li>
+
+1. Locate the snapshot file in the <code>[JAR file location]/snapshots/</code> directory.
+2. Copy the desired snapshot file to <code>[JAR file location]/data/</code>.
+3. Rename the snapshot file to match the filename specified in <code>preferences.json</code>.
+4. Restart ArtHive to load the restored data.
 </ol>
 </div>
 
@@ -453,10 +453,10 @@ Format: `exit`
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
     <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
     Deleting <code>preferences.json</code> will reset ArtHive to use the sample data provided,and it will be saved to the file name specified in <code>preferences.json</code>. If you previously used the <code>save [filename]</code> command to change your save file, you should first:
-    <ul>
-        <li>Back up your current data file from <code>[JAR file location]/data/[custom-filename.json]</code>.</li>
-        <li>After deleting <code>preferences.json</code> and restarting ArtHive, use the <code>save</code> command again or manually copy your backed-up data to the default location.</li>
-    </ul>
+    
+* Back up your current data file from <code>[JAR file location]/data/[custom-filename.json]</code>.
+* After deleting <code>preferences.json</code> and restarting ArtHive, use the <code>save</code> command again or manually copy your backed-up data to the default location.
+
     </div>
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
