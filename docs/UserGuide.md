@@ -227,12 +227,13 @@ Format: `delete (INDEX | p/PHONE )`
 * **One and only one** of `INDEX` or `p/PHONE` must be provided.
 
 * Deletes the contact at the specified `INDEX` **or** with the specified `PHONE`.
+
     * The index refers to the positive integer within the bounds of the displayed person list  1, 2, 3, …​
     * The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed person list).
+    
 
 Phone (`p/PHONE`)
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current displayed contact list.
-
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in ArtHive.
@@ -297,6 +298,7 @@ Updates the status of a Project from an existing person in ArtHive.
 Format: `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS]`
 
 * Updates the Project tagged to the person at the specified `INDEX`. The `INDEX` refers to the index number shown in the displayed person list. The `INDEX` must be a positive integer 1, 2, 3, …​
+* The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed person list).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 

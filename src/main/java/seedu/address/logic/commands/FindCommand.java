@@ -16,12 +16,11 @@ import seedu.address.model.person.Person;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists matching contacts. Partial name matching supported. Use either names or phone numbers.\n"
-            + "Parameters: find (NAME [NAME]... | PHONE [PHONE]...)\n"
-            + "Example 1: " + COMMAND_WORD + " alice bob charlie \n"
-            + "Example 2: " + COMMAND_WORD + " 87438807 88888888";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays all contacts whose names or phone numbers "
+            + "contain any of the provided search terms (case-insensitive). "
+            + "Parameters: n/NAME [NAME]... OR p/PHONE [PHONE]... \n"
+            + "Example 1: " + COMMAND_WORD + " n/alice bob charlie \n"
+            + "Example 2: " + COMMAND_WORD + " p/87438807 88888888";
 
     private final Predicate<Person> predicate;
 
