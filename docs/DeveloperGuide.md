@@ -37,8 +37,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/AY2425S2-CS2103-F10-1/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S2-CS2103-F10-1/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+* At app launch, it initializes the other components in the correct sequence, and connects them with each other.
+* At shutdown, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
@@ -74,7 +74,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S2-CS2103-F10-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S2-CS2103-F10-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S2-CS2103-F10-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S2-CS2103-F10-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -535,12 +535,12 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 contacts without noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should be able to respond within 3 seconds.
 5. The system should not lose any data up till the latest successful operation due to accidental closure of the application.
-6. The data file should be stored locally on the computer and should be in a human editable text file.
-7. The software should be able to work without using an installer.
+6. The data file should be stored locally on the computer and should be in a human editable format.
+7. The software should be able to work without requiring an installer.
 8. The software should not require a remote server to operate.
 
 ---
@@ -550,10 +550,10 @@ Use case ends.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS.
 * **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Client**: An individual or organization that engages the artist's services.
-* **Contact**: An entry in ArtHive that contains client information, such as, name, phone number, and associated project tags.
+* **Contact**: An entry in ArtHive that contains client information, such as name, phone number, and associated project tags.
 * **Phone Number**: A unique 8-digit Singapore phone number starting with '6','8', or '9' that acts as the unique and primary identifier for each contact in ArtHive.
-* **Project**: A project that the contact is working on. Project names are alphanumeric strings with underscores and hyphens, up to 20 characters. A project contains associated payment, deadline and progress information.
-* **Tag**: A tag is an alphanumeric strings with underscores and hyphens that can be associated with a contact.
+* **Project**: A project that the contact is working on. Project names are alphanumeric strings with underscores and hyphens, that are up to 20 characters in length. A project contains associated payment, deadline and progress information.
+* **Tag**: A tag is an alphanumeric string with underscores and hyphens that can be associated with a contact.
 * **Payment**: A boolean attribute (paid/unpaid) associated with a project that indicates whether payment has been received.
 * **Deadline**: A date-time representation associated with a project that indicates when the project is due.
 * **Progress**: A boolean attribute (complete/incomplete) associated with a project that indicates whether the project is finished or not.
