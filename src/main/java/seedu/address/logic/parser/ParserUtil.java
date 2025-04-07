@@ -22,7 +22,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a single non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "INDEX must be a single positive integer within the "
+           + "bounds of the displayed person list.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
