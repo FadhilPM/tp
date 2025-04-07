@@ -102,12 +102,12 @@ The app allows duplicate names but does not allow duplicate phone numbers.
 </div>
 
 * When specifying a `NAME`, please ensure it follows these rules:
-    * **Allowed Characters:**
+    * **Allowed:**
         * Alphanumeric characters (A-Z, a-z, 0-9)
         * Names can contain spaces. However, trailing and leading white space will be trimmed (e.g. "  Johnny Test  " will be saved as "Johnny Test").
         * Special characters: `-`, `_`, `.`, `/`, `,` and `'`
         * Maximum length: 40 characters
-    * **Not Allowed Characters:**
+    * **Not Allowed:**
         * Prefix commands (n/, p/, e/, t/, proj/, by/, pay/, prog/) are NOT allowed
         * Any other special characters outside the allowed list
 * `PHONE` should be exactly 8 digits long, beginning with either 3, 6, 8 or 9.
