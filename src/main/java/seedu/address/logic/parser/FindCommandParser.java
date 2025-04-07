@@ -37,7 +37,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         Optional<String> optPhone = argMultimap.getValue(PREFIX_PHONE);
 
         if (optName.isPresent() && optPhone.isPresent()) { //different types of prefixes present
-            throw new ParseException(Messages.MESSAGE_MULTIPLE_PREFIXES_PROVIDED + "\n" + FindCommand.PREFIX_OPTIONS);
+            throw new ParseException(Messages.MESSAGE_MULTIPLE_PREFIXES_PROVIDED + "\n" + FindCommand.MESSAGE_USAGE);
         } else if (optPhone.isPresent()) {
 
             String trimmedPhone = optPhone.get().trim();

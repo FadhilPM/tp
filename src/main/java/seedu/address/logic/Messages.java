@@ -15,7 +15,7 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INDEX_OR_PHONE = "Provide a valid index OR a valid phone number";
+    public static final String MESSAGE_INDEX_OR_PHONE = "Provide either a valid index OR a valid phone number";
     public static final String MESSAGE_ABSENT_PHONE_NUMBER = "No person found with that phone number";
     public static final String MESSAGE_ABSENT_TAG_PROJECT =
             """
@@ -33,7 +33,7 @@ public class Messages {
     public static final String MESSAGE_NAME_LENGTH_ERROR = "Name must not exceed 40 characters.";
     public static final String MESSAGE_EMPTY_NAME_MSG = "Name field cannot be empty.";
     public static final String MESSAGE_NAME_CONTAINS_PREFIX = "Name contains command prefix.";
-    public static final String MESSAGE_MULTIPLE_PREFIXES_PROVIDED = "Provide only one prefix.";
+    public static final String MESSAGE_MULTIPLE_PREFIXES_PROVIDED = "Provide either n/NAME or p/PHONE";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
