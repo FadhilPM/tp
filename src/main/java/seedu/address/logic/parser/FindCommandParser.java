@@ -38,9 +38,21 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (optName.isPresent() && optPhone.isPresent()) { //different types of prefixes present
             throw new ParseException(Messages.MESSAGE_MULTIPLE_PREFIXES_PROVIDED + "\n" + FindCommand.PREFIX_OPTIONS);
         } else if (optPhone.isPresent()) {
+
+            String trimmedPhone = optPhone.get().trim();
+            if (trimmedPhone.isEmpty()) {
+                throw new ParseException("Phone number must not be empty.");
+            }
+
             String[] keywords = optPhone.get().split("\\s+");
             return new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList(keywords)));
         } else if (optName.isPresent()) {
+
+            String trimmedName = optName.get().trim();
+            if (trimmedName.isEmpty()) {
+                throw new ParseException("Name must not be empty.");
+            }
+
             String[] keywords = optName.get().split("\\s+");
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         } else {
