@@ -28,7 +28,8 @@ public class FindCommandParserTest {
     public void parse_phoneKeywords_returnsFindCommandWithPhonePredicate() throws ParseException {
         String input = " p/88888888 66666666 88886666";
         FindCommand command = parser.parse(input);
-        assertEquals(new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList("88888888", "66666666", "88886666"))), command);
+        assertEquals(new FindCommand(new PhoneContainsKeywordsPredicate(
+                Arrays.asList("88888888", "66666666", "88886666"))), command);
     }
 
     @Test
@@ -43,6 +44,7 @@ public class FindCommandParserTest {
     public void parse_mixedPrefixes_throwsParseException() {
         String input = " n/Alice p/88888888";
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(input));
-        assertEquals(Messages.MESSAGE_MULTIPLE_PREFIXES_PROVIDED + "\n" + FindCommand.PREFIX_OPTIONS, exception.getMessage());
+        assertEquals(Messages.MESSAGE_MULTIPLE_PREFIXES_PROVIDED + "\n" + FindCommand.PREFIX_OPTIONS,
+                exception.getMessage());
     }
 }
