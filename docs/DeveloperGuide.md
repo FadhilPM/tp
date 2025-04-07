@@ -640,3 +640,5 @@ testers are expected to do more *exploratory* testing.
     **Note**: `/snapshot` should be in the same directory as ArtHive.
 
    1. There should be a new file in `/snapshot` with the name consisting of `datetime` in the format of `dMMMuuuu_HHmmss`.  
+
+
