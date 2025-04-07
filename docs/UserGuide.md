@@ -189,7 +189,7 @@ Examples:
 
 Deletes the specified contact in the current displayed contact list from ArtHive.
 
-Format: `delete INDEX` or `delete p/PHONE`
+Format: `delete (INDEX | p/PHONE )`
 
 * Deletes the contact at the specified `INDEX` **or** with the specified `PHONE`.
 * The `INDEX` refers to the index number shown in the displayed contact list and **must be a positive integer** (1, 2, 3, …).
@@ -215,8 +215,10 @@ Format: `tag p/PHONE (t/TAG | proj/PROJECT) [t/TAG]…​ [proj/PROJECT]…​`
 * Adds one or more Tags/Projects to the person specified by `PHONE`.
 * The `PHONE` must be an exact 8-digit phone number and must belong to a contact in the current contact list.
 * In each use of this command, there must be at least one `TAG` or `PROJECT` specified.
-* The existing Tags/Projects of the person will not be removed i.e adding of tags is cumulative.
+* The existing Tags/Projects of the person will not be removed when new Tags/Projects are added.
+* Adding a Tag/Project that already exists for a person will not result in an error, and the system will remain unchanged.
 * `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
+* `TAG`/`PROJECT` are case-insensitive and will be automatically converted to lowercase regardless of input. For example, `PROJ-X` will be saved and displayed as `proj-x`. If another `Proj-X` is added to the same person, it will be considered as adding a Tag/Project that already exists.
 * Projects will have a default values of "Incomplete", "Unpaid", and a deadline set 1 day after creation. Modifications can be made using the `setstatus` command.
 
 Examples:
@@ -253,7 +255,7 @@ Format: `setstatus INDEX proj/PROJECT [pay/PAYMENT] [by/DEADLINE] [prog/PROGRESS
 * Updates the Project tagged to the person at the specified `INDEX`. The `INDEX` refers to the index number shown in the displayed person list. The `INDEX` must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * `PAYMENT` must be either `Paid` or `Unpaid` (case-insensitive).
-* `DEADLINE` must be in a `dd MMM uuuu HHmm` format
+* `DEADLINE` must be in a `dd MMM uuuu HHmm` format. (e.g 01 Apr 2025 2359)
 * `PROGRESS` must be either `Complete` or `Incomplete` (case-insensitive).
 * Existing values will be updated to the input values.
 
