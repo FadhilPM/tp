@@ -22,7 +22,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "INDEX must be a positive integer within the bounds of the displayed person list.";
+    public static final String MESSAGE_INVALID_INDEX = "INDEX must be a positive integer within the "
+           + "bounds of the displayed person list.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it.

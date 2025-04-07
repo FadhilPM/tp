@@ -44,7 +44,7 @@ public class FindCommandParserTest {
     public void parse_mixedPrefixes_throwsParseException() {
         String input = " n/Alice p/88888888";
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(input));
-        assertEquals(Messages.MESSAGE_MULTIPLE_PREFIXES_PROVIDED + "\n" + FindCommand.PREFIX_OPTIONS,
+        assertEquals(Messages.MESSAGE_MULTIPLE_PREFIXES_PROVIDED + "\n" + FindCommand.MESSAGE_USAGE,
                 exception.getMessage());
     }
 
