@@ -359,7 +359,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a.   ArtHive detects an error where the search keyword(s) contains invalid characters.
+* 2a.   ArtHive detects that the user input is invalid.
   * 2a1.  ArtHive displays an error message.
 
     Use case resumes at step 2.
@@ -381,7 +381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a.   ArtHive detects an error where the search keyword(s) contains invalid characters.
+* 2a.   ArtHive detects that the user input is invalid.
     * 2a1.  ArtHive displays an error message.
 
       Use case resumes at step 2.
@@ -564,7 +564,9 @@ Use case ends.
 * **Project**: A task or commission that the artist is currently working on or has completed for a client (contact). Each project is associated with a specific contact and includes key details such as payment status, deadline and progress. Project names are alphanumeric strings with underscores and hyphens, up to 20 characters.
 * **Regex**: Regular Expression - a sequence of characters that defines a certain search pattern, used in ArtHive to validate phone numbers.
 * **Tag**: A short descriptive label used to categorize or highlight specific contacts or projects. Tags are alphanumeric strings with underscores and hyphens, up to 20 characters.
+* **Top-Level Domain** - The first stop after the root zone, basically everything that is after the final dot of a domain name, such as the 'com' of 'youtube.com'
 * **Trim**: The process of removing leading and trailing spaces from input.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
