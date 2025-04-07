@@ -363,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a.   ArtHive detects an error where the search keyword(s) contains invalid characters.
+* 2a.   ArtHive detects that the user input is invalid.
   * 2a1.  ArtHive displays an error message.
 
     Use case resumes at step 2.
@@ -385,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a.   ArtHive detects an error where the search keyword(s) contains invalid characters.
+* 2a.   ArtHive detects that the user input is invalid.
     * 2a1.  ArtHive displays an error message.
 
       Use case resumes at step 2.
@@ -570,6 +570,7 @@ Use case ends.
 * **Domain (Email Domain)**: - The part of an email address after the "@" symbol that identifies the mail server handling emails, such as yahoo.com in user@yahoo.com.
 * **Domain Label**: - A part of a domain name, separated by dots, such as www, example, and com in www.yahoo.com.
 * **JAR**: - JAR stands for Java ARchive. It is a format based on the widely used ZIP file structure, designed to bundle multiple files into one.
+* **Top-Level Domain** - The first stop after the root zone, basically everything that is after the final dot of a domain name, such as the 'com' of 'youtube.com'
 
 --------------------------------------------------------------------------------------------------------------------
 
