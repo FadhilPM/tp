@@ -122,8 +122,8 @@ Edits an existing person in ArtHive.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* The `INDEX` must be a valid index (i.e. Negative number, 0 or any number bigger than the index number shown in the displayed person list is not a valid index).
+* Edits the person at the specified `INDEX`. The index refers to the positive integer within the bounds of the displayed person list  1, 2, 3, …​
+* The `INDEX` must be a valid index (i.e. Positive integer within the bounds of the displayed person list).
 * Only edits to a person's name, phone number and email address is allowed.
 * When specifying a `NAME`, please ensure it follows these rules:
     * **Allowed Characters:**
