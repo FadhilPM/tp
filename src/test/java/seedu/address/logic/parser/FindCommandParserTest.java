@@ -47,4 +47,25 @@ public class FindCommandParserTest {
         assertEquals(Messages.MESSAGE_MULTIPLE_PREFIXES_PROVIDED + "\n" + FindCommand.PREFIX_OPTIONS,
                 exception.getMessage());
     }
+
+    @Test
+    public void parse_invalidPrefix_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse(" x/Alice"));
+        assertThrows(ParseException.class, () -> parser.parse(" e/12345"));
+    }
+
+    @Test
+    public void parse_nonEmptyPreamble_throwsParseException() {
+        // Test with text before any prefix
+        String userInput = "someText " + "n/Alice";
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+
+        // Test with just text and no prefix
+        String userInput2 = "someText";
+        assertThrows(ParseException.class, () -> parser.parse(userInput2));
+
+        ParseException exception = assertThrows(ParseException.class, () -> parser.parse(userInput));
+        assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE), exception.getMessage());
+    }
+
 }
