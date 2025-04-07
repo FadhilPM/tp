@@ -13,19 +13,19 @@ public class Email {
     public static final String MESSAGE_CONSTRAINTS = "Emails must be in Name@Domain format, for example:"
             + " user@yahoo.com.\n"
             + "1. Name: Alphanumeric + special characters: " + SPECIAL_CHARACTERS + ", but cannot start/end "
-            + "with a special character.\n"
+            + "with a special character and cannot have 2 or more consecutive dots(.).\n"
             + "2. Domain: A domain is made up of domain labels, which are parts separated by periods."
             + " Domain must end with at least 2 character long domain label."
             + " Labels must start/end with alphanumeric characters, allowing hyphens in between.";
 
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
-    private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
-            + ALPHANUMERIC_NO_UNDERSCORE + ")*";
+    private static final String LOCAL_PART_REGEX = "^(?!.*\\.{2,})" + ALPHANUMERIC_NO_UNDERSCORE + "(["
+            + SPECIAL_CHARACTERS + "]+" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
     private static final String DOMAIN_PART_REGEX = ALPHANUMERIC_NO_UNDERSCORE
             + "(-" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
-    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
+    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)+" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
     public final String value;

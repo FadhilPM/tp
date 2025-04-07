@@ -125,7 +125,7 @@ public class Project extends Tag {
      */
     @Override
     public String toString() {
-        return '[' + getTagName() + " | Deadline: " + getDeadlineString() + "H | " + getProgressString()
+        return '[' + getTagName() + " | Deadline: " + getDeadlineString() + "hrs | " + getProgressString()
                 + " | " + getPaymentString() + ']';
     }
 }
