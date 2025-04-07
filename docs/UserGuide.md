@@ -71,7 +71,7 @@ ArtHive is intended for managing Singapore-based contacts, where phone numbers a
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a command summary and provides a link to the online help page.
 
 ![help message](images/helpMessage.png)
 
