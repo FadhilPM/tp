@@ -7,8 +7,6 @@ ArtHive is a **desktop application for artists to manage clients and commissions
 
 ArtHive is intended for managing Singapore-based contacts, where phone numbers are 8 digits long and start with 3, 6, 8 or 9.
 
-The app allows duplicate names but does not allow duplicate phone numbers.
-
 * Table of Contents
 {:toc}
 
@@ -97,6 +95,10 @@ A person can have any number of tags and/or projects (including 0).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The email address is optional. You can choose to leave it blank if you prefer not to provide it.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The app allows duplicate names but does not allow duplicate phone numbers.
 </div>
 
 * When specifying a `NAME`, please ensure it follows these rules:
