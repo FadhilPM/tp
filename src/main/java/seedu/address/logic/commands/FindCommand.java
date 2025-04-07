@@ -16,8 +16,6 @@ import seedu.address.model.person.Person;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    public static final String PREFIX_OPTIONS = "Accepted Prefixes:\n" + " - n/ (Search by name)\n"
-            + "  p/ (Search by phone number)\n";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays all contacts whose names or phone numbers, "
             + "contain any of the keywords (case-insensitive). "
             + "Parameters: n/NAME OR p/PHONE \n"
