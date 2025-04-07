@@ -105,7 +105,7 @@ The email address is optional. You can choose to leave it blank if you prefer no
     * **Not Allowed Characters:**
         * Prefix commands (n/, p/, e/, t/, proj/, by/, pay/, prog/) are NOT allowed
         * Any other special characters outside the allowed list
-* `PHONE` should be exactly 8 digits long, beginning with either 3, 6, 8 or 9.
+* `PHONE` must be exactly 8 digits long, beginning with either 3, 6, 8 or 9.
 * The `EMAIL` (if provided) must be in a valid email address format (i.e. name@domain.com), without spaces.
 * `TAG`/`PROJECT` can only contain alphanumeric characters with underscore and hyphens, and be between 1 and 20 characters long.
 
@@ -132,7 +132,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
     * **Not Allowed Characters:**
         * Prefix commands (n/, p/, e/, t/, proj/, by/, pay/, prog/) are NOT allowed
         * Any other special characters outside the allowed list
-* `PHONE` should be exactly 8 digits long, beginning with either 3, 6, 8 or 9. Additionally, the new number must not already be assigned to any existing contact in the list.
+* `PHONE` must be exactly 8 digits long, beginning with either 3, 6, 8 or 9. Additionally, the new number must not already be assigned to any existing contact in the list.
 * The `EMAIL` (if provided) must be in a valid email address format (i.e. name@domain.com), without spaces.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
