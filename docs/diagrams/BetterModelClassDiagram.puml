@@ -12,7 +12,7 @@ UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -right-> "*" Tag
 UniquePersonList -right-> Person
 
-Person -up-> "*" Tag
+Person --> "*" Tag
 
 Person *--> Name
 Person *--> Phone
@@ -20,5 +20,5 @@ Person *--> Email
 Person *--> PreferredContactMethod
 Person *--> Project
 
-Project .up.|> Tag
+Project -up-|> Tag
 @enduml
