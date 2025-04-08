@@ -1,0 +1,90 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SetStatusCommandParser" as SetStatusCommandParser LOGIC_COLOR
+participant "s:SetStatusCommand" as SetStatusCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+participant ":Project" as Project MODEL_COLOR
+end box
+
+[-> LogicManager : execute("setstatus 1 proj/project-x pay/paid prog/complete")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("setstatus 1 proj/project-x pay/paid prog/complete")
+activate AddressBookParser
+
+create SetStatusCommandParser
+AddressBookParser -> SetStatusCommandParser
+activate SetStatusCommandParser
+
+SetStatusCommandParser --> AddressBookParser
+deactivate SetStatusCommandParser
+
+AddressBookParser -> SetStatusCommandParser : parse(" 1 proj/project-x pay/paid prog/complete")
+activate SetStatusCommandParser
+
+create SetStatusCommand
+SetStatusCommandParser -> SetStatusCommand
+activate SetStatusCommand
+
+SetStatusCommand --> SetStatusCommandParser :
+deactivate SetStatusCommand
+
+SetStatusCommandParser --> AddressBookParser : s
+deactivate SetStatusCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SetStatusCommandParser -[hidden]-> AddressBookParser
+destroy SetStatusCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> SetStatusCommand : execute(m)
+activate SetStatusCommand
+
+SetStatusCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> SetStatusCommand : filteredPersonList
+deactivate Model
+
+SetStatusCommand -> Project : createEditedProject(setStatusDescriptor)
+activate Project
+
+Project --> SetStatusCommand : editedProject
+deactivate Project
+
+SetStatusCommand -> Person : replaceProject(editedProject)
+activate Person
+
+Person --> SetStatusCommand : editedPerson
+deactivate Person
+
+SetStatusCommand -> Model : setPerson(personToEdit, editedPerson)
+activate Model
+
+Model --> SetStatusCommand
+deactivate Model
+
+create CommandResult
+SetStatusCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SetStatusCommand
+deactivate CommandResult
+
+SetStatusCommand --> LogicManager : r
+deactivate SetStatusCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
