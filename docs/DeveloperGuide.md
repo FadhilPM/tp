@@ -731,6 +731,6 @@ ArtHive's `setstatus` command utilizes overly verbose wording for parameters tha
 
 ArtHive current only accepts Singaporean phone numbers—specifically 8-digit numbers that begin with 3, 6, or 9. To better support users with international contacts, we plan to enhance ArtHive to accept phone numbers from other countries. These enhancements include specific handling of international/area dialing codes and validating formats according to each country’s standards.
 
-### 10. Allowing Names in Multiple Language
+### 10. Allowing Names in Multiple Languages
 
 ArtHive currently only supports names using alphanumeric characters and a limited set of special characters. To better accommodate an international audience, we plan to support names in different languages and scripts (e.g., Chinese, Arabic, Tamil). This would allow users to input names in their native form, improving inclusivity and user experience across diverse regions.
